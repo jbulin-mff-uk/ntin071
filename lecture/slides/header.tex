@@ -1,0 +1,80 @@
+\usetheme[progressbar=frametitle]{metropolis}
+\metroset{block=fill}
+
+\subtitle{NTIN071 Automata and Grammars}
+\author{Jakub Bulín (KTIML MFF UK)}
+
+\date{Spring 2024\\ 
+    \vspace{1in} 
+    \begin{flushleft}
+        \it \footnotesize * Adapted from the Czech-lecture slides by Marta Vomlelová with gratitude. The translation, some modifications, and all errors are mine.
+    \end{flushleft}
+}
+
+%% packages
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{cancel}
+\usepackage[utf8x]{inputenc}
+\usepackage{multicol}
+
+
+%% TikZ
+\usepackage{tikz}
+    \usetikzlibrary{shapes,shapes.geometric,arrows,fit,automata}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{decorations.pathmorphing}
+    \tikzset{>=stealth',shorten >=1pt,auto,node distance=2cm}
+    \tikzset{initial text={}}
+    \tikzset{elliptic state/.style={draw,ellipse}}
+
+
+%% amsthm
+\theoremstyle{plain}
+    \newtheorem*{algorithm}{Algorithm}
+    \newtheorem*{observation}{Observation}
+
+\theoremstyle{remark}
+    \newtheorem*{exercise}{Exercise}
+    \newtheorem*{remark}{Remark}
+
+%% macros
+
+% L2
+\newcommand{\x}{$\times$}
+\newcommand{\nx}{\ }
+
+
+%% Fix thm title spacing
+% % map t block to oldblock
+% \let\oldblock\block
+% \let\endoldblock\endblock
+
+% % change block by adding smallskip
+% \renewenvironment{block}[1]
+%     {\begin{oldblock}{#1}
+%         \smallskip
+%     }
+%     { 
+%     \end{oldblock}
+%     }
+
+
+
+% \usepackage{bookmark}
+% \usepackage{booktabs}
+% \usepackage{cancel}
+% \usepackage[czech]{babel}
+% \usepackage{enumerate}
+% \usepackage[T1]{fontenc}
+% \usepackage{forest}
+% \usepackage{lmodern}
+% \usepackage{tikz}
+%     \usetikzlibrary{arrows.meta}
+% \usepackage[utf8x]{inputenc}
+% \usepackage{xfrac}
+
+% %% macros and definitions
+% %\DeclareMathOperator{\Aut}{Aut}
+
+% \newcommand{\A}{\textbf{A}}
