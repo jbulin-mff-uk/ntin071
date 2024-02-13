@@ -1,0 +1,124 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+% \thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Tutorial 1 -- Deterministic finite automaton, recognized language, regular languages}
+
+% after Lecture 1
+% spring 2024
+
+\medskip
+
+\noindent\emph{Solve 1abcd, 2ab, 3abcd, 4ab first (the rest is for practice).}
+
+\medskip
+
+%\noindent Let's start by defining the Deterministic Finite Automaton (DFA) and the language it recognizes.
+
+\medskip\begin{problem} [Constructing a DFA for a given language]
+    
+    Construct a DFA recognizing the given language.
+
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_a \text{ is even}\}$
+        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_a \text{ is not divisible by 3}\}$
+        \item $L=\{w\in\{0,1\}^* \ \mid \  w\text{ is a binary encoding of a nonnegative integer divisible by 5}\}$
+        \item $L=\{w\in\{a,b\}^* \mid \text{2 divides $|w|_a$ or 3 divides $|w|_b$}\}$ 
+        \item $L=\{w\in\{a,b\}^* \ \mid \  \text{2 or 3 divides }|w|_a\}$
+        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_b \text{ is divisible by 3}\}$
+        \item $L=\{w\in\{a,b\}^* \ \mid \  \text{2 divides $|w|_a$ and 3 divides $|w|_b$}\}$        
+        
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[DFA given by a table]
+
+    Draw a state diagram and describe the recognized language in set notation.
+
+    \begin{multicols}{4}
+    
+        \begin{enumerate}[(a)]    
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ $\ast$ p & q & p \\  
+            q & r & q\\
+            r & p & r
+            \end{tabular}
+    
+        \columnbreak
+
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ p & p & q \\  
+            q & p & r\\
+            $\ast$ r & p & r
+            \end{tabular}
+
+        \columnbreak
+        
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ p & q & p \\  
+            $\ast$ q & r & q\\
+            $\ast$ r & p & r
+            \end{tabular}
+    
+        \columnbreak
+    
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ p & p & q \\  
+            $\ast$ q & r & q\\
+            $\ast$ r & p & q
+            \end{tabular}
+
+        \end{enumerate}
+
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Describing a language and constructing a DFA for a given property]
+
+    Construct a DFA accepting exactly those words over the alphabet $\Sigma=\{a,b\}$ that satisfy the given property. Describe the language in set notation.
+
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item starts `abba'
+        \item ends `abba'
+        \item contains `abba' or `bab' as a subword
+        \item has at least 2 letters and the first letter is the same as the last letter
+        \item the first two letters are the same as the last two letters
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Regular languages and set operations]
+
+    Let $L,L'$ be regular languages over the same alphabet. Show that the following is true:
+  
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $\Sigma^*\setminus L$ is a regular language
+        \item $L\cup L'$ is a regular language
+        \item $L\cap L'$ is a regular language
+        \item What if the alphabets of $L$ and $L'$ are different (but possibly sharing some symbols)?
+        \item Would you be able to show that  $L^R$ (i.e., words from $L$ writen in reverse) is also regular?
+    \end{enumerate}
+      
+\end{problem}
+
+
+\end{document}
