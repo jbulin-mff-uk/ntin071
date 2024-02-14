@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+%\thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Cvičení 3 -- Myhill-Nerodeova věta, ekvivalentní a minimální reprezentace, homomorfismus automatů}
+
+% po 2. přednášce
+% jaro 2024
+
+\medskip
+
+\noindent\emph{Vyřešte nejprve 1, 2, 3a-f, 4abc pro A\&B (zbytek je na procvičení).}
+
+
+\medskip\begin{problem}[Equivalence na slovech]
+
+    Uveďte příklad ekvivalence $\sim$ na $\Sigma^*$, která:
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item je pravá a levá kongruence
+        \item je pravá, ale ne levá kongruence
+        \item je konečného indexu
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Myhill--Nerodeova věta: formulace]
+    
+    Zformuluje Myhill--Nerodeovu větu a připomeňte si myšlenku důkazu (bez nahlížení do poznámek z přednášky).
+
+\end{problem}
+
+
+\medskip\begin{problem}[Myhill--Nerodeova věta: aplikace]
+
+    Pomocí Myhill--Nerodeovy věty dokažte nebo vyvraťte, že je jazyk regulární.
+
+    \begin{multicols}{2}
+
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L=\{aa, ab, ba\}$
+            \item $L=\{a^ib^j\ \mid\ i\leq j\}$
+            \item $L=\{a^ib^j\ \mid\ i\geq j\}$
+            \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ pro dané $k\in\mathbb N$
+            \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
+            \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$%, kde $w^R$ je $w$ pozpátku
+            \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
+            \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+        \end{enumerate}
+        
+    \end{multicols}
+    
+
+\end{problem}
+
+
+\begin{problem}[Ekvivalentní a minimální reprezentace]    
+    
+    Pro následující automaty:
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Najděte a odstraňte nedosažitelné stavy.
+        \item Určete relaci ekvivalence (nerozlišitelnosti) stavů. (Navíc pro každou rozlišitelnou dvojici stavů najděte všechna nejkratší rozlišující slova.)
+        \item Zkonstruujte jejich redukty.
+        \item Jsou některé dva z automatů ekvivalentní? Použijte algoritmus z přednášky.
+    \end{enumerate}
+    
+    \begin{multicols}{3}\small
+    
+        \begin{itemize}
+            
+            \item[A:] \bigskip
+            \begin{tabular}{ r | c c }
+            & a & b \\ \hline
+            $\to\ast$ 0 & 1 & 2 \\  
+            1 & 3 & 0 \\
+            2 & 4 & 5 \\
+            3 & 0 & 2 \\
+            4 & 2 & 5 \\
+            5 & 0 & 3
+            \end{tabular}
+            
+            \item[B:] \begin{tabular}{ r | c c }
+            & a & b \\ \hline
+            $\to\ast$ 0 & 0 & 5 \\  
+            1 & 1 & 3 \\
+            2 & 2 & 7 \\
+            3 & 3 & 2 \\
+            $\ast$ 4 & 6 & 1 \\
+            5 & 5 & 1 \\
+            $\ast$ 6 & 4 & 2 \\
+            7 & 7 & 0
+            \end{tabular}
+                
+            \item[C:] \begin{tabular}{ r | c c }
+            & a & b \\ \hline
+            $\to$ 1 & 2 & 3 \\
+            2 & 2 & 4 \\
+            $\ast$ 3 & 3 & 5 \\
+            4 & 2 & 7 \\
+            $\ast$ 5 & 6 & 3 \\
+            $\ast$ 6 & 6 & 6 \\
+            7 & 7 & 4 \\
+            8 & 2 & 3 \\
+            9 & 9 & 4
+            \end{tabular}
+            
+        \end{itemize} 
+
+    \end{multicols}
+
+\end{problem}
+
+
+\vspace{-10pt}
+\begin{problem}[Homomorfismus automatů]
+    Najděte DFA $A,B$ takové, že:    
+    \begin{enumerate}[(a)]
+        \item Jsou oba redukované, a nejsou izomorfní. 
+        \item $A$ je homomorfní na $B$, ale nejsou izomorfní.
+        \item Jsou ekvivalentní, ale ne izomorfní.
+        \item Jsou oba homomorfní na, ale ne izomorfní s $C$, a zároveň $A$ není homomorfní na $B$ ani $B$ na $A$.
+        $$
+        C=(\{p,q\},\{0,1\},\{((p,0),q),((p,1),p),((q,0),p),((q,1),q)\},p,\{q\})
+        $$
+    \end{enumerate}
+
+\end{problem}
+
+
+\end{document}
