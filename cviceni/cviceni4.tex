@@ -6,121 +6,118 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 4 -- }
+\section*{NTIN071 A\&G: Cvičení 4 -- Nedeterminismus, uzavřenost na operace}
 
 % po 3. přednášce
 % jaro 2024
 
 \medskip
 
-\noindent\emph{Vyřešte nejprve 1, 2, 3a-f, 4abc pro A\&B, 5 (zbytek je na procvičení).}
+\noindent\emph{Vyřešte nejprve 1a, 2, 3 (zbytek je na procvičení, bude-li naopak čas, vraťte se k nedodělaným příkladům z minule).}
+
+\medskip
 
 
-\medskip\begin{problem}[Equivalence na slovech]
+\medskip\begin{problem}[Podmnožinová konstrukce]
 
-
-
-\end{problem}
-
-
-\medskip\begin{problem}[Myhill--Nerodeova věta: formulace]
+    Pro daný nedeterministický automat s $\lambda$-přechody sestrojte ekvivalentní redukovaný DFA.
     
-    Zformuluje Myhill--Nerodeovu větu a připomeňte si myšlenku důkazu (bez nahlížení do poznámek z přednášky).
-
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]
+            \item
+            \begin{tabular}{ r | c c c }
+            & a & b & $\lambda$ \\ \hline
+            $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
+            $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
+            $D$ & $\{A\}$ & $\{C,D\}$ & $\emptyset$ \\
+            $\to\ast E$ & $\emptyset$ & $\emptyset$ & $\{A,C\}$
+            \end{tabular}
+            
+            \item
+            \begin{tabular}{ r | c c c }
+            & a & b & $\lambda$ \\ \hline
+            $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
+            $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\
+            $\ast D$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+            $E$ & $\{F\}$ & $\emptyset$ & $\{B,C\}$\\
+            $F$ & $\{D\}$ & $\emptyset$ & $\emptyset$
+            \end{tabular}
+            
+        \end{enumerate}
+    
+    \end{multicols}
 \end{problem}
 
 
-\medskip\begin{problem}[Myhill--Nerodeova věta: aplikace]
+\medskip\begin{problem}[Uzavřenost na operace]
 
-    Pomocí Myhill--Nerodeovy věty dokažte nebo vyvraťte, že je jazyk regulární.
+    Pro danou dvojici automatů $A,B$ sestrojte automat, který přijímá daný jazyk.
 
-    \begin{multicols}{2}
-
-        \begin{enumerate}[(a)]\setlength\itemsep{6pt}
-            \item $L=\{aa, ab, ba\}$
-            \item $L=\{a^ib^j\ \mid\ i\leq j\}$
-            \item $L=\{a^ib^j\ \mid\ i\geq j\}$
-            \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ pro dané $k\in\mathbb N$
-            \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
-            \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$%, kde $w^R$ je $w$ pozpátku
-            \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
-            \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+    \begin{multicols}{3}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L(A)-L(B)$
+            \item $L(A).L(B)$
+            \item $L(A)^+$
+            \item $L(A)^*$
+            \item $L(A)^R$
         \end{enumerate}
         
+        \begin{tabular}{ r | c c }
+        A & a & b \\ \hline
+        $\to\ast$ 0 & 1 & 2 \\  
+        1 & 3 & 0 \\
+        2 & 4 & 5 \\
+        3 & 0 & 2 \\
+        4 & 2 & 5 \\
+        5 & 0 & 3
+        \end{tabular}    
+        
+        \begin{tabular}{ r | c c }
+        B & a & b \\ \hline
+        $\to\ast$ 0 & 0 & 5 \\  
+        1 & 1 & 3 \\
+        2 & 2 & 7 \\
+        3 & 3 & 2 \\
+        $\ast$ 4 & 6 & 1 \\
+        5 & 5 & 1 \\
+        $\ast$ 6 & 4 & 2 \\
+        7 & 7 & 0
+        \end{tabular}
+    
     \end{multicols}
     
-
 \end{problem}
-
-
-\begin{problem}[Ekvivalentní a minimální reprezentace]    
     
-    Pro následující automaty:
 
-    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
-        \item Najděte a odstraňte nedosažitelné stavy.
-        \item Určete relaci ekvivalence (nerozlišitelnosti) stavů. (Navíc pro každou rozlišitelnou dvojici stavů najděte všechna nejkratší rozlišující slova.)
-        \item Zkonstruujte jejich redukty.
-        \item Jsou některé dva z automatů ekvivalentní? Použijte algoritmus z přednášky.
+\medskip\begin{problem}[Mazání]
+
+    Mějme nějaký regulární jazyk $L$ nad abecedou $\Sigma=\{a,b\}$. Popište následující jazyky v množinovém zápisu. Jsou tyto jazyky (nutně) také regulární? Dokažte nebo vyvraťte. 
+    
+    \medskip
+
+    Jazyk sestávající ze všech slov vzniklých ze slov jazyka $L$\dots
+    
+    \medskip
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item \dots smazáním všech výskytů písmene $a$.
+            \item \dots smazáním počátečního písmene a zapsáním tohoto písmene na konec slova.
+            \item \dots smazáním nejdelší souvislé posloupnosti $a$ček ze začátku slova.
     \end{enumerate}
-    
-    \vspace{-9pt}
-    \begin{multicols}{3}\small
-    
-        \begin{itemize}
-            
-            \item[A:] \bigskip
-            \begin{tabular}{ r | c c }
-            & a & b \\ \hline
-            $\to\ast$ 0 & 1 & 2 \\  
-            1 & 3 & 0 \\
-            2 & 4 & 5 \\
-            3 & 0 & 2 \\
-            4 & 2 & 5 \\
-            5 & 0 & 3
-            \end{tabular}
-            
-            \item[B:] \begin{tabular}{ r | c c }
-            & a & b \\ \hline
-            $\to\ast$ 0 & 0 & 5 \\  
-            1 & 1 & 3 \\
-            2 & 2 & 7 \\
-            3 & 3 & 2 \\
-            $\ast$ 4 & 6 & 1 \\
-            5 & 5 & 1 \\
-            $\ast$ 6 & 4 & 2 \\
-            7 & 7 & 0
-            \end{tabular}
-                
-            \item[C:] \begin{tabular}{ r | c c }
-            & a & b \\ \hline
-            $\to$ 1 & 2 & 3 \\
-            2 & 2 & 4 \\
-            $\ast$ 3 & 3 & 5 \\
-            4 & 2 & 7 \\
-            $\ast$ 5 & 6 & 3 \\
-            $\ast$ 6 & 6 & 6 \\
-            7 & 7 & 4 \\
-            8 & 2 & 3 \\
-            9 & 9 & 4
-            \end{tabular}
-            
-        \end{itemize} 
-
-    \end{multicols}
 
 \end{problem}
 
-
-\vspace{-10pt}
-\begin{problem}[Homomorfismus automatů] 
     
-    Najděte DFA $A,B$ takové, že jsou oba homomorfní na, ale ne izomorfní s $C$, a zároveň $A$ není homomorfní na $B$ ani $B$ na $A$.
-    $$
-    C=(\{p,q\},\{0,1\},\{((p,0),q),((p,1),p),((q,0),p),((q,1),q)\},p,\{q\})
-    $$
-
+\medskip\begin{problem}[Záměna přijímajících a nepřijímajících stavů]
+        
+    Zaměníme-li u daného NFA přijímající a nepřijímající stavy, bude jazyk přijímaný výsledným automatem doplňkem jazyka přijímaného původním automatem? Zdůvodněte.
+        
 \end{problem}
+
+
 
 
 \end{document}

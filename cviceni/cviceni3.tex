@@ -6,21 +6,23 @@
 
 %\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 3 -- Myhill-Nerodeova věta, ekvivalentní a minimální reprezentace, homomorfismus automatů}
+\section*{NTIN071 A\&G: Cvičení 3 -- Myhill-Nerodeova věta, ekvivalentní a minimální reprezentace, testování vlastností}
 
 % po 2. přednášce
 % jaro 2024
 
 \medskip
 
-\noindent\emph{Vyřešte nejprve 1, 2, 3a-f, 4abc pro A\&B (zbytek je na procvičení).}
+\noindent\emph{Vyřešte nejprve 1, 2, 3a-f, 4abc pro A\&B, 5 (zbytek je na procvičení).}
+
+\medskip
 
 
 \medskip\begin{problem}[Equivalence na slovech]
 
     Uveďte příklad ekvivalence $\sim$ na $\Sigma^*$, která:
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
         \item je pravá a levá kongruence
         \item je pravá, ale ne levá kongruence
         \item je konečného indexu
@@ -53,40 +55,37 @@
             \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
         \end{enumerate}
         
-    \end{multicols}
-    
+    \end{multicols}    
 
 \end{problem}
 
+\vspace{-12pt}
 
-\begin{problem}[Ekvivalentní a minimální reprezentace]    
+\medskip\begin{problem}[Ekvivalentní a minimální reprezentace]    
     
     Pro následující automaty:
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
         \item Najděte a odstraňte nedosažitelné stavy.
         \item Určete relaci ekvivalence (nerozlišitelnosti) stavů. (Navíc pro každou rozlišitelnou dvojici stavů najděte všechna nejkratší rozlišující slova.)
         \item Zkonstruujte jejich redukty.
         \item Jsou některé dva z automatů ekvivalentní? Použijte algoritmus z přednášky.
     \end{enumerate}
     
-    \begin{multicols}{3}\small
+    \begin{multicols}{3}\small\centering
     
-        \begin{itemize}
-            
-            \item[A:] \bigskip
-            \begin{tabular}{ r | c c }
-            & a & b \\ \hline
+        \begin{tabular}{ r | c c }
+            A & a & b \\ \hline
             $\to\ast$ 0 & 1 & 2 \\  
             1 & 3 & 0 \\
             2 & 4 & 5 \\
             3 & 0 & 2 \\
             4 & 2 & 5 \\
             5 & 0 & 3
-            \end{tabular}
+        \end{tabular}
             
-            \item[B:] \begin{tabular}{ r | c c }
-            & a & b \\ \hline
+        \begin{tabular}{ r | c c }
+            B & a & b \\ \hline
             $\to\ast$ 0 & 0 & 5 \\  
             1 & 1 & 3 \\
             2 & 2 & 7 \\
@@ -95,10 +94,10 @@
             5 & 5 & 1 \\
             $\ast$ 6 & 4 & 2 \\
             7 & 7 & 0
-            \end{tabular}
+        \end{tabular}
                 
-            \item[C:] \begin{tabular}{ r | c c }
-            & a & b \\ \hline
+        \begin{tabular}{ r | c c }
+            C & a & b \\ \hline
             $\to$ 1 & 2 & 3 \\
             2 & 2 & 4 \\
             $\ast$ 3 & 3 & 5 \\
@@ -108,19 +107,38 @@
             7 & 7 & 4 \\
             8 & 2 & 3 \\
             9 & 9 & 4
-            \end{tabular}
-            
-        \end{itemize} 
+        \end{tabular}
 
     \end{multicols}
 
 \end{problem}
 
 
-\vspace{-10pt}
-\begin{problem}[Homomorfismus automatů]
-    Najděte DFA $A,B$ takové, že:    
-    \begin{enumerate}[(a)]
+\medskip\begin{problem}[Testování vlastností]
+
+    Mějme konečné automaty $A,B$. Navrhněte algoritmy, které rozhodnou, zda platí následující vlastnosti. (Umíte odhadnout jejich časovou složitost?)
+
+    \medskip
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L(A)=\emptyset$,
+            \item $L(A)=L(B)$,
+            \item $L(A)\subseteq L(B)$,
+            \item $L(A)$ je konečný.
+        \end{enumerate}
+
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Homomorfismus automatů]
+
+    Najděte DFA $A,B$ takové, že:  
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
         \item Jsou oba redukované, a nejsou izomorfní. 
         \item $A$ je homomorfní na $B$, ale nejsou izomorfní.
         \item Jsou ekvivalentní, ale ne izomorfní.
@@ -129,6 +147,13 @@
         C=(\{p,q\},\{0,1\},\{((p,0),q),((p,1),p),((q,0),p),((q,1),q)\},p,\{q\})
         $$
     \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Regulární? Zredukuj]
+    
+   Uvažme jazyk $L$ nad abecedou $\{a,b\}$ sestávající ze všech slov, která neobsahují trojici po sobě jdoucích stejných písmen. Rozhodněte, zda je $L$ regulární. Pokud ano, najděte regulární DFA, který ho rozpoznává.
 
 \end{problem}
 
