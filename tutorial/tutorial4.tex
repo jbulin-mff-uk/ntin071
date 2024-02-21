@@ -4,7 +4,7 @@
 
 \begin{document}
 
-% \thispagestyle{empty}
+\thispagestyle{empty}
 
 \section*{NTIN071 A\&G: Tutorial 4 -- More on closure properties, regular expressions}
 
@@ -13,7 +13,7 @@
 
 \medskip
 
-\noindent\emph{Solve 1, 2a-f, 3a-e, 4abc, 5a (the rest is for practice).}
+\noindent\emph{Solve 1, 2a-f, 3a-e (the rest is for practice).}
 
 \medskip
 
@@ -82,139 +82,5 @@
     
 \end{problem}
    
-
-\medskip\begin{problem}[Automaton to regex]
-    
-    Construct regular expressions for languages accepted by the following automata.
-
-    \bigskip
-    
-    \begin{multicols}{2}
-    
-        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        
-            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.2cm]
-                    \tikzset{every state/.style={minimum size=0.2cm}}
-                        
-                        \node[initial,state]  (a1)      {1};
-                        \node[state,accepting] (b1)  [right of=a1]    {2};
-                            \node[state] [right of=b1](c1)      {3};
-                        \node[state,accepting] [right of=c1] (d1)      {4};
-                        \node[state] (e1)  [right of=d1]    {5};
-                        \node[state,accepting] (f1)  [right of=e1]    {6};
-                        \node[state] (g1)  [below left of=f1]    {7};
-                    \path[->]
-                            (a1)  edge  node {a} (b1)
-                            (b1)  edge  node {a} (c1)
-                            (c1)  edge  node {a} (d1)
-                            (d1)  edge  node {a} (e1)
-                            (e1)  edge  node {a} (f1)
-                            (f1)  edge  node {a} (g1)
-                            (g1)  edge  node {a} (e1)
-                            ;
-            \end{tikzpicture}    
-            
-            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
-                    \tikzset{every state/.style={minimum size=0.2cm}}
-                        
-                        \node[initial,state]  (a1)      {1};
-                        \node[state,accepting] (b1)  [above right of=a1]    {2};
-                            \node[state,accepting] [below of=b1](c1)      {3};
-                    \path[->]
-                            (a1)  edge  node {b} (b1)
-                            (a1)  edge[loop above]  node {a} (a1)
-                            (b1)  edge[bend left]  node {a} (c1)
-                            (b1)  edge[loop above]  node {b} (b1)
-                            (c1)  edge  node {a} (a1)
-                            (c1)  edge  node {b} (b1)
-                            ;
-            \end{tikzpicture}
-
-            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
-                \tikzset{every state/.style={minimum size=0.2cm}}
-                    
-                    \node[initial,state,accepting]  (a1)      {1};
-                    \node[state] (b1)  [above right of=a1]    {2};
-                        \node[state] [below of=b1](c1)      {3};
-                \path[->]
-                        (a1)  edge [bend left] node {a} (b1)
-                        (c1)  edge[loop right]  node {a,b} (c1)
-                        (b1)  edge  node {a} (c1)
-                        (b1)  edge  node {b} (a1)
-                        (c1)  edge  node {b} (a1)
-                        ;
-            \end{tikzpicture}            
-
-            \item	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
-                    \tikzset{every state/.style={minimum size=0.2cm}}
-                        
-                        \node[initial,state]  (a1)      {1};
-                        \node[state] (b1)  [right of=a1]    {2};
-                            \node[state,accepting] [right of=b1](c1)      {3};
-                    \path[->]
-                            (a1)  edge  node {a} (b1)
-                            (a1)  edge[loop above]  node {b} (a1)
-                            (b1)  edge  node {b} (c1)
-                            (b1)  edge[loop above]  node {a} (b1)
-                            (c1)  edge[loop right]  node {a,b} (c1)
-                            ;
-            \end{tikzpicture}
-            
-            \item	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
-                    \tikzset{every state/.style={minimum size=0.2cm}}			
-                        \node[initial,state]  (a1)      {1};
-                        \node[state,accepting] (b1)  [right of=a1]    {2};
-                    \path[->]
-                            (a1)  edge[bend left]  node {b} (b1)
-                            (a1)  edge[loop above]  node {a} (a1)
-                            (b1)  edge[bend left]  node {a} (a1)
-                            (b1)  edge[loop above]  node {b} (b1)
-                            ;
-            \end{tikzpicture}
-
-            \item	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
-                    \tikzset{every state/.style={minimum size=0.2cm}}
-                        
-                        \node[initial,state]  (a1)      {1};
-                        \node[state,accepting] (b1)  [above right of=a1]    {2};
-                            \node[state] [below right of=a1](c1)      {3};
-                    \path[->]
-                            (a1)  edge  node {a} (b1)
-                            (b1)  edge[loop above]  node {a,b} (b1)
-                            (c1)  edge  node {b} (a1)
-                            (c1)  edge  node {a,b} (b1)
-                            ;
-                    \end{tikzpicture}
-
-        \end{enumerate}
-
-    \end{multicols}
-
-\end{problem}
-
-
-\medskip\begin{problem}[Testing equivalence of regular expressions]
-
-    \phantom{}
-
-    \medskip
-
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item Describe an algorithm to test equivalence of two regular expressions. 
-        \item Apply it to the following pair of regular expressions:
-        $$
-        (a + b)(a + b)^* \qquad\text{and}\qquad a(a + b)^* + b(a + b)^*
-        $$
-    \end{enumerate}
-    
-\end{problem}
-
-    
-\medskip\begin{problem}[Are regular expressions regular?]
-
-    Fix a finite alphabet $\Sigma$. Is the language consisting of all regular expressions over $\Sigma$ a regular language?
-
-\end{problem}
-
 
 \end{document}
