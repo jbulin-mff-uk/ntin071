@@ -1,3 +1,590 @@
+\documentclass[handout]{beamer}
+
+\input{header.tex}
+
+
+\title{Lecture 4 -- Regular expressions, Kleene's theorem, string substitution}
+
+
+\begin{document}
+
+
+\frame{\titlepage}
+
+
+\begin{frame}{Recap of Lecture 3}
+
+    \begin{itemize}
+        \item Nondeterministic finite automata (NFA): can `guess' the right path to accepting, computation described by a state tree.
+        \item $\epsilon$-transitions: allow to change states without reading any input
+        \item Subset construction: every NFA and $\epsilon$-NFA is equivalent to a DFA (but can be easier to design, much smaller).
+        \item Regular languages are closed under set operations (union, intersection, complement, difference)
+        \item And under string operations (concatenation, iteration and positive iteration, reverse, left and right quotient)
+    \end{itemize}
+
+\end{frame}
 
 
 \section{1.8 Regular expressions}
+
+
+\begin{frame}{Regular expressions (RE)}
+    
+    \begin{itemize}
+        \item an algebraic description of languages
+        \item declarative: express the form of the words we want to accept
+        \item can describe all, and only, regular languages
+        \item can be viewed as a programming language, a user/friendly description of a finite automaton
+    \end{itemize}
+
+    \begin{example}
+    \begin{itemize}
+        \item \texttt{grep} command in UNIX.
+        \item Python module \texttt{re}
+        \item \alert{lexical analysis}, e.g. \texttt{Flex} (description via `tokens' $\leftrightsquigarrow$ RE)
+    \end{itemize}
+    \end{example}
+
+    Note: \alert{syntax analysis} needs a stronger tool, \alert{context-free grammars}
+
+\end{frame}
+
+
+\begin{frame}{The definition}
+    
+    A \alert{regular expression} $\alpha$ over (finite, nonempty) $\Sigma$, $\alpha\in \alert{\RegE(\Sigma)}$ and the matching language \alert{$L(\alpha)$}, are defined inductively:
+
+    \begin{tabular}{l l l}
+        \\\hline
+        \textbf{expression} & \textbf{language} & \textbf{note}\\\hline
+        $\emptyset$ & $L(\emptyset)=\emptyset$ & empty expression\\
+        $\epsilon$ & $L(\epsilon)=\{\epsilon\}$ & empty string \\
+        
+        $\textbf{a}$ & $L({\bf a})=\{a\}$ & for all $a\in \Sigma$\\
+         $(\alpha+\beta)$ & $L((\alpha+\beta))=L(\alpha)\cup L(\beta) $ & union (\texttt{grep}, \texttt{re} use `$|$')\\
+         $(\alpha\beta)$ & $L((\alpha\beta))=L(\alpha)L(\beta)$ &concatenation \\
+         $\alpha^*$ & $L(\alpha^*)=L(\alpha)^*$ & iteration (Kleene star)
+    \end{tabular}
+    
+\end{frame}
+
+
+\begin{frame}{Examples, notation}
+
+    \begin{example}
+        \begin{itemize}
+            \item The language of alternating 0s and 1s can be expressed as:
+            \begin{itemize}
+                \item $({\bf 01})^*+({\bf 10})^*+{\bf 1}({\bf 01})^*+{\bf 0}({\bf 10})^*$
+                \item $(\epsilon+{\bf 1})({\bf 01})^*(\epsilon+{\bf 0})$
+            \end{itemize}
+            \item $L((\textbf{0}^*\textbf{10}^*\textbf{10}^*\textbf{1})^*\textbf{0}^*)=\{w\in \{0,1\}^*\mid |w|_1 \equiv 0\pmod 3\}$
+        \end{itemize}
+    \end{example}
+
+    We often omit parentheses:
+    \begin{itemize}
+        \item priority of operators: iteration $*$ $>$ concatenation $>$ union $+$
+        \item associativity of concatenation, union $+$
+        \item outer parentheses
+    \end{itemize}
+
+    We could define, and will sometimes use, positive iteration $\alpha^+$
+
+\end{frame}
+
+
+\begin{frame}{Kleene's theorem}
+
+    \begin{theorem}[Kleene's theorem]
+        A language is regular, iff it is matched by some regular expression.
+    \end{theorem}
+
+    We will prove it by giving two constructions:
+    \begin{enumerate}
+        \item from RE to $\epsilon$-NFA (which can be converted to a DFA)
+		\item from a DFA to a RE (but we could start from a $\epsilon$-NFA)
+	\end{enumerate}
+    For 2. we also mention a better algorithm: \alert{state eliminiation}
+
+\end{frame}
+
+
+\begin{frame}{RE to $\epsilon$-NFA}
+
+    By induction on the structure of $\alpha$, construct a $\epsilon$-NFA $E$ s.t. $L(\alpha)=L(E)$ with three additional properties:
+	\begin{enumerate}
+		\item Exactly one accepting state.
+		\item No incoming edges into the initial state.
+		\item No outgoing edges from the accepting state.
+	\end{enumerate}
+	
+    \bigskip
+
+	\textbf{Induction base:} $\alpha$ is the empty string $\epsilon$, empty set $\emptyset$, or a letter ${\bf a}$
+	
+	\begin{multicols}{3}
+	
+        \centering
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.95}]
+            \tikzset{every state/.style={minimum size=0pt}}
+            \node[initial,state] (q0)      {};
+            \node[state,accepting] (q1) [right of=q0]     {};
+            \path[->] (q0)  edge node {$\epsilon$} (q1);
+            \node[state] (X)[rectangle,  fit= (q0) (q1), inner sep=0.3cm,rounded corners] {};
+        \end{tikzpicture}	
+        
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.95}]
+            \tikzset{every state/.style={minimum size=0pt}}
+            \node[initial,state] (q0)      {};
+            \node[state,accepting] (q1) [right of=q0]     {};
+            \path[->];
+            \node[state] (X)[rectangle,  fit= (q0) (q1), inner sep=0.3cm,rounded corners] {};
+        \end{tikzpicture}
+            
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.95}]
+            \tikzset{every state/.style={minimum size=0pt}}
+            \node[initial,state] (q0)      {};
+            \node[state,accepting] (q1) [right of=q0]     {};
+            \path[->] (q0)  edge node {$a$} (q1);	
+            \node[state] (X)[rectangle,  fit= (q0) (q1), inner sep=0.3cm,rounded corners] {};
+        \end{tikzpicture}
+	
+	\end{multicols}
+
+    \bigskip
+
+    \textbf{Induction step:} $\alpha+\beta$, $\alpha\beta$, $\alpha^*$ (next slide) \hfill\qedsymbol
+	
+\end{frame}
+
+
+\begin{frame}{RE to $\epsilon$-NFA: Induction step}
+    
+    Addition $\alpha+\beta$
+
+    \vspace{-1cm}
+
+	\hspace{0.4\textwidth}\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+		\tikzset{every state/.style={minimum size=0pt}}
+		\node[initial,state] (q0)      {};
+		\node[state] (q1a)   [right of=q0]    {};
+		\node[state] (q1b)   [below of=q1a]    {};
+		\node[state] (q2a)   [draw=none,right of=q1a]    {R};
+		\node[state] (q2b)   [draw=none,right of=q1b]    {S};
+		\node[state] (q3a)  [right of=q2a]     {};
+		\node[state] (q3b)  [right of=q2b]     {};
+		\node[state,accepting] (q1) [right of=q3a]     {};
+		\path[->]
+			(q0)  edge node {$\epsilon$} (q1a)
+			(q0)  edge node {$\epsilon$} (q1b)
+			(q3a)  edge node {$\epsilon$} (q1)
+			(q3b)  edge node {$\epsilon$} (q1)
+		;
+		\node[state] (X)[rectangle,  fit= (q1a) (q3a), inner sep=0.3cm,rounded corners] {};
+		\node[state] (Y)[rectangle,  fit= (q1b) (q3b), inner sep=0.3cm,rounded corners] {};
+	\end{tikzpicture}
+
+    \vfill\vfill
+
+    Concatenation $\alpha\beta$	
+
+	\hspace{0.4\textwidth}\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,transform canvas={scale=0.8}]
+		\tikzset{every state/.style={minimum size=0pt}}
+		\node[initial,state] (q1a)      {};
+		\node[state] (q2a)   [draw=none,right of=q1a]    {R};
+		\node[state] (q3a)  [right of=q2a]     {};
+		\node[state] (q1b)   [right=2cm of q3a]    {};
+		\node[state] (q2b)   [draw=none,right of=q1b]    {S};
+		\node[state,accepting] (q3b)  [right of=q2b]     {};
+		\path[->]
+			(q3a)  edge node {$\epsilon$} (q1b)
+		;
+	    \node[state] (X)[rectangle,  fit= (q1a) (q3a), inner sep=0.3cm,rounded corners] {};
+		\node[state] (Y)[rectangle,  fit= (q1b) (q3b), inner sep=0.3cm,rounded corners] {};
+	\end{tikzpicture}
+			
+    \vfill
+
+	Iteration $\alpha^*$
+
+	\hspace{0.4\textwidth}\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+		\tikzset{every state/.style={minimum size=0pt}}
+		\node[initial,state] (q0)      {};
+		\node[state] (q2)   [right of=q0]    {};
+		\node[state] (q4)   [draw=none,right of=q2]    {R};
+		\node[state] (q3)  [right of=q4]     {};
+		\node[state,accepting] (q1) [right of=q3]     {};
+		\path[->]
+			(q0)  edge node {$\epsilon$} (q2)
+			(q3)  edge node {$\epsilon$} (q1)
+			(q3)  edge[bend right,swap] node {$\epsilon$} (q2)
+			(q0)  edge[bend right,swap] node {$\epsilon$} (q1)
+		;
+		\node[state] (X)[rectangle,  fit= (q2) (q3), inner sep=0.3cm,rounded corners] {};
+	\end{tikzpicture}
+    
+\end{frame}
+
+
+\begin{frame}{DFA to RE}
+
+    Assume the states are  $Q=\{1,\ldots,n\}$ and the start state is $q_0=1$. 
+    
+    Construct a RE \alert{$R_{ij}^{(k)}$} matching words that transition from state $i$ into state $j$ and all intermediate states (if any) have index $\leq k$.
+
+    Then we set \alert{$\alpha=\sum_{j\in F_A}R_{1j}^{(n)}$} (from start to some accepting state)
+
+    Iteratively construct $R_{ij}^{(k)}$ for $k=0,\ldots,n$ (finite induction).
+
+    \textbf{Induction base:} $k=0$
+    \begin{itemize}
+        \item If \alert{$i\neq j$}, set $R_{ij}^{(0)}={\bf a_1}+\ldots+{\bf a_m}$ where $a_1,\dots,a_m$ are symbols on edges from $i$ into $j$ ($R_{ij}^{(0)}=\emptyset$ or $R_{ij}^{(0)}={\bf a}$ for $m=0,1$).
+        \item If \alert{$i=j$}, $R_{ii}^{(0)}=\alert{\epsilon+}{\bf a_1}+\ldots+{\bf a_m}$ where $a_i$'s are on loops on $i$.
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{DFA to RE: Induction step}
+
+    Once we have $ R^{(k)}_{ij}$ for all $i,j\in Q$, we can construct $R^{(k+1)}_{ij}$:
+        
+    $$
+    R^{(k+1)}_{ij}=R^{(k)}_{ij}+ R^{(k)}_{i(k+1)}(R^{(k)}_{(k+1)(k+1)})^*R^{(k)}_{(k+1)j}
+    $$
+
+    \bigskip
+
+    \begin{center}
+        \scalebox{0.85}{
+            \begin{tikzpicture}
+                \tikzset{every state/.style={minimum size=0.2cm}}
+                \node[state] (a) at (12,0.5)     {i};
+                \node[state] (g)  [right of=a]     {k+1};
+                \node[state] (g2)  [right of=g]     {j};
+                \path[->]
+                    (a)  edge[decorate,decoration={snake,post length=2mm}]  node {$R^{(k)}_{i,(k+1)}$} (g)
+                    (g)  edge[decorate,decoration={snake,post length=2mm}]  node {$R^{(k)}_{(k+1),j}$} (g2)
+                    (a)  edge[decorate,decoration={snake,post length=2mm}, bend right,swap]  node {$R^{(k)}_{i,j}$} (g2)
+                    (g)  edge[loop=110,decorate,decoration={snake,post length=2mm},swap]  node {$R^{(k)}_{(k+1),(k+1)}$} (g);     
+            \end{tikzpicture}
+        }            
+    \end{center}
+
+    \vspace{-12pt}
+
+    \begin{itemize}
+        \item paths $i\rightsquigarrow j$ not going through $k+1$: already in $R^{(k)}_{ij}$
+        \item paths $i\rightsquigarrow j$ going through $k+1$ one or more times: $i\rightsquigarrow k+1$ (first visit), loop on $k+1$, finally  (last visit) $k+1\rightsquigarrow j$\hfill\qedsymbol
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Example}
+
+    \begin{multicols*}{2}
+
+        \begin{center}
+            \scalebox{0.9}{
+                \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm]
+                    \node[initial,state] (q1)      {1};
+                    \node[state,accepting] (q2) [right of=q1]     {2};
+                    \path[->]
+                        (q1)  edge[loop above]  node {1} (q1)
+                        (q1)  edge  node {0} (q2)
+                        (q2)  edge[loop above] node {0,1} (q2);
+                \end{tikzpicture}
+            }    
+        
+        \vspace{2cm}
+
+        Apply the construction, simplify:
+
+        $\alpha=R_{12}^{(2)}={\bf 1}^*{\bf 0}({\bf 0}+{\bf 1})^*$
+        
+        
+
+    \end{center}
+
+    \end{multicols*}
+        
+    
+
+    \begin{center}\footnotesize
+        \begin{tabular}{r | l @{=} l}
+        %& By direct substitution &Simplified\\
+        $R_{11}^{(0)}$ & $\epsilon +{\bf 1}$ &\\
+        $R_{12}^{(0)}$ & ${\bf 0}$&\\ 
+        $R_{21}^{(0)}$ & $\emptyset$&\\
+        $R_{22}^{(0)}$ & $(\epsilon +{\bf 0}+{\bf 1})$&\\
+        \hline
+        $R_{11}^{(1)}$ & $\epsilon +{\bf 1}+(\epsilon +{\bf 1})(\epsilon +{\bf 1})^*(\epsilon +{\bf 1})$ & ${\bf 1}^*$\\
+        $R_{12}^{(1)}$ & ${\bf 0} +(\epsilon +{\bf 1})(\epsilon +{\bf 1})^*{\bf 0}$ &  ${\bf 1}^*{\bf 0}$\\
+        $R_{21}^{(1)}$ & $\emptyset +\emptyset(\epsilon +{\bf 1})^*(\epsilon +{\bf 1})$&$\emptyset$\\
+        $R_{22}^{(1)}$ & $\epsilon+{\bf 0} +{\bf 1}+\emptyset(\epsilon +{\bf 1})^*{\bf 0}$&$\epsilon+{\bf 0}+{\bf 1}$\\ 
+        \hline
+        $R_{11}^{(2)}$ & ${\bf 1}^*+{\bf 1}^*{\bf 0}(\epsilon +{\bf 0}+{\bf 1})^*\emptyset$ & ${\bf 1}^*$\\
+        $R_{12}^{(2)}$ & ${\bf 1}^*{\bf 0}+{\bf 1}^*{\bf 0}(\epsilon +{\bf 0}+{\bf 1})^*(\epsilon +{\bf 0}+{\bf 1})$ & ${\bf 1}^*{\bf 0}({\bf 0}+{\bf 1})^*$\\
+        $R_{21}^{(2)}$ & $\emptyset+(\epsilon +{\bf 0}+{\bf 1})(\epsilon +{\bf 0}+{\bf 1})^*\emptyset$ & $\emptyset$\\
+        $R_{22}^{(2)}$ & $\epsilon+{\bf 0}+{\bf 1}+(\epsilon +{\bf 0}+{\bf 1})(\epsilon +{\bf 0}+{\bf 1})^*(\epsilon +{\bf 0}+{\bf 1})$ & $({\bf 0}+{\bf 1})^*$
+        \end{tabular}
+    \end{center}
+
+\end{frame}
+
+
+\section*{State elimination algorithm}
+
+\begin{frame}{State elimination: the idea}
+
+    \textbf{Idea:} Allow edges labelled by RE, iteratively remove nodes. (More efficient, avoids duplicity.) 
+	
+	\begin{multicols}{2}
+	
+        \begin{center}
+            \it State $s$ selected for elimination        
+            \begin{tikzpicture}[]
+                \useasboundingbox (-1,-2.50) rectangle (5,1);
+                \scope[transform canvas={scale=0.75}]
+                \node[state] (q1)      {$q_1$};
+                \node[state] (p1)  [right=2.5cm of q1]     {$p_1$};
+                \node[state] (s)  [below right of=q1]    {$s$};
+                \node[state] (q2)  [below=2.5cm of q1]     {$q_2$};
+                \node[state] (qk)  [below of=q2]     {$q_k$};
+                \node[state] (pm)  [below=3cm of p1]     {$p_m$};
+                \path[->]
+                    (q1)  edge [bend left] node {$R_{11} $} (p1)
+                    (q1)  edge [bend right] node {$R_{1m} $} (pm)
+                    (q2)  edge [bend right] node {$R_{21} $} (p1)
+                    (q2)  edge [swap] node {$R_{2m} $} (pm)
+                    (qk)  edge [bend right] node {$R_{31} $} (p1)
+                    (qk)  edge [swap] node {$R_{3m} $} (pm)
+                    (q1)  edge  node {$Q_{1} $} (s)
+                    (q2)  edge  node {$Q_{2} $} (s)
+                    (qk)  edge [swap] node {$Q_{k} $} (s)
+                    (s)  edge  node {$P_{1} $} (p1)
+                    (s)  edge  node {$P_{m} $} (pm)
+                    (s)  edge[loop above]  node {$S$} (s);
+                \endscope
+            \end{tikzpicture}
+        \end{center}
+	
+	    \begin{center}
+	        \it After $s$ is eliminated.	
+            \begin{tikzpicture}[]
+                \useasboundingbox (-1,-2.50) rectangle (5,1);
+                \scope[transform canvas={scale=0.75}]
+                \node[state] (q1)      {$q_1$};
+                \node[state] (p1)  [right=2.5cm of q1]     {$p_1$};
+                \node[state] (q2)  [below=2.5cm of q1]     {$q_2$};
+                \node[state] (qk)  [below of=q2]     {$q_k$};
+                \node[state] (pm)  [below=3cm of p1]     {$p_m$};
+                \path[->]
+                    (q1)  edge [bend left] node {$R_{11}+Q_{1} S^* P_{1} $} (p1)
+                    (q1)  edge [bend left] node {$R_{1m}+Q_{1} S^* P_{m} $} (pm)
+                    (q2)  edge [bend left] node {$R_{21}+Q_{2} S^* P_{1} $} (p1)
+                    (q2)  edge  node {$R_{2m}+Q_{2} S^* P_{m} $} (pm)
+                    (qk)  edge [bend left] node {$R_{k1}+Q_{k} S^* P_{1} $} (p1)
+                    (qk)  edge [swap] node {$R_{km}+Q_{k} S^* P_{m} $} (pm);
+                \endscope
+            \end{tikzpicture}
+        \end{center}
+	
+	\end{multicols}
+
+\end{frame}
+
+
+\begin{frame}{State elimination: the algorithm}
+    
+    For every accepting $q\in F$ eliminate all states $p\in Q\setminus\{q, q_0\}$.
+    \begin{itemize}
+        \item for $q\neq q_0$: \alert{$\RegE(q)=(R+SU^*T)^*SU^*$}
+            \begin{center}
+                \scalebox{0.8}{
+                    \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm]
+                        \node[initial,state] (q1)      {};
+                        \node[state,accepting] (q2) [right of=q1] {};
+                        \path[->]
+                            (q1)  edge[loop above]  node {$R$} (q1)
+                            (q1)  edge[bend left]  node {$S$} (q2)
+                            (q2)  edge[bend left]  node {$T$} (q1)
+                            (q2)  edge[loop above] node {$U$} (q2);
+                    \end{tikzpicture}
+                }
+            \end{center}
+            
+
+        \item for $q= q_0$: \alert{$\RegE(q)=R^*$}
+            \begin{center}
+                \scalebox{0.8}{
+                    \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm]
+                        \node[initial,state,accepting] (q1) {};
+                        \path[->] (q1)  edge[loop above]  node {$R$} (q1);
+                    \end{tikzpicture}
+                }
+            \end{center}
+    \end{itemize}
+    Finally, union over all accepting states: \alert{$\RegE(A)=\sum_{q\in F}\RegE(q)$}
+
+    \medskip
+
+    (Elimination order: first nonaccepting and noninitial states.)
+
+\end{frame}
+
+
+\begin{frame}{State elimination: an example}
+
+    The original automaton: 
+
+	\hspace{5cm}
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+        \node[initial,state] (q0)      {A};
+        \node[state] (q1)  [right of=q0]     {B};
+        \node[state,accepting] (q2)  [right of=q1]     {C};
+        \node[state,accepting] (q3) [right of=q2]     {D};
+        \path[->]
+            (q0)  edge[loop above]  node {0,1} (q0)
+            (q0)  edge  node {1} (q1)
+            (q1)  edge node {0,1} (q2)
+            (q2)  edge node {0,1} (q3);
+    \end{tikzpicture}
+	
+	Replace letters by RE: 
+		
+	\vspace{0.4cm}\hspace{5cm}
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+		\node[initial,state] (q0)      {A};
+		\node[state] (q1)  [right of=q0]     {B};
+		\node[state,accepting] (q2)  [right of=q1]     {C};
+		\node[state,accepting] (q3) [right of=q2]     {D};
+		\path[->]
+			(q0)  edge[loop above]  node {{\bf 0}+{\bf 1}} (q0)
+			(q0)  edge  node {{\bf 1}} (q1)
+			(q1)  edge node {{\bf 0}+{\bf 1}} (q2)
+			(q2)  edge node {{\bf 0}+{\bf 1}} (q3);
+	\end{tikzpicture}
+			
+	Eliminate B: 
+		
+	\vspace{0.4cm} 
+	\hspace{5cm}
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+		\node[initial,state] (q0)      {A};
+		\node[state,accepting] (q2)  [right of=q1]     {C};
+		\node[state,accepting] (q3) [right of=q2]     {D};
+		\path[->]
+			(q0)  edge[loop above]  node {{\bf 0}+{\bf 1}} (q0)
+			(q0)  edge node {{\bf 1}({\bf 0}+{\bf 1})} (q2)
+			(q2)  edge node {{\bf 0}+{\bf 1}} (q3);
+	\end{tikzpicture}
+			
+	Eliminate C:
+	
+    \vspace{0.4cm}
+	\hspace{5cm}
+	\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm,transform canvas={scale=0.8}]
+		\node[initial,state] (q0)      {A};
+		\node[state,accepting] (q3) [right of=q2]     {D};
+		\path[->]
+			(q0)  edge[loop above]  node {{\bf 0}+{\bf 1}} (q0)
+			(q0)  edge node {{\bf 1}({\bf 0}+{\bf 1})({\bf 0}+{\bf 1})} (q3);
+	\end{tikzpicture}
+
+    \vspace{-0.2cm}
+	$$
+    ({\bf 0}+{\bf 1})^*{\bf 1}({\bf 0}+{\bf 1})+({\bf 0}+{\bf 1})^*{\bf 1}({\bf 0}+{\bf 1})({\bf 0}+{\bf 1})
+    $$
+	
+\end{frame}
+
+
+\begin{frame}{Algebraic description of regular languages}
+
+    Let \alert{$\RL(\Sigma)$} denote the smallest set of languages over $\Sigma$ that:
+    \begin{itemize}
+        \item contains $\emptyset$ and $\{x\}$ for any letter $x\in \Sigma$, and 
+        \item is closed under union, concatenation, and iteration.
+    \end{itemize}
+    That is, for $A,B\in \RL(\Sigma)$ also $A\cup B,A.B,A^*\in \RL(\Sigma)$. Note that:
+
+    \begin{itemize}
+        \item $\{\epsilon\}\in\RL(\Sigma)$ since $\{\epsilon\}=\emptyset^*$
+        \item $\Sigma\in\RL(\Sigma)$ since $\Sigma=\bigcup_{x\in \Sigma}\{x\}$ (a finite union)
+        \item $\Sigma^*\in\RL(\Sigma)$
+        \item any finite language over $\Sigma$ is in $\RL(\Sigma)$.
+    \end{itemize}
+        
+    \bigskip
+        
+    \begin{theorem}[A restatement of Kleene's Theorem]
+        A language over $\Sigma$ is regular, iff it is in $\RL(\Sigma)$.
+    \end{theorem}    
+
+\end{frame}
+
+
+\begin{frame}{Some properties to simplify RE  (will not be tested)}
+
+    \begin{eqnarray*}
+        L.\emptyset=\emptyset.L&=&\emptyset\\
+        \{\epsilon\}.L=L.\{\epsilon\}&=& L\\
+        (L^*)^* &=& L^*\\
+        (L_1\cup L_2)^*&=& L_1^*(L_2.L_1^*)^*=L_2^*(L_1.L_2^*)^*\\
+        (L_1.L_2)^R&=&L_2^R.L_1^R\\
+        \partial_w(L_1\cup L_2)&=&\partial_w(L_1)\cup \partial_w(L_2)\\
+        \partial_w(\Sigma^*-L)&=&\Sigma^*-\partial_w L\hbox{.}
+    \end{eqnarray*}
+
+\end{frame}
+
+
+\begin{frame}{Converting between representations}
+
+    \begin{center}
+        \scalebox{0.8}{
+            \begin{tikzpicture}
+                \node[elliptic state] (q0)      {$\epsilon-$NFA};
+                \node[elliptic state] (q1)  [right=4cm of q0]     {NFA};
+                \node[elliptic state] (q2)  [below=2cm of q0]     {RegE};
+                \node[elliptic state] (q3) [right=3cm of q2]     {DFA};
+                \path[->]
+                    (q0)  edge  node[swap] {$O(n^3 2^n )$} (q3)
+                    (q1)  edge  node[swap] {$O(n^3 2^n )$} (q3)
+                    (q2)  edge node {$O(n)$} (q0)
+                    (q3)  edge node {$O(n^3 4^n)$} (q2)
+                    (q3)  edge[bend right] node[swap] {$O(n)$} (q0)
+                    (q3)  edge[bend right] node[swap] {$O(n)$} (q1)
+                    ;
+            \end{tikzpicture}
+        }
+    \end{center}
+        
+    \begin{itemize}
+        \item NFA to DFA
+        \begin{itemize}
+            \item $\epsilon$-closure in $O(n^3)$ (search $n$ states $\times$ $n^2$ arcs)
+            \item subset construction, DFA with up to $2^n$ states; for each state need $O(n^3)$ time to compute transitions.
+        \end{itemize}        
+        \item DFA to NFA or $\epsilon$-NFA: simple modification of the table        
+        \item DFA to RE:  $O(n^3 4^n)$        
+        \item RE to $\epsilon$-NFA: $O(n)$        
+    \end{itemize}
+
+\end{frame}
+
+
+\section*{String substitution}
+
+
+\begin{frame}{This slide is under construction}
+    
+
+\end{frame}
+
+
+\end{document}
+
