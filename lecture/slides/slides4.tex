@@ -670,175 +670,73 @@
 \end{frame}
 
 
-\begin{frame}{Proof for inverse homomorphism}
+\begin{frame}{Proof for inverse homomorphism \& an example}
 
-    TODO
+    Given a DFA $A=(Q,Y, \delta,q_0,F)$ recognizing $L'$, construct a DFA recognizing $h^{-1}(L')$: \alert{$B(Q,\Sigma, \delta_B,q_0,F)$} with \alert{$\delta_B(q,a)=\delta^*(q,h(a))$}     
+    That is, for a letter $a\in\Sigma$ do what $A$ does for the word $h(a)$. Easy to show (by induction on $|w|$) that $\delta_B^*(q_0,w)=\delta^*(q_0,h(w))$.
+    \begin{center}
+        \includegraphics[scale=0.5]{files/inverseHomDFA.PNG}
+    \end{center}
+    \vspace{-24pt}\hfill\qedsymbol
+    \begin{example}[Inverse homomorphism]
+        $L'=L((\bf{00}+\bf{1})^*)$, $h(a)=01$, and $h(b)=10$: $h^{-1}(L')=(\bf{ba})^*$.
+        [$h(L((\bf{ba})^*))\in L'$ is obvious, other words generate an isolated 0.]        
+    \end{example}
 
 \end{frame}
 
 
-\end{document}
-
-
-\subsection*{Inverse Homomorphism}
-
-\begin{definition}[Inverse homomorphism]
-Suppose $h$ is a homomorphism from some alphabet $\Sigma$ to words over another alphabet $T$. Then $h^{-1}(L)$ \alert{`$h$ inverse of $L$'} is the set of strings $w$ in $\Sigma^*$ such that $h(w)$ is in $L$.
-\end{definition}
-\begin{example}
-Let $L=(\bf{00}+\bf{1})^*$, $h(a)=01$ and $h(b)=10$.  We claim $h^{-1}(L)=(\bf{ba})^*$.
-
-(Proof: $h((\bf{ba})^*)\in L$ is easy to see; other $w$ generates isolated 0; 4 cases to consider.)
-
-\end{example}
-
-\bigskip
-\begin{figure}[H]
-	
-	\includegraphics[scale=0.75]{files/inverseHom.PNG}
-	%\input{homom.pdf_t}
-	\label{fig:inverseHom}
-	%\caption{A homomorphism applied in the forward and inverse direction.}
-\end{figure}
-
-\end{multicols}
-
-
-\begin{theorem}
-If $h$ is a homomorphism from alphabet $\Sigma$ to alphabet $T$, and $L$ is a regular language over $T$, then $h^{-1}(L)$ is also a regular language.
-\end{theorem}
-\begin{proof}
-The proof starts with a DFA $A$ for $L$. We construct a DFA for $h^{-1}(L)$.
-\begin{itemize}
-\item For $A=(Q,T, \delta,q_0,F)$ we define $B(Q,\Sigma, \delta_B,q_0,F)$ where $\delta_B(q,a)=\delta^*(q,h(a))$ ($\delta^*$ operates on strings). 
-	\item By induction on $|w|$, $\delta_B^*(q_0,w)=\delta^*(q_0,h(w))$. 
-\item Therefore, $B$ accepts exactly those strings $w$ that are in $h^{-1}(L)$.
-\end{itemize}
-\end{proof}
-
-\begin{figure}
-\includegraphics[scale=1]{files/inverseHomDFA.PNG}
-
-The DFA for $h^{-1}(L)$ applies $h$ to its input, and then simulates the DFA for $L$.
-\end{figure}
-
-\section*{Example: visit every state}
-
-\begin{example}[{visit every state}]
-Suppose $A=(Q,\Sigma, \delta,q_0,F)$ is an DFA. The language $L$ of all strings $w$ in $\Sigma^*$ such that $\delta^*(q_0,w)$ is in $F$ and for every state $q\in Q$ there is some prefix $x_q$ of $w$ such that $\delta^*(q_0,x_q)=q$. 
-
-We will show that this language is regular.
-\end{example}
-\begin{itemize}
-\item $M=L(A)$ the language accepted by DFA $A$ in the usual way. We will construct the language $L$ from the language $M$ by applying operations that preserve regularity of languages.
-	\item We define a new alphabet $T$ of triples $\{[paq]; p,q\in Q, a\in \Sigma, \delta(p,a)=q\}$.
-	\item We define a homomorphism $h([paq])=a$ for all $p,q,a$.
-	\item The language $L_1=h^{-1}(M)$ is regular since $M$ is regular (DFA and inverse homomorphism).
-
-\begin{tikzpicture}[]
-\useasboundingbox (-1,-2.50) rectangle (5,1);
-    \scope[transform canvas={scale=1}]
-			\node[initial,state] (p)      {$p$};
-			\node[state, accepting] (q)  [right of=p]     {$q$};
-		\path[->]
-				(p)  edge[loop above]  node {1} (p)
-				(p)  edge  node {0} (q)
-				(q)  edge[loop right]  node {0,1} (q)
-				;
-    \endscope
-\end{tikzpicture}
-\vspace{-2cm}
-\item Example: $h^{-1}(101) $ includes $2^3=8$ strings, for example: $$[p1p][q0q][p1p]\in\{[p1p],[q1q]\}\{[p0q],[q0q]\}\{[p1p],[q1q]\}$$ 
-	\item We construct $L$ from $L_1$:
-	\bigskip
-
-	\item[$L_2$] Enforce start at $q_0$. Define $E_1=\bigcup_{a\in \Sigma, q\in Q}\{[q_0aq]\}=\{[q_0a_1q_0],[q_0a_2q_1],\ldots,[q_0a_mq_n]\}$. Then, $L_2=L_1\cap L(E_1.T^*)$.
-	\item[$L_3$] Adjacent states must be equal. Define non-matching pairs
-	$$E_2=\bigcup_{q\neq r, p,q,r,s\in Q, a,b \in \Sigma}\{[paq][rbs] \}$$ 
-	
-	Define $L_3=L_2-L(T^*.E_2.T^*)$, {i.e., remove strings with at least one pair of non-matching adjacent states. It is a regular language.}
-	
-	\item[$L_3$] It ends in accepting state since we started from $M$ language of accepting computations on the DFA $A$.
-	\item[$L_4$] All states. For each state $q\in Q$, define $E_q$ be the regular expression that is the sum of all the symbols in $T$ such that $q$ appears in neither its first nor the last position. We subtract $L(E_q^*)$ from $L_3$. $L_4=L_3-\bigcup_{q \in Q}\{E_q^*\}$.
-	\item[$L$] Remove states, leave symbols. $L=h(L_4)$. We conclude $L$ is regular.
-\end{itemize}
-
-
-To summarize the construction:
-\begin{itemize}
-	\item[$M$] $=L(A)$ 
-	\item[$L_1$] $h^{-1}(M)\subseteq \{[qap]\}^*$\hfill Inverse homomorphism
-\item[$L_2$] + $q_0$\hfill
-	Intersection with a RL
-\item[$L_3$] + adjacent states equal\hfill
-	Difference with a RL
-\item[$L_4$] + all states on the path\hfill
-Difference with a RL
-\item[$L$] $h([qap])=a$\hfill
-Homomorphism
-\end{itemize}
-
-
-
-
 \section*{Decision properties of regular languages}
-\subsection*{Testing emptiness} Given a representation of a regular language $L$, is $L=\emptyset$?
 
-\begin{itemize}
-    \item Finite automata: it is a question of graph reachability of any final state from the initial one. Reachability can be tested in $O(n^2)$.
-    \item Regular expressions: we can convert to $\epsilon-$NFA in $O(n)$ time and than check reachability. It can also be done by direct inspection:
+
+\begin{frame}{Testing emptiness}
+
+    Given a representation of a regular language $L$, is $L=\emptyset$?
+
+    \alert{FA:} is any final state reachable from the initial state? $O(n^2)$
+
+    \alert{RE:} convert to $\epsilon-$NFA (in $O(n)$ time) and check reachability
+    
+    or directly: 
+    
+    \textbf{basis:} $\emptyset$ is empty, $\epsilon$ and $\bf{a}$ are not
+    
+    \textbf{induction:}
     \begin{itemize}
-    	\item Basis: $\emptyset$ denotes empty language; $\epsilon$ and $\bf{a}$ are not empty.
-    	\item Induction:
-    	\begin{itemize}
-    		\item $R=R_1+R_2$ is empty iff both $L(R_1)$ and $L(R_2)$ are empty.
-    		\item $R=R_1R_2$ is empty iff either $L(R_1)$ or $L(R_2)$ is empty.
-    		\item $R=R_1^*$ is never empty, in includes $\epsilon$.
-    		\item $R=(R_1)$ is empty iff $R_1$ is empty, since they are the same language. 
-    	\end{itemize}
+        \item $\alpha=(\alpha_1+\alpha_2)$: empty iff both $L(\alpha_1)$ and $L(\alpha_2)$ are empty
+        \item $\alpha=(\alpha_1\alpha_2)$ empty iff either $L(\alpha_1)$ or $L(\alpha_2)$ is empty
+        \item $\alpha=(\alpha_1^*)$ never empty, includes $\epsilon$            
     \end{itemize}
-\end{itemize}
+
+\end{frame}
 
 
-\subsection*{Testing membership}
+\begin{frame}{Testing membership}
 
-Given a string $w$; $|w|=n$ and a regular language $L$, is $w\in L$?
+    Given a regular language $L$ and a word $w$, is $w\in L$?
+    \begin{itemize}
+        \item \alert{DFA:} run the automaton; if $|w|=n$, with a suitable representation (constant time transitions) it is in $O(n)$
+        \item \alert{NFA} with $s$ states: running time $O(ns^2)$, each letter processed by taking the previous set of states
+        \item \alert{$\epsilon$-NFA}: first compute the $\epsilon$-closure, then for each letter, process it and compute the $\epsilon$-closure of the result
+        \item \alert{RE} of size $s$: convert to an $\epsilon$-NFA with at most $2s$ states and then simulate, $O(ns^2)$
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Summary of finite automata}
 \begin{itemize}
-	\item DFA: Run automaton; if $|w|=n$, suitable representation, constant time transitions, it is $O(n)$.
-    \item NFA with $s$ states: running time $O(ns^2)$. Each input symbol can be processed by taking the previous set of states, which numbers at most $s$  states.
-    \item $\epsilon-$NFA --- first compute the $\epsilon-$closure. Then, for each symbol, process it and compute $\epsilon-$ closure of the result.
-    \item A regular expression of size $s$: we convert it to a $\epsilon-$NFA with at most $2s$ states and then simulate, taking $O(ns^2)$.
-\end{itemize}
-
-
-
-
-
-\section*{Summary of Finite Automata}
-\begin{itemize}
-	\item Finite Automata
-	
-	\begin{itemize}
-		\item DFA, minimal DFA
-		\item NFA $2^n$, $\epsilon$--NFA, two--way FA $n^n$
-	\end{itemize}
-	\item Regular Expressions
-	\item Automata and Languages
-	
-	\begin{itemize}
-		\item regular languages
-		\item closed under set operations
-		\item closed under string operations
-		\item closed under substitution, homomorphism, inverse homomorphism
-		\item all finite automata and regular expressions describe the same class of languages.
-	\end{itemize}
+	\item Finite Automata: DFA, reduced DFA, NFA, $\epsilon$-NFA
+    \item Regular Expressions
+	\item Regular languages: closed under set operations, string operations, substitution, homomorphism, inverse hom.
+	\item all FA and RE describe the same class of languages
 	
 	\item Key theorems
 	
 	\begin{itemize}
-		\item Mihyll--Nerode theorem (kongruence)
-		\item Kleene theorem (elementar languages and operations)
-		\item Pumping lemma.
+		\item Mihyll--Nerode (implicit DFA via congruences on words)
+		\item Kleene (regular languages iff matched by RE)
+		\item Pumping lemma
 	\end{itemize}
 \item (optional) 2-way automata
 \item (optional) Automata with output
@@ -847,3 +745,64 @@ Given a string $w$; $|w|=n$ and a regular language $L$, is $w\in L$?
     \item Mealy machine.
 \end{itemize}
 \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 4}
+
+    \begin{itemize}
+        \item regular expressions
+        \item Kleene's theorem (two variants)
+        \item constructions: RE to $\epsilon$-NFA, DFA to RE (also )
+        \item state elimination algorithm
+        \item string substitution, homomorphism, inverse homomorphism
+        \item decision properties
+    \end{itemize}    
+
+\end{frame}
+
+
+\section*{Appendix: Visit every state}
+
+
+\begin{frame}{Visit every state}
+
+    \begin{example}[{visit every state}]
+        Given a DFA $A$, let $L$ consist of all $w\in\Sigma^*$ that are accepted and, moreover, during the computation every state is visited, i.e.:
+        \begin{itemize}
+            \item $\delta^*(q_0,w)\in F$
+            \item for every $q\in Q$ there is a prefix $x_q$ of $w$ s.t. $\delta^*(q_0,x_q)=q$
+        \end{itemize}
+        We will show that this language is regular.
+    \end{example}
+    Construct $L$ from $M=L(A)$ using operations preserving regularity:
+
+    \begin{itemize}
+        \item define an alphabet of `transitions': $T=\{[paq]\mid \delta(p,a)=q\}$
+        \item define a homomorphism $h([paq])=a$ for all $p,q,a$
+        \item $L_1=h^{-1}(M)$ is regular (inverse homomorphism), consists of accepting sequences of transitions
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Visit every state: proof continues}
+
+    \begin{itemize}
+        \item start at $q_0$: $L_2=L_1\cap L(E_1.T^*)$, $E_1=\{[q_0aq]\mid a\in \Sigma, q\in Q\}$
+        \item ajacent states must be equal: define non-matching pairs
+        $$
+        E_2=\{[paq][rbs]\mid q\neq r, p,q,r,s\in Q, a,b \in \Sigma\}$$
+        and set $L_3=L_2-L(T^*.E_2.T^*)$ (remove if at least one non-matching pair of adjacent states)            
+        \item $L_3$ already ends in accepting state: we started from $M=L(A)$
+        \item all states: for $q\in Q$ let $E_q$ be the RE that is the sum of all the symbols in $T$ not containing $q$, set 
+        $L_4=L_3-\bigcup_{q \in Q}\{L(E_q^*)\}$
+        \item from a sequence of transitions back to the word: $L=h(L_4)$
+    \end{itemize}\hfill\qedsymbol
+
+\end{frame}
+
+
+\end{document}
+
