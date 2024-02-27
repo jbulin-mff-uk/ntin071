@@ -561,7 +561,7 @@
 		Let $L$ be a regular language. Then there exists a constant $n\in \mathbb{N}$ (which depends on L) such that for every string $w\in L$ such that $|w|\geq n$, we can break $w$ into three strings, $w=xyz$, such that:
 		
 		\begin{itemize}
-			\item $y\neq \lambda$.
+			\item $y\neq \epsilon$.
 			\item $|xy|\leq n$.
 			\item For all $k\geq 0$, the string $xy^kz$ is also in $L$.
 		\end{itemize}
@@ -643,7 +643,7 @@
         Suppose for contradiction that $L_{eq}$ is regular. Take $n$ from the pumping lemma.
         \begin{itemize}
             \item Pick $w=0^n1^n\in L_{eq}$.
-            \item Break $w=xyz$ as in the pumping lemma, $y\neq \lambda$, $|xy|\leq n$.
+            \item Break $w=xyz$ as in the pumping lemma, $y\neq \epsilon$, $|xy|\leq n$.
             \item Since $|xy|\leq n$ and it's at the beginning of $w$, it has only 0's. 
             \item The pumping lemma says: $xz\in L_{eq}$ (for $k=0$). However, it has less 0's and the same \# of 1's as $w$ so it's not in $L_{eq}$.
         \end{itemize} 
@@ -724,7 +724,7 @@
         \item Product automaton, intersection of reg. languages is regular   
         \item \alert{Pumping lemma for regular languages} (prove nonregularity)
         \item PL not a characterization, some nonregular can be pumped
-        \item A language is infinite iff it contains a word of length $n\leq |w|\leq 2n$ where $n$ is \#states of a recognizing automaton
+        \item A regular language is infinite iff it contains a word of length $n\leq |w|\leq 2n$ where $n$ is \#states of a recognizing automaton
     \end{itemize}
 
 \end{frame}

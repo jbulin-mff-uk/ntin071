@@ -26,7 +26,7 @@
         \item Product automaton, intersection of reg. languages is regular      
         \item \alert{Pumping lemma for regular languages} (prove nonregularity)
         \item PL not a characterization, some nonregular can be pumped
-        \item A language is infinite iff it contains a word of length $n\leq |w|\leq 2n$ where $n=\#\text{states}$ of a recognizing automaton
+        \item A regular language is infinite iff it contains a word of length $n\leq |w|\leq 2n$ where $n=\#\text{states}$ of a recognizing automaton
     \end{itemize}
 
 \end{frame}
@@ -91,9 +91,9 @@
     \vspace{-6pt}
     \begin{itemize}
         \item the alphabet is $\Sigma$, states \alert{$Q$ are the congruence classes $\Sigma^*/\sim$}
-        \item the initial state $q_0=[\lambda]$, final states $F=\{c_1, \ldots, c_n\}$ where $L=\bigcup_{i=1,\ldots,n}c_i$
+        \item the initial state $q_0=[\epsilon]$, final states $F=\{c_1, \ldots, c_n\}$ where $L=\bigcup_{i=1,\ldots,n}c_i$
         \item trans. function \alert{$\delta([u],x)=[ux]$} {(well-defined right congruence)}
-        \item to show that $L(A)=L$, using $\delta^*([\lambda],w)=[w]$: 
+        \item to show that $L(A)=L$, using $\delta^*([\epsilon],w)=[w]$: 
         
         \alert{$w\in L$} $\Leftrightarrow$ $w\in \bigcup_{i=1,\ldots,n}c_i$ $\Leftrightarrow$ $w\in c_1 \vee \ldots w\in c_n$ $\Leftrightarrow$ $[w]=c_1 \vee \ldots [w]=c_n$ $\Leftrightarrow$ $[w]\in F$ $\Leftrightarrow$ \alert{$w\in L(A)$}
         \hfill\qedsymbol
@@ -368,7 +368,7 @@
 
             \small
 
-            C, G distinguishable, $\delta^*(C,\lambda)\in{ F}$, $\delta^*(G,\lambda)\notin{ F}$
+            C, G distinguishable, $\delta^*(C,\epsilon)\in{ F}$, $\delta^*(G,\epsilon)\notin{ F}$
 
             \smallskip
                 
@@ -376,7 +376,7 @@
             
             \smallskip
 
-            A,E equivalent (for $\lambda$, $1*$ obvious, $0$ goes to non-accepting, $01$ \& $00$ meet in the same state)
+            A,E equivalent (for $\epsilon$, $1*$ obvious, $0$ goes to non-accepting, $01$ \& $00$ meet in the same state)
 
         \end{columns}
 
@@ -713,7 +713,7 @@
         \end{itemize}
     \end{algorithm}
         
-    \textbf{NB:} Renaming states gives an isomorphic (hence equivalent) automaton. So we can always assume disjoint states. Alternatively, we can use disjoint union: $Q_B=Q_L\dot\sqcup Q_M=Q_L\times\{0\}\cup Q_M\times\{1\}$.
+    \textbf{NB:} Renaming states gives an isomorphic (hence equivalent) automaton. So we can always assume disjoint states. Alternatively, we can use disjoint union: $Q_B=Q_L\mathbin{\dot\sqcup} Q_M=Q_L\times\{0\}\cup Q_M\times\{1\}$.
     
 \end{frame}
 
@@ -721,7 +721,7 @@
 \begin{frame}{Example}
 
     \begin{example}
-        Two different DFAs recognizing $L=\{\lambda\}\cup \{w0\mid w\in\{0,1\}^*\}$.
+        Two different DFAs recognizing $L=\{\epsilon\}\cup \{w0\mid w\in\{0,1\}^*\}$.
     \end{example}
 
     \begin{columns}
