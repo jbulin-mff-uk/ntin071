@@ -700,7 +700,7 @@
 	A regular language $L$ is infinite if and only if there exists $u\in L; n\leq |u|<2n$, where $n$ is the constant from the PL.
 	\end{theorem}
 	\begin{proof}
-        \alert{\Large$\Leftarrow$} If $(\exists u\in L)\ n\leq |u|<2n$, then we can pump, $(\forall i \in \mathbb{N})\ u^i \in L$, gives us infinitely many words in $L$.\\	
+        \alert{\Large$\Leftarrow$} If $(\exists u\in L)\ n\leq |u|<2n$, then we can pump: split $u=xyz$, $xy^iz\in L$ for all $i\in \mathbb{N}$. That gives us infinitely many words in $L$.\\	
         \alert{\Large$\Rightarrow$} If $L$ is infinite, then it must contain a word $w$ with $n\leq |w|$. If $|w|<2n$, then we are done. Otherwise, using the PL: $w=xyz$ and $x{y^0}z=xz\in L$, and we get a shorter word. If $2n\leq |xz|$, we shorten  $xz$  further (PL again). Each time we cut $\leq n$ symbols; thus we hit the interval $[n,2n)$.
 	\end{proof}
 	
