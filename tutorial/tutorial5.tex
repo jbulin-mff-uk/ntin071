@@ -4,18 +4,83 @@
 
 \begin{document}
 
-% \thispagestyle{empty}
+\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 5 -- More regular expressions, TODO}
+\section*{NTIN071 A\&G: Tutorial 5 -- More on closure properties, regular expressions}
 
 % after Lecture 5
 % spring 2024
 
 \medskip
 
-% \noindent\emph{Solve 1a, 2abc, 3 (the rest is for practice).}
+\noindent\emph{Solve 1, 2a-f, 3abce, 4a, 5bc (the rest is for practice).}
 
 \medskip
+
+
+\medskip\begin{problem}[Delete]
+    
+    Let $L$ be a regular language over the alphabet $\Sigma={a,b}$. Describe the following languages in set notation. Are these languages (necessarily) also regular? Prove or disprove.
+    
+    \medskip
+
+    Language consisting of all words obtained from words of the language $L$ by\dots
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt} 
+        \item \dots deleting all occurrences of the letter $a$. 
+        \item \dots deleting the initial letter and writing this letter at the end of the word. 
+        \item \dots deleting the longest contiguous sequence of $a$'s from the beginning of the word.
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Constructing regular expressions]
+
+    Find regular expressions representing the following languages over $\Sigma = \{a, b\}$ consisting of words that:
+
+    \medskip
+    
+    % \begin{multicols}{2}
+
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item start with `abba',
+            \item end with  `abba',
+            \item start with `ab' and end with `ba',
+            \item contain `abba' or `bab' as a subword,
+            \item do not contain `aa' as a subword,
+            \item contain an even number of a's,
+            \item have at least 2 letters and the first letter is the same as the last letter,
+            \item the first two letters are the same as the last two letters.
+        \end{enumerate}
+
+    % \end{multicols}
+
+\end{problem}
+    
+    
+\medskip\begin{problem}[Regex to automaton]
+
+    Construct finite automata accepting languages described by the following regular expressions:
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $ab + ba$
+            \item $a^2 + b^2 + ab$
+            \item $a + b^*$
+            \item $(ab + c)^*$
+            \item $((ab + c)+a(bc)^* + b)^*$
+            \item $((ab + c)^*a(bc)^* + b)^*$
+            \item $(01^* + 101)^*0^*1$
+            \item $(01)^*11(01)^*(0 + 1)^*00$
+        \end{enumerate}
+    
+    \end{multicols}
+    
+\end{problem}
 
 
 \medskip\begin{problem}[Testing equivalence of regular expressions]
@@ -150,6 +215,6 @@
     Fix a finite alphabet $\Sigma$. Is the language consisting of all regular expressions over $\Sigma$ a regular language?
 
 \end{problem}
-
+   
 
 \end{document}
