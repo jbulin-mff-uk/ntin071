@@ -3,7 +3,7 @@
 \input{header.tex}
 
 
-\title{Lecture 6 -- TODO}
+\title{Lecture 6 -- Chomsky Normal Form, Pumping lemma for context-free languages}
 
 
 \begin{document}
@@ -26,7 +26,195 @@
 \end{frame}
 
 
+\section{2.6 Chomsky Normal Form}
 
+
+\begin{frame}{Chomsky normal form}
+	
+	The \alert{Chomsky normal form (ChNF)} of a context-free grammar:
+	
+	\begin{itemize}
+		\item all rules of the form \alert{$A\rightarrow BC$} or  \alert{$A\rightarrow a$} ($A,B,C\in V$, $a\in T$)
+		\item no \alert{useless} symbols
+	\end{itemize}
+
+	\begin{theorem}
+		For every context-free language $L$ such that $L\setminus \{\epsilon\}\neq \emptyset$ there exists a grammar in ChNF that generates $L\setminus \{\epsilon\}$.
+	\end{theorem}
+	
+	Applications:
+	
+	\begin{itemize}
+		\item Test membership in $L$: the \alert{CYK algorithm} (Sakai 1962) 
+		\item Prove the \alert{Pumping lemma for context-free languages}
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Converting to ChNF}
+
+	Take any context-free grammar for $L$ and simplify (\alert{in this order!}):
+	
+	\begin{enumerate}
+		\item eliminate \alert{$\epsilon$-productions} $A\rightarrow\epsilon$
+		\hfill{\small [here we lose $\epsilon\in L$]}
+		\item eliminate \alert{unit productions} $A\rightarrow B$
+		\item eliminate \alert{useless} symbols
+		\begin{itemize}
+			\item[3a.] \alert{unreachable} \hfill[from the start symbol]
+			\item[3b.] \alert{nongenerating} \hfill[a word over terminals]
+		\end{itemize} 
+	\end{enumerate}
+
+	Now we have a \alert{reduced} grammar. To get to ChNF, we further:
+		
+	\begin{enumerate}\setcounter{enumi}{3}
+		\item \alert{separate} terminals from bodies
+		\item \alert{break up} longer bodies
+	\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}{Step 1: Eliminate $\epsilon$-productions}
+
+	A variable $A\in V$ is \alert{nullable} if $A\Rightarrow^* \epsilon$. An algorithm to find them:
+	\begin{itemize}
+		\item[\textbf{basis:}] for every $\epsilon$-production $A\rightarrow \epsilon$ mark $A$ as nullable
+		\item[\textbf{induct:}] if $B\rightarrow C_1 \ldots C_k\in\mathcal P$ where all $C_i$ are nullable, $B$ is nullable
+	\end{itemize}
+
+	\textbf{To eliminate $\epsilon$-productions:} 1. find nullable variables, 2. remove $\epsilon$-productions, 3. process every production $A\rightarrow X_1\ldots X_k \in \mathcal P$:
+	\begin{itemize}
+		\item let $J\subseteq\{1,\dots,k\}$ be the positions of all nullable variables
+		\item for every $J'\subseteq J$ create a copy of the production where $X_j$ for $j\in J'$ are deleted, except if $J=\{1,\dots,k\}$ require $J'\neq\emptyset$
+	\end{itemize}
+
+	\textbf{Example:} $\mathcal P=\{S\rightarrow AB,A\rightarrow aAB\mid\epsilon,B\rightarrow ABBA\mid\epsilon\}$
+
+	$S\rightarrow AB\mid A\mid B$
+	$A\rightarrow aAB\mid aA\mid aB\mid a$
+	$B\rightarrow ABBA\mid ABA\mid ABB\mid BBA\mid AA\mid AB\mid BA\mid BB\mid A\mid B$
+
+\end{frame}
+
+
+\begin{frame}{Step 2: Eliminate unit productions}
+
+	\textbf{Idea}: for a unit production $A\to B$ copy rules for $B$ with head $A$, but unit productions can be composed, we need transitive closure:
+
+	\alert{Unit pairs} $\mathcal U\subseteq V\times V$ are defined as follows:
+	\begin{itemize}
+		\item $(A,B)\in\mathcal U$ for every unit production $A\to B\in\mathcal P$
+		\item if $(A,B)\in\mathcal U$ and $(B,C)\in\mathcal U$, then $(A,C)\in\mathcal U$
+	\end{itemize}
+
+	\textbf{To eliminate unit productions:} 
+	\begin{enumerate}
+		\item find all unit pairs $\mathcal U$
+		\item remove all unit productions
+		\item for every unit pair $(A,B)\in\mathcal U$ and production $B\to\mathcal\beta\in\mathcal P$ add the production $A\to\beta$ to $\mathcal P$
+	\end{enumerate}
+
+\end{frame}
+	
+
+\begin{frame}{Step 2: Eliminate unit productions -- an example}
+
+	$E\rightarrow T\mid E+T$\\
+	$F\rightarrow I\mid (E)$\\
+	$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$T\rightarrow F\mid T*F$
+
+	unit pairs:\\		
+	$(E,E),(E,F),(E,I),(E,T),$\\
+	$(F,F),(F,I),$\\
+	$(I,I),$\\
+	$(T,F),(T,I),(T,T)$
+
+	the result:\\
+	$E\rightarrow E+T\mid T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$
+	$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$F\rightarrow (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$T\rightarrow T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	
+
+\end{frame}
+
+
+\begin{frame}{Step 3: Eliminate useless symbols}
+
+	\begin{itemize}
+		\item $X\in V\cup T$ is a \alert{useful} symbol (in $G$) if there exists a derivation of the form $S\Rightarrow^* \alpha X \beta \Rightarrow^* w$ for some $w \in T^*$
+		\item $X$ is \alert{useless} if it is not useful
+		\item $X$ is \alert{generating} if $X \Rightarrow^* w$ for some  $w\in T^*$
+		\item $X$ is \alert{reachable} if $S\Rightarrow^* \alpha X \beta$ for some $\alpha,\beta\in(V\cup T)^*$
+	\end{itemize}
+
+	Observe:
+	\begin{itemize}
+		\item useful $\Leftrightarrow$ generating and reachable
+
+		\item useless $\Leftrightarrow$ nongenerating or unreachable (we eliminate both)
+		\item all terminals are generating
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Step 3: Eliminate useless symbols -- the algorithm}
+
+	\begin{enumerate}
+		\item Find all generating symbols:
+		\begin{itemize}
+			\item[\textbf{basis:}] mark all terminals $a\in T$ as generating
+			\item[\textbf{induct:}] for every production $A\rightarrow\beta$ where every symbol in the body $\beta$ is generating, mark the head $A$ as generating (incl. $A\rightarrow \epsilon$)
+		\end{itemize}
+		\item Remove all \alert{nongenerating} symbols and rules containing them
+		\item Find all reachable symbols
+		\begin{itemize}
+			\item[\textbf{basis:}] mark $S$ as reachable
+			\item[\textbf{induct:}] for every production $A\rightarrow\beta$ where the head $A$ is reachable mark every symbol in the body $\beta$ as reachable
+		\end{itemize}
+		\item Remove all \alert{unreachable} symbols and rules containing them		
+	\end{enumerate}
+
+	\begin{itemize}
+		\item The order is important! Eliminating unreachable symbols can create new nongenerating symbols, but not vice versa
+		\item \textbf{Example:} eliminate nongenerating $B$, then unreachable $A$
+		\smallskip
+		\begin{center}
+			\begin{minipage}{0.25\textwidth}
+				$S\rightarrow AB\mid a$\\
+				$A\rightarrow b$
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				$S\rightarrow a$\\
+				$A\rightarrow b$
+			\end{minipage}
+			\begin{minipage}{0.25\textwidth}
+				$S\rightarrow a$
+			\end{minipage}
+		\end{center}
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Step 4: Separate terminals from bodies}
+
+	TODO
+	
+\end{frame}
+
+
+\begin{frame}{Step 5: Break up longer bodies}
+
+	TODO
+
+\end{frame}
 
 
 \end{document}
+
