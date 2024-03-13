@@ -161,6 +161,11 @@
 
 \begin{frame}{RE to $\epsilon$-NFA: Induction step}
     
+    \vspace{-1cm}
+    Let $A,B$ be $\epsilon$-NFA constructed for $\alpha,\beta$.
+
+    \bigskip
+
     Addition $\alpha+\beta$
 
     \vspace{-1cm}
@@ -170,8 +175,8 @@
 		\node[initial,state] (q0)      {};
 		\node[state] (q1a)   [right of=q0]    {};
 		\node[state] (q1b)   [below of=q1a]    {};
-		\node[state] (q2a)   [draw=none,right of=q1a]    {R};
-		\node[state] (q2b)   [draw=none,right of=q1b]    {S};
+		\node[state] (q2a)   [draw=none,right of=q1a]    {A};
+		\node[state] (q2b)   [draw=none,right of=q1b]    {B};
 		\node[state] (q3a)  [right of=q2a]     {};
 		\node[state] (q3b)  [right of=q2b]     {};
 		\node[state,accepting] (q1) [right of=q3a]     {};
@@ -192,10 +197,10 @@
 	\hspace{0.4\textwidth}\begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1cm,transform canvas={scale=0.8}]
 		\tikzset{every state/.style={minimum size=0pt}}
 		\node[initial,state] (q1a)      {};
-		\node[state] (q2a)   [draw=none,right of=q1a]    {R};
+		\node[state] (q2a)   [draw=none,right of=q1a]    {A};
 		\node[state] (q3a)  [right of=q2a]     {};
 		\node[state] (q1b)   [right=2cm of q3a]    {};
-		\node[state] (q2b)   [draw=none,right of=q1b]    {S};
+		\node[state] (q2b)   [draw=none,right of=q1b]    {B};
 		\node[state,accepting] (q3b)  [right of=q2b]     {};
 		\path[->]
 			(q3a)  edge node {$\epsilon$} (q1b)
@@ -212,7 +217,7 @@
 		\tikzset{every state/.style={minimum size=0pt}}
 		\node[initial,state] (q0)      {};
 		\node[state] (q2)   [right of=q0]    {};
-		\node[state] (q4)   [draw=none,right of=q2]    {R};
+		\node[state] (q4)   [draw=none,right of=q2]    {A};
 		\node[state] (q3)  [right of=q4]     {};
 		\node[state,accepting] (q1) [right of=q3]     {};
 		\path[->]
@@ -573,7 +578,7 @@
         \begin{itemize}
             \item a simple modification of the transition table
         \end{itemize}        
-        \item DFA to RE:  $O(n^3 4^n)$        
+        \item DFA to RE:  $O(4^n)$        
         \item RE to $\epsilon$-NFA: $O(n)$        
     \end{itemize}
 

@@ -181,7 +181,7 @@
 	\end{enumerate}
 
 	\begin{itemize}
-		\item The order is important! Eliminating unreachable symbols can create new nongenerating symbols, but not vice versa
+		\item The order is important! Eliminating unreachable symbols can create new nongenerating symbols, but not vice versa.
 		\item \textbf{Example:} eliminate nongenerating $B$, then unreachable $A$
 		\smallskip
 		\begin{center}
@@ -202,19 +202,332 @@
 \end{frame}
 
 
-\begin{frame}{Step 4: Separate terminals from bodies}
+\begin{frame}{Steps 4 \& 5: Separate terminals and break up long bodies}
 
-	TODO
+	\textbf{Step 4: Separate terminals from bodies}
+
+	For every terminal $a\in T$, introduce a new variable $V_a$.
+
+	For every rule $A\to\beta$ with $|\beta|\geq 2$, replace every terminal $a$ by $V_a$.
+	
+	\bigskip
+
+	\textbf{Step 5: Break up longer bodies}
+
+	Replace every rule $A\to B_1\dots B_k$ with $k\geq 3$ with:
+	\begin{align*}
+		A&\to B_1 C_1\\
+		C_1&\to B_2 C_2\\
+		&\ \,\vdots\\
+		C_{k-2}&\to B_{k-1}B_k
+	\end{align*}
+	where $C_1,\dots,C_{k-2}$ are new variables (only used for this purpose).
 	
 \end{frame}
 
 
-\begin{frame}{Step 5: Break up longer bodies}
+\begin{frame}{Conversion to Chomsky Normal Form}
 
-	TODO
+	ChNF: only useful symbols and rules \alert{$A\rightarrow BC$} or \alert{$A\rightarrow a$}
+	
+	\begin{theorem}
+		For every context-free language $L$ such that $L\setminus \{\epsilon\}\neq \emptyset$ there exists a grammar in ChNF that generates $L\setminus \{\epsilon\}$.
+	\end{theorem}
+	\begin{proof}
+		Take a context-free grammar $G$ for $L$. Modify it by applying steps 1, 2, 3a, 3b, 4, and 5, in order. Clearly, the result is in ChNF. After step 1 we get $G'$ such that $L(G')=L(G)\setminus \{\epsilon\}$; the remaining steps produce equivalent grammars. Steps 2-5 don't add any $\epsilon$-productions, 3-5 don't add unit productions, 3b-5 don't add nongenerating symbols, 4-5 don't add useless, etc.
+	\end{proof}
+
+	Note: If we only apply 1, 2, 3a, and 3b, we get a \alert{reduced} grammar: only useful symbols, no $\epsilon$-productions, no unit productions.
 
 \end{frame}
 
 
+\begin{frame}{Example}
+
+	\begin{multicols}{2}
+		
+		$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+		$F\rightarrow I\mid (E)$
+		
+		$T\rightarrow F\mid T*F$\\
+		$E\rightarrow T\mid E+T$
+	\end{multicols}
+
+	\bigskip
+	\hrule
+
+	\begin{multicols}{2}
+		\small
+
+		\textbf{reduce + separate}
+
+		$I\rightarrow a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$F\rightarrow LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$T\rightarrow TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$E\rightarrow EPT\mid TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+
+		\bigskip
+		
+		$A\rightarrow a$, $B\rightarrow b$, $Z\rightarrow 0$, $U\rightarrow 1$,\\
+		$P\rightarrow +$, $M\rightarrow *$, $L\rightarrow ($, $R\rightarrow )$
+		
+		\bigskip\bigskip
+
+		\textbf{break up longer bodies}
+
+		$F\rightarrow LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$T\rightarrow TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$E\rightarrow EC_1\mid TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$C_1\rightarrow PT$\\
+		$C_2\rightarrow MF$\\
+		$C_3\rightarrow ER$\\
+		$I,A,B,Z,U,P,M,L,R$ same as on the left side
+	\end{multicols}
+
+\end{frame}
+
+
+\section{2.7 Pumping lemma for context-free languages}
+
+
+\begin{frame}{Pumping lemma for context-free languages}
+
+	\begin{theorem}[Pumping Lemma for Context Free Languages]
+		Let $L\subseteq\Sigma^*$ be context-free. Then there exists $n\in\mathbb N$ s.t. for any $z\in L, |z|\geq n$ there are $u,v,w,x,y\in\Sigma^*$ s.t. $z=uvwxy$ and:
+		
+		(i) $|vwx|\leq n $ \hfill (ii) $|vx|>0$ \hfill (iii) $uv^iwx^iy\in L$ for all $i\geq 0$
+	\end{theorem}
+
+	\textbf{Proof idea:} Take a ChNF grammar for $L$. If $z\in L$ is long enough, a parse tree for $z$ must contain a path from $S$ to a leaf (terminal) of length $|V|+1$. Some nonterminal $N\in V$ repeats on this path giving two subtrees with root $N$: a larger one containing a smaller one. Replace the larger with a copy of the smaller ($i=0$) or the smaller with a copy of the larger ($i=2$).
+
+	\textbf{What is long enough?} If $|z|>2^{k-1}$, then the depth of the tree is $k+1$. (All inner nodes not immediately above a leaf are binary!) 
+
+\end{frame}
+
+
+\begin{frame}{The proof in a picture}
+
+	\vspace{-6pt}
+	\begin{center}
+		\includegraphics[height=0.92\textheight]{files/pumping-lemma-for-context-free-languages.png}
+	\end{center}
+	\vspace{-12pt}
+	{\footnotesize Image by Jochen Burghardt, CC BY-SA 3.0, from Wikipedia}
+		
+	
+\end{frame}
+
+
+\begin{frame}{The proof}
+
+	If $L=\emptyset$ and $L=\{\epsilon\}$ trivial, take $n=1$. Otherwise take a ChNF grammar for $L$. Set $n=2^{|V|-1}+1$ . Let $z\in L$ with $|z|\geq n$.
+	
+	A parse tree for $z$ contains a path from $S$ to a terminal $t$ of length at least $|V|+1$. At least two of the last $|V|+1$ nonterminals on this path must be the same. Let $A^1, A^2$ be such a pair that is closest to $t$. Let $T^1,T^2$ be the subtrees rooted at $A^1, A^2$.
+		
+	The path from $A^1$ to $t$ is the longest one in $T^1$ and has length at most $(k+1)$. Thus $|vwx|\leq n $.
+
+	There are two paths from $A^1$ (ChNF!): one leads to $T^2$, the other to the rest, it must generate at least one letter (no $\epsilon$-productions). Thus $|vx|>0$.
+
+\end{frame}
+
+
+\begin{frame}{The proof cont'd}
+
+	The word $z=uvwxy$ is derived as follows:
+	\begin{itemize}
+		\item $A^2\Rightarrow^* w$
+		\item $A^1\Rightarrow^*vA^2x\Rightarrow^* vwx$
+		\item $S\Rightarrow^*uA^1y\Rightarrow^*uvA^2xy\Rightarrow^*uvwxy$
+	\end{itemize}
+
+	For $i=0$: replace $T^1$ by $T^2$
+	$$
+	S\Rightarrow^*uA^2y\Rightarrow^*uwy
+	$$
+
+	For $i=2$: replace $T^2$ by a copy of $T^1$
+	$$
+	S\Rightarrow^*uA^1y\Rightarrow^*uvA^1xy\Rightarrow^*uvvA^2xxy\Rightarrow^*uvvwxxy
+	$$
+
+	For $i\geq 3$ repeat the above.\hfill\qedsymbol
+	
+\end{frame}
+
+
+\begin{frame}{Application: proving nonregularity}
+
+	TODO
+	
+
+\end{frame}
+
+
+\section{2.8 The CYK algorithm}
+
+
 \end{document}
 
+
+\begin{example}
+	The language $L=\{0^n1^n2^n\mid n\geq 1\}$ is not CFL.
+	\begin{itemize}
+	\item assume it were CFL
+	\item we get $n$ from the Pumping Lemma
+		\item choose $z=0^n1^n2^n$ $|z|\geq n $
+		\item $|vwx|\leq n $
+		\item we pump at most two different symbols
+		\item the equality of symbols is violated -- CONTRADICTION.
+	\end{itemize}
+	\end{example}
+	
+	
+	\begin{example}
+	The language $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$ is not CFL.
+	
+	\begin{itemize}
+	\item assume it were CFL
+	\item we get $n$ from the Pumping Lemma
+		\item choose $z=0^n1^n2^n$, then $|z|\geq n $
+		\item $|vwx|\leq n$
+		\item we pump at most two different symbols
+		\item in the case of $0$ (or $1$), pump up -- CONTRADICTION $i\leq j$ (or $j\leq n$)
+		\item if $2$ (or $1$), pump down -- CONTRADICTION $j\leq n$ (or $i\leq j$)
+	\end{itemize}
+	\end{example}
+	
+	\begin{example}
+	The language $L=\{0^i1^j2^i3^j\mid i,j\geq 1\}$ is not CFL.
+	\begin{itemize}
+	\item assume it were CFL
+	\item we get $n$ from the Pumping Lemma
+		\item choose $z=0^n1^n2^n3^n$, then $|z|\geq n$
+		\item $|vwx|\leq n $
+		\item we do pump both $0$ and 2 nor 1 and 3
+		\item the equality of symbols is violated -- CONTRADICTION.
+	\end{itemize}
+	\end{example}
+	
+	\begin{example}
+	The language $L=\{ww\mid w\hbox{ is in }\{0,1\}^*\}$ is not CFL.
+	\begin{itemize}
+	\item assume it were CFL
+	\item we get $n$ from the Pumping Lemma
+		\item choose $z=0^n1^n0^n1^n$, then $|z|\geq n$
+		\item $|vwx|\leq n $
+		\item we do not reach both positions of 0 nor both positions of 1
+		\item the equality of symbols is violated -- CONTRADICTION.
+	\end{itemize}
+	\end{example}
+	
+	
+	\subsection*{Generalizations of the Pumping Lemma}{\,}
+	
+	Pumping lemma for CFL is again only an implication!
+	\begin{example}
+	$L=\{a^ib^jc^kd^l| i=0 \vee j=k=l\}$ is not a CFL but it can be pumped.
+	
+	\begin{tabular}{l l}
+	$i=0: b^jc^kd^l$ & can be pumped in any letter\\
+	$i>0:a^ib^nc^nd^n$ & can be pumped in $a^*$
+	\end{tabular}
+	\end{example}
+	
+	What to do?
+	\begin{itemize}
+		\item generalisations (Ogden lemma and others)
+		\begin{itemize}
+			\item pumping marked symbols
+		\end{itemize}
+		\item closure properties (later).
+	\end{itemize}
+	
+	
+	
+	\section*{Testing emptiness of CFLs}
+	Test whether the start symbol $S$ of $G$ is generating: can be done in $O(|G|)$ time.
+	\begin{figure}[H]\includegraphics[width=0.8\textwidth]{files/emptyCFL.PNG}
+	\end{figure}
+	\begin{itemize}
+		\item Create an indexed list of all variables (left)
+		\item Add links: 
+		\begin{itemize}
+			\item $\forall$ variable a chain of all the positions in which that variable appears (full line).
+			\item $\forall$ production, a count of the number of positions holding variables whose ability to generate a terminal string has not yet been taken into account (dashed and dotted lines)
+	\item Establishing $B$ is generating follow full links and decrease the count by $1$ for each occurrence.
+	\item If a count reaches $0$, then we know the head variable is generating.
+	\item Keep all generating variables on a stack and procceed them.
+		\end{itemize}
+	\end{itemize}
+	
+	
+	\section*{Testing finiteness of CFLs}
+	Let $G$ be a Chomsky normal form grammar for $L$, i.e. $L\setminus\{\lambda\}=L(G)$. Construct the following oriented graph: 
+	\begin{itemize}
+		\item nodes: variables in $G$
+		\item edges: $\{(A,B),(A,C) \mid A\rightarrow BC\text{ is a production rule in }G\}$
+	\end{itemize}
+	Now $L$ is infinite, if and only if the graph contains an oriented cycle. Can be tested in $O(|G|)$.
+	
+	
+	
+	
+	
+	
+	
+	\section*{Testing membership in a CFL: the CYK algorithm}
+	
+	The Cocke-Younger-Kasami algorithm for testing membership in a CFL (inefficient: exponential in $|w|$ -- check all derivation trees of appropriate depth of a ChNF grammar for $L$)
+	
+	\begin{definition}[CYK Algorithm, time $O(n^3)$]
+	\begin{itemize}
+		\item The input is CNF grammar $G=(V,T,P,S)$ for language $L$ and a string $w=a_1a_2\ldots a_n\in T^*$.
+		\item Create triangular table 
+		
+		\begin{itemize}
+			\item horizontal axis is $w$
+			\item $X_{ij}$ is the set of variables $A$ such that $A\gen a_ia_{i+1}\ldots a_j$.
+		\end{itemize}
+		\item Fill the table upwards.
+	\begin{itemize}
+	\item BASIS: $$X_{ii}=\{A;A\rightarrow a_i \in P\}$$
+		 \item INDUCTION:
+		$$X_{ij}=\{A\rightarrow BC\mid B\in X_{ik}, C\in X_{k+1,j}\text{ for some $k$ such that }i\leq k<j\}$$
+	%	$X_{ij}=\{A\rightarrow BC;B\gen a_i\ldots a_k, C\gen a_{k+1}\ldots a_j\}$
+	\item QUESTION: Is $S\in X_{1n}$?
+	\end{itemize}
+	\end{itemize}
+	\end{definition}
+	
+	\begin{center}
+	\begin{tabular}{|c c c c c c c c}
+	 $X_{15}$ \\ 
+	%\rowcolor{LightCyan}%\cellcolor{LightCyan}
+	$X_{14}$ &  $X_{25}$  \\ 
+	$X_{13}$ &  $X_{24}$ &  $X_{35}$ \\ %\\[-\normalbaselineskip]
+	 $X_{12}$ &  $X_{23}$ & $X_{34}$ &  $X_{45}$ \\ 
+	 $X_{11}$ & $X_{22}$ &  $X_{33}$ &$X_{44}$ &$X_{55}$ \\ \hline %\cline{1-7}
+	$a_1$&$a_2$&$a_3$&$a_4$&$a_5$
+	\end{tabular}
+		
+	\end{center}
+	
+	
+	\begin{example}
+	$G=(V,T,P,S)$, $P=\{S \to AB\mid BC, A \to BA\mid a, B\to CC\mid b, C\to AB\mid a\}$
+	
+	\bigskip
+	
+	Start filling from the bottom:
+	
+	\bigskip
+	
+	\begin{tabular}{|c c c c c c c c}
+	 $\{S,A,C\}$ \\ 
+	- &  $\{S,A,C\}$  \\ 
+	- &  $\{B\}$ &  $\{B\}$ \\ 
+	 $\{S,A\}$ &  $\{B\}$ & $\{S,C\}$ &  $\{S,A\}$ \\ 
+	 $\{B\}$ & $\{A,C\}$ &  $\{A,C\}$ &$\{B\}$ &$\{A,C\}$ \\ \hline 
+	$b$&$a$&$a$&$b$&$a$
+	\end{tabular}
+	\end{example}
