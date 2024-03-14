@@ -312,7 +312,7 @@
 		\includegraphics[height=0.92\textheight]{files/pumping-lemma-for-context-free-languages.png}
 	\end{center}
 	\vspace{-12pt}
-	{\footnotesize Image by Jochen Burghardt, CC BY-SA 3.0, from Wikipedia}
+	{\footnotesize Image by Jochen Burghardt, CC BY-SA 3.0, from \href{https://en.wikipedia.org/wiki/Pumping_lemma_for_context-free_languages}{Wikipedia}}
 		
 	
 \end{frame}
@@ -355,129 +355,97 @@
 \end{frame}
 
 
-\begin{frame}{Application: proving nonregularity}
+\begin{frame}{Application: proving a laguage is not context-free}
 
-	TODO
+	\begin{example}
+		The language $L=\{0^n1^n2^n\mid n\geq 0\}$ is not context-free.
+	\end{example}
+	Suppose for contradiction that it is. Let $n$ be constant from the Pumping lemma. Choose $z=0^n1^n2^n\in L$. Clearly $|z|\geq n$.
+
+	The Pumping lemma gives us a split $z=uvwxy$ satisfying (i)--(iii). Since $|vwx|\leq n $, the pumped part $vx$ contains at most two of the symbols $0,1,2$. Pumping will violate equal number of symbols.\hfill\qedsymbol
+
+	\medskip
+
+	\begin{example}
+		The language $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$ is not context-free.
+	\end{example}
+	Similar as above, also $z=0^n1^n2^n$, at most two symbols pumped:
+	\begin{itemize}
+		\item if 0 or 1 are pumped, but 2 is not: pump up ($i=2$)
+		\item if 1 or 2 are pumped, but 0 is not: pump down ($i=0$)\hfill\qedsymbol
+
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{More examples}
+
+	\begin{example}
+		$L=\{0^j1^k2^j3^k\mid j,k\geq 0\}$ is not context-free.
+	\end{example}		
+	Similar as before, choose $z=0^n1^n2^n3^n$, $vx$ must contain some symbol. But from $|vwx|\leq n$ we know that it can contain neither both 0 and 2, nor both 1 and 3. In any case, the equal number of symbols 0 and 2 or 1 and 3 is violated.\hfill\qedsymbol
+
+	\bigskip
+
+	\begin{example}
+		$L=\{ww\mid w\in\{0,1\}^*\}$ is not context-free.
+	\end{example}	
+	Choose $z=0^n1^n0^n1^n$, then $|z|\geq n$. The pumped part can cover neither both blocks of 0s nor both blocks of 1s. Four cases to consider: $vx$ contains a symbol from the 1st block of 0s, 1st block of 1s, 2nd 0s, 2nd 1s. In all cases we get a violation.\hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{It is not a characterization}
+
+	The Pumping lemma is again only an implication, not equivalence:
+
+	\begin{example}
+		$L=\{a^ib^jc^kd^\ell| i=0 \text{ or } j=k=\ell\}$ can be pumped. But it is not context-free.
+	\end{example}
+		
+	\begin{tabular}{l l}
+		$i=0: b^jc^kd^l$ & can be pumped in any letter\\
+		$i>0:a^ib^nc^nd^n$ & can be pumped in $a^*$
+	\end{tabular}
+
+	\medskip
 	
+	What to do in such cases?
+	\begin{itemize}
+		\item \href{https://is.cuni.cz/studium/predmety/index.php?do=predmet&kod=NTIN071}{\alert{Ogden's lemma}}: generalize Pumping lemma, mark some of the letters, some marked symbol is pumped
+		\item use closure properties of context-free languages
+	\end{itemize}
 
 \end{frame}
 
 
 \section{2.8 The CYK algorithm}
 
-
 \end{document}
 
+\begin{frame}{Testing membership in a context-free language}
 
-\begin{example}
-	The language $L=\{0^n1^n2^n\mid n\geq 1\}$ is not CFL.
-	\begin{itemize}
-	\item assume it were CFL
-	\item we get $n$ from the Pumping Lemma
-		\item choose $z=0^n1^n2^n$ $|z|\geq n $
-		\item $|vwx|\leq n $
-		\item we pump at most two different symbols
-		\item the equality of symbols is violated -- CONTRADICTION.
-	\end{itemize}
-	\end{example}
+	Let us have a context-free grammar $G$ \alert{in Chomsky Normal Form}.
+
+	Given an input word $w=a_1\dots a_n\in T^*$, determine if $w\in L(G)$.
+
+	\textbf{Inefficient algorithm:} construct all parse trees from $G$ with 
+
+
+
+	\textbf{The Cocke-Younger-Kasami algorithm:} dynamic programming
+
+
 	
-	
-	\begin{example}
-	The language $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$ is not CFL.
-	
-	\begin{itemize}
-	\item assume it were CFL
-	\item we get $n$ from the Pumping Lemma
-		\item choose $z=0^n1^n2^n$, then $|z|\geq n $
-		\item $|vwx|\leq n$
-		\item we pump at most two different symbols
-		\item in the case of $0$ (or $1$), pump up -- CONTRADICTION $i\leq j$ (or $j\leq n$)
-		\item if $2$ (or $1$), pump down -- CONTRADICTION $j\leq n$ (or $i\leq j$)
-	\end{itemize}
-	\end{example}
-	
-	\begin{example}
-	The language $L=\{0^i1^j2^i3^j\mid i,j\geq 1\}$ is not CFL.
-	\begin{itemize}
-	\item assume it were CFL
-	\item we get $n$ from the Pumping Lemma
-		\item choose $z=0^n1^n2^n3^n$, then $|z|\geq n$
-		\item $|vwx|\leq n $
-		\item we do pump both $0$ and 2 nor 1 and 3
-		\item the equality of symbols is violated -- CONTRADICTION.
-	\end{itemize}
-	\end{example}
-	
-	\begin{example}
-	The language $L=\{ww\mid w\hbox{ is in }\{0,1\}^*\}$ is not CFL.
-	\begin{itemize}
-	\item assume it were CFL
-	\item we get $n$ from the Pumping Lemma
-		\item choose $z=0^n1^n0^n1^n$, then $|z|\geq n$
-		\item $|vwx|\leq n $
-		\item we do not reach both positions of 0 nor both positions of 1
-		\item the equality of symbols is violated -- CONTRADICTION.
-	\end{itemize}
-	\end{example}
-	
-	
-	\subsection*{Generalizations of the Pumping Lemma}{\,}
-	
-	Pumping lemma for CFL is again only an implication!
-	\begin{example}
-	$L=\{a^ib^jc^kd^l| i=0 \vee j=k=l\}$ is not a CFL but it can be pumped.
-	
-	\begin{tabular}{l l}
-	$i=0: b^jc^kd^l$ & can be pumped in any letter\\
-	$i>0:a^ib^nc^nd^n$ & can be pumped in $a^*$
-	\end{tabular}
-	\end{example}
-	
-	What to do?
-	\begin{itemize}
-		\item generalisations (Ogden lemma and others)
-		\begin{itemize}
-			\item pumping marked symbols
-		\end{itemize}
-		\item closure properties (later).
-	\end{itemize}
-	
-	
-	
-	\section*{Testing emptiness of CFLs}
-	Test whether the start symbol $S$ of $G$ is generating: can be done in $O(|G|)$ time.
-	\begin{figure}[H]\includegraphics[width=0.8\textwidth]{files/emptyCFL.PNG}
-	\end{figure}
-	\begin{itemize}
-		\item Create an indexed list of all variables (left)
-		\item Add links: 
-		\begin{itemize}
-			\item $\forall$ variable a chain of all the positions in which that variable appears (full line).
-			\item $\forall$ production, a count of the number of positions holding variables whose ability to generate a terminal string has not yet been taken into account (dashed and dotted lines)
-	\item Establishing $B$ is generating follow full links and decrease the count by $1$ for each occurrence.
-	\item If a count reaches $0$, then we know the head variable is generating.
-	\item Keep all generating variables on a stack and procceed them.
-		\end{itemize}
-	\end{itemize}
-	
-	
-	\section*{Testing finiteness of CFLs}
-	Let $G$ be a Chomsky normal form grammar for $L$, i.e. $L\setminus\{\lambda\}=L(G)$. Construct the following oriented graph: 
-	\begin{itemize}
-		\item nodes: variables in $G$
-		\item edges: $\{(A,B),(A,C) \mid A\rightarrow BC\text{ is a production rule in }G\}$
-	\end{itemize}
-	Now $L$ is infinite, if and only if the graph contains an oriented cycle. Can be tested in $O(|G|)$.
-	
-	
-	
-	
-	
-	
-	
-	\section*{Testing membership in a CFL: the CYK algorithm}
-	
+
+
 	The Cocke-Younger-Kasami algorithm for testing membership in a CFL (inefficient: exponential in $|w|$ -- check all derivation trees of appropriate depth of a ChNF grammar for $L$)
+	
+
+\end{frame}
+
+
+\begin{frame}{The CYK algorithm}
 	
 	\begin{definition}[CYK Algorithm, time $O(n^3)$]
 	\begin{itemize}
@@ -486,14 +454,14 @@
 		
 		\begin{itemize}
 			\item horizontal axis is $w$
-			\item $X_{ij}$ is the set of variables $A$ such that $A\gen a_ia_{i+1}\ldots a_j$.
+			\item $X_{ij}$ is the set of variables $A$ such that $A\Rightarrow^* a_ia_{i+1}\ldots a_j$.
 		\end{itemize}
 		\item Fill the table upwards.
 	\begin{itemize}
 	\item BASIS: $$X_{ii}=\{A;A\rightarrow a_i \in P\}$$
 		 \item INDUCTION:
 		$$X_{ij}=\{A\rightarrow BC\mid B\in X_{ik}, C\in X_{k+1,j}\text{ for some $k$ such that }i\leq k<j\}$$
-	%	$X_{ij}=\{A\rightarrow BC;B\gen a_i\ldots a_k, C\gen a_{k+1}\ldots a_j\}$
+	%	$X_{ij}=\{A\rightarrow BC;B\Rightarrow^* a_i\ldots a_k, C\Rightarrow^* a_{k+1}\ldots a_j\}$
 	\item QUESTION: Is $S\in X_{1n}$?
 	\end{itemize}
 	\end{itemize}
@@ -531,3 +499,11 @@
 	$b$&$a$&$a$&$b$&$a$
 	\end{tabular}
 	\end{example}
+
+
+	
+
+\end{frame}
+
+
+\end{document}
