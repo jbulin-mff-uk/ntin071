@@ -6,16 +6,181 @@
 
 % \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 7 -- TODO}
+\section*{NTIN071 A\&G: Tutorial 7 -- Formal grammars, regular and context-free grammars, bonus: two-way automata}
 
 % second tutorial after Lecture 6
 % spring 2024
 
 \medskip
 
-% \noindent\emph{Solve 1abc only for A\&B, 2, 3a (the rest is for practice).}
+\noindent\emph{Solve 1a-d, 2, 3, 4ab first (the rest is for practice, the bonus section on 2-way automata won't be tested)}
 
 \medskip
+
+
+\medskip\begin{problem}[Constructing grammars]
+
+    Design grammars (of the highest possible type) which generate the following languages (the alphabet is $\Sigma=\{a,b\}$ unless specified otherwise).
+    
+    \begin{multicols}{2}
+    \begin{enumerate}[(a)]    
+        \item $L=\Sigma^*$
+        \item $L=\{w\mid |w|_b\text{ is even}\} $
+        \item $L=\{ww^R\mid w\in \Sigma^*\} $
+        \item $L=\{a^{2i}b^j\mid i\leq j\}$
+        \item $L=\{w\mid |w|_a = 2|w|_b\}$
+        \item $L = \{a^ib^jc^k\mid i = j\text{ or }j = k\}$    
+    \end{enumerate}
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[FA to grammar]
+
+    For the following automaton, find an equivalent grammar. Which class of the Chomsky hierarchy does it belong to?
+    
+    \begin{center}
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=2cm]
+            \tikzset{every state/.style={minimum size=0.2cm}}			
+            \node[initial,state]  (a1)      {1};
+            \node[state,accepting] (b1)  [right of=a1]    {2};
+            \node[state,accepting] [below of=b1](c1)      {3};
+            \node[state] [below of=a1](d1)      {4};
+            \path[->]
+                (a1)  edge  node {b} (b1)
+                (a1)  edge[loop above]  node {a} (a1)
+                (b1)  edge[loop above]  node {b} (b1)
+                (d1)  edge[loop left]  node {a} (d1)
+                (b1)  edge  node {a} (c1)
+                (c1)  edge  node {a} (a1)
+                (c1)  edge  node {b} (d1)
+                (d1)  edge  node {b} (a1);
+        \end{tikzpicture}
+    \end{center}
+        
+\end{problem}
+
+
+\medskip\begin{problem}[Type 3 grammar to FA] 
+    
+    For the following right linear grammar, construct an equivalent finite automaton: $G=(\{S,A,B,C\},\{a,b\},\mathcal P,S)$ where $\mathcal P$ consists of the following production rules:
+
+    \bigskip
+        
+    \begin{center}
+        \begin{tabular}{l}
+            $S\rightarrow abS\mid babA\mid \lambda $\\
+            $A\rightarrow abA\mid aB \mid  bC$\\
+            $B\rightarrow abS\mid B\mid bC\mid \lambda $\\
+            $C\rightarrow aab\mid A\mid aA\mid \lambda $
+        \end{tabular}
+    \end{center}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Testing properties of context-free languages]
+    
+    Design an (efficient) algorithm which decides in a given CFG satisfies the given property:
+    
+    \medskip
+
+    \begin{enumerate}[(a)]
+        \item $L(G)\neq\emptyset$
+        \item $\lambda\in L(G)$
+        \item $L(G)$ is a finite language
+    \end{enumerate}
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Small grammars generating large (finite) languages]
+    
+    Find a sequence of CFGs $G_1,G_2,G_3,\dots$ (over a given alphabet $\Sigma$) such that $G_n$ generates exactly all words of length $\leq 2^n$ (and no other words), and the size of $G_n$ (for simplicity, say the number of symbols in bodies of production rules) is in $O(n)$.
+    
+    %X_1 \to X_2_X2, X_2 \to X_3X_3,\dots, X_{n−1}\to X_nX_n, X_n\to aa|a|\lambda
+
+\end{problem}
+
+
+\bigskip
+
+
+\section*{Bonus: Two-way automata}
+
+
+\medskip\begin{problem}[Inspect and convert a 2-way automaton]
+
+    Consider the following two-way automaton.
+
+    \begin{multicols}{2}
+
+    \begin{center}
+        \begin{tabular}{ r | c c }
+            & a & b \\
+            \hline
+            $\to\ast p$ & $p,1$ & $q,-1$ \\
+            $q$ & $r,1$ & \\
+            $r$ & & $p,1$
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tikzpicture}[scale=0.15]
+            \tikzstyle{every node}+=[inner sep=0pt]
+            \draw [black] (10.1,-9.7) circle (3);
+            \draw (10.1,-9.7) node {$p$};
+            \draw [black] (10.1,-9.7) circle (2.4);
+            \draw [black] (21.7,-9.7) circle (3);
+            \draw (21.7,-9.7) node {$q$};
+            \draw [black] (33.5,-9.7) circle (3);
+            \draw (33.5,-9.7) node {$r$};
+            \draw [black] (3.2,-9.7) -- (7.1,-9.7);
+            \fill [black] (7.1,-9.7) -- (6.3,-9.2) -- (6.3,-10.2);
+            \draw [black] (9.129,-6.874) arc (226.70189:-61.29811:2.25);
+            \draw (11.45,-2.35) node [above] {$a,1$};
+            \fill [black] (11.75,-7.21) -- (12.66,-6.97) -- (11.94,-6.28);
+            \draw [black] (13.1,-9.7) -- (18.7,-9.7);
+            \fill [black] (18.7,-9.7) -- (17.9,-9.2) -- (17.9,-10.2);
+            \draw (15.9,-9.2) node [above] {$b,-1$};
+            \draw [black] (24.7,-9.7) -- (30.5,-9.7);
+            \fill [black] (30.5,-9.7) -- (29.7,-9.2) -- (29.7,-10.2);
+            \draw (27.6,-9.2) node [above] {$a,1$};
+            \draw [black] (31.254,-11.682) arc (-53.92224:-126.07776:16.054);
+            \fill [black] (12.35,-11.68) -- (12.7,-12.56) -- (13.29,-11.75);
+            \draw (21.8,-15.26) node [below] {$b,1$};
+        \end{tikzpicture}
+    \end{center}
+
+    \end{multicols}
+
+    \begin{enumerate}[(a)]
+        \item Determine the language accepted by this automaton.
+        \item Determine the functions $f_u$ and the congruence $\sim$ for all words of length at most $4$.
+        \item Convert it to an equivalent one-way automaton.
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Without 2-way automata this is hard]
+
+    Given a DFA $A$, design a nondeterministic finite automaton accepting the language $L'=\{\#w\#\ |\ ww^R\in L(A)\}$. Do not use two-way automata.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Constructing 2-way automata]
+
+    Let $L$ be a regular language over the alphabet $\Sigma$ accepted by a finite automaton $A$ and $\#\notin\Sigma$. Construct a two-way finite automaton accepting the given language: 
+
+    \begin{enumerate}[(a)]
+        \item $L' = \{\#w\#\mid ww^R \in L\}$
+        \item $L' = \{\#w\#\mid (\exists u \in\Sigma^*)( wu \in L\ \wedge \ |w|=|u|)\}$
+    \end{enumerate}
+
+\end{problem}
 
 
 \end{document}

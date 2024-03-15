@@ -4,13 +4,198 @@
 
 \begin{document}
 
-\thispagestyle{empty}
+% \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 6 -- TODO}
+\section*{NTIN071 A\&G: Cvičení 6 -- Regulární výrazy}
 
 % po 5. přednášce
 % jaro 2024
 
 \medskip
 
+\noindent\emph{Vyřešte nejprve 1a-f, 2a-e, 3abc, 4a (zbytek je na procvičení).}
+
+\medskip
+
+\medskip\begin{problem}[Konstrukce regulárních výrazů]
+
+    Najděte regulární výrazy reprezentující jazyky nad abecedou $\Sigma = \{a, b\}$ sestávající ze slov, která:
+
+    \medskip
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item začínají `abba',
+            \item končí  `abba',
+            \item začínají `ab' a končí `ba',
+            \item obsahují `abba' nebo `bab' jako podslovo,
+            \item neobsahují `aa' jako podslovo,
+            \item obsahují sudý počet výskytů písmene `a',
+            \item mají alespoň 2 písmena a začínají a končí stejným písmenem,
+            \item mají alespoň 4 písmena a začínají a končí stejnou dvojicí písmen.
+        \end{enumerate}
+
+    \end{multicols}
+
+\end{problem}
+    
+    
+\medskip\begin{problem}[Převod regexu na automat]
+
+    Zkonstruujte konečné automaty přijímající jazyky popsané následujícími regulárními výrazy.
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $ab + ba$
+            \item $a^2 + b^2 + ab$
+            \item $a + b^*$
+            \item $(ab + c)^*$
+            \item $((ab + c)+a(bc)^* + b)^*$
+            \item $((ab + c)^*a(bc)^* + b)^*$
+            \item $(01^* + 101)^*0^*1$
+            \item $(01)^*11(01)^*(0 + 1)^*00$
+        \end{enumerate}
+
+    \end{multicols}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Převod automatu na regex]
+
+    Sestrojte regulární výrazy pro jazyky přijímané následujícími automaty.
+
+    \bigskip
+    
+    % \begin{multicols}{2}
+
+        \begin{enumerate}[(a)]
+        
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.2cm]
+                    \tikzset{every state/.style={minimum size=0.2cm}}
+                        
+                        \node[initial,state]  (a1)      {1};
+                        \node[state,accepting] (b1)  [right of=a1]    {2};
+                            \node[state] [right of=b1](c1)      {3};
+                        \node[state,accepting] [right of=c1] (d1)      {4};
+                        \node[state] (e1)  [right of=d1]    {5};
+                        \node[state,accepting] (f1)  [right of=e1]    {6};
+                        \node[state] (g1)  [below left of=f1]    {7};
+                    \path[->]
+                            (a1)  edge  node {a} (b1)
+                            (b1)  edge  node {a} (c1)
+                            (c1)  edge  node {a} (d1)
+                            (d1)  edge  node {a} (e1)
+                            (e1)  edge  node {a} (f1)
+                            (f1)  edge  node {a} (g1)
+                            (g1)  edge  node {a} (e1)
+                            ;
+                    \end{tikzpicture}            
+            
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
+                    \tikzset{every state/.style={minimum size=0.2cm}}
+                        
+                        \node[initial,state]  (a1)      {1};
+                        \node[state,accepting] (b1)  [above right of=a1]    {2};
+                            \node[state,accepting] [below of=b1](c1)      {3};
+                    \path[->]
+                            (a1)  edge  node {b} (b1)
+                            (a1)  edge[loop above]  node {a} (a1)
+                            (b1)  edge[bend left]  node {a} (c1)
+                            (b1)  edge[loop above]  node {b} (b1)
+                            (c1)  edge  node {a} (a1)
+                            (c1)  edge  node {b} (b1)
+                            ;
+                    \end{tikzpicture}
+
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
+                \tikzset{every state/.style={minimum size=0.2cm}}
+                            
+                            \node[initial,state,accepting]  (a1)      {1};
+                            \node[state] (b1)  [above right of=a1]    {2};
+                                \node[state] [below of=b1](c1)      {3};
+                        \path[->]
+                                (a1)  edge [bend left] node {a} (b1)
+                                (c1)  edge[loop right]  node {a,b} (c1)
+                                (b1)  edge  node {a} (c1)
+                                (b1)  edge  node {b} (a1)
+                                (c1)  edge  node {b} (a1)
+                                ;
+                    \end{tikzpicture}
+
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
+                    \tikzset{every state/.style={minimum size=0.2cm}}
+                        
+                        \node[initial,state]  (a1)      {1};
+                        \node[state] (b1)  [right of=a1]    {2};
+                            \node[state,accepting] [right of=b1](c1)      {3};
+                    \path[->]
+                            (a1)  edge  node {a} (b1)
+                            (a1)  edge[loop above]  node {b} (a1)
+                            (b1)  edge  node {b} (c1)
+                            (b1)  edge[loop above]  node {a} (b1)
+                            (c1)  edge[loop right]  node {a,b} (c1)
+                            ;
+                    \end{tikzpicture}
+            
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
+                    \tikzset{every state/.style={minimum size=0.2cm}}			
+                        \node[initial,state]  (a1)      {1};
+                        \node[state,accepting] (b1)  [right of=a1]    {2};
+                    \path[->]
+                            (a1)  edge[bend left]  node {b} (b1)
+                            (a1)  edge[loop above]  node {a} (a1)
+                            (b1)  edge[bend left]  node {a} (a1)
+                            (b1)  edge[loop above]  node {b} (b1)
+                            ;
+                    \end{tikzpicture}
+
+            \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm]
+                    \tikzset{every state/.style={minimum size=0.2cm}}
+                        
+                        \node[initial,state]  (a1)      {1};
+                        \node[state,accepting] (b1)  [above right of=a1]    {2};
+                            \node[state] [below right of=a1](c1)      {3};
+                    \path[->]
+                            (a1)  edge  node {a} (b1)
+                            (b1)  edge[loop above]  node {a,b} (b1)
+                            (c1)  edge  node {b} (a1)
+                            (c1)  edge  node {a,b} (b1)
+                            ;
+                    \end{tikzpicture}
+                    
+        \end{enumerate}
+
+    % \end{multicols}
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Testování ekvivalence regulárních výrazů]
+
+    \phantom{}
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Popište algoritmus na testování ekvivalence regulárních výrazů. 
+        \item Aplikujte ho na následující dvojici regulárních výrazů:
+        $$
+        (a + b)(a + b)^* \qquad\text{a}\qquad a(a + b)^* + b(a + b)^*
+        $$
+    \end{enumerate}
+
+\end{problem}
+   
+
+\medskip\begin{problem}[Jsou regulární výrazy regulární?]
+    
+    Mějme konečnou abecedu $\Sigma$. Je jazyk sestávající ze všech regulárních výrazů nad abecedou $\Sigma$ regulárním jazykem?
+    
+\end{problem}
+
+
 \end{document}
+
