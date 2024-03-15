@@ -767,23 +767,6 @@
 \end{frame}
 
 
-\begin{frame}{Summary of Lecture 5}
-	
-	\begin{itemize}
-		\item Grammars: general, context-sensitive, context-free, right-linear (regular) -- Chomsky hierarchy
-		\item The language of a grammar, derivation
-		\item Right-linear grammars correspond to FA (and so do left/linear)
-		\item Linear grammars are stronger
-		\item Context-free grammars: parse tree and its yield
-		\item (un)ambiguous grammars, inherently ambiguous languages
-	\end{itemize}
-
-\end{frame}
-
-
-\section*{Appendix: Unambiguity and compilers}
-
-
 \begin{frame}{Unambiguity and compilers}
 
 	Compiling an expression (a stack for intermediate results + two registers):
@@ -806,6 +789,20 @@
 		\item now replace the rules with the corresponding code:
 		
 		\texttt{push a; push a; pop r1; pop r2; mul r1,r2; push r2; push a; pop r1; pop r2; add r1,r2; push r2} 
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 5}
+	
+	\begin{itemize}
+		\item Grammars: general, context-sensitive, context-free, right-linear (regular) -- Chomsky hierarchy
+		\item The language of a grammar, derivation
+		\item Right-linear grammars correspond to FA (and so do left/linear)
+		\item Linear grammars are stronger
+		\item Context-free grammars: parse tree and its yield
+		\item (un)ambiguous grammars, inherently ambiguous languages
 	\end{itemize}
 
 \end{frame}

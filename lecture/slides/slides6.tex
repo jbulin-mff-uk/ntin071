@@ -34,7 +34,7 @@
 	The \alert{Chomsky normal form (ChNF)} of a context-free grammar:
 	
 	\begin{itemize}
-		\item all rules of the form \alert{$A\rightarrow BC$} or  \alert{$A\rightarrow a$} ($A,B,C\in V$, $a\in T$)
+		\item all rules of the form \alert{$A\to BC$} or  \alert{$A\to a$} ($A,B,C\in V$, $a\in T$)
 		\item no \alert{useless} symbols
 	\end{itemize}
 
@@ -57,9 +57,9 @@
 	Take any context-free grammar for $L$ and simplify (\alert{in this order!}):
 	
 	\begin{enumerate}
-		\item eliminate \alert{$\epsilon$-productions} $A\rightarrow\epsilon$
+		\item eliminate \alert{$\epsilon$-productions} $A\to\epsilon$
 		\hfill{\small [here we lose $\epsilon\in L$]}
-		\item eliminate \alert{unit productions} $A\rightarrow B$
+		\item eliminate \alert{unit productions} $A\to B$
 		\item eliminate \alert{useless} symbols
 		\begin{itemize}
 			\item[3a.] \alert{unreachable} \hfill[from the start symbol]
@@ -81,21 +81,21 @@
 
 	A variable $A\in V$ is \alert{nullable} if $A\Rightarrow^* \epsilon$. An algorithm to find them:
 	\begin{itemize}
-		\item[\textbf{basis:}] for every $\epsilon$-production $A\rightarrow \epsilon$ mark $A$ as nullable
-		\item[\textbf{induct:}] if $B\rightarrow C_1 \ldots C_k\in\mathcal P$ where all $C_i$ are nullable, $B$ is nullable
+		\item[\textbf{basis:}] for every $\epsilon$-production $A\to \epsilon$ mark $A$ as nullable
+		\item[\textbf{induct:}] if $B\to C_1 \ldots C_k\in\mathcal P$ where all $C_i$ are nullable, $B$ is nullable
 	\end{itemize}
 
-	\textbf{To eliminate $\epsilon$-productions:} 1. find nullable variables, 2. remove $\epsilon$-productions, 3. process every production $A\rightarrow X_1\ldots X_k \in \mathcal P$:
+	\textbf{To eliminate $\epsilon$-productions:} 1. find nullable variables, 2. remove $\epsilon$-productions, 3. process every production $A\to X_1\ldots X_k \in \mathcal P$:
 	\begin{itemize}
 		\item let $J\subseteq\{1,\dots,k\}$ be the positions of all nullable variables
 		\item for every $J'\subseteq J$ create a copy of the production where $X_j$ for $j\in J'$ are deleted, except if $J=\{1,\dots,k\}$ require $J'\neq\emptyset$
 	\end{itemize}
 
-	\textbf{Example:} $\mathcal P=\{S\rightarrow AB,A\rightarrow aAB\mid\epsilon,B\rightarrow ABBA\mid\epsilon\}$
+	\textbf{Example:} $\mathcal P=\{S\to AB,A\to aAB\mid\epsilon,B\to ABBA\mid\epsilon\}$
 
-	$S\rightarrow AB\mid A\mid B$
-	$A\rightarrow aAB\mid aA\mid aB\mid a$
-	$B\rightarrow ABBA\mid ABA\mid ABB\mid BBA\mid AA\mid AB\mid BA\mid BB\mid A\mid B$
+	$S\to AB\mid A\mid B$
+	$A\to aAB\mid aA\mid aB\mid a$
+	$B\to ABBA\mid ABA\mid ABB\mid BBA\mid AA\mid AB\mid BA\mid BB\mid A\mid B$
 
 \end{frame}
 
@@ -122,10 +122,10 @@
 
 \begin{frame}{Step 2: Eliminate unit productions -- an example}
 
-	$E\rightarrow T\mid E+T$\\
-	$F\rightarrow I\mid (E)$\\
-	$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
-	$T\rightarrow F\mid T*F$
+	$E\to T\mid E+T$\\
+	$F\to I\mid (E)$\\
+	$I\to a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$T\to F\mid T*F$
 
 	unit pairs:\\		
 	$(E,E),(E,F),(E,I),(E,T),$\\
@@ -134,10 +134,10 @@
 	$(T,F),(T,I),(T,T)$
 
 	the result:\\
-	$E\rightarrow E+T\mid T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$
-	$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
-	$F\rightarrow (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
-	$T\rightarrow T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$E\to E+T\mid T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$
+	$I\to a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$F\to (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+	$T\to T*F\mid (E)\mid a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
 	
 
 \end{frame}
@@ -169,13 +169,13 @@
 		\item Find all generating symbols:
 		\begin{itemize}
 			\item[\textbf{basis:}] mark all terminals $a\in T$ as generating
-			\item[\textbf{induct:}] for every production $A\rightarrow\beta$ where every symbol in the body $\beta$ is generating, mark the head $A$ as generating (incl. $A\rightarrow \epsilon$)
+			\item[\textbf{induct:}] for every production $A\to\beta$ where every symbol in the body $\beta$ is generating, mark the head $A$ as generating (incl. $A\to \epsilon$)
 		\end{itemize}
 		\item Remove all \alert{nongenerating} symbols and rules containing them
 		\item Find all reachable symbols
 		\begin{itemize}
 			\item[\textbf{basis:}] mark $S$ as reachable
-			\item[\textbf{induct:}] for every production $A\rightarrow\beta$ where the head $A$ is reachable mark every symbol in the body $\beta$ as reachable
+			\item[\textbf{induct:}] for every production $A\to\beta$ where the head $A$ is reachable mark every symbol in the body $\beta$ as reachable
 		\end{itemize}
 		\item Remove all \alert{unreachable} symbols and rules containing them		
 	\end{enumerate}
@@ -186,15 +186,15 @@
 		\smallskip
 		\begin{center}
 			\begin{minipage}{0.25\textwidth}
-				$S\rightarrow AB\mid a$\\
-				$A\rightarrow b$
+				$S\to AB\mid a$\\
+				$A\to b$
 			\end{minipage}
 			\begin{minipage}{0.25\textwidth}
-				$S\rightarrow a$\\
-				$A\rightarrow b$
+				$S\to a$\\
+				$A\to b$
 			\end{minipage}
 			\begin{minipage}{0.25\textwidth}
-				$S\rightarrow a$
+				$S\to a$
 			\end{minipage}
 		\end{center}
 	\end{itemize}
@@ -228,7 +228,7 @@
 
 \begin{frame}{Conversion to Chomsky Normal Form}
 
-	ChNF: only useful symbols and rules \alert{$A\rightarrow BC$} or \alert{$A\rightarrow a$}
+	ChNF: only useful symbols and rules \alert{$A\to BC$} or \alert{$A\to a$}
 	
 	\begin{theorem}
 		For every context-free language $L$ such that $L\setminus \{\epsilon\}\neq \emptyset$ there exists a grammar in ChNF that generates $L\setminus \{\epsilon\}$.
@@ -246,11 +246,11 @@
 
 	\begin{multicols}{2}
 		
-		$I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
-		$F\rightarrow I\mid (E)$
+		$I\to a\mid b\mid Ia\mid Ib\mid I0\mid I1$\\
+		$F\to I\mid (E)$
 		
-		$T\rightarrow F\mid T*F$\\
-		$E\rightarrow T\mid E+T$
+		$T\to F\mid T*F$\\
+		$E\to T\mid E+T$
 	\end{multicols}
 
 	\bigskip
@@ -261,26 +261,26 @@
 
 		\textbf{reduce + separate}
 
-		$I\rightarrow a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$F\rightarrow LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$T\rightarrow TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$E\rightarrow EPT\mid TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$I\to a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$F\to LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$T\to TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$E\to EPT\mid TMF\mid LER\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
 
 		\bigskip
 		
-		$A\rightarrow a$, $B\rightarrow b$, $Z\rightarrow 0$, $U\rightarrow 1$,\\
-		$P\rightarrow +$, $M\rightarrow *$, $L\rightarrow ($, $R\rightarrow )$
+		$A\to a$, $B\to b$, $Z\to 0$, $U\to 1$,\\
+		$P\to +$, $M\to *$, $L\to ($, $R\to )$
 		
 		\bigskip\bigskip
 
 		\textbf{break up longer bodies}
 
-		$F\rightarrow LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$T\rightarrow TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$E\rightarrow EC_1\mid TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
-		$C_1\rightarrow PT$\\
-		$C_2\rightarrow MF$\\
-		$C_3\rightarrow ER$\\
+		$F\to LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$T\to TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$E\to EC_1\mid TC_2\mid LC_3\mid a\mid b\mid IA\mid IB\mid IZ\mid IU$\\
+		$C_1\to PT$\\
+		$C_2\to MF$\\
+		$C_3\to ER$\\
 		$I,A,B,Z,U,P,M,L,R$ same as on the left side
 	\end{multicols}
 
@@ -421,67 +421,114 @@
 
 \section{2.8 The CYK algorithm}
 
-\end{document}
 
 \begin{frame}{Testing membership in a context-free language}
 
-	Let us have a context-free grammar $G$ \alert{in Chomsky Normal Form}.
+	Given a context-free grammar $G$ \alert{in Chomsky Normal Form} and a word $w=a_1\dots a_n\in T^*$, determine if $w\in L(G)$.
 
-	Given an input word $w=a_1\dots a_n\in T^*$, determine if $w\in L(G)$.
+	\bigskip
 
-	\textbf{Inefficient algorithm:} construct all parse trees from $G$ with 
-
-
-
-	\textbf{The Cocke-Younger-Kasami algorithm:} dynamic programming
-
-
+	\textbf{Naive, inefficient algorithm:}
 	
+	Construct all parse trees from $G$ of appropriate depth ($\lceil log_2|w|\rceil$), check if the yield is $w$.
+
+	\bigskip
 
 
-	The Cocke-Younger-Kasami algorithm for testing membership in a CFL (inefficient: exponential in $|w|$ -- check all derivation trees of appropriate depth of a ChNF grammar for $L$)
+	\textbf{The Cocke-Younger-Kasami algorithm:} 
 	
+	Use \alert{dynamic programming} to compute, for every $1\leq i\leq j\leq n$, the set $X_{ij}$ of all variables of $G$ that generate the subword $a_i\dots a_j$.
+
+	Then check if $S\in X_{1n}$.
+
+	(Very efficient, worst-case time complexity $\mathcal O(n^3|G|)$.)
 
 \end{frame}
 
 
 \begin{frame}{The CYK algorithm}
-	
-	\begin{definition}[CYK Algorithm, time $O(n^3)$]
+
 	\begin{itemize}
-		\item The input is CNF grammar $G=(V,T,P,S)$ for language $L$ and a string $w=a_1a_2\ldots a_n\in T^*$.
-		\item Create triangular table 
+		\item \textbf{input:} $G=(V,T,\mathcal P,S)$ in ChNF, $w=a_1\dots a_n\in T^*$
+		\item \textbf{decide:} $w\in L(G)$?
+	\end{itemize}	
+	
+	\begin{multicols}{2}
+		Compute for $1\leq i\leq j\leq n$:
 		
-		\begin{itemize}
-			\item horizontal axis is $w$
-			\item $X_{ij}$ is the set of variables $A$ such that $A\Rightarrow^* a_ia_{i+1}\ldots a_j$.
-		\end{itemize}
-		\item Fill the table upwards.
-	\begin{itemize}
-	\item BASIS: $$X_{ii}=\{A;A\rightarrow a_i \in P\}$$
-		 \item INDUCTION:
-		$$X_{ij}=\{A\rightarrow BC\mid B\in X_{ik}, C\in X_{k+1,j}\text{ for some $k$ such that }i\leq k<j\}$$
-	%	$X_{ij}=\{A\rightarrow BC;B\Rightarrow^* a_i\ldots a_k, C\Rightarrow^* a_{k+1}\ldots a_j\}$
-	\item QUESTION: Is $S\in X_{1n}$?
-	\end{itemize}
-	\end{itemize}
-	\end{definition}
-	
+		\vspace{-24pt}
+		$$
+		X_{ij}=\{A\in V\mid A\Rightarrow^* a_ia_{i+1}\ldots a_j\}
+		$$
+		\vspace{-24pt}
+
+		using dynamic programming (storing results in a table)
+		
+		\begin{center}
+			\scalebox{0.85}{
+				\begin{tabular}{|c c c c c c c c}
+					$X_{15}$ \\ 		
+					$X_{14}$ &  $X_{25}$  \\ 
+					$X_{13}$ &  $X_{24}$ &  $X_{35}$ \\
+					$X_{12}$ &  $X_{23}$ & $X_{34}$ &  $X_{45}$ \\ 
+					$X_{11}$ & $X_{22}$ &  $X_{33}$ &$X_{44}$ &$X_{55}$ \\ \hline
+					\rowcolor{Gray}$a_1$&$a_2$&$a_3$&$a_4$&$a_5$
+				\end{tabular}
+			}		
+		\end{center}		
+	\end{multicols}
+
+	\begin{enumerate}
+		\item \textbf{Initialize:} $X_{ii}=\{A\in V\mid A\to a_i \in \mathcal P\}$
+		\item \textbf{Fill upwards:} $$X_{ij}=\{A\in V\mid A\to BC\in \mathcal P,B\in X_{ik}, C\in X_{k+1,j}\}$$
+		\item \textbf{Check:} Is $S\in X_{1n}$?
+	\end{enumerate}	
+
+\end{frame}
+
+
+\begin{frame}{The CYK algorithm: an example}
+
+	\begin{example}
+	$G=(\{S,A,B,C\},\{a,b\},\mathcal P,S)$ with $\mathcal P=\{S\to AB\mid BC, A\to BA\mid a, B\to CC\mid b, C\to AB\mid a\}$
+	\end{example}
+	\vspace{-6pt}
+	Rules reversed:\vspace{-6pt}
+	\begin{quote}
+		\begin{multicols}{4}\small
+			$AB  \leftarrow  \{S,C\}$\\
+			$BA  \leftarrow  \{A\}$\\
+			$BC  \leftarrow  \{S\}$\\
+			$CC  \leftarrow  \{B\}$\\
+			$b   \leftarrow  \{B\}$\\
+			$a   \leftarrow  \{A,C\}$
+		\end{multicols}	
+	\end{quote}
+
+	\vspace{-12pt}
+	Fill upwards:
+	\vspace{3pt}
+
 	\begin{center}
-	\begin{tabular}{|c c c c c c c c}
-	 $X_{15}$ \\ 
-	%\rowcolor{LightCyan}%\cellcolor{LightCyan}
-	$X_{14}$ &  $X_{25}$  \\ 
-	$X_{13}$ &  $X_{24}$ &  $X_{35}$ \\ %\\[-\normalbaselineskip]
-	 $X_{12}$ &  $X_{23}$ & $X_{34}$ &  $X_{45}$ \\ 
-	 $X_{11}$ & $X_{22}$ &  $X_{33}$ &$X_{44}$ &$X_{55}$ \\ \hline %\cline{1-7}
-	$a_1$&$a_2$&$a_3$&$a_4$&$a_5$
-	\end{tabular}
-		
+		\begin{tabular}{|c c c c c c c c}
+			$\{\alert{S},A,C\}$ \\ 
+			- &  $\{S,A,C\}$  \\ 
+			- &  $\{B\}$ &  $\{B\}$ \\ 
+			$\{S,A\}$ &  $\{B\}$ & $\{S,C\}$ &  $\{S,A\}$ \\ 
+			$\{B\}$ & $\{A,C\}$ &  $\{A,C\}$ &$\{B\}$ &$\{A,C\}$ \\ %\cline{1-7}
+			\rowcolor{Gray}$b$&$a$&$a$&$b$&$a$
+		\end{tabular}
 	\end{center}
-	
+\end{frame}
+
+
+\end{document}
+
+\begin{frame}{Testing membership in a context-free language}
 	
 	\begin{example}
+		
+	\end{example}
 	$G=(V,T,P,S)$, $P=\{S \to AB\mid BC, A \to BA\mid a, B\to CC\mid b, C\to AB\mid a\}$
 	
 	\bigskip
@@ -496,7 +543,7 @@
 	- &  $\{B\}$ &  $\{B\}$ \\ 
 	 $\{S,A\}$ &  $\{B\}$ & $\{S,C\}$ &  $\{S,A\}$ \\ 
 	 $\{B\}$ & $\{A,C\}$ &  $\{A,C\}$ &$\{B\}$ &$\{A,C\}$ \\ \hline 
-	$b$&$a$&$a$&$b$&$a$
+	 \rowcolor{Gray}$b$&$a$&$a$&$b$&$a$
 	\end{tabular}
 	\end{example}
 
