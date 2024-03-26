@@ -181,7 +181,7 @@
 	\end{enumerate}
 
 	\begin{itemize}
-		\item The order is important! Eliminating unreachable symbols can create new nongenerating symbols, but not vice versa.
+		\item The order is important! Eliminating nongenerating symbols can create new unreachable symbols, but not vice versa.
 		\item \textbf{Example:} eliminate nongenerating $B$, then unreachable $A$
 		\smallskip
 		\begin{center}
@@ -206,7 +206,7 @@
 
 	\textbf{Step 4: Separate terminals from bodies}
 
-	For every terminal $a\in T$, introduce a new variable $V_a$.
+	For every $a\in T$, introduce a new variable $V_a$ and the rule $V_a\to a$.
 
 	For every rule $A\to\beta$ with $|\beta|\geq 2$, replace every terminal $a$ by $V_a$.
 	

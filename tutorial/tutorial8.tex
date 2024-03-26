@@ -4,18 +4,108 @@
 
 \begin{document}
 
-% \thispagestyle{empty}
+\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 8 -- TODO}
+\section*{NTIN071 A\&G: Tutorial 8 -- Chomsky normal form, The CYK algorithm}
 
 % after Lecture 7
 % spring 2024
 
 \medskip
 
-% \noindent\emph{Solve 1abc only for A\&B, 2, 3a (the rest is for practice).}
+\noindent\emph{Solve 1, 2ab, 3ab first (the rest is for practice).}
 
-\medskip
+\medskip\begin{problem}[Useless symbols]
+    
+    Answer the following questions. Justify your answer.
+    
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+        \item Find an example of a grammar in which there is a generating variable only reachable via nongenerating variables.
+        \item When reducing a grammar, which variables do we need to remove first: nongenerating or unreachable?
+        \item Is it possible for a reachable generating variable to become nongenerating after the removal of unreachable variables?
+    \end{enumerate}
 
+\end{problem}
+    
+    
+\medskip\begin{problem}[Convert to ChNF]
+
+    Convert the following context-free grammar to Chomsky normal form:
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow 0AB, \\
+            &A\rightarrow 0A0\mid 11,\\
+            &B\rightarrow 0\}
+            \end{align*}
+        
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow A\mid 0SA\mid \lambda, \\
+            &A\rightarrow 1A\mid 1\mid B1,\\
+            &B\rightarrow 0B\mid 0\mid \lambda\} 
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{
+            &S\rightarrow 0A10B10, \\
+            &A\rightarrow 1A0\mid \lambda,\\
+            &B\rightarrow 1B00\mid \lambda\} 
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,E,F\},\{(,),*,+,,1\},S,\mathcal P)\\
+            \mathcal P=\{&
+            S\rightarrow (E), \\
+            &E\rightarrow F+F\mid F*F,\\
+            &F\rightarrow S\mid 1\}
+            \end{align*}
+
+        \end{enumerate}
+    \end{multicols}
+        
+\end{problem}
+    
+
+\medskip\begin{problem}[The CYK algorithm]
+    
+    Using the CYK algorithm determine if $w\in L(G)$.
+
+    \begin{enumerate}[(a)]\setlength{\itemsep}{3pt}
+
+        \item $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$,        
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow 0\mid AB, \\
+            A&\rightarrow 1\mid SA\mid SB, \\
+            B&\rightarrow AS \mid BA \mid 0\}
+        \end{align*}
+    
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, 
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+    
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$,
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+
+    \end{enumerate}
+
+\end{problem}
+    
 
 \end{document}
