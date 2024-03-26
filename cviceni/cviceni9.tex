@@ -6,12 +6,70 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 9 -- TODO}
+\section*{NTIN071 A\&G: Cvičení 9 -- Pumping lemma pro bezkontextové jazyky}
 
 % po 9. přednášce
 % jaro 2024
 
 \medskip
+
+\noindent\emph{Vyřešte nejprve 1, 2a-j, 3 (zbytek je na procvičení).}
+
+\medskip
+
+
+\medskip\begin{problem}[Pumping lemma]
+
+    Připomeňte si znění a důkaz Pumping lemmatu pro bezkontextové jazyky. Srovnejte s verzí pro regulární jazyky
+
+\end{problem}
+
+
+\medskip\begin{problem}[Důkaz nebezkontextovosti]
+
+    Rozhodněte, zda jsou následující jazyky bezkontextové. Dokažte.
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]
+            \setlength\itemsep{1em}
+            \item $L=\{0^i1^i\mid i\geq 0\}$
+            \item $L=\{0^i1^j0^i\mid i,j\geq 0\}$
+            \item $L=\{0^i1^j0^i\mid 0\leq i\leq j\}$
+            \item $L=\{0^i1^j0^i\mid 0\leq j\leq i\}$
+            \item $L=\{0^i1^i2^i\mid i\geq 0\}$
+            \item $L=\{0^{2i}1^{3i}0^i\mid i\geq 0\}$
+            \item $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$
+            \item $L=\{ww\mid w\in \{0,1\}^*\}$
+            \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+            \item $L=\{ww^R\mid w\in \{0,1\}^*, |w|_0=|w|_1\}$
+            \item $L=\{1^{n^2}\mid n\geq 0\}$
+            \item $L=\{1^{n^2+n+1}\mid n\geq 0\}$
+            \item $L=\{1^p\mid p \text{ je prvočíslo}\}$
+            \item $L=\{0^i1^{j}\mid 0\leq i\leq j^2\}$
+        \end{enumerate}
+    
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumpování lineárních jazyků]
+    
+    Připomeňme, že gramatika je \emph{lineární}, pokud obsahuje pouze pravidla tvaru $A\to uBw$ a $A\to w$, kde $A,B\in V$ a $u,w\in T^*$.
+    
+    \bigskip
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{1em}
+        \item Zformulujte Pumping lemma pro lineární jazyky.
+        \item Dokažte toto tvrzení pomocí odvození (redukovanou) lineární gramatikou.
+        \item Jak souvisí $n$ z tvrzení s lineární gramatikou pro daný jazyk?
+        \item Ukažte, že jazyk $L=\{w\in \{0,1\}^*\mid |w|_0=|w|_1\}$ není lineární.
+        \item Zařaďte jazyk $L$ do Chomského hierarchie.
+    \end{enumerate}
+    
+\end{problem}
 
 
 \end{document}
