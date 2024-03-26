@@ -6,12 +6,72 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 10 -- TODO}
+\section*{NTIN071 A\&G: Cvičení 10 -- Zásobníkové automaty}
 
 % po 10. přednášce
 % jaro 2024
 
 \medskip
+
+%\noindent\emph{Vyřešte nejprve 1, 2a-j, 3 (zbytek je na procvičení).}
+
+\medskip
+
+\medskip\begin{problem}
+
+    Navrhněte zásobníkové automaty pro následující jazyky. (Mohou přijímat koncovým stavem i prázdným zásobníkem, u některých sestrojte obojí.)
+
+    \bigskip
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $L=\{w\mid w\in\{0,1\}^*,|w|_1\geq 3\}$
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+        \item $L=\{w\mid w\in\{(,)\}^*\text{ je korektní uzávorkování}\}$
+        \item $L=\{w\mid w\in \{0,1\}^*,w=w^R\}$
+        \item $L=\{a^ib^jc^k\mid i=j \vee j=k\} $
+        \item $L=\{a^ib^jc^k\mid i+j=k\}$
+        \item $L=\{a^{2n}b^{3n}\mid n\geq 0\}$
+        \item $L=\{w\ |\ w\in \{0,1\}^*\ \&\  |w|_0=|w|_1\} $
+        \item $L=\{u2v\ |\ u,v\in \{0,1\}^*\ \&\  |u|\neq |v|\} $
+        \item* $L=\{u2v\ |\ u,v\in \{0,1\}^*\ \&\  u\neq v\} $ (jde-li o bezkontextový jazyk)
+        \item $L=\{w\mid w\in\{(,),[,]\}^*\text{ je korektní uzávorkování}\}$     
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}
+
+    Vybrané zásobníkové automaty sestrojené v předchozím příkladu převeďte z přijímání koncovým stavem na přijímání prázdným zásobníkem, a naopak. (Vyzkoušejte si obě konstrukce.)
+
+\end{problem}
+
+
+\bigskip\begin{problem}
+    Pro danou gramatiku $G$ sestrojte zásobníkové automaty $Z_1,Z_2$ že $L(Z_1)=L(G)$ a $N(Z_2)=L(G)$.
+
+    \bigskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+    \item $G=(\{S,T,X\},\{a,b\},P,S)$
+        \begin{align*}
+    P=\{S&\rightarrow aTXb, \\
+    T&\rightarrow XTS\mid \lambda,\\ 
+    X&\rightarrow a\mid b\}
+    \end{align*}
+    \item $G=(\{S,T,X\},\{(,),*,+,,1\},P,S)$
+        \begin{align*}
+    P=\{S&\rightarrow S+T\mid T, \\
+    T&\rightarrow T*X\mid X,\\ 
+    X&\rightarrow 1\mid (S)\}
+    \end{align*}
+    \end{enumerate}
+    Pro nějaké rozumně dlouhé slovo $w\in L(G)$ najděte levou derivaci a simulujte výpočet automatu $Z_2$.
+    \end{problem}
+    
+    \bigskip\begin{problem}
+    Vybrané (malé) zásobníkové automaty sestrojené na předchozím cvičení převeďte na bezkontextové gramatiky. Pro nějaké rozumně dlouhé slovo $w$ přijímané daným automatem najděte levou derivaci tohoto slova v zkonstruované gramatice.
+    \end{problem}
+
 
 
 \end{document}
