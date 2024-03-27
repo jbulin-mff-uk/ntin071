@@ -6,16 +6,185 @@
 
 % \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 11 -- TODO}
+\section*{NTIN071 A\&G: Tutorial 11 -- Turing machines}
 
 % after Lecture 10
 % spring 2024
 
 \medskip
 
-% \noindent\emph{Solve 1abc only for A\&B, 2, 3a (the rest is for practice).}
+\noindent\emph{Solve 1, 2, 3a-d, 4  first (the rest is for practice).}
 
 \medskip
 
+
+\medskip\begin{problem}[A Turing machine]
+    
+    Consider the following TM.
+    \vspace{-9pt}
+    \begin{table}[h]
+        \begin{tabular}{r|cccc}
+        & B   & a    & b    &  c  \\ \hline
+        $\to q_0$ & $(q_1, B, L)$ & $(q_0, a, R)$ & $(q_0, c, R)$ & $(q_0, c, R)$ \\
+        $q_1$ & $(q_2, B, R)$ & $(q_1, c, L)$ &  & $(q_1, b, L)$ \\
+        $\ast q_2$  &              &              &              &             
+        \end{tabular}
+    \end{table}
+
+    \vspace{-24pt}    
+    \begin{multicols}{2}        
+        \begin{enumerate}[(a)]
+            \item Draw the state diagram.
+            \item Describe the computation (by a sequence of configurations) for $w=aabca$.
+            \item Describe the operation it performs.
+            \item What is the language recognized by the machine?
+        \end{enumerate} 
+    \end{multicols}
+    
+\end{problem}
+    
+    
+\medskip\begin{problem}[Erase all 1s]
+
+    Design a TM over the alphabet $\{0,1\}$ which will erase all 1's from the input and then return to the beginning (e.g. if it starts in the configuration $q_0 0011010$, then it will halt in the configuration $q_F 0000$ for some $q_F\in F$).
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Programming TMs]
+
+    Design a TM which will accept the language $L$. Write down the sequence of configurations that shows that the given word $w$ is accepted. 
+    
+    \begin{multicols}{2}
+    \begin{enumerate}[(a)]
+        \item $L=\{0^n1^n\mid n\geq 0\}$, $w=0011$
+        \item $L=\{0^n1^n2^n\mid n\geq 0\}$, $w=001122$
+        \item $L=\{0^i1^j\mid i\leq j\}$, $w=00111$
+        \item $L=\{w\in\{0,1\}^*\mid |w|_0=|w|_1\}$,\\ $w=100110$
+        \item $L=\{ucu^R\mid u\in\{0,1\}^*\}$, $w=10c01$
+        \item $L=\{uu^R\mid u\in\{0,1\}^*\}$, $w=101101$
+        \item $L=\{ucu\mid u \in\{0,1\}^*\}$, $w=110c110$
+        \item $L=\{uu\mid u \in\{0,1\}^*\}$, $w=110110$
+    \end{enumerate}
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Predecessor]
+	
+    Construct a Turing machine $T$ that for a given input natural number $x>0$ in binary encoding outputs its predecessor, i.e., $x-1$ (in binary encoding as well) and returns the head to the beginning of the output. %Additionally:
+	
+	\smallskip
+	\begin{enumerate}[(a)]
+	
+		%\item Describe formally all components of $T$ except for the transition function% (for that, the state diagram suffices, see (b)).
+		\item Draw the state diagram of $T$.
+		\item Write a sequence of \emph{configurations} that the machine goes through during some accepting computation for the input word $w=10100$.
+
+	\end{enumerate}
+
+	Construct a deterministic, single-tape, single-track machine. (If you want e.g. a two-track machine, program it yourself.) A number in binary encoding must not start with 0, unless it is equal to 0. Examples of input and output configurations:	
+	
+	\begin{itemize}
+	
+		\item from the configuration $q_01$ the machine should finish in $f0$ for some $f\in F$,
+		\item from the configuration $q_01001$ the machine should finish in $f1000$ for some $f\in F$,
+		\item from the configuration  $q_0100$ the machine should finish in $f11$ for some $f\in F$.
+	\end{itemize}
+
+\end{problem}
+    
+    
+\medskip\begin{problem}[Reverse]
+    
+    Design a TM which will create the reverse of the input word.
+
+\end{problem}
+    
+
+\begin{problem}[Memory blocks]
+
+    Design a TM which will switch the contents of two memory blocks. Specifically, if it starts in the configuration $q_0u\#v\#w\#x\#y$ (where $u, v, w, x, y \in \Sigma\setminus\{\#\}$), then it halts in the configuration $fu\#x\#w\#v\#y$ for some $f\in F$. Try to construct a small and efficient machine.
+
+\end{problem}
+    
+
+\begin{problem}[Nondeterministic test of non-primeness]
+    
+    Design a nondeterministic TM which will accept the language $L=\{1^n \mid\text{$n$ is not a prime number}\}$.
+
+\end{problem}
+
+
+\begin{problem}[One-way infinite tape]
+
+    Describe how to convert a Turing machine with a (single) two-way infinite tape to a Turing machine whose tape is only infinite in one direction, to the right. (You can assume that the second TM's tape contains a special delimiter $\triangleright$ in its first field.)
+
+\end{problem}
+    
+
+\begin{problem}[Head moves]
+    
+    Consider modifications of Turing machines in which the allowed moves of the head are the following. What class of languages they recognize?
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+            \item left (L) and right (R),
+            \item stay (N) and right (R),
+            \item stay (N) and left (L),
+            \item left (L), right (R), and stay (N).
+        \end{enumerate}    
+    \end{multicols}
+
+\end{problem}
+
+
+\begin{problem}[Only two actions at once]
+
+    Show that any single-tape Turing machine $M$ can be converted to a Turing machine $M'$ which is allowed to execute only two of the three actions at one step, that is, any instruction either 
+    \begin{itemize}
+        \item changes state and head position, or
+        \item changes state and tape symbol, or
+        \item changes head position and tape symbol,
+    \end{itemize}
+    but no instruction can perform all three of these actions.
+
+\end{problem}
+
+
+\begin{problem}[Right or restart]
+    Consider a Turing machine model where the tape is only one-way infinite (to the right) and the head can only perform two types of movement:  right (R) or RESTART (that is, return to the first field of the tape). Show how to convert a single-tape Turing machine to a Turing machine of this kind.
+\end{problem}
+        
+
+\begin{problem}[Rewrite at most once]
+
+    Consider a single-tape Turing machine which is allowed to change any field (i.e., it can rewrite the symbol with a different symbol) on the tape at most once. Show that this model is equivalent to a regular single-tape TM.
+
+\end{problem}
+    
+
+\begin{problem}[Don't rewrite input]
+
+    Explain why if a single-tape Turing machine is forbidden to modify the fields containing the input, it is equivalent to a finite automaton. (And therefore such TMs only recognize regular languages. It is enough to give the main idea, not a detailed construction.)
+
+\end{problem}
+    
+
+\begin{problem}[Closure properties]
+    
+    Show that both the class of all \emph{decidable} languages and the class of all \emph{partially decidable} languages are closed under:
+    
+    (a) \emph{union}, (b) \emph{intersection}, (c) \emph{concatenation}, (d) \emph{Kleene star}.
+    
+    Moreover, show that 
+    \begin{enumerate}[(a)]
+    \setcounter{enumi}{4}
+    \item decidable languages are closed under \emph{complementation}, but
+    \item partially decidable languages are not.
+    \end{enumerate}
+
+\end{problem}
+    
 
 \end{document}

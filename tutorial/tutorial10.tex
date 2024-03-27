@@ -13,9 +13,85 @@
 
 \medskip
 
-% \noindent\emph{Solve 1abc only for A\&B, 2, 3a (the rest is for practice).}
+\noindent\emph{Solve 1a-h, 2ab, 3a first (the rest is for practice).}
 
 \medskip
+
+\medskip\begin{problem}[Constructing PDA]
+
+    Design pushdown automata for the following languages. (Acceptance can be either by final state or by empty stack, in some cases construct both.)
+
+    \bigskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $L=\{w\mid w\in\{0,1\}^*,|w|_1\geq 3\}$
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+        \item $L=\{w\in\{(,)\}^*\mid w\text{ is correctly parenthesized}\}$
+        \item $L=\{w\in \{0,1\}^*\mid w=w^R\}$
+        \item $L=\{a^ib^jc^k\mid i=j \text{ or } j=k\} $
+        \item $L=\{a^ib^jc^k\mid i+j=k\}$
+        \item $L=\{a^{2n}b^{3n}\mid n\geq 0\}$
+        \item $L=\{w\in \{0,1\}^*\mid  |w|_0=|w|_1\} $
+        \item $L=\{u2v\mid u,v\in \{0,1\}^*\text{ and }|u|\neq |v|\}$
+        \item $L=\{w\in\{(,),[,]\}^*\mid w\text{ is correctly parenthesized}\}$           
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Acceptance by final state vs. empty stack]
+
+    Convert selected PDA constructed in the previous problem from acceptance by final state to acceptance by empty stack, and vice versa. (Try both constructions.)
+
+\end{problem}
+
+
+\medskip\begin{problem}[CFG to PDA]
+
+    For a given context-free grammar $G$ construct pushdown automata $Z_1,Z_2$ such that $L(Z_1)=L(G)$ and $N(Z_2)=L(G)$.
+
+    \bigskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $G=(\{S,T,X\},\{a,b\},P,S)$
+            \begin{align*}
+        P=\{S&\rightarrow aTXb, \\
+        T&\rightarrow XTS\mid \lambda,\\ 
+        X&\rightarrow a\mid b\}
+        \end{align*}
+        \item $G=(\{S,T,X\},\{(,),*,+,,1\},P,S)$
+            \begin{align*}
+        P=\{S&\rightarrow S+T\mid T, \\
+        T&\rightarrow T*X\mid X,\\ 
+        X&\rightarrow 1\mid (S)\}
+        \end{align*}
+    \end{enumerate}
+
+    For a reasonably long word $w\in L(G)$ find its right derivation from $G$ and simulate the automaton  $Z_2$ on the input $w$.
+
+\end{problem}
+    
+
+\medskip\begin{problem}[PDA to CFG]
+
+    Convert selected (small) pushdown automata constructed in Problem 1 to context-free grammars. For a reasonably long word $w$ accepted by the automaton find a right derivation of $w$ from the grammar.
+
+\end{problem}
+
+
+\section*{Bonus: Context grammars}
+
+
+\medskip\begin{problem}[A context grammar]
+    
+    Consider the grammar $G=(\{S,A,B,C\},\{a,b,c\},S,P)$, where
+    \begin{align*}
+        P=\{&S\rightarrow aSBC\mid aBC, B\rightarrow BBC,  C\rightarrow CC, CB\rightarrow BC,\\ 
+        &aB\rightarrow ab, bB\rightarrow bb, bC\rightarrow bc, cC\rightarrow cc\}
+    \end{align*}
+    What language does it generate? Is $G$ a context grammar? If not, find an equivalent context grammar.
+    
+\end{problem}
 
 
 \end{document}
