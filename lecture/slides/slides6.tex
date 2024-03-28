@@ -535,33 +535,3 @@
 
 
 \end{document}
-
-\begin{frame}{Testing membership in a context-free language}
-	
-	\begin{example}
-		
-	\end{example}
-	$G=(V,T,P,S)$, $P=\{S \to AB\mid BC, A \to BA\mid a, B\to CC\mid b, C\to AB\mid a\}$
-	
-	\bigskip
-	
-	Start filling from the bottom:
-	
-	\bigskip
-	
-	\begin{tabular}{|c c c c c c c c}
-	 $\{S,A,C\}$ \\ 
-	- &  $\{S,A,C\}$  \\ 
-	- &  $\{B\}$ &  $\{B\}$ \\ 
-	 $\{S,A\}$ &  $\{B\}$ & $\{S,C\}$ &  $\{S,A\}$ \\ 
-	 $\{B\}$ & $\{A,C\}$ &  $\{A,C\}$ &$\{B\}$ &$\{A,C\}$ \\ \hline 
-	 \rowcolor{Gray}$b$&$a$&$a$&$b$&$a$
-	\end{tabular}
-	\end{example}
-
-
-	
-\end{frame}
-
-
-\end{document}
