@@ -3,7 +3,7 @@
 \input{header.tex}
 
 
-\title{Lecture 6 -- Chomsky Normal Form, Pumping lemma for context-free languages, CYK algorithm}
+\title{Lecture 6 -- Chomsky Normal Form, Pumping lemma for context-free languages}
 
 
 \begin{document}
@@ -419,116 +419,12 @@
 \end{frame}
 
 
-\section{2.8 The CYK algorithm}
-
-
-\begin{frame}{Testing membership in a context-free language}
-
-	Given a context-free grammar $G$ \alert{in Chomsky Normal Form} and a word $w=a_1\dots a_n\in T^*$, determine if $w\in L(G)$.
-
-	\bigskip
-
-	\textbf{Naive, inefficient algorithm:}
-	
-	Construct all parse trees from $G$ of appropriate depth ($\lceil log_2|w|\rceil$), check if the yield is $w$.
-
-	\bigskip
-
-
-	\textbf{The Cocke-Younger-Kasami algorithm:} 
-	
-	Use \alert{dynamic programming} to compute, for every $1\leq i\leq j\leq n$, the set $X_{ij}$ of all variables of $G$ that generate the subword $a_i\dots a_j$.
-
-	Then check if $S\in X_{1n}$.
-
-	(Very efficient, worst-case time complexity $\mathcal O(n^3|G|)$.)
-
-\end{frame}
-
-
-\begin{frame}{The CYK algorithm}
-
-	\begin{itemize}
-		\item \textbf{input:} $G=(V,T,\mathcal P,S)$ in ChNF, $w=a_1\dots a_n\in T^*$
-		\item \textbf{decide:} $w\in L(G)$?
-	\end{itemize}	
-	
-	\begin{multicols}{2}
-		Compute for $1\leq i\leq j\leq n$:
-		
-		\vspace{-24pt}
-		$$
-		X_{ij}=\{A\in V\mid A\Rightarrow^* a_ia_{i+1}\ldots a_j\}
-		$$
-		\vspace{-24pt}
-
-		using dynamic programming (storing results in a table)
-		
-		\begin{center}
-			\scalebox{0.85}{
-				\begin{tabular}{|c c c c c c c c}
-					$X_{15}$ \\ 		
-					$X_{14}$ &  $X_{25}$  \\ 
-					$X_{13}$ &  $X_{24}$ &  $X_{35}$ \\
-					$X_{12}$ &  $X_{23}$ & $X_{34}$ &  $X_{45}$ \\ 
-					$X_{11}$ & $X_{22}$ &  $X_{33}$ &$X_{44}$ &$X_{55}$ \\ \hline
-					\rowcolor{Gray}$a_1$&$a_2$&$a_3$&$a_4$&$a_5$
-				\end{tabular}
-			}		
-		\end{center}		
-	\end{multicols}
-
-	\begin{enumerate}
-		\item \textbf{Initialize:} $X_{ii}=\{A\in V\mid A\to a_i \in \mathcal P\}$
-		\item \textbf{Fill upwards:} $$X_{ij}=\{A\in V\mid A\to BC\in \mathcal P,B\in X_{ik}, C\in X_{k+1,j}\}$$
-		\item \textbf{Check:} Is $S\in X_{1n}$?
-	\end{enumerate}	
-
-\end{frame}
-
-
-\begin{frame}{The CYK algorithm: an example}
-
-	\begin{example}
-	$G=(\{S,A,B,C\},\{a,b\},\mathcal P,S)$ with $\mathcal P=\{S\to AB\mid BC, A\to BA\mid a, B\to CC\mid b, C\to AB\mid a\}$
-	\end{example}
-	\vspace{-6pt}
-	Rules reversed:\vspace{-6pt}
-	\begin{quote}
-		\begin{multicols}{4}\small
-			$AB  \leftarrow  \{S,C\}$\\
-			$BA  \leftarrow  \{A\}$\\
-			$BC  \leftarrow  \{S\}$\\
-			$CC  \leftarrow  \{B\}$\\
-			$b   \leftarrow  \{B\}$\\
-			$a   \leftarrow  \{A,C\}$
-		\end{multicols}	
-	\end{quote}
-
-	\vspace{-12pt}
-	Fill upwards:
-	\vspace{3pt}
-
-	\begin{center}
-		\begin{tabular}{|c c c c c c c c}
-			$\{\alert{S},A,C\}$ \\ 
-			- &  $\{S,A,C\}$  \\ 
-			- &  $\{B\}$ &  $\{B\}$ \\ 
-			$\{S,A\}$ &  $\{B\}$ & $\{S,C\}$ &  $\{S,A\}$ \\ 
-			$\{B\}$ & $\{A,C\}$ &  $\{A,C\}$ &$\{B\}$ &$\{A,C\}$ \\ %\cline{1-7}
-			\rowcolor{Gray}$b$&$a$&$a$&$b$&$a$
-		\end{tabular}
-	\end{center}
-\end{frame}
-
-
 \begin{frame}{Summary of Lecture 6}
 	
 	\begin{itemize}
 		\item Reducing a grammar: removing $\epsilon$-productions, unit productions, useless symbols
 		\item Chomsky Normal Form of a context-free grammar
 		\item Pumping lemma for context-free languages, application: proving non-context-freeness
-		\item Testing membership in a context-free language: the CYK algorithm
 	\end{itemize}
 
 \end{frame}

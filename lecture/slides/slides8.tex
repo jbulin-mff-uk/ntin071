@@ -3,7 +3,7 @@
 \input{header.tex}
 
 
-\title{Lecture 8 -- Deterministic PDA}
+\title{Lecture 8 -- Equivalence of PDA and CFG, Deterministic PDA}
 
 
 \begin{document}
@@ -14,9 +14,358 @@
 
 \begin{frame}{Recap of Lecture 7}
 	
-    \begin{itemize}        
+    \begin{itemize}    
+        \item Testing membership in a context-free language: the Cocke-Younger-Kasami algorithm
+        \item Testing emptiness and finiteness of a context-free language    
 		\item Pushdown automaton: extend an $\epsilon$-NFA with a stack memory (potentially infinite), pop the top symbol, decide based on $(q,a,X)$, can push a finite string of stack symbols
-        \item Acceptance by final state $L(P)$ and by empty stack $N(P)$, conversion between the two options
+        \item Acceptance by final state $L(P)$ and by empty stack $N(P)$, conversion between the two options        	
+	\end{itemize}
+
+\end{frame}
+
+
+
+\section*{2.10 Equivalence of PDA and context-free grammars}
+
+
+\begin{frame}{Equivalence of PDA and CFG}
+
+    \begin{theorem}
+        The following statements about $L\subset\Sigma^*$ are equivalent:
+        \begin{enumerate}[(i)]
+            \item There exists a context-free grammar such that $L(G)=L$.
+            \item There exists a PDA such that $L(P)=L$.
+            \item There exists a PDA such that $N(P)=L$.
+        \end{enumerate}
+    \end{theorem}
+        
+    \begin{center}
+        \begin{tikzpicture}
+            \node[elliptic state][align=center] (p)      {Context-free\\ grammar};
+            \node[elliptic state][align=center] (q) [right=1cm of p]     {PDA by\\empty stack};
+            \node[elliptic state][align=center] (r) [right=1cm  of q]     {PDA by\\final state};
+            \path[->]
+                (p)  edge[bend left] node {} (q)
+                (q)  edge[bend left] node {} (p)
+                (q)  edge[bend left] node {} (r)
+                (r)  edge[bend left] node {} (q)
+            ;
+        \end{tikzpicture}    
+    \end{center}
+
+    We have already shown $(ii)\Leftrightarrow(iii)$. To prove equivalence with a context-free grammar, we use acceptance by empty stack.
+
+\end{frame}
+
+
+\section*{Context-free grammar to pushdown automaton}
+
+
+\begin{frame}{CFG to PDA}
+
+    \begin{block}{The construction}
+        Given $G=(V,T,\mathcal P,S)$, construct $P=(\{q\},T,V\cup T,\delta,q,S)$:
+        \begin{enumerate}[(1)]
+            \item for each $ A\in V$, \alert{$\delta(q,\epsilon, A)=\{(q,\beta)\mid A\rightarrow \beta \in\mathcal P\}$} \\ \hfill [apply rule]
+            \item for each $a\in T$, \alert{$\delta(q,a,a)=\{(q,\epsilon)\}$}\\ \hfill [match terminal]
+        \end{enumerate}   
+    \end{block} 
+
+    \textbf{How it works:}
+    \begin{itemize}
+        \item a \alert{leftmost} derivation is simulated by the PDA
+        \item current sentential form = part of input read + stack contents
+        \item see a variable: apply rule, a terminal: read \& pop from stack
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{An example}
+
+    \begin{example}
+        $I\rightarrow a\mid b\mid Ia\mid Ib\mid I0\mid I1$,\\
+        $E\rightarrow I\mid E*E\mid E+E\mid (E)$
+    \end{example}
+        
+    $\Sigma=\{a,b,0,1,(,),+,*\}$, $\Gamma=\Sigma\cup\{I,E\}$,  $\delta$ is defined as follows:
+
+    \begin{itemize}
+        \item $\delta(q,\epsilon,I)=\{(q,a),(q,b),(q,Ia),(q,Ib),(q,I0),(q,I1)\}$
+        \item $\delta(q,\epsilon,E)=\{(q,I),(q,E*E),(q,E+E),(q,(E))\}$
+        \item $\delta(q,s,s)=\{(q,\epsilon)\}$ for all $s\in \Sigma$ (e.g. $\delta(q,+,+)=\{(q,\epsilon)\}$)
+        \item $\delta(q,x)$ is empty otherwise
+    \end{itemize}
+
+    \alert{Leftmost derivation:} $E\Rightarrow E*E\Rightarrow I*E\Rightarrow a*E\Rightarrow a*I\Rightarrow a*b$\\       	
+    
+    \medskip
+
+    The sequence of configurations:
+
+    $(q,a*b,E)$
+    $\vdash$ $(q,a*b,E*E)$
+    $\vdash$ $(q,a*b,I*E)$
+    $\vdash$ $(q,a*b,a*E)$
+    $\vdash$ $(q,*b,*E)$
+    $\vdash$ $(q,b,E)$
+    $\vdash$ $(q,b,I)$
+    $\vdash$ $(q,b,b)$
+    $\vdash$ $(q,\epsilon,\epsilon)$
+
+\end{frame}
+
+
+\begin{frame}{Proof that $N(P)=L(G)$\hfill \alert{(i) $w\in L(G)\Rightarrow w\in N(P)$}}
+
+    Start with a leftmost derivation $S=\gamma_1\Rightarrow_{lm}\ldots\Rightarrow_{lm}\gamma_n=w$.
+
+    Prove by induction on $i$ that $(q,w,S)\vdash_P^* (q, v_i,\alpha_i)$, where $\gamma_i=u_i\alpha_i$ is the $i$-th sentential form and $u_iv_i=w$.
+
+    If $\gamma_i$ contains only terminals, set $\gamma_i=w=u_i, v_i=\epsilon=\alpha_i$. Otherwise, write $\gamma_i=u_iA\alpha_i$, where $u_i\in T^*$ and $A\in V$ is the leftmost variable.
+
+    By induction we have $(q,w,S)\vdash_P^* (q, v_i,A\alpha_i)$, $w=u_iv_i$.
+
+    For the step $\gamma_i\Rightarrow_{lm}\gamma_{i+1}$ we used some rule $A\rightarrow\beta\in P$. The PDA replaces $A$ on the stack with $\beta$, moves to configuration $(q,v_i,\beta\alpha_i)$.
+
+    We pop all terminals $v\in \Sigma^*$ from the beginning of $\beta\alpha$ (matching them with the input): $v_i=vv_{i+1}$ and $\beta\alpha=v\alpha_{i+1}$
+
+    We got to $(q,v_{i+1},\alpha_{i+1})$, corresponds to the sentential form $\gamma_{i+1}$.
+    
+\end{frame}
+
+
+\begin{frame}{Proof that $N(P)=L(G)$\hfill \alert{(ii) $w\in N(P)\Rightarrow w\in L(G)$}}
+
+    \vspace{-3pt}
+    Prove that if $(q,u,X)\vdash_P^*(q,\epsilon,\epsilon)$, then $X\Rightarrow_G^* u$. By induction on the number of moves. \textbf{Basis} \alert{$n=1$} move:
+    \begin{itemize}
+        \item $X=a\in\Sigma$: $\delta(q, a, a)\ni (q,\epsilon)$, $u=a$, 0-step derivation
+        \item $X=A\in \Gamma$: $\delta(q,\epsilon,A)\ni (q,\epsilon)$ coming from $A\rightarrow\epsilon\in\mathcal P$, $u=\epsilon$
+    \end{itemize} 
+
+    \vspace{-3pt}
+    \textbf{Induction step} \alert{$n>1$} moves: if the first move is \alert{[match terminal]}, don't extend the derivation, if it is \alert{[apply rule]}: $A$ on top of stack was replaced by $\beta=Y_1Y_2\ldots Y_k$, for a rule $A\to\beta\in\mathcal P$.
+
+    \begin{columns}
+
+        \column{0.78\textwidth}
+    
+        Split $u=u_1\ldots u_k$ s.t. while popping $Y_i$ we read~$u_i$, i.e. $(q,u_iu_{i+1}\ldots u_k,Y_i)\vdash^*(q,u_{i+1}\ldots u_k,\epsilon)$
+
+        \medskip
+        
+        Thus also $(q,u_i,Y_i)\vdash^*(q,\epsilon,\epsilon)$, by induction assumption we get $Y_i\Rightarrow^*u_i$. Together:
+        {\small
+        $$
+        A\Rightarrow Y_1Y_2\ldots Y_k\Rightarrow^* u_1Y_2\ldots Y_k\Rightarrow^* \ldots \Rightarrow^* u_1u_2\ldots u_k
+        $$
+        } 
+        
+        \vspace{-6pt}\hfill\qedsymbol
+    
+        \column{0.22\textwidth}
+
+        \scalebox{0.85}{
+            \input{files/PDACFG.pdf_t}
+        }
+        
+    \end{columns}    
+       
+\end{frame}
+
+
+\section*{Pushdown automaton to context-free grammar}
+
+
+\begin{frame}{An example}
+
+    \begin{columns}
+
+        \column{0.7\textwidth}\centering
+        
+        Given $P=(\{q\},\{\mathtt{if},\mathtt{else}\},\{Z\},\delta,q,Z)$
+        
+        \smallskip
+
+        $\delta(q,\mathtt{if},Z)=\{(q,ZZ)\}$\\        
+        $\delta(q,\mathtt{else},Z)=\{(q,\epsilon)\}$
+        
+        \column{0.3\textwidth}
+
+        \begin{center}
+            \scalebox{0.9}{
+                \begin{tikzpicture}
+                    \node[initial,state] (q) {$q$};
+                    \path[->]
+                        (q)  edge[loop above] node[align=center] { $\mathtt{if},Z\rightarrow ZZ$\\ $\mathtt{else},Z\rightarrow \epsilon$} (q);
+                \end{tikzpicture}
+            }
+        \end{center} 
+
+    \end{columns}
+
+    Construct $G=(V,\{\mathtt{if},\mathtt{else}\},\mathcal P,S)$
+
+    \begin{itemize}
+        \item variables: $V=\{S,[qZq]\}$ 
+        \item production rules:
+        \begin{itemize}
+            \item $S\rightarrow [qZq]$            
+            \item $[qZq]\rightarrow \mathtt{else}$
+            \item $[qZq]\rightarrow \mathtt{if}[qZq][qZq]$
+            
+        \end{itemize}        
+    \end{itemize}    
+    
+    In this example, $S$ and $[qZq]$ generate the same words, so we can simplify:
+         $G=(\{S\},\{\mathtt{if},\mathtt{else}\},\{S\rightarrow \mathtt{if}SS\mid\mathtt{else}\},S)$
+    
+\end{frame}
+
+
+\begin{frame}{PDA to CFG: the construction}
+
+    \vspace{-6pt}
+    \begin{itemize}
+        \item key event: pop a symbol $X$, while changing from state $q$ to $r$
+        \item variables: $[qXr]$ for $q,r\in Q$ and $X\in \Gamma$, plus a new variable~$S$
+        $$
+        L([qXr])=\{w\in\Sigma^*\mid (q,w,X)\vdash_P^*(r,\lambda,\lambda)\}
+        $$
+        \item $S$ to choose (guess) in which state the stack is emptied
+    \end{itemize}
+
+    \begin{block}{The construction}
+        Given $P=(Q,\Sigma,\Gamma,\delta,q_0,Z_0)$, construct $G=(V,T,\mathcal P,S)$ where $V=\{S\}\cup\{[pXq]\mid p,q\in Q,X\in\Gamma\}$ and the productions are:   
+        \begin{enumerate}[(i)]
+            \item for every state $p\in Q$ add $S\to [q_0Xp]$ 
+            \item for every transition $({\color{red}p},Y_1Y_2\ldots Y_k)\in\delta({\color{red}q,a,X})$ (incl. $a=\epsilon$) and \alert{all $k$-tuples of states} $p_1,\dots,p_{k-1},{\color{blue}p_k}\in Q$ add
+            
+            \vspace{-6pt}
+            $$
+            [{\color{red}qX}{\color{blue}p_k}]\rightarrow {\color{red}a}[{\color{red}p}Y_1p_1][p_1Y_2p_2]\ldots [p_{k-1}Y_k{\color{blue}p_k}]
+            $$                  
+        \end{enumerate}        
+        %\vspace{-3pt}      
+        In particular, for $(p,\epsilon)\in\delta(q,a,X)$ (i.e., $k=0$) add $[qXp]\rightarrow a$.
+    \end{block}
+
+\end{frame}
+
+
+\begin{frame}{Another example: $\{0^n1^n\mid n>0\}$}
+
+    \vspace{-6pt}
+    {\small    
+        \begin{center}
+            \begin{tabular}{l l c}
+                $\delta$ & Productions & \\\hline
+                & $S\rightarrow [pZp]\mid [pZq]$ & (1)\\
+                $\delta(p,0,Z)\ni (p,A)$	& $[pZp]\rightarrow 0[pAp] $ & (2)\\
+                & $[pZq]\rightarrow 0[pAq] $& (3)\\
+                $\delta(p,0,A)\ni (p,AA)$ & $[pAp]\rightarrow 0[pAp][pAp]$ & (4)\\
+                & $[pAp]\rightarrow 0[pAq][qAp] $ & (5)\\
+                & $[pAq]\rightarrow 0[pAp][pAq] $ & (6)\\
+                & $[pAq]\rightarrow 0[pAq][qAq] $ & (7)\\
+                $\delta(p,1,A)\ni (q,\epsilon)$ & $[pAq]\rightarrow 1$ & (8)\\			
+                $\delta(q,1,A)\ni (q, \epsilon)$ & $[qAq]\rightarrow 1$ & (9)			
+            \end{tabular}
+        \end{center}
+    }
+
+    \bigskip
+
+    \begin{columns}
+
+        \column{0.5\textwidth}
+
+        Derivation of $0011$:\vspace{-12pt}
+        \begin{align*}
+            S &\Rightarrow^{(1)} [pZq] \Rightarrow^{(3)} 0[pAq]\\
+              &\Rightarrow^{(7)} 00[pAq][qAq]\\
+              &\Rightarrow^{(8)} 001[qAq]\Rightarrow^{(9)} 0011   
+        \end{align*}
+
+        \column{0.5\textwidth}
+
+        \begin{center}
+            \scalebox{0.9}{
+                \begin{tikzpicture}
+                    \node[initial,state] (p)      {$p$};
+                    \node[state] (q)  [right=2cm of p]     {$q$};
+                    \path[->]
+                        (p)  edge[loop above]  node[align=center] {
+                            $0,Z \rightarrow A$	\\
+                            $0,A \rightarrow AA$	
+                        } (p)
+                        (p)  edge[swap]  node[align=center] {
+                            $1,A \rightarrow \epsilon$			
+                        }  (q)
+                        (q)  edge[loop above]  node[align=center] {
+                            $1,A \rightarrow \epsilon$			
+                        } (q);           
+                \end{tikzpicture}                
+            }
+        \end{center}
+
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Sketch of proof that $L(G)=N(P)$}
+
+    \begin{columns}
+
+        \column{0.7\textwidth}
+
+        It suffices to show that:
+        $$
+        [qXp]\Rightarrow^*w\ \text{ iff }\ (q,w,X)\vdash^*(p,\epsilon,\epsilon)
+        $$
+
+        In both directions, the proof is done by induction (number of moves/steps).
+        
+        \column{0.3\textwidth}
+
+        \begin{center}
+            \input{files/PDACFG2.pdf_t}    
+        \end{center}
+
+        \hfill\qedsymbol
+                
+    \end{columns}
+
+\end{frame}
+
+
+\section*{2.11 Deterministic pushdown automata}
+
+
+\begin{frame}{The definition}
+
+    \begin{definition}[Deterministic PDA]
+        A pushdown automaton $P=(Q,\Sigma,\Gamma,\delta,q_0,Z_0,F)$ is \alert{deterministic} (a \alert{DPDA}) iff both of the following hold:
+        \begin{itemize}
+            \item The set of possible transitions $\delta(q,a,X)$ is at most one-element for all  $q\in Q$, $a\in\Sigma \cup \{\epsilon\}$, and $X\in\Gamma$.
+            \item If $\delta(q,a,X)\neq\emptyset$ for some $a\in \Sigma$, then $\delta(q,\epsilon,X)=\emptyset$.
+        \end{itemize}
+        \end{definition}
+
+\end{frame}
+
+
+\begin{frame}{TODO}
+
+    
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 8}
+
+    \begin{itemize}
         \item Pushdown automata accept exactly context-free languages (constructions: CFG to PDA and PDA to CFG)		
 	\end{itemize}
 
