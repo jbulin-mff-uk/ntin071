@@ -231,7 +231,7 @@
         \item key event: pop a symbol $X$, while changing from state $q$ to $r$
         \item variables: $[qXr]$ for $q,r\in Q$ and $X\in \Gamma$, plus a new variable~$S$
         $$
-        L([qXr])=\{w\in\Sigma^*\mid (q,w,X)\vdash_P^*(r,\lambda,\lambda)\}
+        L([qXr])=\{w\in\Sigma^*\mid (q,w,X)\vdash_P^*(r,\epsilon,\epsilon)\}
         $$
         \item $S$ to choose (guess) in which state the stack is emptied
     \end{itemize}
@@ -347,18 +347,224 @@
 
     \begin{definition}[Deterministic PDA]
         A pushdown automaton $P=(Q,\Sigma,\Gamma,\delta,q_0,Z_0,F)$ is \alert{deterministic} (a \alert{DPDA}) iff both of the following hold:
-        \begin{itemize}
+        \begin{enumerate}[(i)]
             \item The set of possible transitions $\delta(q,a,X)$ is at most one-element for all  $q\in Q$, $a\in\Sigma \cup \{\epsilon\}$, and $X\in\Gamma$.
             \item If $\delta(q,a,X)\neq\emptyset$ for some $a\in \Sigma$, then $\delta(q,\epsilon,X)=\emptyset$.
-        \end{itemize}
-        \end{definition}
+        \end{enumerate}
+    \end{definition}
 
 \end{frame}
 
 
-\begin{frame}{TODO}
+\begin{frame}{Example: even palindromes with a center mark}
 
+    \vspace{-3pt}
+    $L_{wwr}=\{ww^R\mid w\in\{0,1\}^*\}$ is context free, but not recognizable by a DPDA [proof coming soon]; (ii) forbids a choice between an $\epsilon$-transition and reading the next input symbol.
     
+    But if we put in a `center mark' $c$, $L_{wcwr}=\{wcw^R\mid w\in\{0,1\}^*\}$ is recognized by the following DPDA:
+        
+    \begin{center}
+        \scalebox{0.83}{
+            \begin{tikzpicture}
+                \node[initial,state] (q0)      {$q_0$};
+                \node[state] (q1)  [right=2cm of q0]     {$q_1$};
+                \node[state, accepting] (q2)  [right=2cm of q1]    {$q_2$};
+                \path[->]
+                    (q0)  edge[loop above]  node[align=center] {
+                        $0,Z_0 \rightarrow 0Z_0$	\\
+                        $1,Z_0 \rightarrow 1Z_0$	\\			
+                        $0,0 \rightarrow 00$	\\			
+                        $0,1 \rightarrow 01$	\\			
+                        $1,0 \rightarrow 10$	\\			
+                        $1,1 \rightarrow 11$			
+                        } (q0)
+                    (q0)  edge[swap]  node[align=center] {
+                        $c,Z_0 \rightarrow Z_0$	\\			
+                        $c,0 \rightarrow 0$	\\			
+                        $c,1 \rightarrow 1$			
+                        }  (q1)
+                    (q1)  edge[loop above]  node[align=center] {
+                        $0,0 \rightarrow \epsilon$	\\			
+                        $1,1 \rightarrow \epsilon$			
+                        } (q1)
+                    (q1)  edge[swap]  node[align=center] {
+                        $\epsilon,Z_0 \rightarrow Z_0$	
+                        } (q2)
+                    ;    
+            \end{tikzpicture}
+        }
+    \end{center}
+
+\end{frame}
+
+
+\begin{frame}{Languages recognized by deterministic PDA}
+
+    \vspace{-24pt}
+    {\Large
+    $$
+    RL\subsetneq L_{DPDA} \subsetneq L_{PDA}=CFL = N_{PDA}\supsetneq N_{DPDA}
+    $$
+    }
+    \vspace{-6pt}
+      
+    \begin{proposition}
+        For every regular language $L$, there is a DPDA $P$ with $L=L(P)$.
+    \end{proposition}
+
+    \vspace{-6pt}
+    DPDA can simulate a DFA, ignore the stack (leave $Z_0$ on top).
+    \hfill\qedsymbol
+ 
+    \medskip
+
+    \begin{example}
+       $L_{wcwr}$ is recognized by a DPDA by final state, but not regular.
+    \end{example}
+
+    \vspace{-6pt}
+    DPDA on the previous slide, nonregularity by PL for $z=0^nc0^n$.
+    \hfill\qedsymbol
+
+    \medskip
+    
+    \begin{example}
+        $L=\{a^ib^i\mid i \in \mathbb{N}\} \cup \{a^ib^{2i}\mid i \in \mathbb{N}\}$ is context-free, but not recognizable by any DPDA by final state.
+    \end{example}
+
+    \vspace{-6pt}
+    Context-freeness is easy. Not in $L_{DPDA}$: next slide.
+
+\end{frame}
+
+
+\begin{frame}{$L_{abb}=\{a^ib^i|i \in \mathbb{N}\} \cup \{a^ib^{2i}|i \in \mathbb{N}\}\notin L_{DPDA}$}
+
+    \vspace{-3pt}
+    Assume for contradiction: recognized by a DPDA $M$ by final state.
+    Create two copies, $M_1$ and $M_2$, call corresponding nodes `siblings'. Construct a (nondeterministic) PDA $M'$:
+    
+    \vspace{-3pt}
+    \begin{itemize}
+        \item initial state: the initial state of $M_1$
+        \item final states: the final states of $M_2$
+        \item \alert{reroute transitions} going out of final states of $M_1$ to the siblings in $M_2$, relabel $b$ to $c$ (e.g. $\delta(f,b,X)=\{(q,X)\}$ becomes $\delta(f,c,X)=\{(q',X)\}$ where $q'$ is the sibling of $q$)
+        \item in the automaton $M_2$, \alert{relabel} $b$-transitions to $c$-transitions 
+    \end{itemize}
+
+    \vspace{-3pt}
+    The resulting PDA $M'$ recognizes \alert{$\{a^ib^ic^i\mid i \in \mathbb{N}\}$} by final state: determinism of $M$ means a \alert{unique path} when reading $a^ib^{2i}$, thus after the initial $a^ib^i$, $M$ is in an accepting state. Then $M'$ continues reading $c^i$, ends in a final state in $M_2$, and accepts.
+
+    But we know $\{a^ib^ic^i|i \in \mathbb{N}\}$ is not context-free, a contradiction.\hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{Prefix-free languages \& acceptance by empty stack}
+
+    \begin{definition}
+        A language $L\subseteq \Sigma^*$ is \alert{prefix-free} if there are no words $u,v\in L$ such that $u$ is a proper prefix of $v$ (i.e., $u=vz$ for some $z\in \Sigma^+$).
+    \end{definition}
+    \vspace{-8pt}
+    For example, $L_{wcwr}$ is prefix-free while $L_{wwr}$ is not. %(e.g. $00,0000\in L_{wwr}$.
+
+
+    \begin{theorem}
+        For any language $L$, $L=N(P)$ for some DPDA $P$ if and only if $L$ is prefix-free and $L=L(P')$ for some DPDA $P'$.
+    \end{theorem}
+    \vspace{-8pt}
+    \textbf{Proof:}
+    \alert{\Large$\Rightarrow$} The prefix $u$ is accepted by empty stack. There is no transition for empty stack, so no proper extension $v$ of $u$ can be in $N(P)=L$. Thus $L$ is prefix-free. The conversion from empty stack to final state acceptance does not add nondeterminism.
+        
+    \vspace{-3pt}    
+    \alert{\Large$\Leftarrow$} Since $L$ is prefix-free, we can delete transitions out of final states. Then the conversion to empty stack acceptance does not add nondeterminism.\hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{Deterministic PDA have unambiguous grammars}
+
+    \begin{theorem}
+        If $L$ is recognized by a DPDA (either by final state or empty stack), then $L$ has an unambiguous grammar.
+    \end{theorem}
+    \vspace{-9pt}
+    \textbf{NB:} The converse is not true, $L_{wwr}$ has an unambiguous grammar $S\rightarrow 0S0 \mid 1S1 \mid \epsilon$ but is not a DPDA language.
+        
+    \vspace{-2pt}
+    \textbf{Proof:}
+    \alert{$L=N(P)$:} PDA (by empty stack) to CFG construction, when applied to a DPDA, yields an unambiguous grammar.
+
+    \vspace{-2pt}
+    \alert{$L=L(P)$:} First, convert $L$ to a prefix-free language $L'$ by adding a new symbol \alert{$\$$ at the end of each word}. Now, construct a DPDA $P'$ such that $L'=N(P')$. Convert it to an unambiguous grammar $G'$ generating the language $N(P')=L'$.
+    
+    \vspace{-2pt}
+    Finally, modify $G'$ to get a grammar $G$ for  $L$: Change the terminal~$\$$ to a nonterminal, \alert{add the rule $\$\rightarrow \epsilon$}. Note that $G$ is unambiguous since $G'$ was, and we did not add ambiguity.\hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{The landscape of languages}
+
+    \vspace{-0.7cm}
+    \begin{center}
+        \scalebox{0.8}{
+            \begin{tikzpicture}[level distance=8mm]
+                \node[align=center] (r1) at (1,5) {\\regular languages\\${\mathcal L}_3$};
+                \node (r2) at (1,4) {};
+                \node[align=center] (pref) at (1,3) {prefix-property \& DPDA\\$\{0^n1^n\mid n>0\} $};
+                \node[align=center] (det) at (1,1.6) {deterministic PDA\\$\{0^n1^m; 0<n\leq m\} $};
+                \node[align=center] (cfl) at (1,-0.3) {context-free ${\mathcal L}_2$\\ $\{ww^R\mid w\in \{0,1\}^*\}$};
+                \node[align=center] (cl) at (5.3,2) {context-sensitive\\${\mathcal L}_1$\\$\{a^ib^ic^i\mid i\geq 0\}$};
+                \node[align=center] (re) at (9.4,2) {recursively\\enumerable\\${\mathcal L}_0$
+                \\$L_u=\{(\mathrm{code}(M),w)\mid M$\\ is a TM that accepts $w\}$};
+                \node[align=center] (out) at (3,-2.7) {$L_d=\{w\mid$ the TM with code $w$ rejects input $w\}$};
+                \node (bot) at (1,-1.6) {};
+                \node (top) at (1,6.4) {};
+                \node (left) at (-1.3,0) {};                
+                \node[draw=red!80,thick,inner sep=-2pt,ellipse,fit=(r1) (r2) ] {};
+                \node[draw=blue!80,thick,inner sep=-5pt,ellipse,fit= (r2) (pref)] {};
+                \node[draw=green!80,thick,inner sep=-5pt,ellipse,fit=(r1) (r2) (pref) (det)] {};
+                \node[draw=black,thick,inner sep=-5pt,ellipse,fit=(r1) (r2) (pref) (det) (cfl)] {};
+                \node[draw=black,thick,inner sep=10pt,rectangle,fit=(r1) (r2) (pref) (det) (cfl) (cl) (bot) (top) (left)] {};
+                \node[draw=black,thick,inner sep=15pt,rectangle,fit= (re) (bot) (top) (left)] {};                
+                \begin{scope}[on background layer]
+                    \node[fill=black!10,thick,inner sep=-5pt,ellipse,fit=(r1) (r2) (pref) (det) (cfl)] {};
+                    \node[fill=green!10,inner sep=-5pt,ellipse,fit=(r1) (r2) (pref) (det)] {};
+                    \node[fill=blue!10,thick,inner sep=-5pt,ellipse,fit= (r2) (pref)] {};
+                    \node[fill=red!10,thick,inner sep=-2pt,ellipse,fit=(r1) (r2) ] {};
+                \end{scope}
+            \end{tikzpicture}
+        }
+    \end{center}      
+
+\end{frame}
+
+
+\begin{frame}{Converting between representations of context-free languages}
+
+    \textbf{Conversions linear in input size:}
+    \begin{itemize}
+        \item CFG to a PDA
+        \item PDA by final state to a PDA by empty stack
+        \item PDA by empty stack to PDA by final state
+    \end{itemize}
+    
+    \textbf{PDA to CFG:} $O(n^3)$ algorithm that takes a PDA $P$ whose representation has length $n$ and produces a CFG of length (sum of sizes of bodies) at most $O(n^3)$
+    
+    \textbf{Conversion to ChNF:} given a $\epsilon$-production-free grammar $G$ of length $n$, we can find an equivalent ChNF grammar for G in time $O(n^2)$; the resulting grammar has length $O(n^2)$
+
+\end{frame}
+
+
+\begin{frame}{Undecidable problems about context-free languages (preview)}
+    
+    The following problems are not algorithmically \alert{decidable}:
+    \begin{itemize}
+        \item Is a given context-free grammar ambiguous?
+        \item Is a given context-free language inherently ambiguous?
+        \item Is the intersection of two context-free languages empty?
+        \item Is a given context-free language equal to $\Sigma^*$?
+    \end{itemize}
 
 \end{frame}
 
@@ -366,7 +572,14 @@
 \begin{frame}{Summary of Lecture 8}
 
     \begin{itemize}
-        \item Pushdown automata accept exactly context-free languages (constructions: CFG to PDA and PDA to CFG)		
+        \item Pushdown automata accept exactly context-free languages (constructions: CFG to PDA and PDA to CFG)
+        \item A deterministic pushdown automaton (DPDA)
+        \item DPDA recognize a proper subclass of context-free languages,\\ accepts by empty stack iff prefix-free and accepts by final state\\
+        (Deterministic PDA + acceptance by empty stack does not even cover regular languages!)
+        \item Deterministic PDA have unambiguous grammars
+        \item The landscape of languages
+        \item Converting between representations of context-free languages
+        \item Undecidable problems about context-free languages (preview)
 	\end{itemize}
 
 \end{frame}

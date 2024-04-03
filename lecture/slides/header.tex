@@ -25,67 +25,36 @@
 %% colors
 \definecolor{Gray}{gray}{0.9}
 
-
 %% TikZ
 \usepackage{tikz}
-    \usetikzlibrary{shapes,shapes.geometric,arrows,fit,automata}
-    \usetikzlibrary{positioning}
-    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{
+        automata,
+        arrows,
+        backgrounds,
+        decorations.pathmorphing,
+        fit,
+        positioning,
+        shapes,
+        shapes.geometric
+    } 
     \tikzset{>=stealth',shorten >=1pt,auto,node distance=2cm}
     \tikzset{initial text={}}
     \tikzset{elliptic state/.style={draw,ellipse}}
 
-
 %% amsthm
 \theoremstyle{plain}
-    \newtheorem*{algorithm}{Algorithm}
+    \newtheorem*{algorithm}{Algorithm}    
     \newtheorem*{observation}{Observation}
+    \newtheorem*{proposition}{Proposition}
 
 \theoremstyle{remark}
     \newtheorem*{exercise}{Exercise}
     \newtheorem*{remark}{Remark}
 
 %% macros
-
-
 \DeclareMathOperator{\RegE}{RegE}
 \DeclareMathOperator{\RL}{RL}
 
 % Just for Lecture 2
 \newcommand{\x}{$\times$}
 \newcommand{\nx}{\ }
-
-
-%% Fix thm title spacing
-% % map t block to oldblock
-% \let\oldblock\block
-% \let\endoldblock\endblock
-
-% % change block by adding smallskip
-% \renewenvironment{block}[1]
-%     {\begin{oldblock}{#1}
-%         \smallskip
-%     }
-%     { 
-%     \end{oldblock}
-%     }
-
-
-
-% \usepackage{bookmark}
-% \usepackage{booktabs}
-% \usepackage{cancel}
-% \usepackage[czech]{babel}
-% \usepackage{enumerate}
-% \usepackage[T1]{fontenc}
-% \usepackage{forest}
-% \usepackage{lmodern}
-% \usepackage{tikz}
-%     \usetikzlibrary{arrows.meta}
-% \usepackage[utf8x]{inputenc}
-% \usepackage{xfrac}
-
-% %% macros and definitions
-% %\DeclareMathOperator{\Aut}{Aut}
-
-% \newcommand{\A}{\textbf{A}}
