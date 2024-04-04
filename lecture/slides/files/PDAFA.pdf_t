@@ -1,0 +1,23 @@
+\begin{picture}(0,0)%
+\includegraphics{files/PDAFA.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(2472,1457)(-14,-613)
+\put(616,252){\makebox(0,0)[lb]{\smash{{\SetFigFont{5}{6.0}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}PDA}%
+}}}}
+\put(582,694){\makebox(0,0)[lb]{\smash{{\SetFigFont{5}{6.0}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}FA}%
+}}}}
+\put(  1,366){\makebox(0,0)[lb]{\smash{{\SetFigFont{5}{6.0}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Input $w\in \Sigma^*$}%
+}}}}
+\put(1100,469){\makebox(0,0)[lb]{\smash{{\SetFigFont{5}{6.0}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}And}%
+}}}}
+\put(1244,414){\makebox(0,0)[lb]{\smash{{\SetFigFont{5}{6.0}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Accept/Reject}%
+}}}}
+\end{picture}%
