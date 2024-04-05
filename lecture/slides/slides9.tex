@@ -49,7 +49,254 @@
 \end{frame}
 
 
-\begin{frame}{Not closed under intesection}
+\section*{Substitution and homomorphism}
+
+
+\begin{frame}{Recall the definitions}
+   
+    A (string) \alert{substitution} is a mapping $\sigma\colon \Sigma^*\rightarrow \mathcal P(Y^*)$ where
+    \begin{itemize}
+        \item $\Sigma$ and $Y$ are finite alphabets, $Y=\bigcup_{x\in \Sigma}Y_x$
+        \item for each $x\in \Sigma$, $\sigma(x)$ is a language over $Y_x$
+        \item $\sigma(\epsilon)=\{\epsilon\}$ and $\sigma(u.v)=\sigma(u).\sigma(v)$
+    \end{itemize}
+    For a language $L\subseteq \Sigma^*$, $\alert{\sigma(L)}=\bigcup_{w\in L}\sigma(w)\subseteq Y^*$. %A substitution is \alert{$\epsilon$-free} if no $\sigma(x)$ contains $\epsilon$.
+
+    A (string) \alert{homomorphism} is defined similarly but each letter is mapped to a single word, $h\colon\Sigma^*\rightarrow Y^*$ where $h(x)\in Y_x^*$ for $x\in\Sigma$, $h(\epsilon)=\epsilon$ and $h(u.v)=h(u).h(v)$. Then \alert{$h(L)=\{h(w)\mid w\in L\}$}. %It is \alert{$\epsilon$-free} if $h(x)\neq\epsilon$ for all $x\in\Sigma$.
+
+    The \alert{inverse homomorphism} applied to a language $L'\subseteq Y^*$: 
+    $$
+    h^{-1}(L')=\{w\in\Sigma^*\mid h(w)\in L'\}
+    $$
+
+\end{frame}
+
+
+\begin{frame}{Example: substitution}
+    
+    \begin{example}
+    Consider $G=(\{E\},\{a,+,(,)\},\{E\rightarrow E+E\mid (E)\mid a\},E)$. Let us have the following substitution:
+    \begin{itemize}
+        \item $\sigma(a)=L(G_a)$, where 
+        \vspace{-3pt}
+        $$
+        G_a=(\{I\},\{a,b,0,1\},\{I\rightarrow I0\mid I1\mid Ia\mid Ib\mid a\mid b\},I)
+        $$
+        \vspace{-18pt}
+        \item $\sigma(+)=\{-,*,:, \div, \mod\}$
+        \item $\sigma(()=\{(\}$
+        \item $\sigma())=\{)\}$
+    \end{itemize}
+    \end{example}
+    Take $(a+a)+a\in L(G)$. Note that $(a+a)+a \notin \sigma(L(G))$, because $+\notin\sigma(+)$. But e.g. $(a001-bba)*b1 \in \sigma((a+a)+a)\subseteq\sigma(L(G))$
+
+    \smallskip
+
+    What if we modify the definition: $\sigma(\alert{(})=\{\alert{(},\alert{[}\}$, $\sigma(\alert{)})=\{\alert{)},\alert{]}\}$?
+
+\end{frame}
+
+  
+\begin{frame}{Example: homomorphism}
+        
+    \begin{columns}
+
+        \column{0.5\textwidth}
+    
+        \begin{example}
+            $G=(\{E\},\{a,+,(,)\},$ $\{E\rightarrow E+E\mid (E)\mid a\},E)$        
+            \begin{itemize}            
+                \item $h(a)=\epsilon$
+                \item $h(+)=\epsilon$
+                \item $h(()=left$
+                \item $h())=right$               
+            \end{itemize}
+        \end{example}
+        \begin{itemize}
+            \item $h((a+a)+a)=leftright $,
+            \item $h^{-1}(leftright)\ni (a++)a$.
+        \end{itemize}
+
+        \vspace{1.75cm}
+    
+        \column{0.5\textwidth}
+
+        \begin{example}
+            $G=(\{E\},\{a,+,(,)\},$ $\{E\rightarrow a+E\mid (E)\mid a\},E)$
+            \begin{itemize}
+                \item $h_2(a)=a$
+                \item $h_2(+)=+$
+                \item $h(()=\epsilon$
+                \item $h())=\epsilon$
+            \end{itemize}
+        \end{example}
+        Are the following regular?
+        \begin{itemize}
+            \item $L(G)$
+            \item $h(L(G))$
+            \item $h^{-1}(h(L(G)))$
+        \end{itemize}
+        Is $h^{-1}(h(L(G)))=L(G)$?       
+        
+    \end{columns}
+            
+\end{frame}
+
+
+\begin{frame}{Closure under substitution and homomorphism}
+   
+    \begin{theorem}
+        Let $L\subseteq\Sigma^*$ be a context-free language.
+        \begin{enumerate}[(i)]
+            \item If $\sigma$ is a substitution on $\Sigma$ such that $\sigma(a)$ is context-free for all $a\in \Sigma$, then $\sigma(L)$ is context-free.
+            \item If $h$ is a homomorphism on $\Sigma$, then $h(L)$ is context-free.
+        \end{enumerate}   
+    \end{theorem}
+
+    \textbf{Idea:} replace terminals $a\in T$ in a parse tree with corresponding  parse trees for $\sigma(a)$ or $h(a)$, respectively
+
+    \vspace{-12pt}
+    \begin{multicols}{2}
+
+        \phantom{.}
+
+        \textbf{Proof:} \alert{(ii)} follows immediately from (i), define $\sigma(a)=\{h(a)\}$
+
+        \alert{(i)} construct a context-free grammar for $\sigma(L)$ [next slide]
+
+        
+        \begin{center}
+            \scalebox{1}{
+                \input{files/subst.pdf_t}        
+            }
+        \end{center}
+
+    \end{multicols}
+    
+\end{frame}
+
+
+\begin{frame}{Proof: construct the grammar for $\sigma(L)$}
+
+    Let us have the following context-free grammars, assume all their variable sets are disjoint:
+    \begin{itemize}
+        \item $G=(V,T,\mathcal P,S)$ generating $L$
+        \item $G_a=(V_a,T_a,\mathcal P_a,S_a)$ generating $\sigma(a)$, for $a\in T$
+    \end{itemize} 
+
+    Construct a grammar $G'=(V',T',\mathcal P',S')$ where
+    \begin{itemize}
+        \item $V'=V\cup (\bigcup_{a\in T} V_a)$
+	    \item $T'=\bigcup_{a\in \Sigma} T_a$
+	    \item $\mathcal P'=(\bigcup_{a\in \Sigma} P_a) \cup \mathcal P''$ where $\mathcal P''$ is obtained from $\mathcal P$ by replacing every terminal $a$ by the variable $S_a$
+	    \item $S'=S$
+    \end{itemize}
+    Clearly, $G'$ generates the language $\sigma(L)$.
+    \hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{Example}
+
+    Consider the language
+    $$
+    L=\{a^ib^j\mid 0\leq i\leq j\}
+    $$
+    and the following substitution:
+    \begin{itemize}
+        \item $\sigma(a)=L_a=\{c^id^i\mid i\geq 0\}$
+        \item $\sigma(b)=L_b=\{c^i\mid i\geq 0\}$
+    \end{itemize}
+
+    The grammars $G$, $G_a$, and $G_b$:
+    \begin{itemize}
+        \item $S\rightarrow aSb\mid Sb\mid\epsilon$\\
+        \item $S_a\rightarrow c S_a d\mid\epsilon$
+        \item $S_b\rightarrow c S_b\mid\epsilon$
+    \end{itemize}
+   
+    Then the grammar $G'$ for $\sigma(L)$ consists of the following rules:
+    $$
+    S\rightarrow S_aSS_b\mid SS_b\mid\epsilon,\qquad S_a\rightarrow cS_ad\mid\epsilon,\qquad S_b\rightarrow cS_b\mid\epsilon
+    $$
+
+\end{frame}
+
+
+\begin{frame}{Closure under inverse homomorphism}
+    
+    \begin{theorem}
+        Let $L\subseteq Y^*$ be a context-free language and $h\colon\Sigma^*\to Y^*$ a homomorphism. Then $h^{-1}(L)$ is also context-free. Moreover, if $L$ is deterministic, then so is $h^{-1}(L)$.
+    \end{theorem}
+
+    \begin{columns}
+
+        \column{0.5\textwidth}
+
+        \textbf{Idea:} simulate a PDA $M$ for $L$
+
+        \begin{itemize}
+            \item read a letter $a$ $\Rightarrow$ place  $h(a)$ into an inner buffer
+            \item simulate $M$, but with input taken from the buffer
+            \item if buffer empties, read the next letter from real input
+            \item accept iff empty buffer and $M$ is in accepting state
+        \end{itemize}
+
+        \column{0.5\textwidth}
+
+        \vspace{-10pt}
+
+        \begin{center}
+            \includegraphics[width=\textwidth]{files/invHomoCFL.PNG}
+        \end{center}
+
+        \vspace{-15pt}
+
+        \textbf{NB:} buffer is \alert{finite} $\Rightarrow$ can be encoded in the states:\\
+        \alert{state} = (state, buffer contents)
+        
+    \end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Proof: the construction}    
+    
+    Let $M=(Q,Y,\Gamma, \delta, q_0,Z_0,F)$ (by final state).
+    We define a PDA  
+    $$M'=(Q',\Sigma,\Gamma,\delta',\left[q_0,\epsilon\right], Z_0,F\times\{\epsilon\})$$ 
+    where the set of states is the following ($u$ is the buffer)
+    $$
+    Q'=\{\left[q,u\right]\mid q\in Q, u\in Y^*, (\exists a\in \Sigma) (\exists v\in Y^*)\ h(a)=vu\}
+    $$
+    and the transition function is defined as follows:
+    \begin{itemize}
+        \item \alert{{[re]}fill buffer:} 
+        \vspace{-6pt}
+        $$
+        \delta'(\left[q,\epsilon\right],a,Z)=\{(\left[q,h(a)\right],Z)\}
+        $$
+        \item \alert{read from buffer:}
+        \begin{align*}
+            \delta'(\left[q,u\right],\epsilon,Z)=&\{(\left[p,u\right],\gamma)\mid (p,\gamma)\in \delta(q,\epsilon,Z)\}\\
+            \mathbin{\cup}&\{(\left[p,v\right],\gamma)\mid (p,\gamma)\in \delta(q,b,Z), u=bv\}
+        \end{align*}
+    \end{itemize}
+ 
+    
+    \medskip
+    
+    For a DPDA $M$, the resulting $M'$ is also deterministic.
+    \hfill\qedsymbol
+
+\end{frame}
+
+
+\section*{Closure properties: it's complicated}
+
+
+\begin{frame}{CFLs not closed under intersection}
 
     \begin{example}
         $L=\{0^n1^n2^n \mid n\geq 1\}=\{0^n1^n2^i \mid n,i\geq 1\}\cap \{0^i1^n2^n \mid n,i\geq 1\}$
@@ -164,7 +411,7 @@
 \end{frame}
 
 
-\begin{frame}{Difference and complement}
+\begin{frame}{CFLs are not closed under difference nor complement}
 
     \begin{theorem}
         The class of the context-free languages is not closed under difference, nor complement.
@@ -185,112 +432,81 @@
 \end{frame}
 
 
-\section*{Substitution and homomorphism}
+\begin{frame}{DCFLs are closed under complement}
 
-
-\begin{frame}{Recall the definitions}
-   
-    A (string) \alert{substitution} is a mapping $\sigma\colon \Sigma^*\rightarrow \mathcal P(Y^*)$ where
+    \begin{theorem}
+        The complement of a deterministic CFL is also deterministic.
+    \end{theorem}
+    \textbf{Proof:} Idea: accept iff the original PDA rejected. But we need to:
     \begin{itemize}
-        \item $\Sigma$ and $Y$ are finite alphabets, $Y=\bigcup_{x\in \Sigma}Y_x$
-        \item for each $x\in \Sigma$, $\sigma(x)$ is a language over $Y_x$
-        \item $\sigma(\epsilon)=\{\epsilon\}$ and $\sigma(u.v)=\sigma(u).\sigma(v)$
+        \item catch failure due to empty stack by a new bottom of the stack
+        \item recognize possible $\epsilon$-transition cycle by a counter
+        \item at the end of input, check if we are in an accepting state, or transitioned out of it using $\epsilon$-transitions; in that case, reject
     \end{itemize}
-    For a language $L\subseteq \Sigma^*$, $\alert{\sigma(L)}=\bigcup_{w\in L}\sigma(w)\subseteq Y^*$. %A substitution is \alert{$\epsilon$-free} if no $\sigma(x)$ contains $\epsilon$.
-
-    A (string) \alert{homomorphism} is defined similarly but each letter is mapped to a single word, $h\colon\Sigma^*\rightarrow Y^*$ where $h(x)\in Y_x^*$ for $x\in\Sigma$, $h(\epsilon)=\epsilon$ and $h(u.v)=h(u).h(v)$. Then \alert{$h(L)=\{h(w)\mid w\in L\}$}. %It is \alert{$\epsilon$-free} if $h(x)\neq\epsilon$ for all $x\in\Sigma$.
-
-    The \alert{inverse homomorphism} applied to a language $L'\subseteq Y^*$: 
-    $$
-    h^{-1}(L')=\{w\in\Sigma^*\mid h(w)\in L'\}
-    $$
+    \hfill\qedsymbol
 
 \end{frame}
 
 
-\begin{frame}{Example: substitution}
+\begin{frame}{DCFLs are not closed under union nor intersection}
+
+    \textbf{Recall:} intersection of a DCFL and a regular language is a DCFL
+
+    \begin{example}
+        $L=\{a^ib^jc^k| i\neq j\text{ or }j\neq k\text{ or }i\neq k\} $, a union of three DCFLs, is context-free but not a DCFL.
+    \end{example}
+    \textbf{Proof:} $\overline{L}\cap L(a^*b^*c^*)=\{a^ib^jc^k\mid i=j=k\}$ would be a DCFL; it's not even context-free (Pumping lemma).
+    \hfill\qedsymbol
+
+    \textbf{Note:} This also implies that DCFLs are not closed under intersection (de Morgan laws: $L_1\cup L_2=\overline{\overline{L_1}\cap\overline{L_2}}$).
+
+\end{frame}
+
+
+\begin{frame}{DCFLs are not closed under homomorphism}
     
     \begin{example}
-    Consider $G=(\{E\},\{a,+,(,)\},\{E\rightarrow E+E\mid (E)\mid a\},E)$. Let us have the following substitution:
-    \begin{itemize}
-        \item $\sigma(a)=L(G_a)$, where 
-        \vspace{-3pt}
-        $$
-        G_a=(\{I\},\{a,b,0,1\},\{I\rightarrow I0\mid I1\mid Ia\mid Ib\mid a\mid b\},I)
-        $$
-        \vspace{-18pt}
-        \item $\sigma(+)=\{-,*,:, \div, \mod\}$
-        \item $\sigma(()=\{(\}$
-        \item $\sigma())=\{)\}$
-    \end{itemize}
-    \end{example}
-    Take $(a+a)+a\in L(G)$. Note that $(a+a)+a \notin \sigma(L(G))$, because $+\notin\sigma(+)$. But e.g. $(a001-bba)*b1 \in \sigma((a+a)+a)\subseteq\sigma(L(G))$
-
-    \smallskip
-
-    What if we modify the definition: $\sigma(\alert{(})=\{\alert{(},\alert{[}\}$, $\sigma(\alert{)})=\{\alert{)},\alert{]}\}$?
-
-\end{frame}
-
-  
-\begin{frame}{Example: homomorphism}
+        Consider languages $L_1=\{a^ib^jc^k\mid i\neq j\}$, $L_2=\{a^ib^jc^k\mid j\neq k\}$, $L_3=\{a^ib^jc^k\mid i\neq k\}$ which are deterministic context-free.
         
-    \begin{columns}
-
-        \column{0.5\textwidth}
-    
-        \begin{example}
-            $G=(\{E\},\{a,+,(,)\},$ $\{E\rightarrow E+E\mid (E)\mid a\},E)$        
-            \begin{itemize}            
-                \item $h(a)=\epsilon$
-                \item $h(+)=\epsilon$
-                \item $h(()=left$
-                \item $h())=right$               
-            \end{itemize}
-        \end{example}
         \begin{itemize}
-            \item $h((a+a)+a)=leftright $,
-            \item $h^{-1}(leftright)\ni (a++)a$.
+            \item The language $0L_1\cup 1L_2\cup 2L_3$ is a DCFL, construct a DPDA.
+            \item The language $L_1\cup L_2\cup L_3$ is not a DCFL, otherwise also $\overline{L_1\cup L_2\cup L_3} \cap L(a^*b^*c^*)=\{a^ib^jc^k\mid i=j=k\}$ would be.
         \end{itemize}
-
-        \vspace{1.75cm}
-    
-        \column{0.5\textwidth}
-
-        \begin{example}
-            $G=(\{E\},\{a,+,(,)\},$ $\{E\rightarrow a+E\mid (E)\mid a\},E)$
-            \begin{itemize}
-                \item $h_2(a)=a$
-                \item $h_2(+)=+$
-                \item $h(()=\epsilon$
-                \item $h())=\epsilon$
-            \end{itemize}
-        \end{example}
-        Are the following regular?
-        \begin{enumerate}
-            \item $L(G)$
-            \item $h(L(G))$
-            \item $h^{-1}(h(L(G)))$
-            \item $h^{-1}(h(L(G)))=L(G)$
-        \end{enumerate}        
         
-    \end{columns}
-            
+        But $h(0L_1\cup 1L_2\cup 2L_3)=L_1\cup L_2\cup L_3$ for the homomorphism:
+        \begin{itemize}
+            \item $h(0)=\epsilon$, $h(1)=\epsilon$, $h(2)=\epsilon$,
+            \item $h(s)=s$ for all other symbols.
+        \end{itemize}
+    \end{example}
+
+    \textbf{But recall:} DCFLs \alert{are} closed under \alert{inverse homomorphism}.
+
 \end{frame}
 
 
-\begin{frame}{Closure under substitution and homomorphism}
-   
-    \begin{theorem}
-        Let $L\subseteq\Sigma^*$ be a context-free language.
-        \begin{enumerate}[(i)]
-            \item If $\sigma$ is a substitution on $\Sigma$ such that $\sigma(a)$ is context-free for all $a\in \Sigma$, then $\sigma(L)$ is context-free.
-            \item If $h$ is a homomorphism on $\Sigma$, then $h(L)$ is context-free.
-        \end{enumerate}   
-    \end{theorem}
+\begin{frame}{Closure properties: summary}
 
-    \textbf{Proof:} TODO
-    
+    \newcommand{\y}{{\color{blue}YES}}
+    \newcommand{\n}{{\color{red}NO}}
+
+    \begin{center}
+        \begin{tabular}{l!{\color{gray}\vrule} c!{\color{blue!30!gray}\vrule} c|c|}
+        \renewcommand{\arraystretch}{1.5}
+        language& regular (RL) & context--free & deterministic CFL\\
+        \arrayrulecolor{gray}\hline
+        union & {\color{blue}YES} &{\color{blue}YES} &{\color{red}NO} \\
+        intersection & {\color{blue}YES} &{\color{red}NO}&{\color{red}NO}\\
+        \hline
+        $\cap$ with RL & {\color{blue}YES} &{\color{blue}YES}&{\color{blue}YES}\\
+        complement & {\color{blue}YES} &{\color{red}NO} &{\color{blue}YES} \\
+        \hline
+        homomorphism & {\color{blue}YES} &{\color{blue}YES} &{\color{red}NO} \\
+        inverse hom. & {\color{blue}YES} &{\color{blue}YES} &\y\\
+        \hline
+        \end{tabular}
+    \end{center}
+
 \end{frame}
 
 
@@ -299,20 +515,25 @@
 
 \begin{frame}{Dyck languages}
 
+    \begin{definition}
+        The \alert{Dyck language} $D_n$ is defined over $\Sigma_n=\{a_1, a^|_1,\ldots,a_n, a^|_n\}$ using context-freethe grammar with rules $S\rightarrow \epsilon\mid SS\mid a_1Sa_1^| \mid \ldots \mid a_nSa_n^|$.
+    \end{definition}
+        
+    \begin{itemize}
+        \item the Dyck language $D_n$ captures correctly parenthesized expressions with $n$ types of parentheses
+        \item we use it to describe computations of an arbitrary PDA
+        \item to show that any context-free language can be expressed as:
+        $$
+        L = \tikzmark{pdt}h(\tikzmark{pd}D_n\cap \tikzmark{ptd}R)
+        $$
+        \vspace{-6pt}
+        \begin{itemize}
+            \item[-] the regular language $R$ describes all computation steps
+            \item[-] the Dyck language selects only valid computations
+            \item[-] the homomorphism $h$ cleans auxiliary symbols
+        \end{itemize}
+    \end{itemize}
     
-\end{frame}
-
-
-\begin{frame}{A characterization of context-free languages}
-
-
-\end{frame}
-
-
-\begin{frame}{The proof}
-
-    
-
 \end{frame}
 
 
