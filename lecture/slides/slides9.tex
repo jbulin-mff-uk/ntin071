@@ -516,9 +516,12 @@
 \begin{frame}{Dyck languages}
 
     \begin{definition}
-        The \alert{Dyck language} $D_n$ is defined over $\Sigma_n=\{a_1, a^|_1,\ldots,a_n, a^|_n\}$ using context-freethe grammar with rules $S\rightarrow \epsilon\mid SS\mid a_1Sa_1^| \mid \ldots \mid a_nSa_n^|$.
-    \end{definition}
-        
+        The \alert{Dyck language} $D_n$ is defined over $\Sigma_n=\{a_1, a^|_1,\ldots,a_n, a^|_n\}$ using context-freethe grammar with the following rules: 
+        $$
+        S\rightarrow \epsilon\mid SS\mid a_1Sa_1^| \mid \ldots \mid a_nSa_n^|
+        $$
+    \end{definition}  
+    \vspace{-6pt}      
     \begin{itemize}
         \item the Dyck language $D_n$ captures correctly parenthesized expressions with $n$ types of parentheses
         \item we use it to describe computations of an arbitrary PDA
@@ -526,7 +529,7 @@
         $$
         L = \tikzmark{pdt}h(\tikzmark{pd}D_n\cap \tikzmark{ptd}R)
         $$
-        \vspace{-6pt}
+        \vspace{-12pt}
         \begin{itemize}
             \item[-] the regular language $R$ describes all computation steps
             \item[-] the Dyck language selects only valid computations
@@ -535,6 +538,107 @@
     \end{itemize}
     
 \end{frame}
+
+
+\begin{frame}{A characterization of context-free languages}
+
+    If we only push to the stack, \alert{never pop}: it suffices to remember the top symbol; thus we only need \alert{finite memory}, i.e. a FA
+
+    If we also need to pop:
+    
+    \vspace{-6pt}
+    \begin{columns}
+
+        \column{0.6\textwidth}
+
+        \begin{itemize}
+            \item finite memory is not enough
+            \item but memory access is not arbitrary, a stack is LIFO (last in--first out)
+        \end{itemize}
+        
+        \column{0.4\textwidth}
+
+        \includegraphics[scale=0.4]{files/pushDown.PNG}
+                
+    \end{columns}
+    
+    Expand the computation with a stack to a linear structure:
+    \begin{itemize}
+        \item[$X$] symbol pushed
+        \item[$X^{-1}$] symbol popped
+    \end{itemize}
+
+    Pushing and popping form a pair that behaves like parentheses:
+    $$
+    \underbrace{ZZ^{-1}}\underbrace{B\underbrace{AA^{-1}}\underbrace{CC^{-1}}B^{-1}}
+    $$
+
+\end{frame}
+
+
+\begin{frame}{The theorem}
+
+    \begin{theorem}
+        For any context-free language $L$ there exist a regular language $R$, a Dyck language $D$ and a homomorphism $h$ s.t. $L=h(D\cap R)$.
+    \end{theorem}
+    
+    \textbf{Proof:} Start with a PDA recognizing $L$, accepting by empty stack.
+    First, convert to instructions of the form:
+    $$
+    \delta(q,a,Z)\in (p,w), \alert{|w|\leq 2}
+    $$ 
+    (Instructions pushing more symbols can be split using new states).
+            
+    Let $R^|$ consist of all expressions of the form 
+    $$
+    q^{-1}aa^{-1}Z^{-1}BAp
+    $$ 
+    for instruction $\delta(q,a,Z)\ni (p,AB)$, and similarly for instructions $\delta(q,a,Z)\in (p,A)$ and $\delta(q,a,Z)\in (p,\epsilon)$. (For $a=\epsilon$ omit $aa^{-1}$.)
+    
+Now define the regular language as $R=Z_0q_0(R^|)^*Q^{-1}$.
+    
+    
+    
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Proof cont'd}
+
+    The Dyck language $D$ is over the alphabet
+    $$
+    \Sigma\cup \Sigma^{-1} \cup Q\cup Q^{-1}\cup \Gamma\cup \Gamma^{-1}
+    $$
+
+    The language $D\cap R=D\cap Z_0q_0(R^|)^*Q^{-1}$ describes valid computations, e.g.
+    $$
+    \underbrace{Z_0\overbrace{q_0q_0^{-1}}aa^{-1}Z_0^{-1}}\underbrace{B\underbrace{A\overbrace{pp^{-1}}bb^{-1}A^{-1}}\overbrace{qq^{-1}}cc^{-1}B^{-1}}\overbrace{rr^{-1}}
+    $$
+
+    The homomorphism $h$ selects the input word being read:
+      
+    \begin{center}
+        \begin{tabular}{l l}
+            $h(a)=a$ & for input symbols $a\in\Sigma$\\
+            $h(y)=\epsilon$ & for all other symbols
+        \end{tabular}
+    \end{center}    
+    \hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 9}
+
+    \begin{itemize}        
+        \item Closure properties of context-free languages (including substitution, homomorphism, inverse homomorphism)
+        \item Also closure properties of deterministic CFLs
+        \item Dyck languages, a characterization of context-free languages
+    \end{itemize}
+
+\end{frame}
+
 
 
 \end{document}

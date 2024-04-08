@@ -148,7 +148,7 @@
 
 \begin{frame}{Testing finiteness of a context-free language}
 
-    Let $G$ be a Chomsky normal form grammar for $L$, i.e. $L\setminus\{\lambda\}=L(G)$. Construct the following oriented graph: 
+    Let $G$ be a Chomsky normal form grammar for $L$, i.e. $L\setminus\{\epsilon\}=L(G)$. Construct the following oriented graph: 
     \begin{itemize}
         \item nodes: variables in $G$
         \item edges: $\{(A,B),(A,C) \mid A\rightarrow BC\text{ is a production rule in }G\}$
@@ -510,7 +510,7 @@
                 \node[state] (q1a)   [right of=q0]   {};
                 \node[state] (q1b)   [below=.6cm of q1a]   {};
                 \node[state,draw=none] (pf) [below=.4cm of q0] {$P_N$};
-                \node[state,accepting] (q2)   [right=2.3cm of q1a] {$p_f$};
+                \node[state,accepting] (q2)   [right=2.3cm of q1a] {$p_F$};
                 \node[state] (X)[rectangle,  fit= (q0) (q1a) (q1b), inner sep=0.3cm,rounded corners] {};
                 \path[->]
                     (p0)  edge node {$\epsilon,X_0 \rightarrow Z_0X_0$} (q0)
@@ -528,15 +528,15 @@
 
 \begin{frame}{The proof}
 
-    $P_F=(Q\cup \{p_0,p_f\},\Sigma,\Gamma\cup\{X_0\},\delta_F,p_0,X_0,\{p_F\})$, where $\delta_F$ is
+    $P_F=(Q\cup \{p_0,p_F\},\Sigma,\Gamma\cup\{X_0\},\delta_F,p_0,X_0,\{p_F\})$, where $\delta_F$ is
     \begin{itemize}
         \item $\delta_F(p_0,\epsilon,X_0)=\{(q_0,Z_0X_0)\}$ (start).
         \item $\forall (q\in Q, a\in \Sigma\cup\{\epsilon\},Y\in \Gamma)$, $\delta_F(q,a,Y)=\delta_N(q,a,Y)$.
         \item In addition, $\delta_F(q,\epsilon,X_0)\ni (p_f,\epsilon)$ for every $q\in Q$.
     \end{itemize}
-    We must show that $w\in L(P_N)$ iff $w\in L(P_F)$.
+    We must show that $w\in N(P_N)$ iff $w\in L(P_F)$.
     \begin{itemize}
-        \item (If) $P_F$ accepts as follows: $(p_0,w,X_0)\vdash_{P_F}(q_0,w,Z_0X_0)\vdash^*_{P_F=N_F}(q,\epsilon,X_0)\vdash_{P_F}(p_f,\epsilon,\epsilon) $.
+        \item (If) $P_F$ accepts as follows: $(p_0,w,X_0)\vdash_{P_F}(q_0,w,Z_0X_0)\vdash^*_{P_F=N_F}(q,\epsilon,X_0)\vdash_{P_F}(p_F,\epsilon,\epsilon) $.
         \item (Only if) No other way to go to $p_F$ than the above. \hfill\qedsymbol
     \end{itemize}
     
@@ -571,7 +571,7 @@
     \end{center}
     \vspace{-12pt}
 
-    \textbf{Idea:} Make $Z_0$ a fake bottom (insert a new bottom below), because $P_F$ could accidentally empty stack in a nonfinal state. Add $\epsilon$-transitions (upon any stack symbol) from final states to a new state, there empty the stack without reading any input symbols.
+    \textbf{Idea:} Make $Z_0$ a fake bottom (insert a new bottom below), because $P_F$ could accidentally empty stack in a non-final state. Add $\epsilon$-transitions (upon any stack symbol) from final states to a new state, there empty the stack without reading any input symbols.
 
 \end{frame}
 
@@ -603,7 +603,7 @@
     \begin{lemma}
         If $(q,xw,\alpha)\vdash^*_P (p,yw,\beta) $, then also $(q,x,\alpha)\vdash^*_P(p,y,\beta)$.
     \end{lemma}
-    \textbf{NB:} Not true for stack, the computation may require $\gamma$ on the stack and then push it back. (E.g. $L=\{0^i1^i0^j1^j\}$, configuration $(p,0^{i-j}1^i0^j1^j,0^jZ_0)\vdash^* (q,1^j,0^jZ_0)$, inbetween clear the stack.)
+    \textbf{NB:} Not true for stack, the computation may require $\gamma$ on the stack and then push it back. (E.g. $L=\{0^i1^i0^j1^j\mid i,j\geq 0\}$, config. $(p,0^{i-j}1^i0^j1^j,0^jZ_0)\vdash^* (q,1^j,0^jZ_0)$, needs to clear the stack.)
 
 \end{frame}
 

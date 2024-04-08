@@ -94,7 +94,7 @@
 
 \medskip\begin{problem}[Subset construction]
 
-    Given a nondeterministic finite automaton with  $\lambda$-transitions, construct an equivalent reduced DFA.
+    Given a nondeterministic finite automaton with  $\epsilon$-transitions, construct an equivalent reduced DFA.
     
     
     \begin{multicols}{2}
@@ -102,7 +102,7 @@
         \begin{enumerate}[(a)]
 
             \item \begin{tabular}{ r | c c c }
-            & a & b & $\lambda$ \\ \hline
+            & a & b & $\epsilon$ \\ \hline
             $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
             $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
             $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
@@ -111,7 +111,7 @@
             \end{tabular}
             
             \item \begin{tabular}{ r | c c c }
-            & a & b & $\lambda$ \\ \hline
+            & a & b & $\epsilon$ \\ \hline
             $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
             $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
             $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\

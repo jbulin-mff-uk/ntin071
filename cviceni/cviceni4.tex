@@ -20,14 +20,14 @@
 
 \medskip\begin{problem}[Podmnožinová konstrukce]
 
-    Pro daný nedeterministický automat s $\lambda$-přechody sestrojte ekvivalentní redukovaný DFA.
+    Pro daný nedeterministický automat s $\epsilon$-přechody sestrojte ekvivalentní redukovaný DFA.
     
     \begin{multicols}{2}
     
         \begin{enumerate}[(a)]
             \item
             \begin{tabular}{ r | c c c }
-            & a & b & $\lambda$ \\ \hline
+            & a & b & $\epsilon$ \\ \hline
             $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
             $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
             $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
@@ -37,7 +37,7 @@
             
             \item
             \begin{tabular}{ r | c c c }
-            & a & b & $\lambda$ \\ \hline
+            & a & b & $\epsilon$ \\ \hline
             $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
             $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
             $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\

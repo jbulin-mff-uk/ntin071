@@ -73,10 +73,10 @@
 
     \begin{center}
         \begin{tabular}{l}
-        $S\rightarrow abS\mid babA\mid \lambda $\\
+        $S\rightarrow abS\mid babA\mid \epsilon $\\
         $A\rightarrow abA\mid aB \mid  bC$\\
-        $B\rightarrow abS\mid B\mid bC\mid \lambda $\\
-        $C\rightarrow aab\mid A\mid aA\mid \lambda $
+        $B\rightarrow abS\mid B\mid bC\mid \epsilon $\\
+        $C\rightarrow aab\mid A\mid aA\mid \epsilon $
         \end{tabular}
     \end{center}
 
@@ -90,7 +90,7 @@
     
     \begin{enumerate}[(a)]
         \item $L(G)\neq\emptyset$
-        \item $\lambda\in L(G)$
+        \item $\epsilon\in L(G)$
         \item $L(G)$ je konečný jazyk
     \end{enumerate}
 
@@ -101,7 +101,7 @@
     
     Najděte posloupnost bezkontextových gramatik $G_1,G_2,G_3,\dots$ (nad danou abecedou $\Sigma$) takových, že $G_n$ generuje právě všechna slova délky $\leq 2^n$ (a žádná jiná), a přitom velikost $G_n$ (pro jednoduchost počet symbolů v tělech produkčních pravidel) je v $O(n)$.
     
-    %X_1 \to X_2_X2, X_2 \to X_3X_3,\dots, X_{n−1}\to X_nX_n, X_n\to aa|a|\lambda
+    %X_1 \to X_2_X2, X_2 \to X_3X_3,\dots, X_{n−1}\to X_nX_n, X_n\to aa|a|\epsilon
 
 \end{problem}
 
