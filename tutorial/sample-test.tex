@@ -1,0 +1,38 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+{\Large\sc name:}
+\hfill
+\begin{tabular}{c|c|c|c|c|c||c}
+    1 & 2 & 3 & 4 & 5 & 6 & $\Sigma$\\ \hline
+      &   &   &   &   &   &
+\end{tabular}
+
+\bigskip
+
+\begin{center}
+    \large{NTIN071 A\&G: Sample test}
+\end{center}
+    
+{\it Each problem is worth 20 points, totaling 120 points.}
+    
+    \bigskip
+    
+\begin{enumerate}
+    \item Construct a context-free grammar generating the language $L=\{a^nb^ka^{3n}\mid n,k\geq 0\}$. Write down a derivation for the word $w=abbaaa$.
+    \item Convert the grammar from the previous problem to Chomsky normal form.
+    \item Prove that the language $L=\{a^{n^5}\mid n\geq 0\}$ is not regular.
+    \item Construct a pushdown automaton accepting, by empty stack, the language $L=\{w\in\{0,1\}^*\mid |w|_0\geq |w|_1 + 1\}$. Write down a sequence of configurations for the word $w=10001$.
+    \item Prove that the language $L=\{0^i1^j2^k3^\ell\mid i=j=k\text{ or }\ell=0\}$ is not context-free.
+    \item Construct a deterministic finite automaton that accepts exactly those words over the alphabet $\{0,1\}$ which end with the sequence $010$.
+\end{enumerate}
+
+
+\end{document}

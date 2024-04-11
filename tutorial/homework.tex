@@ -1,1 +1,97 @@
-TODO
+\documentclass[a4paper,12pt]{article}
+\usepackage{a4wide}
+\usepackage{amsmath,amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+    \newtheorem{problem}{Problem}
+
+\begin{document}
+
+\begin{center}
+    \large{NTIN071 A\&G: Homework assignment}    
+\end{center}
+
+
+{\it  Each problem is worth 5 points, totaling 20 points. The solution must be entirely your own work. Describe all steps in your solution, the objects you construct, and proofs in sufficient detail and using the formalism from the lecture.}
+
+\bigskip
+
+\begin{problem}
+    Solve the following sample test:
+
+    \begin{enumerate}
+        \item Construct a context-free grammar generating the language $L=\{a^nb^ka^{3n}\mid n,k\geq 0\}$. Write down a derivation for the word $w=abbaaa$.
+        \item Convert the grammar from the previous problem to Chomsky normal form.
+        \item Prove that the language $L=\{a^{n^5}\mid n\geq 0\}$ is not regular.
+        \item Construct a pushdown automaton accepting, by empty stack, the language $L=\{w\in\{0,1\}^*\mid |w|_0\geq |w|_1 + 1\}$. Write down a sequence of configurations for the word $w=10001$.
+        \item Prove that the language $L=\{0^i1^j2^k3^\ell\mid i=j=k\text{ or }\ell=0\}$ is not context-free.
+        \item Construct a deterministic finite automaton that accepts exactly those words over the alphabet $\{0,1\}$ which end with the sequence $010$.
+    \end{enumerate}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+    Let us have a pair of regular languages $L,M$ over the alphabet $\{0,1\}$. Assume that we have DFAs $A,B$ such that $L=L(A)$ and $M=L(B)$. Define the language $K$ as follows:
+	$$K=\{uvw\mid uw\in L, v\in M\}$$
+
+    \begin{enumerate}[(a)]	
+		\item Construct a $\epsilon$-NFA $C$ recognizing language $K$. 
+		(The construction must be formally described but you do not have to prove that $C$ accepts the language $K$.)
+	\end{enumerate}
+	Demonstrate your construction also on the following example: Let $L=\{0^{2n+1}\mid n\geq 0\}$ and $M=\{w\in\{0,1\}\mid |w|\text{ is divisible by 3}\}$.
+	
+	\smallskip
+	\begin{enumerate}[(b)]
+		\item Draw the state diagrams of some DFAs $A,B$ accepting the languages $L,M$ (respectively). 
+		\item[(c)] Draw the state diagram of the $\epsilon$-NFA $C$ obtained by your construction.
+		\item[(d)] Write a sequence of states that the automaton $C$ goes through during some accepting computation for the input word $w=00110000$.
+	\end{enumerate}    
+  
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+    Consider the following regular expressions over the alphabet $\Sigma=\{a,b\}$:
+    \begin{align*}
+        R_1&=((a + b)(a + b)(a + b))^*\\
+        R_2&=(a+b)^*a
+    \end{align*}
+    \begin{enumerate}[(a)]
+        \item Construct a \emph{deterministic} finite automaton $A$ recognizing the intersection of the languages described by the expressions $R_1$ and $R_2$, i.e., such that $L(A)= L(R_1) \cap L(R_2)$.
+        \item Using the state elimination algorithm, convert $A$ into a regular expression.
+    \end{enumerate}
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+
+    Consider the following language over the alphabet $\{0,1,\#\}$:
+    $$
+    L = \{w \# s^R \mid w,s\in\{0,1\}^*\text{ and $s$ is a substring of $w$}\}
+    $$
+    (Note: $s^R$ denotes the word $s$ written backwards; a substring is a contiguous subsequence, including empty and the entire word.)
+    \begin{enumerate}[(a)]  
+        \item Prove that $L$ is not regular.    
+        \item Construct a context-free grammar $G$ generating the language $L$.
+        \item Write down the derivation of the word $1001\#00$.
+        \item Convert the grammar $G$ from part (a) into a pushdown automaton accepting by empty stack.
+        \item Write a sequence of configurations for the word $1001\#00$.
+    \end{enumerate}
+
+\end{problem}
+
+
+\end{document}

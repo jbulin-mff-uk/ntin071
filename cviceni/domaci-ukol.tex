@@ -1,1 +1,104 @@
-TODO
+\documentclass[a4paper,12pt]{article}
+\usepackage{a4wide}
+\usepackage{amsmath,amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{enumerate}
+
+\theoremstyle{definition}
+    \newtheorem{problem}{Problem}
+
+\begin{document}
+
+\begin{center}
+    \large{NTIN071 A\&G: Domácí úkol}    
+\end{center}
+
+
+{\it Za každý příklad lze získat maximálně 5 bodů, celkem 20 bodů. Řešení musí být zcela vaší vlastní prací. Svůj postup, zkonstruované objekty, a důkazy popište dostatečně podrobně a formálně.}
+
+\bigskip
+
+\begin{problem}
+
+    Vyřešte následující vzorové zadání zápočtového testu. 
+
+    \begin{enumerate}
+        \item Sestrojte bezkontextovou gramatiku generující jazyk $L=\{a^nb^ka^{3n}\mid n,k\geq 0\}$. Napište derivaci pro slovo $w=abbaaa$.
+        \item Převeďte gramatiku z předchozího příkladu do Chomského normální formy.
+        \item Dokažte, že jazyk $L=\{a^{n^5}\mid n\geq 0\}$ není regulární.
+        \item Sestrojte zásobníkový automat přijímající, prázdným zásobníkem, jazyk $L=\{w\in\{0,1\}^*\mid |w|_0\geq |w|_1 + 1\}$. Napište posloupnost konfigurací pro slovo $w=10001$.
+        \item Dokažte, že jazyk $L=\{0^i1^j2^k3^\ell\mid i=j=k\text{ nebo }\ell=0\}$ není bezkontextový.
+        \item Sestrojte deterministický konečný automat, který přijímá právě ta slova nad abecedou $\{0,1\}$, která končí posloupností $010$.
+    \end{enumerate}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+
+    Mějme dva regulární jazyky $L,M$ nad abecedou $\{0,1\}$. Předpokládejme, že máme DFA $A,B$ takové, že $L=L(A)$ a $M=L(B)$. Definujme jazyk $K$ takto:
+    $$K=\{uvw\mid uw\in L, v\in M\}$$
+    
+    \smallskip
+    \begin{enumerate}[(a)]    
+        \item Sestrojte $\epsilon$-NFA $C$ rozpoznávající jazyk $K$. 
+        (Konstrukce musí být formálně popsaná, ale nemusíte zdůvodňovat, proč $C$ přijímá právě jazyk $K$.)
+    \end{enumerate}
+    Ukažte vaši konstrukci také na konkrétním příkladě: Nechť $L=\{0^{2n+1}\mid n\geq 0\}$ a $M=\{w\in\{0,1\}\mid |w|\text{ je dělitelná 3}\}$.    
+    
+    \smallskip
+    \begin{enumerate}[(b)]
+        \item Nakreslete stavové diagramy nějakých DFA $A,B$ přijímajících $L,M$ (resp.). 
+        \item[(c)] Nakreslete stavový diagram $\epsilon$-NFA $C$ vytvořeného vaší konstrukcí.  
+        \item[(d)] Napište posloupnost stavů, ve kterých se $C$ ocitá v průběhu nějakého přijímajícího výpočtu slova $w=00110000$.
+    \end{enumerate}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+
+    Mějme následující regulární výrazy nad abecedou $\Sigma=\{a,b\}$:
+    \begin{align*}
+        R_1&=((a + b)(a + b)(a + b))^*\\
+        R_2&=(a+b)^*a
+    \end{align*}
+    \begin{enumerate}[(a)]
+        \item Sestrojte \emph{deterministický} konečný automat $A$ rozpoznávající průnik jazyků popsaných výrazy $R_1$ a $R_2$, tj. takový, že $L(A)= L(R_1) \cap L(R_2)$.
+        \item Pomocí algoritmu eliminace stavů převeďte automat $A$ na regulární výraz.
+    \end{enumerate}
+
+\end{problem}
+
+
+\bigskip
+
+
+\begin{problem}
+    
+    Uvažte následující jazyk nad abecedou $\{0,1,\#\}$:
+    $$
+    L = \{w \# s^R \mid w,s\in\{0,1\}^*\text{ a slovo $s$ je podslovem slova $w$}\}
+    $$
+    
+    (Poznámka: $s^R$ označuje slovo $s$ napsané pozpátku; podslovo je souvislý podřetězec, vč. prázdného a celého slova.)
+
+    \begin{enumerate}[(a)]  
+        \item Dokažte, že $L$ není regulární.    
+        \item Sestrojte nějakou bezkontextovou gramatiku $G$ generující jazyk $L$.
+        \item Napište derivaci slova $1001\#00$.
+        \item Převeďte gramatiku $G$ z části (a) na zásobníkový automat přijímající prázdným zásobníkem.
+        \item Napište posloupnost konfigurací pro slovo $1001\#00$.
+    \end{enumerate}
+
+\end{problem}
+
+
+\end{document}

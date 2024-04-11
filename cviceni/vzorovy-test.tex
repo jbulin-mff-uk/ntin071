@@ -1,0 +1,39 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+{\Large\sc jméno:}
+\hfill
+\begin{tabular}{c|c|c|c|c|c||c}
+    1 & 2 & 3 & 4 & 5 & 6 & $\Sigma$\\ \hline
+      &   &   &   &   &   &
+\end{tabular}
+
+\bigskip
+
+\begin{center}
+    \large{NTIN071 A\&G: Vzorový zápočtový test}    
+\end{center}
+
+
+{\it Za každý příklad lze získat maximálně 20 bodů, celkem 120 bodů.}
+
+\bigskip
+
+\begin{enumerate}
+    \item Sestrojte bezkontextovou gramatiku generující jazyk $L=\{a^nb^ka^{3n}\mid n,k\geq 0\}$. Napište derivaci pro slovo $w=abbaaa$.
+    \item Převeďte gramatiku z předchozího příkladu do Chomského normální formy.
+    \item Dokažte, že jazyk $L=\{a^{n^5}\mid n\geq 0\}$ není regulární.
+    \item Sestrojte zásobníkový automat přijímající, prázdným zásobníkem, jazyk $L=\{w\in\{0,1\}^*\mid |w|_0\geq |w|_1 + 1\}$. Napište posloupnost konfigurací pro slovo $w=10001$.
+    \item Dokažte, že jazyk $L=\{0^i1^j2^k3^\ell\mid i=j=k\text{ nebo }\ell=0\}$ není bezkontextový.
+    \item Sestrojte deterministický konečný automat, který přijímá právě ta slova nad abecedou $\{0,1\}$, která končí posloupností $010$.
+\end{enumerate}
+
+
+\end{document} 
