@@ -179,30 +179,85 @@
 
 \begin{frame}{The program explained}
 
+    \vspace{-6pt}
+    \begin{multicols}{2}
+        Recognizes \alert{$L=\{0^n1^n\mid n>0\}$}.
+
+        \vspace{12pt}
+
+        On tape always $X^*0^*Y^*1^*$.
+
+        \vspace{12pt}
+
+        Repeatedly rewrite a $0$ to $X$, and the corresponding $1$ to $Y$:
+
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{files/tmTrans.PNG}
+        \end{center}
+
+    \end{multicols}   
     
+    \vspace{-1.25cm}
+
+    \begin{itemize}
+        \item[$q_0$:] rewrite $0$ to $X$, switch to $q_1$
+        \item[$q_1$:] search forward for the first $1$, rewrite to $Y$, switch to $q_2$
+        \item[$q_2$:] search backward for the last $X$, go forward, switch to $q_0$
+    \end{itemize}
+
+    If $q_0$ sees $0$, continue as above, if it sees $Y$, switch to $q_3$    
+    \begin{itemize}
+        \item[$q_3$:] moves to the end to check that there are no remaining $1$s
+        \item if $q_3$ finds $B$, switch to $q_4$, accept (accepting state)
+        \item if $q_3$ finds $1$, fail (no instruction, not accepting state) 
+    \end{itemize}
+
 \end{frame}
 
 
-\begin{frame}{Computation: examples}
+\begin{frame}{Computation examples: $w=\alert{0011}$ and $w=\alert{0010}$}
     
-       
-    $w=0011$
+    \small
 
-    $$q_00011\vdash Xq_1011\vdash X0q_111\vdash Xq_20Y1\vdash q_2X0Y1\vdash Xq_00Y1\vdash 
-    XXq_1Y1\vdash 
-    $$    
-    $$
-    \vdash XXYq_11\vdash XXq_2YY \vdash  Xq_2XYY\vdash XXq_0YY\vdash XXYq_3Y\vdash XXYYq_3B\vdash XXYYBq_4B
-    $$
-    
-    $w=0010$
+    \begin{columns}
 
-    $$
-    q_00010\vdash Xq_1010\vdash X0q_110\vdash Xq_20Y0\vdash q_2X0Y0\vdash Xq_00Y0\vdash 
-    XXq_1Y0\vdash
-    $$
-    $\vdash XXYq_10\vdash XXY0q_1B$ ends in failure, because there is no instruction
-    
+        \column{0.5\textwidth}
+
+        \vspace{-0.75cm}
+        \begin{align*}
+            q_0\alert{0011}&\vdash\\
+            Xq_1011&\vdash\\
+            X0q_111&\vdash\\
+            Xq_20Y1&\vdash\\
+            q_2X0Y1&\vdash\\
+            Xq_00Y1&\vdash\\
+            XXq_1Y1&\vdash\\    
+            XXYq_11&\vdash\\
+            XXq_2YY&\vdash\\
+            Xq_2XYY&\vdash\\
+            XXq_0YY&\vdash\\
+            XXYq_3Y&\vdash\\
+            XXYYq_3B&\vdash\\
+            XXYYBq_4B&\phantom{\vdash}\quad\text{\dots accepted}
+        \end{align*}
+      
+        \column{0.5\textwidth}
+        
+        \vspace{-3.7cm}
+        \begin{align*}
+            q_0\alert{0010}&\vdash\\
+            Xq_1010&\vdash\\
+            X0q_110&\vdash\\
+            Xq_20Y0&\vdash\\
+            q_2X0Y0&\vdash\\
+            Xq_00Y0&\vdash\\
+            XXq_1Y0&\vdash\\
+            XXYq_10&\vdash\\
+            XXY0q_1B&\phantom{\vdash}\quad\text{\dots fail (no instruction)}
+        \end{align*}
+        
+    \end{columns}
+
 \end{frame}
 
 
