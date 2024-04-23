@@ -261,6 +261,99 @@
 \end{frame}
 
 
+\begin{frame}{Recognizing regular and context-free languages}
+
+    \vspace{-8pt}
+    \textbf{Regular languages:}
+    \vspace{-6pt}
+    \begin{itemize}
+        \item simulate a DFA, move always right, never write on the tape
+        \item if we see $B$, we are at the end of input: if the DFA is in accepting state, switch to a new accepting state $q_F$
+        \item (note: in a TM, the accepting state $q_F$ cannot have outgoing transitions; in a DFA it is allowed) 
+    \end{itemize}
+
+    \begin{example}
+        $L=\{a^{2n}\mid  n\geq 0\}$ recognized by the following TM: $M=(\{q_0,q_1,q_F\},\{a\},\{a,B\},\delta,q_0,B,\{q_F\})$ with transitions 
+        \vspace{-6pt}
+        \begin{itemize}
+            \item $\delta(q_0,B)=(q_F,B,R)$
+            \item $\delta(q_0,a)=(q_1,a,R)$
+            \item $\delta(q_1,a)=(q_0,a,R)$
+        \end{itemize}
+    \end{example}
+    
+    \vspace{-10pt}
+    \textbf{Context-free languages:} simulate a PDA, simulate an auxiliary tape to hold the stack contents (how?? later)
+
+\end{frame}
+
+
+\begin{frame}{Turing machines with output}
+
+    Turing Machines can give output, i.e., compute a (partial) function
+    $$
+    f_M:\Sigma^*\to\Sigma^*
+    $$
+    where $f_M(w)$ is defined as follows:
+    \begin{itemize}
+        \item if $M$ halts, then $f_M(w)$ equals the \alert{contents of the tape} at the end of computation (everything between the first and last non-blank symbol, or $f_M(w)=\epsilon$ if the tape is all blanks) 
+        \item if $M$ does not halt, then $f_M(w)$ is \alert{undefined} 
+    \end{itemize} 
+
+    Note: the set of accepting states $F$ is ignored, often omitted
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Example: computing \alert{monus} $m\frac{.}{\ } n=max(m-n,0)$}
+    \small
+    \vspace{-6pt}
+    \begin{center}        
+        \includegraphics[width=0.7\textwidth]{files/tmta.PNG}
+    \end{center}
+    
+    %$M=(\{q_0,q_1,q_2,q_3,q_4,q_5,q_6\},\{0,1\},\{0,1,B\},\delta,q_0,B)$    
+
+    \vspace{-15pt}
+    \begin{multicols}{2}
+        $m,n$ encoded in unary\\
+        at the start: $0^{m}10^n$\\
+        at the end: $0^{m\frac{.}{\ } n}$\\
+        find leftmost 0, delete\\
+        search right for a 1\\
+        if found, continue\\
+        find a 0, rewrite by 1\\
+        return left\\
+        if no 0 found, either left or right:\\
+        right: replace all 1s by B\\
+        left ($m<n$): replace all 1s and 0s by B (leave the tape blank)      
+    \end{multicols}
+
+\end{frame}
+
+
+\begin{frame}{Halting, recursively enumerable and recursive languages}
+        
+    \begin{definition}
+        A TM \alert{halts} if it enters a state $q$, scanning a tape symbol $X$, and there is no transition in this situation, i.e., $\delta(q,X)$ is undefined.
+    \end{definition}
+
+    A TM halts whenever it gets to an accepting state (no outgoing transitions allowed). In general, we cannot require that a TM always halts, even if it does not accept.
+
+    (Until a TM halts, we  do not know whether it will accept or not.)
+
+    \smallskip
+
+    \begin{definition}
+        A language $L$ is:
+        \begin{itemize}
+            \item \alert{recursively enumerable} if it is recognized by some TM
+            \item \alert{recursive} if there exists at TM $M$ that recognizes $L$ and \emph{halts on every input} $w\in\Sigma^*$
+        \end{itemize}
+    \end{definition}
+  
+\end{frame}
 
 
 \section{3.2 Variants of TMs}
