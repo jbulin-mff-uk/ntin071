@@ -3,7 +3,7 @@
 \input{header.tex}
 
 
-\title{Lecture 10 -- Turing Machines, Linear-bounded automata}
+\title{Lecture 10 -- Turing Machines}
 
 
 \begin{document}
@@ -385,7 +385,7 @@
 \begin{frame}{Construction trick: storage in the FA unit}
 
     The following TM recognizes the language $L=01^*+10^*$; it remembers $0$, $1$, or $B$ in its state:
-    $$
+    $$d
     M=(\{q_0,q_1\}\times\{0,1,B\},\{0,1\},\{0,1,B\},\delta,[q_0,B],B,\{[q_1,B]\})
     $$
     \begin{center}
@@ -501,29 +501,33 @@
 
 \begin{frame}{Proof: simulate using multiple tracks, mark head positions}
 
-    Split the single tape into $2k$ tracks.
-    \begin{itemize}
-        \item odd tracks: mark $i^{th}$ head position
-        \item even tracks: contents of $i^{th}$ tape
+    \vspace{-6pt}
+    \begin{flushright}
+        \hspace{3cm}\includegraphics[width=0.48\textwidth]{files/tmmultitrack.PNG}    
+    \end{flushright}
+    
+    \vspace{-3cm}
+    Split the single tape into $2k$ tracks
+    
+    \begin{itemize}\setlength{\itemindent}{0pt}
+        \item odd: mark $i^{th}$ head position
+        \item even tracks: $i^{th}$ tape contents
     \end{itemize}
 
-    To simulate one step of the multi-tape TM, we visit all heads. We store the following in the FA unit:
-           
+    \vspace{0.5cm}
+
+    To simulate one step, visit all heads and store in the FA unit:
+    \vspace{-6pt}       
     \begin{itemize}
         \item the simulated state
         \item the number of head marks to the left of us
         \item for every $i$, the symbol under $i^{th}$ head
     \end{itemize}
-    Then we know enough to simulate one step(visit all heads again to rewrite and move them).
-        
-        {\center \includegraphics[width=0.5\textwidth]{files/tmmultitrack.PNG}}
 
-        \hfill\qedsymbol
+    Then we know enough to simulate one step. We visit all heads again to rewrite and move them.   \hfill\qedsymbol
 
         
-    The simulation of a $k$-tape machine with $n$ steps can be performed in $O(n^2)$ (one step simulation takes $4n+2k$, heads are no further than $2n$ -- read, write, move the head position marks).
-
-    
+    Simulating $n$ steps of a $k$-tape TM takes $O(n^2)$ moves. (One step takes $4n+2k$, heads no further than $2n$; read, write, move marks).
 
 \end{frame}
 
@@ -531,11 +535,96 @@
 \section*{Nondeterministic Turing Machines}
 
 
+\begin{frame}{Nondeterministic Turing Machine}
+
+    \begin{definition}
+        A \alert{nondeterministic Turing machine} is $M=(Q,\Sigma, \Gamma, \delta,q_0,B,F)$ where $Q,\Sigma,\Gamma,q_0,B,F$ are the same as for a determ. TM, and
+        \vspace{-3pt}
+        $$
+        \delta: (Q- F)\times \Gamma\rightarrow \mathcal P(Q\times\Gamma\times\{L,R\})
+        $$
+        \vspace{-18pt}
+        
+        A word $w\in \Sigma^*$ \alert{is accepted} by the nondeterminisic TM $M$ iff there exists an accepting sequence of moves $q_0w\vdash^* \alpha p \beta$, $p\in F$.
+    \end{definition} 
+    
+    \begin{theorem}
+        For every nondeterministic Turing machine $M_N$ there exist a deterministic TM $M_D$ such that $L(M_N)=L(M_D)$.
+    \end{theorem}
+
+    \textbf{Proof idea:} Subset construction not possible, the tape is infinite. Instead, BFS of the computation graph. In $k$ steps, at most $m^k$ configs for $m=\max_{q\in Q,x\in\Gamma} |\delta(q,x) |$. Store on a tape \& process.
+
+\end{frame}
 
 
+\begin{frame}{Proof}
+
+    Breadth-first search of all possible computations of $M_N$ (configurations reachable from the initial configuration).
+
+    Use a two-tape TM:
+    \begin{itemize}
+        \item \textbf{first tape:} maintain a queue of open vertices (configurations) separated by a special symbol
+        \item \textbf{second tape:} scratch tape for processing one configuration
+    \end{itemize}
+
+    To process one configuration: 
+	\begin{itemize}
+        \item copy it to the scratch tape, dequeue (erase)
+        \item read the state and scanned symbol
+		\item if accepting state, accept and halt
+		\item for each possible transition of $\delta_N$: perform the move and enqueue the resulting config (write at the end of tape 1)
+	\end{itemize}
+    \vspace{-6pt}
+    [The transition function $\delta_N$ is encoded in $\delta_D$.]
+
+\end{frame}
 
 
-\section{3.3 TMs and grammars}
+\begin{frame}{One-way infinite tape}
+
+    \begin{theorem}
+        Every recursively enumerable language is also recognized by a TM whose head never moves left of its initial position.
+    \end{theorem}
+        
+    \medskip
+    \begin{center}
+        \begin{tabular}{|c|c|c|c}
+        \hline
+        $X_0$ &$X_1$ &$X_2$ & \ldots\hspace{5cm}\  \\ \hline
+        * &$X_{-1}$ &$X_{-2}$ & \ldots \hspace{5cm}\ \\
+        \hline
+        \end{tabular}
+    \end{center}
+    \textbf{Proof idea:} Two-track tape, lower track for negative indices. Remember in state if positive or negative. If negative, $L$ means moving to the right and vice versa. Special cases around 0.\hfill\qedsymbol
+
+    \bigskip
+
+    \textbf{Exercise:} Consider a variant of Turing Machine with an infinite 2D board instead of a tape, moves $\{\uparrow,\rightarrow,\downarrow,\leftarrow\}$. Show how to simulate by the standard TM.
+    
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 10}
+
+    \begin{itemize}        
+        \item Turing machine: two-way infinite tape, read, write, move head
+        \item Accept iff in a final state; configurations
+        \item TMs with output, computing a function
+        \item Recursively enumerable vs. recursive languages (always halt).
+        \item Construction tricks: 
+        \begin{itemize}
+            \item storage in state
+            \item multiple tracks (on a single tape)
+        \end{itemize}
+        \item Variants of TMs: 
+        \begin{itemize}
+            \item multi-tape (independent heads),
+            \item nondeterministic (accept iff some choices lead to final state)
+        \end{itemize}  
+    \end{itemize}
+    
+\end{frame}
+
 
 
 \end{document}
