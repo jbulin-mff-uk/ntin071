@@ -61,7 +61,7 @@
         \item $Q$ is a finite, nonempty set of \alert{states}
         \item $\Sigma$ is a finite, nonempty \alert{input alphabet} 
         \item $\Gamma$ is a finite, nonempty \alert{tape alphabet}, $\Gamma \supseteq \Sigma$, $Q\cap \Gamma=\emptyset$
-        \item $\delta\colon(Q\setminus F)\times\Gamma\rightarrow Q\times \Gamma\times \{L,R\}$ is the (partial) \alert{transition function}, i.e., one instruction is $\delta(q,x)=(p,Y,D)$ where:
+        \item $\delta\colon(Q\setminus F)\times\Gamma\rightarrow Q\times \Gamma\times \{L,R\}$ is the (partial) \alert{transition function}, i.e., one instruction is $\delta(q,X)=(p,Y,D)$ where:
         \begin{itemize}
             \item $q\in Q\setminus F$ is the current state [no transitions out of final states]
             \item $X\in\Gamma$ is the tape symbol in the current cell
@@ -292,7 +292,7 @@
 
     Turing Machines can give output, i.e., compute a (partial) function
     $$
-    f_M:\Sigma^*\to\Sigma^*
+    f_M:\Sigma^*\to\Gamma^*
     $$
     where $f_M(w)$ is defined as follows:
     \begin{itemize}
@@ -384,8 +384,8 @@
 
 \begin{frame}{Construction trick: storage in the FA unit}
 
-    The following TM recognizes the language $L=01^*+10^*$; it remembers $0$, $1$, or $B$ in its state:
-    $$d
+    The following TM recognizes the language $L=L(01^*+10^*)$; it remembers $0$, $1$, or $B$ in its state:
+    $$
     M=(\{q_0,q_1\}\times\{0,1,B\},\{0,1\},\{0,1,B\},\delta,[q_0,B],B,\{[q_1,B]\})
     $$
     \begin{center}

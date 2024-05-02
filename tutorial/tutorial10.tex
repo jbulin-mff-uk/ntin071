@@ -48,33 +48,33 @@
 
 \medskip\begin{problem}[CFG to PDA]
 
-    For a given context-free grammar $G$ construct pushdown automata $Z_1,Z_2$ such that $L(Z_1)=L(G)$ and $N(Z_2)=L(G)$.
+    For a given context-free grammar $G$ construct pushdown automata $P_1,P_2$ such that $L(G)=N(P_1)=L(P_2)$.
 
     \bigskip
 
     \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $G=(\{S,T,X\},\{a,b\},P,S)$
+        \item $G=(\{S,T,X\},\{a,b\},\mathcal P,S)$
             \begin{align*}
-        P=\{S&\rightarrow aTXb, \\
+        \mathcal P=\{S&\rightarrow aTXb, \\
         T&\rightarrow XTS\mid \epsilon,\\ 
         X&\rightarrow a\mid b\}
         \end{align*}
-        \item $G=(\{S,T,X\},\{(,),*,+,,1\},P,S)$
+        \item $G=(\{S,T,X\},\{(,),*,+,,1\},\mathcal P,S)$
             \begin{align*}
-        P=\{S&\rightarrow S+T\mid T, \\
+        \mathcal P=\{S&\rightarrow S+T\mid T, \\
         T&\rightarrow T*X\mid X,\\ 
         X&\rightarrow 1\mid (S)\}
         \end{align*}
     \end{enumerate}
 
-    For a reasonably long word $w\in L(G)$ find its right derivation from $G$ and simulate the automaton  $Z_2$ on the input $w$.
+    For a reasonably long word $w\in L(G)$ find its leftmost derivation from $G$ and simulate the automaton  $P_1$ on the input $w$.
 
 \end{problem}
     
 
 \medskip\begin{problem}[PDA to CFG]
 
-    Convert selected (small) pushdown automata constructed in Problem 1 to context-free grammars. For a reasonably long word $w$ accepted by the automaton find a right derivation of $w$ from the grammar.
+    Convert selected (small) pushdown automata constructed in Problem 1 to context-free grammars. For a reasonably long word $w$ accepted by the automaton find a leftmost derivation of $w$ from the grammar.
 
 \end{problem}
 

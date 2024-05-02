@@ -126,17 +126,17 @@
             \begin{itemize}
                 \item $h_2(a)=a$
                 \item $h_2(+)=+$
-                \item $h(()=\epsilon$
-                \item $h())=\epsilon$
+                \item $h_2(()=\epsilon$
+                \item $h_2())=\epsilon$
             \end{itemize}
         \end{example}
         Are the following regular?
         \begin{itemize}
             \item $L(G)$
-            \item $h(L(G))$
-            \item $h^{-1}(h(L(G)))$
+            \item $h_2(L(G))$
+            \item $h_2^{-1}(h(L(G)))$
         \end{itemize}
-        Is $h^{-1}(h(L(G)))=L(G)$?       
+        Is $h_2^{-1}(h_2(L(G)))=L(G)$?       
         
     \end{columns}
             
@@ -178,7 +178,7 @@
 
 \begin{frame}{Proof: construct the grammar for $\sigma(L)$}
 
-    Let us have the following context-free grammars, assume all their variable sets are disjoint:
+    Let us have the following context-free grammars, assume all their variable sets are (pairwise) disjoint:
     \begin{itemize}
         \item $G=(V,T,\mathcal P,S)$ generating $L$
         \item $G_a=(V_a,T_a,\mathcal P_a,S_a)$ generating $\sigma(a)$, for $a\in T$
@@ -437,7 +437,9 @@
     \begin{theorem}
         The complement of a deterministic CFL is also deterministic.
     \end{theorem}
-    \textbf{Proof:} Idea: accept iff the original PDA rejected. But we need to:
+    \textbf{Proof:} Idea: accept iff the original DPDA rejects. 
+
+    But we need to:
     \begin{itemize}
         \item catch failure due to empty stack by a new bottom of the stack
         \item recognize possible $\epsilon$-transition cycle by a counter
@@ -516,7 +518,7 @@
 \begin{frame}{Dyck languages}
 
     \begin{definition}
-        The \alert{Dyck language} $D_n$ is defined over $\Sigma_n=\{a_1, a^|_1,\ldots,a_n, a^|_n\}$ using context-freethe grammar with the following rules: 
+        The \alert{Dyck language} $D_n$ is defined over $\Sigma_n=\{a_1, a^|_1,\ldots,a_n, a^|_n\}$ using the context-free grammar with the following rules: 
         $$
         S\rightarrow \epsilon\mid SS\mid a_1Sa_1^| \mid \ldots \mid a_nSa_n^|
         $$
