@@ -349,10 +349,321 @@
 \end{frame}
 
 
-\end{document}
+\begin{frame}{Linear Bounded Automaton}    
+
+    \begin{definition}
+        A \alert{linear bounded automaton} (\alert{LBA}) is a \emph{nondeterministic} Turing machine where the tape contains special symbols for left ($\underline{l}$) and right ($\underline{r}$) end. Those symbols cannot be rewritten and the head cannot move to the left of $\underline{l}$ or to the right of $\underline{r}$. 
+
+    A word $w$ is \alert{accepted} if $q_0\underline{l}w\underline{r}\vdash^*\alpha p\beta$ for some $p\in F$
+    \end{definition}
+    \begin{itemize}
+        \item The space for computation is given by the input word, we cannot exceed its length.
+        \item Not a problem for context-sensitive/monotone grammars: sentential forms in a derivation cannot shorten.
+        \item Nondeterminisim is crucial!
+    \end{itemize}
+
+    \alert{Construction trick:} `draw' several tape symbols into one cell (as in multi-track tape), increase space by constant factor; hence `linear'
+
+\end{frame}
+
+
+\begin{frame}{From monotone grammar to LBA \hfill $(ii)\Rightarrow(iii)$}
+
+    \begin{columns}
+
+        \column{0.62\textwidth}
+
+        %Split the tape into two tracks:
+
+        \alert{Track 1}: a copy of the input $w$, read-only
+
+        \alert{Track 2}: simulate the derivation of $w$ %(monotone $\Rightarrow$ it fits below $w$)
+        
+        \column{0.38\textwidth}
+    
+        \vspace{11pt}
+
+        \scalebox{0.9}{
+            \begin{tabular}{|c| c c |c|}
+                \hline
+                \multirow{2}{*}{\underline{l}} & \multicolumn{2}{c|}{w}& \multirow{2}{*}{\underline{r}}\\ \cline{2-3}
+                & \multicolumn{1}{c|}{S}& \hspace{2cm} &\\\hline
+            \end{tabular}                
+        }
+
+        
+    \end{columns}
+
+    \begin{itemize}
+        \item initialize with $S$ in first field (the rest blank)
+        \item at the end it should contain $w$, compare to Track 1  
+        
+        \bigskip
+        
+        \item to simulate one derivation step (apply rule $\alpha X \beta \rightarrow \alpha \gamma \beta$):
+
+        \smallskip
+        \begin{center}
+            \begin{tabular}{c c c  c c c}
+            \cline{1-5}
+            \multicolumn{1}{|c|}{u} & $\alpha$ & \multicolumn{1}{|c|}{X} & $\beta$& \multicolumn{1}{|c|}{v} &\\ \cline{1-5}
+            \vspace{0.005cm}\\ \cline{1-6}
+            \multicolumn{1}{|c|}{u} & $\alpha$ & \multicolumn{2}{|c|}{$\gamma$} & $\beta$& \multicolumn{1}{|c|}{v} \\ \cline{1-6}
+            \end{tabular}
+        \end{center}
+        \smallskip
+    
+        \item rewrite the sentential form using production rules
+        \item \alert{nondeterministically choose} which rule and where to apply it
+        \item rewrite head to body (move the rest to the right)
+        \item if only terminals, compare with Track 1, accept if match\hfill\qedsymbol
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{From LBA to monotone grammar}
+    
+    \begin{itemize}
+        \item the grammar cannot generate any `extra' symbols
+        \item we hide the computation in `two-track' variables
+        \item generate a word of the form $$(a_0,\left[q_0,\underline{l},a_0\right]),(a_1,a_1),\ldots,(a_n,\left[a_n,\underline{r}\right]) $$
+
+        \medskip
+
+        \begin{center}
+            \begin{tabular}{|c c c|}
+            \hline
+            \multicolumn{3}{|c|}{w} \\ \cline{1-3}
+            \multicolumn{1}{|c|}{$q_0,\underline{l},a_0$}& \hspace{2cm} &\multicolumn{1}{|c|}{$a_n,\underline{r}$}\\\hline
+            \end{tabular}
+        \end{center}
+
+        \bigskip
+        
+        \item simulate computation in the 2nd track (as for TMs)
+        \begin{itemize}
+            \item for $\delta(p,x)\ni(q,x',R)$:  $P\underline{X}\underline{Y}\rightarrow \underline{X'}Q\underline{Y}$ 
+            \item for $\delta(p,x)\ni(q,x',L)$:  $\underline{Y}P\underline{X}\rightarrow Q\underline{Y}\underline{X'} $ 
+        \end{itemize}
+    \item if the state is accepting, `erase' the 2nd track
+    \item special production for generating $\epsilon$ (if $\epsilon \in L$)\hfill\qedsymbol
+    \end{itemize}
+
+\end{frame}
+
+
+% TODO: Add an example of the construction?
+
+
+\begin{frame}{Hierarchy of languages: context-sensitive and above}
+    
+    \small\vspace{-10pt}
+    \begin{tikzpicture}[level distance=8mm]
+        \node[align=center] (rr) at (1,0) {\textbf{recursive}\\ EXPSPACE-complete, \\e.g. equivalence of\\ RE with squaring};
+        % example: equivalence of regular expressions with squaring
+        \node[align=center] (cl) at (1,2) {\textbf{context-sensitive}\\$\{a^ib^ic^i\mid i\geq 0\} $\\$\{ww\mid w\in \{0,1\}^*\} $};
+        \node[align=center] (re) at (2.2,4.2) {\textbf{recursively enumerable}\\$L_u=\{(M,w)\mid M\text{ accepts }w\}$};
+        \node[align=center] (out) at (7.2,-1.2) {$L_d=\{w\mid$ TM with code $w$\\ \qquad does not accept input $w\}$};
+        \node (bot) at (1,-1.2) {};
+        \node (top) at (1,6.2) {};
+        \node (left) at (-1.2,0) {};
+        
+        \node[draw=blue!80,inner sep=2pt,ellipse,fit=(rr) (cl) (re)] {};
+        \node[draw=red!80,thick,inner sep=0pt,ellipse,fit=(rr) (cl)] {};
+        \node[draw=black!80,thick,inner sep=-3pt,ellipse,fit= (cl)] {};
+        
+        \begin{scope}[on background layer]
+            \node[fill=blue!10,inner sep=2pt,ellipse,fit=(rr) (cl) (re)] {};
+            \node[fill=red!10,thick,inner sep=0pt,ellipse,fit=(rr) (cl)] {};
+            \node[fill=black!10,thick,inner sep=-3pt,ellipse,fit= (cl)] {};
+        \end{scope}
+    \end{tikzpicture}
+    
+\end{frame}
 
 
 \section{\sc Chapter 4: Intro to computability theory}
+
+
+\section*{First, a brief overview in 4 slides, without technical details}
+
+
+\begin{frame}{Languages and decision problems}
+    
+    A \alert{decision problem} $P$: given input $w$ (usually a 0-1 string), answer YES or NO (e.g. `Is the given number prime?',  `Is the given picture classified as cat by the given neural net?')
+    
+    \vspace{-10pt}
+    $$
+    \alert{L_P}=\{w\mid P(w)\text{ answers `YES'}\}
+    $$
+
+    \begin{itemize}
+        \item $P$ is \alert{(algorithmically) decidable} $\Leftrightarrow$ $L_P$ is \alert{recursive} $\Leftrightarrow$ there is a TM \alert{deciding} $L_P$ (halting on every input, answering correctly)
+        \item $P$ is \alert{partially decidable} $\Leftrightarrow$ $L_P$ is \alert{recursively enumerable} $\Leftrightarrow$ there is a TM that accepts every YES-instance $w$ but for NO-instances it may either reject or run an infinite loop
+    \end{itemize}
+
+    \textbf{NB:} almost all problems are not even partially decidable (TMs can be represented by finite strings, so only countably many TMs)
+    
+    \textbf{Coming up next:} a concrete example, the \alert{diagonal language}
+
+\end{frame}
+
+
+\begin{frame}{Source code for a Turing Machine \& how to execute it}
+
+    Source code for TMs:
+    \begin{itemize}
+        \item encode TMs by 01-strings, $M\ \rightsquigarrow\ \alert{\mathrm{code}(M)}\in\{0,1\}^*$
+        \item if $w$ is not well-formed code, then say it represents a TM with no transitions, so every $w\in\{0,1\}^*$ will represent some TM
+        \item also encode a pair of 01-strings $u,v$ as a 01-string $\langle u,v\rangle$
+    \end{itemize}
+
+    \medskip
+
+    The \alert{Universal language}: $L_U=\{\langle \mathrm{code(M),w}\rangle\mid M\text{ accepts }w\}$
+
+    \medskip
+    
+    \begin{quote}
+        ``Does a given program return true on a given input?''
+    \end{quote}
+
+    \medskip
+
+    \begin{theorem}
+        The Universal language is recursively enumerable.
+    \end{theorem}
+
+    \textbf{Proof idea:} construct the \alert{Universal Turing Machine} that can simulate any TM (using its code) on any input [details later]
+
+\end{frame}
+
+
+\begin{frame}{Barber's paradox aka the diagonal argument}
+
+
+    The \alert{Diagonal language}:
+    $$
+    L_D=\{w\mid M\text{ such that $w=\mathrm{code}(M)$ does *not* accept }w\}
+    $$
+
+    \medskip
+    
+    \begin{quote}
+        ``Return true if the given program does not return true when fed its own source code.''
+    \end{quote}
+
+    \medskip
+
+    \begin{theorem}
+        The Diagonal language is not recursively enumerable.
+    \end{theorem}
+
+    \textbf{Proof idea:} there cannot exist a TM recognizing $L_
+    D$: running it on its own code would lead to Barber's paradox
+
+    \bigskip
+
+    \begin{quote}
+        ``The program accepts all programs that don't accept themselves. Does the program accept itself?''
+    \end{quote}    
+
+\end{frame}
+
+
+\begin{frame}{Languages that are recursively enumerable, but not recursive}
+
+    \begin{block}{Post's theorem}
+        A language $L$ is recursive, if and only if both $L$ and $\overline{L}$ are recursively enumerable.
+    \end{block}
+    
+    \vspace{-6pt}
+    \textbf{Proof idea:} simulate TMs for $L$ and $\overline{L}$ in parallel, one must halt
+    \vspace{6pt}
+
+    \begin{corollary}
+        The language $\overline{L_D}$ is not recursive, but it is recursively enumerable.
+    \end{corollary}
+
+    \vspace{-6pt}
+    {\it ``Does the given program return true when fed its own code?''}
+    \vspace{6pt}
+
+    \begin{corollary}
+        The Universal language is not recursive.
+    \end{corollary}
+    
+    \vspace{-6pt}
+    (If a TM decided $L_U$, we could use it to decide $\overline{L_D}$: $w\rightsquigarrow\langle w,w\rangle$)
+    \vspace{9pt}
+
+    We can execute a program, but cannot test if it runs into a loop.    
+
+\end{frame}
+
+
+\section*{Now, the technical details}
+
+
+\begin{frame}{Machine-readable encoding of TMs (Gödel numbering)}
+
+    \vspace{-5pt}
+    To encode a TM as a binary string, we first assign integers to the states, tape symbols, and directions $L,R$. Assume:
+    \begin{itemize}
+        \item the start state is always $q_1$, the only final state is $q_2$
+        \item the first tape symbol is always 0, the second 1, the third B (other tape symbols can be assigned arbitrarily)
+        \item the direction L is 1, the direction R is 2
+    \end{itemize}
+    Each transition $\delta(q_i,X_j)=(q_k,X_l,D_m)$ is encoded by $0^i10^j10^k10^l10^m$. Since $i,j,k,l,m\geq 1$, substring 11 doesn't occur.
+    The entire encoding \alert{$\mathrm{code}(M)$} consists of codes for all transitions (in any order), separated by a pair of 1's: $C_111C_211\ldots C_{n-1}11C_n$.
+
+    Similarly, we can encode a tuple of 01-strings as a 01-string. We also fix an order of 01-strings, by length + lexicographically \\ ($w_0=\epsilon$, $w_1=0$, $w_2=1$, $w_3=00$, $w_4=01$, \dots)
+
+\end{frame}
+
+
+\begin{frame}{Example}
+
+    $$
+    M=(\{q_1,q_2,q_3\},\{0,1\},\{0,1,B\},\delta,q_1,B,\{q_2\})
+    $$
+
+    \begin{center}
+        \begin{tabular}{r |c |c |c }
+        $\delta$ & 0 & 1 & B \\
+        \hline\hline
+        $\rightarrow q_1$& & $(q_3,0,R)$& \\
+        $*q_2$& & & \\
+        $q_3$& $(q_1,1,R)$&$(q_2,0,R)$ &$(q_3,1,L)$.
+        \end{tabular}
+    \end{center}
+
+    Codes for transitions:
+    \vspace{-12pt}
+    \begin{center}
+        \small
+        \begin{tabular}{c|c|c|c}
+            $C_1$&$C_2$&$C_3$&$C_4$\\
+            0100100010100&
+            0001010100100&
+            00010010010100&
+            0001000100010010
+        \end{tabular}
+    \end{center} 
+    
+    \medskip
+    
+    The full encoding $\mathrm{code}(M)$:
+    \vspace{-12pt}
+    \begin{center}
+        \small
+        $$
+        01001000101001100010101001001100010010010100110001000100010010
+        $$        
+    \end{center}
+
+\end{frame}
 
 
 \begin{frame}{Summary of Lecture 11}
@@ -363,118 +674,29 @@
             \item TM to G: simulate moves on a reversed non-terminal copy of $\omega$, generate sufficient space, cleanup if accepting state
             \item G to TM: generate all strings, check if any of them represents a valid derivation of $\omega$ (sentential forms separated by $\#$)
         \end{itemize}   
-        \item Context-sensitive languages    
-    \end{itemize}
-    
-\end{frame}
-
-
-\section*{Linear Bounded Automata}
-
-
-\begin{frame}{Linear Bounded Automaton}
-
-    We need an automaton counterpart of context grammar:
-
-    \begin{definition}
-    \emph{Linear bounded automaton (LBA)} is a *nondeterministic* TM where the tape contains special symbols for left ($\underline{l}$) and right ($\underline{r}$) end. Those symbols cannot be rewritten and the head cannot move to the left of $\underline{l}$ or to the right of $\underline{r}$. 
-
-    A word $w$ is \emph{accepted} by the LBA, if $q_0\underline{l}w\underline{r}\vdash^*\alpha p\beta$ for some $p\in F$
-    \end{definition}
-    \begin{itemize}
-        \item The space for the computation is given by the input word and the automaton cannot exceed its length during the computation
-        \item This is not a problem for context (and for monotone) grammars: no sentential form in the derivation can be longer than $w$.
-        \item Nondeterminisim is crucial!
-    \end{itemize}
-
-\end{frame}
-
-
-\begin{frame}{Context-sensitive grammar to LBA}
-
-    \begin{theorem}
-    Every context language is accepted by some LBA.
-    \end{theorem}
-    \begin{proof}
-    We simulate the derivation of the grammar on the LBA.
-    \begin{itemize}
-        \item use a two-track tape
-        \item first track: $w$ 
+        \item Context-sensitive languages:
         \begin{itemize}
-            \item read-only, i.e., not changed during the computation
-            \item at the end, compare with 2nd track 
+            \item context-sensitive grammars are equivalent to monotone grammars
+            \item Linear Bounded Automaton (LBA): nondeterministic TM with tape limited to the length of input
+            \item constructions: monotone grammar to LBA, LBA to monotone grammar
         \end{itemize}
-        \item second track: the sentential form 
-            \begin{itemize}
-                \item at the beginning: $S$ in the first position, the rest is blank
-                \item at the end: $w$
-            \end{itemize}
+        \item Intro to computability: an overview
+        \item decision problem $\leftrightsquigarrow$ the language of all `YES' instances
+        \item machine-readable encoding of TMs
     \end{itemize}
-    \begin{center}
-    \begin{tabular}{|c| c c |c|}
-    \hline
-    \multirow{2}{*}{\underline{l}} & \multicolumn{2}{c|}{w}& \multirow{2}{*}{\underline{r}}\\ \cline{2-3}
-    & \multicolumn{1}{c|}{S}& \hspace{2cm} &\\\hline
-    \end{tabular}
-    \end{center}
-
-    One step of the derivation: applying the rule $\alpha X \beta \rightarrow \alpha \gamma \beta$
-
-    \begin{center}
-    \begin{tabular}{c c c  c c c}
-    \cline{1-5}
-    \multicolumn{1}{|c|}{u} & $\alpha$ & \multicolumn{1}{|c|}{X} & $\beta$& \multicolumn{1}{|c|}{v} &\\ \cline{1-5}
-    \vspace{0.005cm}\\ \cline{1-6}
-    \multicolumn{1}{|c|}{u} & $\alpha$ & \multicolumn{2}{|c|}{$\gamma$} & $\beta$& \multicolumn{1}{|c|}{v} \\ \cline{1-6}
-    \end{tabular}
-    \end{center}
-
-    \begin{itemize}
-        \item Rewrite the sentential form in the 2nd track using production rules of $G$
-        \item Nondeterministically choose the part to be rewritten and the rule to be used
-        \item Rewrite using the chosen rule (move the rest of the track to the right)
-        \item If there are only terminals, compare with the 1st track, accept if they match
-    \end{itemize}
-    \end{proof}
-
-\end{frame}
-
-
-\begin{frame}{LBA to context-sensitive grammar}
     
-    \begin{theorem}
-    LBA accept only context languages.
-    \end{theorem}
-    \begin{proof}
-    We will construct a monotone grammar.
-    \begin{itemize}
-        \item the grammar cannot generate any `extra' symbols
-        \item we hide the computation in `two-track' variables
-        \item generate word of the form $$(a_0,\left[q_0,\underline{l},a_0\right]),(a_1,a_1),\ldots,(a_n,\left[a_n,\underline{r}\right]) $$
-    %	\end{itemize}
-
-    \medskip
-    \begin{center}
-    \begin{tabular}{|c c c|}
-    \hline
-    \multicolumn{3}{|c|}{w} \\ \cline{1-3}
-    \multicolumn{1}{|c|}{$q_0,\underline{l},a_0$}& \hspace{2cm} &\multicolumn{1}{|c|}{$a_n,\underline{r}$}\\\hline
-    \end{tabular}
-    \end{center}
-
-    \bigskip
-    \item simulate the computation of the LBA in the 2nd track (as we did for TMs)
-    \begin{itemize}
-        \item for $\delta(p,x)=(q,x',R)$:  $P\underline{X}\underline{Y}\rightarrow \underline{X'}Q\underline{Y}$ 
-        \item for $\delta(p,x)=(q,x',L)$:  $\underline{Y}P\underline{X}\rightarrow Q\underline{Y}\underline{X'} $ 
-    \end{itemize}
-    \item if the state is accepting, `erase' the 2nd track
-    \item special production for accepting $\epsilon$ (if $\epsilon \in L$)
-    \end{itemize}
-    \end{proof}
-
 \end{frame}
+
+
+
+
+
+
+
 
 
 \end{document}
+
+
+
 

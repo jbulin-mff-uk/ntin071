@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.2)  3 MAY 2024 19:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.2)  4 MAY 2024 18:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides10.tex
-(c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides10.tex
+**c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides12.tex
+(c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides12.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
 (c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamer.cls
@@ -1320,8 +1320,8 @@ Package: l3keys2e 2024-03-14 LaTeX2e option processing using LaTeX3 keys
 \l__sn_y_dim=\dimen336
 \l__sn_xa_dim=\dimen337
 \l__sn_ya_dim=\dimen338
-)) (./slides10.aux)
-\openout1 = `slides10.aux'.
+)) (./slides12.aux)
+\openout1 = `slides12.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
 LaTeX Font Info:    ... okay on input line 9.
@@ -1396,9 +1396,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 9.
- (./slides10.out) (./slides10.out)
+ (./slides12.out) (./slides12.out)
 \@outlinefile=\write6
-\openout6 = `slides10.out'.
+\openout6 = `slides12.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 9.
@@ -1461,243 +1461,83 @@ Dictionary: translator-months-dictionary, Language: English
 Dictionary: translator-numbers-dictionary, Language: English 
 ) (c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) (./slides10.nav)
+) (./slides12.nav)
 Overfull \vbox (44.55656pt too high) detected at line 12
  []
 
 [1
 
 {c:/Program Files/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 23.
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 34.
  (c:/Program Files/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 File: ts1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [2
-
-{c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <14.4> not available
-(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 26.
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 26.
-(c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
+ (c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 26.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
  (c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 26.
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on input line 34.
  (c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
-) [3
+)
+Overfull \vbox (17.10207pt too high) detected at line 34
+ []
 
-] [4
+[2
+
+{c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3
 
 ]
-<files/tm1.PNG, id=67, 435.87843pt x 164.86594pt>
-File: files/tm1.PNG Graphic file (type png)
-<use files/tm1.PNG>
-Package pdftex.def Info: files/tm1.PNG  used on input line 53.
-(pdftex.def)             Requested size: 245.83282pt x 92.98337pt.
+<files/diagonal.PNG, id=43, 624.08156pt x 471.26062pt>
+File: files/diagonal.PNG Graphic file (type png)
+<use files/diagonal.PNG>
+Package pdftex.def Info: files/diagonal.PNG  used on input line 79.
+(pdftex.def)             Requested size: 147.49782pt x 111.37906pt.
 
-Overfull \vbox (16.96692pt too high) detected at line 53
+Overfull \vbox (20.0561pt too high) detected at line 79
  []
 
-[5
+[4
 
- <./files/tm1.PNG>]
-Overfull \vbox (17.97713pt too high) detected at line 77
- []
+ <./files/diagonal.PNG>] [5
 
-[6
-
-] [7
-
-]
-Overfull \hbox (11.84534pt too wide) detected at line 129
-\OT1/mathkerncmss/m/sl/10.95 X[]X[] [] X[]qX[]X[] [] X[] \OMS/cmsy/m/n/10.95 `[] \OT1/mathkerncmss/m/sl/10.95 X[]X[] [] X[]pX[][]X[] [] X[]
- []
-
-[8
-
-]
-Overfull \vbox (18.45728pt too high) detected at line 164
- []
-
-[9
-
-]
-<files/tmTrans.PNG, id=102, 317.68687pt x 288.3272pt>
-File: files/tmTrans.PNG Graphic file (type png)
-<use files/tmTrans.PNG>
-Package pdftex.def Info: files/tmTrans.PNG  used on input line 177.
-(pdftex.def)             Requested size: 221.24907pt x 200.80696pt.
-
-Overfull \vbox (27.95338pt too high) detected at line 177
- []
-
-[10
-
- <./files/tmTrans.PNG>]
-File: files/tmTrans.PNG Graphic file (type png)
-<use files/tmTrans.PNG>
-Package pdftex.def Info: files/tmTrans.PNG  used on input line 215.
-(pdftex.def)             Requested size: 138.2795pt x 125.5049pt.
-
-Overfull \vbox (19.76482pt too high) detected at line 215
- []
-
-[11
-
-]
-Overfull \hbox (0.85164pt too wide) detected at line 261
-[]
- []
-
-
-Overfull \vbox (21.97844pt too high) detected at line 261
- []
-
-[12
-
-]
-Overfull \vbox (21.2842pt too high) detected at line 288
- []
-
-[13
-
-] [14
-
-]
-<files/tmta.PNG, id=131, 532.99126pt x 377.91188pt>
-File: files/tmta.PNG Graphic file (type png)
-<use files/tmta.PNG>
-Package pdftex.def Info: files/tmta.PNG  used on input line 333.
-(pdftex.def)             Requested size: 215.10196pt x 152.51718pt.
-
-Overfull \vbox (28.97083pt too high) detected at line 333
- []
-
-[15
-
- <./files/tmta.PNG>]
-Overfull \vbox (15.71571pt too high) detected at line 356
- []
-
-[16
-
-] [17
-
-] [18
-
-] [19
-
-] [20
-
-]
-<files/tmmt.PNG, id=172, 472.76625pt x 236.38312pt>
-File: files/tmmt.PNG Graphic file (type png)
-<use files/tmmt.PNG>
-Package pdftex.def Info: files/tmmt.PNG  used on input line 421.
-(pdftex.def)             Requested size: 184.3758pt x 92.18904pt.
-
-Overfull \vbox (20.48917pt too high) detected at line 421
- []
-
-[21
-
- <./files/tmmt.PNG>]
-Overfull \vbox (36.60468pt too high) detected at line 443
- []
-
-[22
-
-] [23
-
-] [24
-
-]
-Overfull \hbox (89.72868pt too wide) in paragraph at lines 499--499
-[]  
- []
-
-<files/tmmultitape.PNG, id=195, 378.66469pt x 295.1025pt>
-File: files/tmmultitape.PNG Graphic file (type png)
-<use files/tmmultitape.PNG>
-Package pdftex.def Info: files/tmmultitape.PNG  used on input line 499.
-(pdftex.def)             Requested size: 135.2062pt x 105.36775pt.
-
-Overfull \hbox (12.29214pt too wide) in paragraph at lines 499--499
-[][]  
- []
-
-
-Overfull \vbox (13.74733pt too high) detected at line 499
- []
-
-[25
-
- <./files/tmmultitape.PNG>]
-<files/tmmultitrack.PNG, id=203, 319.94531pt x 206.27063pt>
-File: files/tmmultitrack.PNG Graphic file (type png)
-<use files/tmmultitrack.PNG>
-Package pdftex.def Info: files/tmmultitrack.PNG  used on input line 532.
-(pdftex.def)             Requested size: 147.49782pt x 95.09335pt.
-
-Overfull \vbox (18.24222pt too high) detected at line 532
- []
-
-[26
-
- <./files/tmmultitrack.PNG>] [27
-
-]
-Overfull \vbox (17.09094pt too high) detected at line 557
- []
-
-[28
-
-]
-Overfull \vbox (17.0856pt too high) detected at line 580
- []
-
-[29
-
-] [30
-
-] [31
+] [6
 
 ]
 \tf@nav=\write7
-\openout7 = `slides10.nav'.
+\openout7 = `slides12.nav'.
 
 \tf@toc=\write8
-\openout8 = `slides10.toc'.
+\openout8 = `slides12.toc'.
 
 \tf@snm=\write9
-\openout9 = `slides10.snm'.
+\openout9 = `slides12.snm'.
 
- (./slides10.aux)
+ (./slides12.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-04-11>
  ***********
-Package rerunfilecheck Info: File `slides10.out' has not changed.
-(rerunfilecheck)             Checksum: 771AE8862AF4CF46E1ECE7BB81C2C933;997.
+Package rerunfilecheck Info: File `slides12.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 36979 strings out of 474050
- 851946 string characters out of 5741738
- 1946754 words of memory out of 5000000
- 58671 multiletter control sequences out of 15000+600000
- 575746 words of font info for 98 fonts, out of 8000000 for 9000
+ 36735 strings out of 474050
+ 847199 string characters out of 5741738
+ 1936754 words of memory out of 5000000
+ 58481 multiletter control sequences out of 15000+600000
+ 574105 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,126p,1968b,761s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb>
-Output written on slides10.pdf (31 pages, 293451 bytes).
+ 128i,13n,126p,1968b,741s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb>
+Output written on slides12.pdf (6 pages, 181228 bytes).
 PDF statistics:
- 333 PDF objects out of 1000 (max. 8388607)
- 242 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 143 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
