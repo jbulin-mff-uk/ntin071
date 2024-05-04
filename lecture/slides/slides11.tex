@@ -521,7 +521,7 @@
 
     \medskip
 
-    The \alert{Universal language}: $L_U=\{\langle \mathrm{code(M),w}\rangle\mid M\text{ accepts }w\}$
+    The \alert{Universal language}: $L_U=\{\langle \mathrm{code}(M),w\rangle\mid M\text{ accepts }w\}$
 
     \medskip
     
@@ -616,9 +616,10 @@
         \item the direction L is 1, the direction R is 2
     \end{itemize}
     Each transition $\delta(q_i,X_j)=(q_k,X_l,D_m)$ is encoded by $0^i10^j10^k10^l10^m$. Since $i,j,k,l,m\geq 1$, substring 11 doesn't occur.
+    
     The entire encoding \alert{$\mathrm{code}(M)$} consists of codes for all transitions (in any order), separated by a pair of 1's: $C_111C_211\ldots C_{n-1}11C_n$.
 
-    Similarly, we can encode a tuple of 01-strings as a 01-string. We also fix an order of 01-strings, by length + lexicographically \\ ($w_0=\epsilon$, $w_1=0$, $w_2=1$, $w_3=00$, $w_4=01$, \dots)
+    Similarly, we encode a tuple of 01-strings as a 01-string: separate entries by 111. We also fix an order of 01-strings, by length + lexicographically ($w_0=\epsilon$, $w_1=0$, $w_2=1$, $w_3=00$, $w_4=01$, \dots)
 
 \end{frame}
 
@@ -686,13 +687,6 @@
     \end{itemize}
     
 \end{frame}
-
-
-
-
-
-
-
 
 
 \end{document}

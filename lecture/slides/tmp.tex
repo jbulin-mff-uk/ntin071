@@ -1,109 +1,4 @@
     
-    \begin{frame}{Kódování}
-    
-    \begin{itemize}[<+->]
-        \item Pro kódování TM $M=(Q,\{0,1\},\Gamma, \delta,q_1,B,\{q_2\})$ očíslujeme stavy, symboly a směry $L,R$.
-    \item Předpokládejme:
-    \begin{itemize}
-        \item Počáteční stav je vždy $q_1$.
-        \item Stav $q_2$ je vždy jediný koncový stav (nepotřebujeme víc, TM zastaví).
-        \item První symbol je vždy 0, druhý 1, třetí B, prázdný symbol. Ostatní symboly pásky očíslujeme libovolně.
-        \item Směr L je 1, směr R je 2.
-    \end{itemize}
-    \item Jeden krok $\delta(q_i,X_j)=(q_k,X_l,D_m)$ kódujeme: $0^i10^j10^k10^l10^m$. Všechna $i,j,k,l,m\geq 1$ takže se dvě jedničky za sebou nevyskytují.
-    \item Celý TM se skládá z kódů všech přechodů v nějakém pořadí oddělených dvojicemi jedniček $11$: $C_111C_211\ldots C_{n-1}11C_n$.
-    \end{itemize}\pause
-    Budeme potřebovat uspořádat řetězce do posloupnosti:
-    \begin{itemize}[<+->]
-        \item Řetězce bereme uspořádané podle délky, stejně dlouhé uspořádáme lexikograficky.
-    \item První je $\epsilon$, druhý $0$, třetí $1$, čtvrtý $00$ atd.
-    \item $i$--tý řetězec označujeme $w_i$.
-    \end{itemize}
-    
-    \end{frame}
-    
-    \begin{frame}{Příklad kódování TM}
-    \begin{block}{Turingův stroj}
-    $M=(\{q_1,q_2,q_3\},\{0,1\},\{0,1,B\},\delta,q_1,B,\{q_2\})$
-    \begin{tabular}{r |c |c |c }
-    $\delta$ & 0 & 1 & B \\
-    \hline\hline
-    $\rightarrow q_1$& & $(q_3,0,R)$& \\
-    $*q_2$& & & \\
-    $q_3$& $(q_1,1,R)$&$(q_2,0,R)$ &$(q_3,1,L)$.
-    \end{tabular}
-    \end{block}\pause
-    \begin{itemize}
-        \item 
-    Kód pro transakce:
-    \begin{tabular}{c |c |c |c }
-    $C_1$&$C_2$&$C_3$&$C_4$\\
-    0100100010100&
-    0001010100100&
-    00010010010100&
-    0001000100010010
-    \end{tabular}\pause
-    \item 
-    Kód celého TM:\\
-    01001000101001100010101001001100010010010100110001000100010010.
-    \end{itemize}
-    \end{frame}
-    
-    \begin{frame}%{The Diagonal Language}
-    \vskip-0.2cm
-    \begin{definition}[Diagonální jazyk]
-    \pojem{Diagonální jazyk $L_d$} je definovaný $L_d=\{w\in \{0,1\}^*; \hbox{TM reprezentovaný jako } w \hbox{ který nepřijímá slovo }w\}$.
-    \end{definition}
-    %\pause
-    \begin{minipage}{0.35\textwidth}
-    $L_d=\{w; \hbox{na diagonále je } 0\}$.
-    \begin{theorem}
-    $L_d$ není rekurzivně spočetný jazyk, tj. neexistuje TM přijímající $L_d$.
-    \end{theorem}
-    $i$ - k\'od TM\\
-    $j$ - vstup $w$\\
-    0/1 - prijima/neprijema\\
-    \includegraphics[width=\textwidth]{diagonal.PNG}
-    \end{minipage}
-    \begin{minipage}{0.03\textwidth}
-    \ \end{minipage}
-    \begin{minipage}{0.6\textwidth}
-    \begin{proof}
-    \begin{itemize}%[<+->]
-        \item Předpokládejme $L_d$ je RE, $L_d=L(M_d)$ pro nějaký TM $M_d$.
-        \item Jeho jazyk je $\{0,1\}$, tedy je v seznamu na obrázku: 'Přijímá TM $M_i$ vstupní slovo $w_j$?'
-        \item Alespoň jeden řetězec ho kóduje, řekněme $code(M_d)=w_d$.
-        \item Je $w_d\in L_d$
-        
-        \begin{itemize}
-            \item Pokud 'ano', na diagonále má být 0, tj. $w_d\notin L(M_d)=L_d$, spor.
-    \item Pokud 'ne', na diagonále má být 1, $w_d\in L(M_d)=L_d$, spor.
-        \end{itemize}
-     %\pause
-        Proto takový $M_d$ neexistuje. Tedy $L_d$ není rekurzivně spočetný.
-    \end{itemize}
-    \end{proof}
-    \end{minipage}
-    \end{frame}
-    %An Undecidable Problem That Is RE
-    %\begin{frame}{Základní hierarchie jazyků}
-    %\begin{minipage}{0.6\textwidth}
-    %Základní typy jazyků:
-    %\begin{itemize}
-        %\item Rekurzivní, rozhodnutelný: Přijímaný TM který vždy zastaví, ať už vstup přijme nebo nepřijme.
-        %\item RE Rekurzivně spočetný: přijímaný nějakým TM. Výpočet může trvat, nikdy nevíme, jestli je slovo zamítnuto nebo máme ještě čekat.
-        %\item Některé jazyky nejsou ani rekurzivně spočetné, {\em non}-RE jazyky, jako $L_d$ is {\em non}--RE jazyk.
-    %\end{itemize}
-    %\end{minipage}
-    %\begin{minipage}{0.03\textwidth}
-    %\ \end{minipage}
-    %\begin{minipage}{0.3\textwidth}
-    %\includegraphics[width=\textwidth]{languages.PNG}
-    %\end{minipage}
-    %\end{frame}
-    
-    
-    
     \begin{frame}{Univerzální Turingův stroj}
     \begin{definition}[Univerzální jazyk]
     Definujeme \pojem{univerzální jazyk} $L_u$ jakožto množinu binárních řetězců které kódují pár $(M,w)$, kde $M$ je TM a $w \in L(M)$.
@@ -322,91 +217,7 @@
     \end{itemize}
     \end{proof}
     \end{frame}
-    
-    %
-    %\begin{frame}{TM přijímající prázdný jazyk (nic)}
-    %\begin{definition}
-    %Slova $w$ jazyků $L_e, L_{ne}\in \{0,1\}^*$  vnímáme jako kódy Turingových strojů. Definujeme:
-    %\begin{itemize}
-        %\item $L_e=\{w|L(w)=\emptyset\} $
-        %\item $L_{ne}=\{w|L(w)\neq\emptyset\} $.
-    %\end{itemize}
-    %\end{definition}
-    %%\pause
-    %
-    %\begin{minipage}{0.45\textwidth}
-    %\begin{theorem}
-    %$L_{ne}$ je rekurzivně spočetný (RE).
-    %\end{theorem}
-    %\includegraphics[width=\textwidth]{Lne.PNG}
-    %\begin{theorem}%<3->
-    %$L_{e}$ není rekurzivně spočetný, proto $L_{ne}$ není rekurzivní.
-    %\end{theorem}
-    %\end{minipage}
-    %\begin{minipage}{0.01\textwidth}
-    %\ \end{minipage}
-    %\begin{minipage}{0.51\textwidth}
-    %%\pause 
-    %Redukce: Pro $w\in L_d$ do $M; L(M)=L_{e}$.
-    %\pause
-    %\begin{itemize}
-        %\item Obraz $R(w)$ je TM, který ignoruje svůj vstup $x$,
-    %%\pause
-        %\item na vstupní pásku napíše $w$ a simuluje $U$ na vstupu $w$.
-    %%\pause
-        %\item Jazyk je prázdný iff stroj $w$ nepřijímá $w$, tj. přijímá diagonální jazyk.
-    %\end{itemize}
-    %\includegraphics[width=\textwidth]{Lne2.PNG}
-    %\end{minipage}
-    %\end{frame}
-    
-    %
-    %\begin{frame}{Properties of the RE Languages}
-    %\begin{definition}{Properties of the RE Languages}
-    %A \pojem{property} of the RE languages is simply a set of RE languages.
-    %
-    %A property is \pojem{trivial} if it is either empty, or is all RE languages. Otherwise, it is \pojem{nontrivial}.
-    %\end{definition}
-    %\begin{example}[Examples:]
-    %\begin{itemize}
-        %\item Being context--free language CFL.
-        %\item The property of being empty is the set $\{\emptyset\}$. 
-        %\item Empty property $\emptyset$.
-    %\end{itemize}
-    %\end{example}  
-    %\begin{theorem}[Rice's Theorem]
-    %Every nontrivial property of the RE languages is undecidable.
-    %\end{theorem}
-    %\end{frame}
-    %
-    %
-    %\begin{frame}{Rice's Theorem}
-    %\begin{minipage}{0.48\textwidth}
-    %\begin{theorem}[Rice's Theorem]
-    %Every nontrivial property of the RE languages is undecidable.
-    %\end{theorem}
-    %\end{minipage}
-    %\begin{minipage}{0.01\textwidth}
-    %\end{minipage}
-    %\begin{minipage}{0.48\textwidth}
-    %\includegraphics[width=\textwidth]{rice.PNG}
-    %\end{minipage}
-    %\begin{proof}
-    %\begin{itemize}
-        %\item Let ${\cal P}$ be a nontrivial property of the RE languages, assume $\emptyset \notin {\cal P}$, $L \in {\cal P}$, $M_L$ a TM accepting $L$.
-        %\item We construct $M'$, two tape TM on the figure, reducing $L_u$ to $L_{\cal P}$.
-        %
-        %\begin{itemize}
-            %\item First tape is used to simulate $M$ on $w$.
-            %\item If $M$ does not accept $w$, $M'$ does nothing else, so $L(M')=\emptyset$ and from assumption $\emptyset \notin{\cal P}$, that means the code for M' is not in $L_{\cal P}$.
-                %\item If $M$ accepts $w$, then $M'$ begins simulating $M_L$ on its own input $x$. Thus, $M'$ will accept exactly the language $L$. Since $L\in {\cal P}$, the code for M' is in $L_{\cal P}$. 
-        %\end{itemize}
-        %\item If $\emptyset \in {\cal P}$, then $\emptyset \notin \overline{\cal P}$. From above, $\overline{\cal P}$ is undecidable, it is RE. Then, the complement $L_{\cal P}$ must be undecidable.
-    %\end{itemize}
-    %\end{proof}
-    %\end{frame}
-    
-    
+        
     
     \begin{frame}{Směřujeme k nerozhodnutelným problémům o bezkontextových gramatikách}
     
@@ -745,11 +556,7 @@
     $B:$ & $\#q_101\#\uncover<2->{\color{blue}  1q_2}\uncover<3->{\color{green}  1\# 1}\uncover<4->{\color{red}0q_1}\uncover<5->{\color{green} \# 1}\uncover<6->{\color{violet}q_201 \#}\uncover<7->{\color{orange} q_310}\uncover<8->{\color{green}1\# \color{cyan}q_3\color{green}01\# \color{cyan}q_3\color{green}1\# \color{cyan}q_3\color{green}\#}\uncover<9->{\color{black}\#}
     $
     \end{tabular}
-    
-    %\begin{tabular}{ l  l }
-    %$A:\#q_101\# 1q_21 \# 10q_1 \# 1q_201 \# q_3101\# q_301\# q_31\# q_3\#\#$\\
-    %$B:\#q_101\# 1q_21 \# 10q_1 \# 1q_201 \# q_3101\# q_301\# q_31\# q_3\#\#$
-    %\end{tabular}
+   
     \end{frame}
     
     
@@ -922,13 +729,7 @@
         \item 	Důkaz: za $R$ zvolíme $\Sigma^*$.
     \end{itemize}
     \end{itemize}
-    %\pause
-    %\begin{tabular}{l l}
-         %Je $L(G_1)= L(G_2)$? & Důkaz: ať $G_1$ generuje $\Sigma^*$\\
-         %Je $L(G_1)= L(R)$?& Důkaz: za $R$ zvolíme $\Sigma^*$\\
-         %Je $L(G_1)\subseteq L(G_2)$?& Důkaz: ať $G_1$ generuje $\Sigma^*$\\
-         %Je $L(R)\subseteq L(G_1)$?& Důkaz: za $R$ zvolíme $\Sigma^*$
-    %\end{tabular}
+
     \end{proofm}
     \pause
     \begin{itemize}
@@ -1146,36 +947,6 @@
     
     \end{frame}
     
-    
-    
-    
-    
-    %\begin{frame}{Redukce}
-    %\begin{minipage}{0.57\textwidth}
-    %\begin{definition}[Redukce]
-    %\end{definition}
-    %%\pause
-    %\end{minipage}
-    %\begin{minipage}{0.01\textwidth}
-    %\end{minipage}
-    %\begin{minipage}{0.41\textwidth}
-    %\includegraphics[width=\textwidth]{reduction.PNG}
-    %\end{minipage}
-    %\begin{example}
-    %\begin{minipage}{0.48\textwidth}
-    %Redukce  TM pro $L_d$ na  TM pro $\overline{L_u}$:
-    %\includegraphics[width=\textwidth]{LU.PNG}
-    %\end{minipage}
-    %\begin{minipage}{0.01\textwidth}
-    %\end{minipage}
-    %\begin{minipage}{0.41\textwidth}
-    %\begin{itemize}
-        %\item $P_1=$ Nepřijímá TM reprezentovaný $w$ vstupní slovo $w$?
-        %\item $P_2=$ Nepřijímá TM reprezentovaný $M$ vstupní slovo $w$?
-        %\end{itemize}
-    %\end{minipage}
-    %\end{example}
-    %\end{frame}
     
     
     \begin{frame}{Cook-Levin-ova věta}
