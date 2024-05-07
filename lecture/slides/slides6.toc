@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{2.6 Chomsky Normal Form}{3}{0}{1}
+\beamer@sectionintoc {2}{2.7 Pumping lemma for context-free languages}{14}{0}{2}

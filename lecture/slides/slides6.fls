@@ -2,8 +2,8 @@ PWD c:/Users/jakub/Work/GitHub/ntin071/lecture/slides
 INPUT c:/Program Files/texlive/texmf.cnf
 INPUT c:/Program Files/texlive/texmf-dist/web2c/texmf.cnf
 INPUT c:/Program Files/texlive/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides12.tex
-OUTPUT slides12.log
+INPUT c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides6.tex
+OUTPUT slides6.log
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamerbasemodes.sty
@@ -264,7 +264,7 @@ INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamercolorthemedefau
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamericonbook.pdf
-OUTPUT slides12.pdf
+OUTPUT slides6.pdf
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamericonbook.pdf
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamericonbook.20.pdf
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/beamer/beamericonbook.20.pdf
@@ -422,10 +422,10 @@ INPUT c:/Program Files/texlive/texmf-dist/tex/latex/tikzmark/tikzlibrarytikzmark
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/tikzmark/tikzlibrarytikzmark.code.tex
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-INPUT ./slides12.aux
-INPUT ./slides12.aux
-INPUT slides12.aux
-OUTPUT slides12.aux
+INPUT ./slides6.aux
+INPUT ./slides6.aux
+INPUT slides6.aux
+OUTPUT slides6.aux
 INPUT c:/Program Files/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT c:/Program Files/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT c:/Program Files/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -434,13 +434,13 @@ INPUT c:/Program Files/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT ./slides12.out
-INPUT ./slides12.out
-INPUT slides12.out
-INPUT slides12.out
-INPUT ./slides12.out
-INPUT ./slides12.out
-OUTPUT slides12.out
+INPUT ./slides6.out
+INPUT ./slides6.out
+INPUT slides6.out
+INPUT slides6.out
+INPUT ./slides6.out
+INPUT ./slides6.out
+OUTPUT slides6.out
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
@@ -459,9 +459,9 @@ INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-number
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
-INPUT ./slides12.nav
-INPUT ./slides12.nav
-INPUT slides12.nav
+INPUT ./slides6.nav
+INPUT ./slides6.nav
+INPUT slides6.nav
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
@@ -476,29 +476,8 @@ INPUT c:/Program Files/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 INPUT c:/Program Files/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcss1095.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcss1000.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
-INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
@@ -508,98 +487,70 @@ INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+INPUT c:/Program Files/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssi10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT ./files/diagonal.PNG
-INPUT ./files/diagonal.PNG
-INPUT ./files/diagonal.PNG
-INPUT ./files/diagonal.PNG
-INPUT ./files/diagonal.PNG
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi10.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
+INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi8.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi12.tfm
-INPUT ./files/universalTM.PNG
-INPUT ./files/universalTM.PNG
-INPUT ./files/universalTM.PNG
-INPUT ./files/universalTM.PNG
-INPUT ./files/universalTM.PNG
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT ./files/compRec.PNG
-INPUT ./files/compRec.PNG
-INPUT ./files/compRec.PNG
-INPUT ./files/compRec.PNG
-INPUT ./files/compRec.PNG
-INPUT ./files/bothRE.PNG
-INPUT ./files/bothRE.PNG
-INPUT ./files/bothRE.PNG
-INPUT ./files/bothRE.PNG
-INPUT ./files/bothRE.PNG
-INPUT ./files/Lne.PNG
-INPUT ./files/Lne.PNG
-INPUT ./files/Lne.PNG
-INPUT ./files/Lne.PNG
-INPUT ./files/Lne.PNG
-INPUT ./files/Lne2.PNG
-INPUT ./files/Lne2.PNG
-INPUT ./files/Lne2.PNG
-INPUT ./files/Lne2.PNG
-INPUT ./files/Lne2.PNG
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT ./files/pumping-lemma-for-context-free-languages.png
+INPUT ./files/pumping-lemma-for-context-free-languages.png
+INPUT ./files/pumping-lemma-for-context-free-languages.png
+INPUT ./files/pumping-lemma-for-context-free-languages.png
+INPUT ./files/pumping-lemma-for-context-free-languages.png
 INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmss9.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT c:/Program Files/texlive/texmf-dist/fonts/tfm/public/sansmathaccent/mathkerncmssi9.tfm
-OUTPUT slides12.nav
-OUTPUT slides12.toc
-OUTPUT slides12.snm
-INPUT slides12.aux
-INPUT ./slides12.out
-INPUT ./slides12.out
+OUTPUT slides6.nav
+OUTPUT slides6.toc
+OUTPUT slides6.snm
+INPUT slides6.aux
+INPUT ./slides6.out
+INPUT ./slides6.out
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
+INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
-INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb
 INPUT c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb
