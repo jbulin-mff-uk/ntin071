@@ -2,11 +2,15 @@
 
 \input{header.tex}
 
+\usepackage{mdframed}
+
 \begin{document}
 
 % \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 14 -- Intro to complexity}
+
+
+\section*{NTIN071 A\&G: Tutorial 14 -- TODO Intro to complexity}
 
 % after Lecture 13
 % spring 2024
@@ -18,35 +22,36 @@
 \medskip
 
 
-\end{document}
 
 
-\bigskip\begin{problem}
-    Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
+
+
+% \bigskip\begin{problem}
+%     Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
     
-    \renewcommand{\arraystretch}{2.5}
-    \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-    (a) & $\SPACE(n\log n)$ & $\TIME(2^{n^2})$ & (f) & $\SPACE(n\log n)$ & $\TIME(2^{n\log n})$\\
-    (b) & $\TIME(2^{n^2})$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^{n^2})$ & $\NSPACE(\log^2 n)$\\
-    (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^2 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(n)$\\
-    (d) & $\NSPACE(\log^2 n)$ & $\NTIME(n)$ & (i) & $\NSPACE(\log^2 n)$ & $\SPACE(n\log n)$ \\
-    (e) & $\NTIME(n)$ & $\SPACE(n\log n)$ & (j) & $\NTIME(n)$ & $\TIME(2^{n^2})$
-    \end{tabular}
-    \end{problem}
+%     \renewcommand{\arraystretch}{2.5}
+%     \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
+%     (a) & $\SPACE(n\log n)$ & $\TIME(2^{n^2})$ & (f) & $\SPACE(n\log n)$ & $\TIME(2^{n\log n})$\\
+%     (b) & $\TIME(2^{n^2})$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^{n^2})$ & $\NSPACE(\log^2 n)$\\
+%     (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^2 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(n)$\\
+%     (d) & $\NSPACE(\log^2 n)$ & $\NTIME(n)$ & (i) & $\NSPACE(\log^2 n)$ & $\SPACE(n\log n)$ \\
+%     (e) & $\NTIME(n)$ & $\SPACE(n\log n)$ & (j) & $\NTIME(n)$ & $\TIME(2^{n^2})$
+%     \end{tabular}
+%     \end{problem}
     
     
-    \bigskip\begin{problem}
-    Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
+%     \bigskip\begin{problem}
+%     Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
     
-    \renewcommand{\arraystretch}{2.5}
-    \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-    (a) & $\SPACE(n)$ & $\TIME(2^n)$ & (f) & $\SPACE(n)$ & $\TIME(2^{n\log n})$\\
-    (b) & $\TIME(2^n)$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^n)$ & $\NSPACE(\log^3 n)$\\
-    (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^3 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(2^n)$\\
-    (d) & $\NSPACE(\log^3 n)$ & $\NTIME(2^n)$ & (i) & $\NSPACE(\log^3 n)$ & $\SPACE(n)$ \\
-    (e) & $\NTIME(2^n)$ & $\SPACE(n)$ & (j) & $\NTIME(2^n)$ & $\TIME(2^n)$
-    \end{tabular}
-    \end{problem}
+%     \renewcommand{\arraystretch}{2.5}
+%     \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
+%     (a) & $\SPACE(n)$ & $\TIME(2^n)$ & (f) & $\SPACE(n)$ & $\TIME(2^{n\log n})$\\
+%     (b) & $\TIME(2^n)$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^n)$ & $\NSPACE(\log^3 n)$\\
+%     (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^3 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(2^n)$\\
+%     (d) & $\NSPACE(\log^3 n)$ & $\NTIME(2^n)$ & (i) & $\NSPACE(\log^3 n)$ & $\SPACE(n)$ \\
+%     (e) & $\NTIME(2^n)$ & $\SPACE(n)$ & (j) & $\NTIME(2^n)$ & $\TIME(2^n)$
+%     \end{tabular}
+%     \end{problem}
     
     
     \bigskip\begin{problem}
@@ -72,23 +77,18 @@
     
     \bigskip\hrule\hrule
     
-    \section*{Homework}
     
-    Due at the beginning of the next tutorial.
+    % Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
     
-     
-    \begin{hw*}
-    Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
-    
-    \renewcommand{\arraystretch}{2.5}
-    \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-    (a) & $\SPACE(n)$ & $\TIME(2^{\log^3 n})$ & (f) & $\SPACE(n)$ & $\NSPACE(\log^2 n)$\\
-    (b) & $\TIME(2^{\log^3 n})$ & $\NSPACE(\log^2 n)$ & (g) & $\TIME(2^{\log^3 n})$ & $\NTIME(2^{\log^3 n})$\\
-    (c) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{\log^3 n})$ & (h) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{n\log n})$\\
-    (d) & $\NTIME(2^{\log^3 n})$ & $\NTIME(2^{n\log n})$ & (i) & $\NTIME(2^{\log^3 n})$ & $\SPACE(n)$ \\
-    (e) & $\NTIME(2^{n\log n})$ & $\SPACE(n)$ & (j) & $\NTIME(2^{n\log n})$ & $\TIME(2^{\log^3 n})$
-    \end{tabular}
-    \end{hw*}
+    % \renewcommand{\arraystretch}{2.5}
+    % \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
+    % (a) & $\SPACE(n)$ & $\TIME(2^{\log^3 n})$ & (f) & $\SPACE(n)$ & $\NSPACE(\log^2 n)$\\
+    % (b) & $\TIME(2^{\log^3 n})$ & $\NSPACE(\log^2 n)$ & (g) & $\TIME(2^{\log^3 n})$ & $\NTIME(2^{\log^3 n})$\\
+    % (c) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{\log^3 n})$ & (h) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{n\log n})$\\
+    % (d) & $\NTIME(2^{\log^3 n})$ & $\NTIME(2^{n\log n})$ & (i) & $\NTIME(2^{\log^3 n})$ & $\SPACE(n)$ \\
+    % (e) & $\NTIME(2^{n\log n})$ & $\SPACE(n)$ & (j) & $\NTIME(2^{n\log n})$ & $\TIME(2^{\log^3 n})$
+    % \end{tabular}
+
 
 
     \medskip\begin{problem}
@@ -293,14 +293,6 @@
         \end{problem}
         
         
-        \bigskip\hrule\hrule
-        
-        \section*{Homework}
-        
-        Due at the beginning of the next tutorial.
-        
-        \bigskip 
-        \begin{hw}
         Show that the problem \textsc{cover-oriented-cycles} defined below is NP-complete. (Hint: Use a reduction from \textsc{vertex-cover}. Do not forget to show that \textsc{cover-oriented-cycles} is in NP.)
         
         \bigskip
@@ -315,10 +307,10 @@
         \end{mdframed}
         \end{quote}
         
-        \end{hw}
+
         
         \bigskip
-        \begin{hw}
+
         Consider the \textsc{partition-problem} defined below.
         \begin{enumerate}[(a)]
             \item Show that the \textsc{partition-problem} is polynomially reducible to the \textsc{knapsack} problem defined further below.
@@ -363,7 +355,7 @@
         \end{mdframed}
         \end{quote}
         
-        \end{hw}
+
 
 
 \end{document}
