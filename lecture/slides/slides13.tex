@@ -3,6 +3,8 @@
 \input{header.tex}
 
 
+
+
 \title{Lecture 13 -- Intro to Complexity theory}
 
 
@@ -13,18 +15,233 @@
 
 
 \begin{frame}{Recap of Lecture 12}
-	
-    TODO
-	
+
+    \begin{itemize}
+        \item the Diagonal language $L_D$ is not recursively enumerable
+        \item the Universal language $L_U$, the Universal TM: simulate any $M$ on any $w$
+        \item recursive languages are closed under complement
+        \item Post's theorem: $L$ recursive iff both $L,\overline{L}$ are RE
+        \item $L_U$, $\overline{L_D}$ are recursively enumerable but not recursive
+        \item reductions between decision problems
+        \item the Halting problem is undecidable        
+        \item (Rice's thm: nontriv. properties of programs are undecidable)
+        \item Undecidable problems about context-free grammars
+        \item Source of undecidability: Post's correspondence problem
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 13}
+
+    \begin{itemize}
+        \item time complexity
+        \item 
+    \end{itemize}
+
 \end{frame}
 
 
 \section{\sc Chapter 5: Intro to Complexity}
 
 
-\begin{frame}{Summary of Lecture 13}
+\section*{Time complexity}
 
-    TODO
+
+\begin{frame}{Asymptotic notation}
+    
+    \textbf{Big-O notation:} Let $f,g: \mathbb{N}\to \mathbb{R}^+$. We say that \alert{$f(n)\in O(g(n))$}, if there exist $C,n_0\in \mathbb{N}^+$ such that
+    $$
+    (\forall n\geq n_0)\ f(n)\leq C\cdot g(n)
+    $$
+
+    e.g. $\limsup_{n\to\infty}\frac{f(n)}{g(n)}<\infty$. In that case we say that $g(n)$ is an [asymptotic] \alert{upper bound} [up to a constant multiple] for $f(n)$. 
+    
+    \textbf{Note:} Often the imprecise term `upper bound' is used; sometimes you will encounter $f(n)=O(g(n))$.
+
+    For example, $f(5n^3+2n^2+22n+6)\in O(n^3)$ with $n_0=10$, $C=6$.
+
+    \medskip
+
+    \textbf{Little-o notation:} \alert{$f(n)\in o(g(n))$}, if for all $c>0$ there exists $n_0\in \mathbb{N}^+$ so that
+    $(\forall n\geq n_0)\ f(n)<c\cdot g(n)$, i.e. $\lim_{n\to\infty}\frac{f(n)}{g(n)}=0$. Then we say $f(n)$ is [asymptotically] \alert{dominated} by $g(n)$.
+    
+    Analogously for $\geq$ instead of $\leq$:  $\Omega,\omega$.
+
+\end{frame}
+
+
+\begin{frame}{Classes of time complexity}
+
+    \begin{definition}
+        Let $M$ be a Turing machine that halts on every input. The \alert{time complexity} of $M$ is the function $f:\mathbb{N}\to \mathbb{N}$, where $f(n)$ is the maximum number of computation steps for inputs of length $n$.
+    \end{definition}
+    
+    \begin{definition}
+        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{TIME}(t(n))$} is the class of all languages decidable by a TM of time complexity in $O(t(n))$ (i.e., always halts and for $|w|=n$ correctly answers in at most $O(t(n))$ steps).
+    \end{definition}
+
+    \textbf{NB:} Here we mean the standard, single-tape, deterministic TM.
+    
+\end{frame}
+
+
+\begin{frame}{Example}
+
+    \begin{example}[$L=\{0^i1^i \mid i\geq 0\}$ is in $\mathrm{TIME}(n^2)$]
+        \begin{enumerate}
+            \item check if the input is $0^i1^j$, if a $0$ follows a $1$, reject (time $O(n)$)
+            \item return to the beginning: hidden in the constant $O(2n)=O(n)$
+            \item go through the $0$s, in time $O(n^2)$
+            \begin{enumerate}
+                \item rewrite the next $0$ to $X$
+                \item find the first $1$, rewrite to $X$
+                \item return to the beginning
+            \end{enumerate}
+            \item if no more $0$s, check that no more $1$s remain and accept (if $1$ found, reject)  (time $O(n)$)\vspace{-6pt}
+        \end{enumerate}
+    \end{example}
+    
+    \vdots
+    Can we do it faster?
+
+\end{frame}
+
+
+\begin{frame}{Can we do it faster?}
+
+    \textbf{Idea:} ``compare the binary representations of $i$ and $j$'', $\log n$ bits, for each bit need to traverse through the word
+
+
+    \begin{example}[$L=\{0^i1^i \mid  i\geq 0\}$ is also in $\mathrm{TIME}(n\log n)$]
+        \begin{enumerate}
+            \item check if the input is $0^i1^j$ \alert{and even length} (time $O(n)$)          
+            \item iterate while there are $0$s, in time $O(n\log n)$
+            \begin{enumerate}
+                \item rewrite every other $0$ to $X$, then every other $1$ to $X$
+                \item check if the number of remaining $0$s+$1$s is even, if not, reject                
+            \end{enumerate}
+            \item if no more $0$s, check that no more $1$s and accept (time $O(n)$)
+            \end{enumerate}    
+    \end{example}
+
+    \vdots
+    Can we do it even faster?
+
+\end{frame}
+
+
+\begin{frame}{Time complexity and regular languages}
+    
+    Can we do it even faster? Not really.
+
+    \begin{theorem}
+        Every language decidable in time $o(n \log n)$ [on a single-tape, deterministic TM] is regular. %problem 7.49
+    \end{theorem}
+
+    [We omit the proof.]
+
+\end{frame}
+
+    
+\begin{frame}{Multi-tape TM}
+    
+    \begin{example}[Multi-tape TM for $L=\{0^i1^i \mid  i\geq 0\}$]
+        \begin{itemize}
+            \item copy 0s to Tape 2
+            \item at first 1, switch state; erase 1 from Tape 1 \& 0 from Tape 2
+            \item accept if both tapes are erased
+        \end{itemize}
+
+    \end{example}
+    
+    \begin{lemma}
+        Every multi-tape Turing Machine with time complexity $t(n)$ is equivalent to a [single-tape] Turing Machine with time complexity $O(t^2(n))$.
+    \end{lemma}
+    \textbf{Proof:} Simulation of $n$ steps of a $k$-tape TM can be done in $O(n^2)$ moves since one step takes $4n+2k$ moves (heads at most $2n$ fields apart, read, write, move head marks).\hfill\qedsymbol
+
+\end{frame}
+
+
+\begin{frame}{Nondeterministic time complexity}
+    
+    The \alert{time complexity} of a \textbf{nondeterministic} Turing machine that always halts is defined analogously: $f(n)$ is the maximum number of steps in \textbf{any branch} of the computation tree.
+    
+    \begin{definition}
+        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{NTIME}(t(n))$} is the class of all languages decidable by a nondetermistic TM of time complexity in $O(t(n))$.
+    \end{definition}
+    \vspace{-6pt}
+    (An NTM \alert{decides} $L$ if halts on all inputs and recognizes $L$.)
+
+    \smallskip
+
+    \begin{theorem}        
+    Any nondeterministic TM of time complexity $t(n)\geq n$, has a determistic equivalent of time complexity in $2^{O(t(n))}$.
+    \end{theorem}
+
+    \begin{corollary}
+        If $t(n)\geq n$, then $\mathrm{NTIME}(t(n))\subseteq \mathrm{TIME}(2^{O(t(n))})$.
+    \end{corollary}
+    
+\end{frame}
+
+
+\begin{frame}{Proof}
+
+    Recall the construction: BFS of the computation graph, keep a queue of configurations to process.
+    \begin{itemize}
+        \item At most $d$ possible transitions for any $(q,X)\in (Q\setminus F)\times \Gamma$. 
+        \item So after $k$ steps at most $d^k$ configurations.
+        \item Processing one configuration can be `hidden' in the constant.
+        \item Therefore the simulation is in time:
+        $$
+        O(t(n)d^{t(n)})=2^{O(t(n))}
+        $$
+        \item We need to simulate multiple tapes, but: 
+        $$
+        (2^{O(t(n))})^2=2^{O(2t(n))}=2^{O(t(n))}
+        $$
+
+        \vspace{-12pt}
+        \hfill\qedsymbol
+    \end{itemize}
+
+\end{frame}
+
+
+\section*{P vs. NP}
+
+
+\begin{frame}{The class $\mathrm{P}$}
+
+    \begin{definition}
+        Let \alert{$\mathrm{P}$} (also \alert{$\mathrm{PTIME}$}) be the class of all languages decidable in \alert{polynomial time} by a [single-tape, deterministic] Turing machine:
+
+        \vspace{-18pt}
+        $$
+        \mathrm{P}=\bigcup_k \mathrm{TIME}(n^k)
+        $$
+        \vspace{-9pt}
+    \end{definition}
+    \vspace{-9pt}
+    \begin{itemize}
+        \item Path in a graph
+        \item Primality of an integer (Agrawal–Kayal–Saxena 2002)
+        \item Linear programming
+        \item Horn-SAT
+    \end{itemize}
+    \vspace{-3pt}
+    (The last two are $\mathrm{P}$-complete under $\mathrm{LOGSPACE}$ reductions.)
+
+    \medskip
+
+    \begin{theorem}[$CFL\subseteq P$]
+        Every context free language belongs to $\mathrm{P}$.
+    \end{theorem}  
+    
+    \vspace{-10pt}
+    \textbf{Proof:}
+        Take a ChNF grammar for $L$. Given input $\omega$, run the CYK algorithm (polynomial, in $O(n^3)$).\hfill\qedsymbol
 
 \end{frame}
 
