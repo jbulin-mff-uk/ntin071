@@ -168,7 +168,7 @@
     The \alert{time complexity} of a \textbf{nondeterministic} Turing machine that always halts is defined analogously: $f(n)$ is the maximum number of steps in \textbf{any branch} of the computation tree.
     
     \begin{definition}
-        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{NTIME}(t(n))$} is the class of all languages decidable by a nondetermistic TM of time complexity in $O(t(n))$.
+        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{NTIME}(t(n))$} is the class of all languages decidable by a nondeterministic TM of time complexity in $O(t(n))$.
     \end{definition}
     \vspace{-6pt}
     (An NTM \alert{decides} $L$ if halts on all inputs and recognizes $L$.)
@@ -176,7 +176,7 @@
     \smallskip
 
     \begin{theorem}        
-    Any nondeterministic TM of time complexity $t(n)\geq n$, has a determistic equivalent of time complexity in $2^{O(t(n))}$.
+    Any nondeterministic TM of time complexity $t(n)\geq n$, has a deterministic equivalent of time complexity in $2^{O(t(n))}$.
     \end{theorem}
 
     \begin{corollary}
@@ -212,7 +212,7 @@
 \section*{P vs. NP}
 
 
-\begin{frame}{The class $\mathrm{P}$}
+\begin{frame}{The class P}
 
     \begin{definition}
         Let \alert{$\mathrm{P}$} (also \alert{$\mathrm{PTIME}$}) be the class of all languages decidable in \alert{polynomial time} by a [single-tape, deterministic] Turing machine:
@@ -226,7 +226,7 @@
     \vspace{-9pt}
     \begin{itemize}
         \item Path in a graph
-        \item Primality of an integer (Agrawal–Kayal–Saxena 2002)
+        \item Primality of an integer (Agrawal, Kayal, Saxena 2002)
         \item Linear programming
         \item Horn-SAT
     \end{itemize}
@@ -244,6 +244,49 @@
         Take a ChNF grammar for $L$. Given input $\omega$, run the CYK algorithm (polynomial, in $O(n^3)$).\hfill\qedsymbol
 
 \end{frame}
+
+
+    
+\begin{frame}{The class NP: verifier-based definition}
+    
+    \begin{definition}
+        A \alert{verifier} for a language $L$ is an algorithm $V$ such that:
+        
+        \vspace{-24pt}
+        $$
+        L=\{w\mid \text{there exists a finite string $c$ such that $V$ accepts }\langle w,c\rangle\}
+        $$
+        \vspace{-24pt}
+    \end{definition}
+    \vspace{-9pt}
+    Such a $c$ is called a \alert{certificate}. It can be over any alphabet!
+
+    Complexity of verifiers is only considered wrt. the length of $w$: a \alert{polynomial verifier} must halt in time $O(|w|^k)$ for some $k>0$. Then we can assume the cerfificate has polynomial length (otherwise the verifier cannot even read it).
+    
+    \begin{definition}
+        \alert{$\mathrm{NP}$} is the class of all languages that have a polynomial verifier.
+    \end{definition}
+    \vspace{-9pt}
+    That is, there is an algorithm that works in time polynomial in $|w|$ and when given $w\in L$ and a cerfificate $c$ validates that $c$ is a valid certificate for $w\in L$.
+
+\end{frame}
+
+
+\begin{frame}{Hamiltonian path}
+    
+    A \alert{Hamiltonian path} in a directed graph $G$ is a directed path $P$ that visits each vertex of $G$ exactly once.
+    
+    $\mathrm{HAMPATH}=\{\langle G,s,t\rangle\mid$ there is a Ham. path from $s$ to $t$ in $G\}$
+
+    \begin{itemize}
+        \item complexity for graphs can be measured just wrt. $|V|$ (\# edges is at most quadratic, thus polynomial)
+        \item the \alert{certificate} is the path (sequence of vertices)
+        \item the algorithm verifies that the sequence is indeed a path from $s$ to $t$ containing each vertex exactly once; this can be easily done in polynomial time wrt. $|V|$
+        \item for $\overline{\mathrm{HAMPATH}}$ we do not know whether a polynomial verifier exists (the problem is in $\mathrm{EXPTIME}$)
+    \end{itemize}
+
+\end{frame}
+
 
 
 \end{document}

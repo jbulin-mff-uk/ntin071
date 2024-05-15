@@ -1,41 +1,4 @@
-    
-    
-    \begin{frame}{Verifikátory, třída $NP$}
-    
-    \begin{definition}[Verifikátor, NP\label{def:NP}]
-    \begin{itemize}[<+->]
-        \item 
-    \alert{Verifikátor} jazyka $L$ je algoritmus $V$, kde:
-    $$L=
-    \{ w\ | \ V \hbox{ pro nějaký řetězec $c$ přijímá }\langle w,c\rangle \}\hbox{.}
-    $$
-    \item Nápověda $c$ pro snadné ověření se nazývá \alert{certifikát}.
-    \item Časová složitost verifikátoru se měří pouze vzhledem k délce $w$, \alert{polynomiální verifikátor} rozhoduje v čase polynomiálním vzhledem k $|w|$.
-    \item Jazyk $L$ je \alert{polynomiálně verifikovatelný}, pokud má polynomiální verifikátor. Pak i certifikát musí být polynomiální, aby o verifikátor stihl přečíst.
-    \end{itemize}
-    \end{definition}
-    \pause
-    \begin{definition}[Verifikátor, NP\label{def:NP}]
-     \alert{Třída jazyků rozhodnutelných v polynomiálním čase} \alert{$NP$ }  je tvořena jazyky s~polynomiálním verifikátorem.
-    \end{definition}
-    \end{frame}
-    
-    
-    \begin{frame}{Hamiltonovská cesta}
-    \begin{example}
-        $$ HAMPATH=\{\langle G,s,t\rangle | G \hbox{ je orientovaný graf s hamiltonovskou cestou z } s \hbox{ do } t\}\hbox{.}$$
-        Hamiltonovská cesta je taková (orientovaná) cesta, která obsahuje každý vrchol grafu právě jednou.
-    \end{example}
-    \pause
-    \begin{itemize}[<+->]
-        \item Složitost u grafů bereme vůči počtu uzlů, počet hran je max. kvadratický, tj. polynomiální.
-        \item Náš certifikát je posloupnost vrcholů cesty.
-        \item Algoritmus v polynomiálním čase ověří, že jde o hamiltonovskou cestu.
-        \item $\overline{HAMPATH}$, množina orientovaných grafů, pro které neexistuje hamiltonovská cesta, neznáme verifikátor (jen umíme ověřit v exponenciálním čase).
-    \end{itemize}
-    \end{frame}
-    
-    
+  
     \begin{frame}{Třída $NP$}
     
     
