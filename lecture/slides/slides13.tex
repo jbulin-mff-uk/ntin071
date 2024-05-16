@@ -168,7 +168,7 @@
     The \alert{time complexity} of a \textbf{nondeterministic} Turing machine that always halts is defined analogously: $f(n)$ is the maximum number of steps in \textbf{any branch} of the computation tree.
     
     \begin{definition}
-        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{NTIME}(t(n))$} is the class of all languages decidable by a nondeterministic TM of time complexity in $O(t(n))$.
+        For $t:\mathbb{N}\to \mathbb{R}^+$, \alert{$\mathrm{NTIME}(t(n))$} is the class of all languages decidable by a nondeterm. TM of time complexity in $O(t(n))$.
     \end{definition}
     \vspace{-6pt}
     (An NTM \alert{decides} $L$ if halts on all inputs and recognizes $L$.)
@@ -276,17 +276,160 @@
     
     A \alert{Hamiltonian path} in a directed graph $G$ is a directed path $P$ that visits each vertex of $G$ exactly once.
     
-    $\mathrm{HAMPATH}=\{\langle G,s,t\rangle\mid$ there is a Ham. path from $s$ to $t$ in $G\}$
+    $$
+    \mathrm{HAMPATH}=\{\langle G\rangle\mid G\text{ contains a Hamiltonian path}\}
+    $$
 
-    \begin{itemize}
-        \item complexity for graphs can be measured just wrt. $|V|$ (\# edges is at most quadratic, thus polynomial)
+    \begin{itemize}  
+        \item complexity for graphs can be measured just wrt. $|V|$ ($|E|$ is at most quadratic, thus polynomial)    
         \item the \alert{certificate} is the path (sequence of vertices)
-        \item the algorithm verifies that the sequence is indeed a path from $s$ to $t$ containing each vertex exactly once; this can be easily done in polynomial time wrt. $|V|$
-        \item for $\overline{\mathrm{HAMPATH}}$ we do not know whether a polynomial verifier exists (the problem is in $\mathrm{EXPTIME}$)
+        \item the algorithm verifies that the sequence is indeed a path containing each vertex exactly once; this can be easily done in polynomial time wrt. $|V|$
+        \item for $\overline{\mathrm{HAMPATH}}$ we do not know whether a polynomial verifier exists (we only know the problem is in $\mathrm{EXPTIME}$)
     \end{itemize}
 
 \end{frame}
 
+
+\begin{frame}{The class $NP$: nondeterminism-based definition}
+    
+    \begin{definition}
+        $\mathrm{NP}$ is the class of all languages that have a polynomial verifier.
+    \end{definition}
+    \begin{theorem}
+    $\mathrm{NP}=\bigcup_k NTIME(n^k)$.
+    \end{theorem}
+
+    \textbf{Idea:} convert a verifier to a nondeterministic TM, and vice versa
+    \begin{itemize}
+        \item[$\Rightarrow$] the NTM guesses the certificate, then simulates the verifier
+        \item[$\Leftarrow$] the verifier takes as a certificate the accepting path of the NTM (more precisely, the sequence of nondeterministic choices that leads to acceptance), then simulates the NTM
+    \end{itemize}
+
+\end{frame}
+    
+\begin{frame}{Proof}
+    
+    \alert{$\mathrm{NP}\subseteq\bigcup_k NTIME(n^k)$:} Let $L\in\mathrm{NP}$ and take a polynomial verifier $V$ for $L$, say it works in time $C\cdot |\omega|^k$. Construct an NTM $M$:
+
+    Given input $\omega$:
+    
+    \vspace{-3pt}
+    \begin{itemize}
+        \item nondeterministically guess a certificate $c$ (of $|c|\leq C\cdot |\omega|^k$)
+        \item simulate $V$ on input $\langle \omega, c\rangle$
+        \item if $V$ accepted, $M$ accepts
+    \end{itemize}
+        
+    \alert{$\bigcup_k NTIME(n^k)\subseteq\mathrm{NP}$:} Let $L\in NTIME(n^k)$, i.e., $L=L(M)$ for an NTM $M$ working in time $O(n^k)$. Construct a polynomial verifier $V$:
+
+    Given input $\langle w, c\rangle$, interpret $c$ as sequence of choices: $c_i=j$ means ``at step $i$ use $j$th possible transition'' (order as in $\mathrm{code}(M)$)
+ 
+    \vspace{-3pt}
+    \begin{itemize}        
+        \item simulate $M$ on input $w$
+        \item at each step $i$ choose the $c_i$th possible transition
+        \item accept if this computation path leads to acceptance\hfill\qedsymbol     
+    \end{itemize}    
+
+\end{frame}
+
+
+\begin{frame}{Example: CLIQUE is in NP}
+
+    $$
+    \mathrm{CLIQUE}=\{\langle G,k\rangle\mid G \text{ is a graph which contains }K_k\text{ as a subgraph}\}
+    $$
+
+    \textbf{Polynomial verifier for $\mathrm{CLIQUE}$}: input $\langle \langle G,k\rangle,c\rangle$
+    \begin{itemize}
+        \item interpret the certificate $c$ as a list of vertices
+        \item check that $c$ contains $k$ vertices
+        \item check that $c$ induces a complete subgraph of $G$
+    \end{itemize}
+
+    \textbf{Nondeterministic TM deciding $\mathrm{CLIQUE}$}: input $\langle G,k\rangle$
+    \begin{itemize}
+        \item nondeterministically choose a $k$-element subset $c\subseteq V$
+        \item check that $c$ induces a complete subgraph of $G$
+    \end{itemize}
+
+\end{frame}
+
+
+\section*{Polynomial-time reductions and NP-completeness}
+
+
+\begin{frame}{Polynomial-time reducibility}
+    
+    Recall the notion of \alert{reduction} between decision problems. Now we additionally require that the algorithm is polynomial-time:
+
+    \medskip
+    
+    A [total] function $f: \Sigma^*\to \Delta^*$ is \alert{polynomial-time computable}, if there exists a [deterministic] Turing Machine $M$ and $C,k>0$ such that for each $\omega\in\Sigma^*$, $M$ halts in at most $C\cdot |\omega|^k$ steps with $f(\omega)\in\Delta^*$ being the non-blank contents of its tape.
+
+    \medskip
+
+    \begin{definition}
+        A language $A\subseteq\Sigma^*$ is \alert{polynomial-time reducible} to a language $B\subseteq\Delta^*$, \alert{$A\leq_P B$}, if there exists a polynomial-time computable function $f: \Sigma^*\to \Delta^*$ such that for all $\omega\in \Sigma^*$:
+
+        \vspace{-12pt}
+        $$
+        \omega\in A \ \Leftrightarrow\ f(\omega)\in B
+        $$
+        \vspace{-20pt}
+
+        Then we call $f$ a \alert{polynomial-time reduction} from $A$ to $B$.
+    \end{definition}
+    
+\end{frame}
+
+
+\begin{frame}{Example: Hamiltonian path from source to target}
+   
+    \begin{itemize}
+        \item $\mathrm{HAMPATH}=\{\langle G\rangle\mid G\text{ contains a Hamiltonian path}\}$
+        \item $st$-$\mathrm{HAMPATH}=\{\langle G,s,t\rangle\mid G\text{ has a H. path from $s$ to $t$}\}$
+    \end{itemize}
+    
+    \begin{example}
+        $\mathrm{HAMPATH}$ and $st$-$\mathrm{HAMPATH}$ are \alert{polynomial-time interreducible}, i.e. each polynomial-time reduces to the other.
+    \end{example}
+
+    \textbf{The reduction $\mathrm{HAMPATH}\leq_P st\text{-}\mathrm{HAMPATH}$}:
+    
+    Given $G$ create $G'$ by adding new vertices $s,t$ and all edges from $s$ to $V_G$ and from $V_G$ to $t$; define $f(\langle G\rangle)=\langle G',s,t\rangle$    
+    $$
+    \langle G\rangle\in\mathrm{HAMPATH}\ \Leftrightarrow\ \langle G',s,t\rangle\in st\text{-}\mathrm{HAMPATH}
+    $$
+
+    \textbf{The reduction $st\text{-}\mathrm{HAMPATH}\leq_P \mathrm{HAMPATH}$}:
+    construct $G'$ by adding new vertices $s',t'$, edges $s'\to s,t\to t'$; $f(\langle G,s,t\rangle)=\langle G'\rangle$   
+
+\end{frame}
+
+
+\begin{frame}{Example: 3SAT is polynomial-time reducible to CLIQUE}
+    
+    A propositional formula is in \alert{CNF} if it is a conjunction of clauses, and \alert{3-CNF} if each clause contains exactly 3 literals.
+
+    \begin{itemize}
+        \item $\alert{\mathrm{SAT}}=\{\langle\phi\rangle\mid \varphi\text{ is a satisfiable CNF formula}\}$
+        \item $\alert{\mathrm{3SAT}}=\{\langle\phi\rangle\mid \varphi\text{ is a satisfiable 3-CNF formula}\}$
+    \end{itemize}
+    
+    \begin{theorem}
+        $\mathrm{3SAT}$ is polynomial-time reducible to $\mathrm{CLIQUE}$.
+    \end{theorem}
+    \textbf{Proof:} Vertices are occurrences of literals (three vertices per clause). Include all edges except for:
+    \begin{itemize}
+        \item between vertices from the same clause
+        \item between a variable and its negation ($x$ and $\neg x$)
+    \end{itemize}
+    Set $k=\#\text{clauses}$. Note: Exactly one literal per clause selected.\hfill\qedsymbol
+
+    \textbf{Exercise:} 3SAT is polynomial-time interreducible with SAT.
+
+\end{frame}
 
 
 \end{document}
