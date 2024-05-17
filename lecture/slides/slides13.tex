@@ -32,21 +32,6 @@
 \end{frame}
 
 
-\begin{frame}{Summary of Lecture 13}
-
-    \begin{itemize}
-        \item time complexity, for TM as well as NTM
-        \item the class P
-        \item the class NP: verifier-based and nondeterminisim-based definitions
-        \item polynomial-time reductions
-        \item NP-complete problems
-        \item Cook-Levin theorem: SAT is NP-complete
-        \item space complexity
-    \end{itemize}
-
-\end{frame}
-
-
 \section{\sc Chapter 5: Intro to Complexity}
 
 
@@ -157,7 +142,6 @@
             \item at first 1, switch state; erase 1 from Tape 1 \& 0 from Tape 2
             \item accept if both tapes are erased
         \end{itemize}
-
     \end{example}
     
     \begin{lemma}
@@ -295,7 +279,7 @@
 \end{frame}
 
 
-\begin{frame}{The class $NP$: nondeterminism-based definition}
+\begin{frame}{The class NP: nondeterminism-based definition}
     
     \begin{definition}
         $\mathrm{NP}$ is the class of all languages that have a polynomial verifier.
@@ -418,8 +402,8 @@
     A propositional formula is in \alert{CNF} if it is a conjunction of clauses, and \alert{3-CNF} if each clause contains exactly 3 literals.
 
     \begin{itemize}
-        \item $\alert{\mathrm{SAT}}=\{\langle\phi\rangle\mid \varphi\text{ is a satisfiable CNF formula}\}$
-        \item $\alert{\mathrm{3SAT}}=\{\langle\phi\rangle\mid \varphi\text{ is a satisfiable 3-CNF formula}\}$
+        \item $\alert{\mathrm{SAT}}=\{\langle\varphi\rangle\mid \varphi\text{ is a satisfiable CNF formula}\}$
+        \item $\alert{\mathrm{3SAT}}=\{\langle\varphi\rangle\mid \varphi\text{ is a satisfiable 3-CNF formula}\}$
     \end{itemize}
     
     \begin{theorem}
@@ -455,8 +439,6 @@
     \textbf{Note:} We call $B$ \alert{$\mathrm{NP}$-hard} if some/every $\mathrm{NP}$-complete problem reduces to it (but $B$ is not necessarily in $\mathrm{NP}$). This makes sense even for problems that are not `decision' problems (for example `counting problems').    
 
 \end{frame}
-
-
   
     
 \begin{frame}{Cook-Levin theorem}
@@ -465,8 +447,184 @@
         $\mathrm{SAT}$ is $\mathrm{NP}$-complete.
     \end{theorem}
 
-    \textbf{Proof:} TODO
+
+    \textbf{Proof:} \alert{SAT is in NP:} nondeterministic TM that guesses a satisfying assignment, verifies it satisfies $\varphi$ (in polynomial time).
+
+    \bigskip
+
+    \alert{SAT is NP-hard:} The idea is to encode computation of a (nondeterministic) TM as a SAT instance.
+
+    Take any $L\in NP$ and let $M$ be an NTM that decides $L$ in time $n^k-3$ for some $k$ (for simplicity assume one-way infinite tape).
+
+    Describe the computation of $M$ on input $w$ in a table [next slide].
+
+\end{frame}
+
+
+\begin{frame}{Proof cont'd: computation in a table}
+
+    Construct a $n^k\times n^k$ table where each row corresponds to a configuration for computation of $M$ on input $w$.  
     
+    The first row describes the initial config, each next row obtained by one move, or by zero moves (if we already halted).
+
+    We bookend the configurations by \#'s.
+
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}\hline
+            \# & $q_0$ & $w_1$ &$w_2$ & \ldots &$w_n$ & \_  &\_  &  \ldots &\# \\\hline
+            \# &       &       &       &       &       &       &       &  &\# \\\hline
+            \# & \vdots &       &       &       &       &       &       &&\# \\
+            \# & \vdots &       &       &       &       &       &       &&\# \\\hline
+            \# &       &       &       &       &       &       &       &  &\# \\\hline
+                
+        \end{tabular}
+    \end{center}
+
+    We inspect the table by $2\times 3$ frames:
+    \scalebox{0.8}{
+        \begin{tabular}{|c|c|c|}\hline\small
+            \phantom{\#} & \phantom{\#} & \phantom{\#} \\\hline
+            & & \\\hline
+        \end{tabular}
+    }
+    [next slide]
+
+\end{frame}
+
+
+\begin{frame}{Proof cont'd: legal frames}
+
+    \vspace{-3pt}
+    We describe \alert{legal frames}, here only a selection ($a,b,c,d\in \Gamma$):
+
+    \begin{center}
+        
+        \begin{minipage}{0.32\textwidth}
+            $\delta(q_1,b)\ni (q_2,c,L)$
+    
+            \begin{tabular}{|c|c|c|}\hline
+                a & $q_1$ & b\\\hline
+                $q_2$ & a & c\\\hline
+            \end{tabular}
+        \end{minipage}
+        \begin{minipage}{0.32\textwidth}
+            $\delta(q_1,b)\ni (q_2,c,R)$
+    
+            \begin{tabular}{|c|c|c|}\hline
+                a & $q_1$ & b\\\hline
+                a & c & $q_2$ \\\hline
+            \end{tabular}
+        \end{minipage}
+        \begin{minipage}{0.32\textwidth}
+            $\delta(q_1,b)\ni (q_2,c,R)$
+    
+            \begin{tabular}{|c|c|c|}\hline
+                d & a & $q_1$ \\\hline
+                d & a & c  \\\hline
+            \end{tabular}
+        \end{minipage}
+    
+        \medskip
+    
+        \begin{minipage}{0.32\textwidth}
+            $\delta(\_,\_)\ni (q_2,\_,L)$
+    
+            \begin{tabular}{|c|c|c|}\hline
+                a & b & c\\\hline
+                a & b & $q_2$ \\\hline
+            \end{tabular}
+        \end{minipage}
+        \begin{minipage}{0.32\textwidth}
+            $\delta(\_,\_)\ni (\_,c,L)$
+    
+            \begin{tabular}{|c|c|c|}\hline
+                a & b & d\\\hline
+                c & b & d \\\hline
+            \end{tabular}
+        \end{minipage}
+        \begin{minipage}{0.32\textwidth}
+            no change
+    
+            \begin{tabular}{|c|c|c|}\hline
+                \# & a & b\\\hline
+                \# & a & b\\\hline
+            \end{tabular}
+        \end{minipage}
+
+    \end{center}
+
+    \smallskip
+    
+    \textbf{Claim:} If 1st row contains initial config and each frame legal, then each row corresponds to a valid move (or is a copy once we halted).
+    
+    \vspace{-3pt}
+    \begin{itemize}
+        \item each row has at most one state
+        \item legal frames with a state correspond to valid moves
+        \item if no state, transfer without change
+        \item proof technical, we omit some of the details
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Proof cont'd: describe table by CNF formula}
+
+    For each $(i,j) $ and $a\in \Gamma\cup Q \cup \{\#\}$ create a boolean variable $x_{i,j,a}$.
+
+    \vspace{-18pt}
+    $$
+    \varphi=\alert{\varphi_{cell}}\ \wedge\ \alert{\varphi_{start}}\ \wedge\ \alert{\varphi_{move}}\ \wedge\  \alert{\varphi_{accept}}
+    $$
+
+    Each cell has exactly one symbol:
+    $$
+    \alert{\varphi_{cell}}=
+        \bigwedge_{1\leq i,j \leq n^k} \left(
+            \left(
+                \bigvee_{a \in \Gamma\cup Q \cup \{\#\}} x_{i,j,a}
+                \right) 
+            \ \wedge \bigwedge_{s\neq t\in \Gamma\cup Q \cup \{\#\}} (\overline{x_{i,j,s}}\vee \overline{x_{i,j,t}})
+        \right)
+    $$
+
+    The first row is the initial configuration:
+    $$
+    \alert{\varphi_{start}}= x_{1,1,\#}\mathbin{\wedge} x_{1,2,q_0} \mathbin{\wedge} x_{1,3,w_1}\mathbin{\wedge}\ldots \mathbin{\wedge} x_{1,n+2,w_n}\mathbin{\wedge} x_{1,n+3,\_}\mathbin{\wedge}\ldots \mathbin{\wedge} x_{1,n^k,\#}
+    $$
+
+    We got to an accepting state:
+    $$
+    \alert{\varphi_{accept}}= \bigvee_{1\leq i,j \leq n^k} x_{i,j,q_{F}}
+    $$    
+
+\end{frame}
+
+
+\begin{frame}{Proof finished}
+
+    \vspace{-3pt}
+    Legality of the table is a conjunction of legality of all frames:
+    $$
+    \alert{\varphi_{move}}=\bigwedge_{1\leq i < n^k, 1<j<n^k} \alert{\varphi_{i,j}}
+    $$
+
+    \vspace{-3pt}
+    Legality of one frame is a disjunction over all legal frames:
+    $$
+    \alert{\varphi_{i,j}}=\bigvee_{\substack{(a_1,\ldots,a_6) \\ \in\mathrm{LEGAL}}}(x_{i,j-1,a_1}\mathbin{\wedge} x_{i,j,a_2}\mathbin{\wedge} x_{i,j+1,a_3}\mathbin{\wedge}x_{i+1,j-1,a_4}\mathbin{\wedge} x_{i+1,j,a_5}\mathbin{\wedge} x_{i+1,j+1,a_6})
+    $$
+    This is not in CNF but can be converted: $\varphi_{i,j}$ doesn't depend on the  input, only on the TM, except need to write indices $i,j$ ($\log n$)
+
+    \textbf{Claim:} reduction has polynomial time complexity, $O(n^{2k}\log n)$.
+    \begin{itemize}
+        \item we need $\log n$ to write indices of variables
+        \item $\varphi_{cell}$ in $O(n^{2k}\log n)$, go through all cells
+        \item $\varphi_{start}$ in $O(n^{k}\log n)$, go through the first row
+        \item $\varphi_{move},\varphi_{accept}$ in $O(n^{2k}\log n)$, all cells
+        \hfill\qedsymbol
+    \end{itemize}
+
 \end{frame}
 
 
@@ -488,7 +646,7 @@
     \end{theorem}
     \textbf{Proof:} observe $\overline{\mathrm{TAUT}}\in\mathrm{NP}$ (guess False assignment); note that $A\leq_P B$ iff $\overline{A}\leq_P\overline{B}$; so $\mathrm{TAUT}$ is co-$\mathrm{NP}$-hard iff $\overline{\mathrm{TAUT}}$ is $\mathrm{NP}$-hard. But $\mathrm{SAT}\leq_P\overline{\mathrm{TAUT}}$ ($\varphi$ satisf. iff $\neg\varphi$ not a tautology)\hfill\qedsymbol
 \end{frame}
-    
+
 
 \section*{Space complexity}
 
@@ -524,11 +682,26 @@
         $\mathrm{L}\subseteq \mathrm{NL}\subseteq \mathrm{P} \subseteq \mathrm{NP} \subseteq \mathrm{PSPACE} \subseteq \mathrm{NPSPACE} \subseteq \mathrm{EXPTIME}$
     \end{theorem}
     
-    $\alert{\mathrm{L}}=\mathrm{SPACE}(\log(n))$\\
+    $\alert{\mathrm{L}}=\mathrm{SPACE}(\log(n))$ \qquad note: $\log(n^k)\in O(\log(n))$\\
     $\alert{\mathrm{NL}}=\mathrm{NSPACE}(\log(n))$\\
     $\alert{\mathrm{PSPACE}} = \bigcup_k \mathrm{SPACE}(n^k)$\\
     $\alert{\mathrm{NPSPACE}} = \bigcup_k \mathrm{NSPACE}(n^k)$\\
     $\alert{\mathrm{EXPTIME}} = \bigcup_k \mathrm{TIME}(2^{n^k})$
+
+\end{frame}
+
+
+\begin{frame}{Summary of Lecture 13}
+
+    \begin{itemize}
+        \item time complexity, for TM as well as NTM
+        \item the class P
+        \item the class NP: verifier-based and nondeterminisim-based definitions
+        \item polynomial-time reductions
+        \item NP-complete problems
+        \item Cook-Levin theorem: SAT is NP-complete
+        \item space complexity
+    \end{itemize}
 
 \end{frame}
 

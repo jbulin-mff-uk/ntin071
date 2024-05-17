@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.2)  17 MAY 2024 15:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.2)  18 MAY 2024 00:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1485,22 +1485,22 @@ LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inpu
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/mathkerncmss.
 ) [2
 
-{c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3
-
-]
+{c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <14.4> not available
-(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 50.
+(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 35.
 
-[4
+[3
 
-] [5
+] [4
 
 ]
-Overfull \vbox (18.83736pt too high) detected at line 76
+Overfull \vbox (18.83736pt too high) detected at line 61
  []
 
-[6
+[5
+
+] [6
 
 ] [7
 
@@ -1510,90 +1510,124 @@ Overfull \vbox (18.83736pt too high) detected at line 76
 
 ] [10
 
-] [11
-
 ]
-Overfull \vbox (9.70229pt too high) detected at line 191
+Overfull \vbox (9.70229pt too high) detected at line 175
  []
 
-[12
+[11
+
+] [12
 
 ] [13
 
-] [14
+]
+Overfull \vbox (20.21883pt too high) detected at line 235
+ []
+
+[14
 
 ]
-Overfull \vbox (20.21883pt too high) detected at line 251
+Overfull \vbox (10.80112pt too high) detected at line 261
  []
 
 [15
 
-]
-Overfull \vbox (10.80112pt too high) detected at line 277
- []
-
-[16
+] [16
 
 ] [17
 
-] [18
+]
+Overfull \vbox (16.47728pt too high) detected at line 323
+ []
+
+[18
 
 ]
-Overfull \vbox (16.47728pt too high) detected at line 339
+Overfull \hbox (10.77731pt too wide) detected at line 345
+[] \OT1/cmss/m/n/10.95 = \OMS/cmsy/m/n/10.95 fh\OT1/mathkerncmss/m/sl/10.95 G\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 k\OMS/cmsy/m/n/10.95 i j \OT1/mathkerncmss/m/sl/10.95 G[]K[][]\OMS/cmsy/m/n/10.95 g
  []
 
 [19
 
+] [20
+
 ]
-Overfull \hbox (10.77731pt too wide) detected at line 361
-[] \OT1/cmss/m/n/10.95 = \OMS/cmsy/m/n/10.95 fh\OT1/mathkerncmss/m/sl/10.95 G\OML/cmm/m/it/10.95 ; \OT1/mathkerncmss/m/sl/10.95 k\OMS/cmsy/m/n/10.95 i j \OT1/mathkerncmss/m/sl/10.95 G[]K[][]\OMS/cmsy/m/n/10.95 g
+Overfull \vbox (15.91061pt too high) detected at line 373
  []
 
-[20
-
-] [21
+[21
 
 ]
-Overfull \vbox (15.91061pt too high) detected at line 389
+Overfull \vbox (0.1366pt too high) detected at line 397
  []
 
 [22
 
 ]
-Overfull \vbox (0.1366pt too high) detected at line 413
+Overfull \vbox (17.11821pt too high) detected at line 422
  []
 
 [23
 
 ]
-Overfull \vbox (17.11821pt too high) detected at line 438
+Overfull \vbox (3.03903pt too high) detected at line 441
  []
 
 [24
 
+] [25
+
 ]
-Overfull \vbox (3.03903pt too high) detected at line 457
+Overfull \vbox (13.99551pt too high) detected at line 492
  []
 
-[25
-
-] [26
+[26
 
 ]
-Overfull \vbox (14.25322pt too high) detected at line 490
+Overfull \vbox (16.72401pt too high) detected at line 568
  []
 
 [27
 
-] [28
+]
+Overfull \hbox (6.44604pt too wide) detected at line 601
+[]\OML/cmm/m/it/10.95 '[][] \OT1/cmss/m/n/10.95 = [] []
+ []
+
+
+Overfull \vbox (2.62984pt too high) detected at line 601
+ []
+
+[28
 
 ]
-Overfull \vbox (4.77654pt too high) detected at line 510
+Overfull \hbox (22.45038pt too wide) detected at line 628
+[]\OML/cmm/m/it/10.95 '[][] \OT1/cmss/m/n/10.95 = [](\OT1/mathkerncmss/m/sl/10.95 x[] [] x[] [] x[] [] x[] [] x[] [] x[]\OT1/cmss/m/n/10.95 )
+ []
+
+
+Overfull \vbox (21.18158pt too high) detected at line 628
  []
 
 [29
 
-] [30
+]
+Overfull \vbox (14.25322pt too high) detected at line 648
+ []
+
+[30
+
+] [31
+
+]
+Overfull \vbox (4.77654pt too high) detected at line 668
+ []
+
+[32
+
+] [33
+
+] [34
 
 ]
 \tf@nav=\write7
@@ -1614,18 +1648,18 @@ Package rerunfilecheck Info: File `slides13.out' has not changed.
 (rerunfilecheck)             Checksum: CCCDB9D8CBF182EF6AA7722433644A46;823.
  ) 
 Here is how much of TeX's memory you used:
- 36929 strings out of 474050
- 850868 string characters out of 5741738
- 1939754 words of memory out of 5000000
- 58622 multiletter control sequences out of 15000+600000
- 574653 words of font info for 94 fonts, out of 8000000 for 9000
+ 36941 strings out of 474050
+ 851023 string characters out of 5741738
+ 1946754 words of memory out of 5000000
+ 58629 multiletter control sequences out of 15000+600000
+ 572705 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,13n,126p,1968b,761s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb>
-Output written on slides13.pdf (30 pages, 211817 bytes).
+<c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/Program Files/texlive/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb>
+Output written on slides13.pdf (34 pages, 234744 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 328 PDF objects out of 1000 (max. 8388607)
+ 248 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
  83 words of extra memory for PDF output out of 10000 (max. 10000000)
 
