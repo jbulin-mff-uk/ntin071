@@ -35,8 +35,13 @@
 \begin{frame}{Summary of Lecture 13}
 
     \begin{itemize}
-        \item time complexity
-        \item 
+        \item time complexity, for TM as well as NTM
+        \item the class P
+        \item the class NP: verifier-based and nondeterminisim-based definitions
+        \item polynomial-time reductions
+        \item NP-complete problems
+        \item Cook-Levin theorem: SAT is NP-complete
+        \item space complexity
     \end{itemize}
 
 \end{frame}
@@ -139,7 +144,7 @@
         Every language decidable in time $o(n \log n)$ [on a single-tape, deterministic TM] is regular. %problem 7.49
     \end{theorem}
 
-    [We omit the proof.]
+    [We omit the proof. (It uses Myhill-Nerode theorem similarly to the proof that 2-way DFA only recognize regular languages.)]
 
 \end{frame}
 
@@ -428,6 +433,102 @@
     Set $k=\#\text{clauses}$. Note: Exactly one literal per clause selected.\hfill\qedsymbol
 
     \textbf{Exercise:} 3SAT is polynomial-time interreducible with SAT.
+    %todo hint or proof
+
+\end{frame}
+
+
+\begin{frame}{NP-completeness}
+
+    \begin{definition}
+    A langugage $B$ is \alert{$\mathrm{NP}$-complete}, if $B\in\mathrm{NP}$ and every language $A\in \mathrm{NP}$ is polynomial-time reducible to $B$.
+    \end{definition}
+    
+    \textbf{Observe:}
+    \begin{itemize}
+        \item If some $\mathrm{NP}$-complete $B$ is in $\mathrm{P}$, then $\mathrm{P}=\mathrm{NP}$.
+        \item If $B$ is $\mathrm{NP}$-complete, $B\leq_P C$ and $C\in\mathrm{NP}$, then $C$ is $\mathrm{NP}$-complete. (Why? $\leq_P$ is transitive.)
+    \end{itemize}
+
+    \textbf{Exercise:} Prove that $\mathrm{P}\neq\mathrm{NP}$.
+
+    \textbf{Note:} We call $B$ \alert{$\mathrm{NP}$-hard} if some/every $\mathrm{NP}$-complete problem reduces to it (but $B$ is not necessarily in $\mathrm{NP}$). This makes sense even for problems that are not `decision' problems (for example `counting problems').    
+
+\end{frame}
+
+
+  
+    
+\begin{frame}{Cook-Levin theorem}
+    
+    \begin{theorem}[Cook, Karp, Levin ca. 1971]
+        $\mathrm{SAT}$ is $\mathrm{NP}$-complete.
+    \end{theorem}
+
+    \textbf{Proof:} TODO
+    
+\end{frame}
+
+
+\begin{frame}{The class co-NP, tautology}
+    \begin{definition}
+     A language $L\subseteq \Sigma^*$ belongs to the class \alert{co-$\mathrm{NP}$}, if and only if its complement $\overline{L}=\Sigma^*-L$ belongs to $\mathrm{NP}$.
+    \end{definition}
+    \vspace{-12pt}
+    \begin{itemize}
+        \item $\mathrm{P}$ is contained in $\mathrm{NP}\cap\text{co-}\mathrm{NP}$
+        \item it is expected that $\mathrm{NP}\neq\text{co-}\mathrm{NP}$ (implies $\mathrm{P}\neq\mathrm{NP}$ but not iff)
+    \end{itemize}
+
+    \begin{example}
+        \alert{$\mathrm{TAUT}$} is the decision problem whether a given propositional formula is a tautology (i.e., satisfied by every assignment).
+    \end{example}
+    \begin{theorem}
+        $\mathrm{TAUT}$ is co-$\mathrm{NP}$-complete.
+    \end{theorem}
+    \textbf{Proof:} observe $\overline{\mathrm{TAUT}}\in\mathrm{NP}$ (guess False assignment); note that $A\leq_P B$ iff $\overline{A}\leq_P\overline{B}$; so $\mathrm{TAUT}$ is co-$\mathrm{NP}$-hard iff $\overline{\mathrm{TAUT}}$ is $\mathrm{NP}$-hard. But $\mathrm{SAT}\leq_P\overline{\mathrm{TAUT}}$ ($\varphi$ satisf. iff $\neg\varphi$ not a tautology)\hfill\qedsymbol
+\end{frame}
+    
+
+\section*{Space complexity}
+
+    
+\begin{frame}{Space complexity}
+
+    Similarly to time, measure space required for computation:
+
+    \begin{definition}
+        The \alert{space complexity} of a [deterministic, single-tape] Turing machine that always halts is $f:\mathbb{N}\to \mathbb{N}$, where $f(n)$ is the maximum number of cells that $M$ accesses on any input of size $n$.
+
+        For nondeterministic Turing machines we take the maximum over all computation paths.
+    \end{definition}
+
+    But this does not work for \alert{sublinear} space complexity, in particular, \alert{logspace} (\alert{$\mathrm{L}$}) and \alert{nodeterministic logspace} (\alert{$\mathrm{NL}$}).
+
+    The solution is to have two tapes: a read-only input tape, and a working tape whose space we measure. (If we want ouput, then a third `write-only' output tape, only traverse in one direction.)
+
+\end{frame}
+    
+
+\begin{frame}{Classes of space complexity}
+
+    For $f: \mathbb{N}\to \mathbb{R}^+$, define the space complexity clases:
+
+   
+    $\alert{\mathrm{SPACE}(f(n))}=\{L\mid L \text{ decidable by a DTM in space }O(f(n))\}$\\ 
+    $\alert{\mathrm{NSPACE}(f(n))}=\{L\mid L \text{ decidable by an NTM in space }O(f(n))\}$
+
+    \medskip
+
+    \begin{theorem}
+        $\mathrm{L}\subseteq \mathrm{NL}\subseteq \mathrm{P} \subseteq \mathrm{NP} \subseteq \mathrm{PSPACE} \subseteq \mathrm{NPSPACE} \subseteq \mathrm{EXPTIME}$
+    \end{theorem}
+    
+    $\alert{\mathrm{L}}=\mathrm{SPACE}(\log(n))$\\
+    $\alert{\mathrm{NL}}=\mathrm{NSPACE}(\log(n))$\\
+    $\alert{\mathrm{PSPACE}} = \bigcup_k \mathrm{SPACE}(n^k)$\\
+    $\alert{\mathrm{NPSPACE}} = \bigcup_k \mathrm{NSPACE}(n^k)$\\
+    $\alert{\mathrm{EXPTIME}} = \bigcup_k \mathrm{TIME}(2^{n^k})$
 
 \end{frame}
 
