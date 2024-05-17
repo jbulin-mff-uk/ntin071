@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1715983784.73387 "c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides13.tex" "slides13.pdf" "slides13" 1715983788.97392 0
+["pdflatex"] 1715983985.7646 "c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides13.tex" "slides13.pdf" "slides13" 1715983989.79801 0
   "c:/Program Files/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1714676029 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/Program Files/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1714676909 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/Program Files/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcss1095.tfm" 1714676540 1536 f0fa079cdc83a6ffeda21e42352cf1ea ""
@@ -278,12 +278,12 @@
   "c:/Program Files/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1714682126 5519708 3e0a3bd242c027d061e388cbd88d8b5c ""
   "c:/Program Files/texlive/texmf-var/web2c/pdftex/pdflatex.fmt" 1714682254 8225303 744c928c74513808c62eae66352e4bb0 ""
   "c:/Program Files/texlive/texmf.cnf" 1714682088 755 639003dd4ad18b875b8369800f2abbde ""
-  "c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides13.tex" 1715983783 27240 e46b8ebad19a1392845d2f4690b39043 ""
+  "c:/Users/jakub/Work/GitHub/ntin071/lecture/slides/slides13.tex" 1715983984 27240 1058b3194e759473b6ac4a10de3143ff ""
   "header.tex" 1715696167 1507 abee1ddd793efdad9cd2f5b3dafc4d2f ""
-  "slides13.aux" 1715983788 6069 68e0e9df828fb0d7b59376c7cb62c63a "pdflatex"
-  "slides13.nav" 1715983788 4231 cad54da7bf1a27e6fcb75c8604f10f4d "pdflatex"
-  "slides13.out" 1715983788 823 cccdb9d8cbf182ef6aa7722433644a46 "pdflatex"
-  "slides13.tex" 1715983783 27240 e46b8ebad19a1392845d2f4690b39043 ""
+  "slides13.aux" 1715983989 6069 68e0e9df828fb0d7b59376c7cb62c63a "pdflatex"
+  "slides13.nav" 1715983989 4231 cad54da7bf1a27e6fcb75c8604f10f4d "pdflatex"
+  "slides13.out" 1715983989 823 cccdb9d8cbf182ef6aa7722433644a46 "pdflatex"
+  "slides13.tex" 1715983984 27240 1058b3194e759473b6ac4a10de3143ff ""
   (generated)
   "slides13.aux"
   "slides13.log"
