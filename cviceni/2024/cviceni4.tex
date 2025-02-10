@@ -1,0 +1,123 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Cvičení 4 -- Nedeterminismus, uzavřenost na operace}
+
+% po 3. přednášce
+% jaro 2024
+
+\medskip
+
+\noindent\emph{Vyřešte nejprve 1a, 2, 3 (zbytek je na procvičení, bude-li naopak čas, vraťte se k nedodělaným příkladům z minule).}
+
+\medskip
+
+
+\medskip\begin{problem}[Podmnožinová konstrukce]
+
+    Pro daný nedeterministický automat s $\epsilon$-přechody sestrojte ekvivalentní redukovaný DFA.
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]
+            \item
+            \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
+            $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
+            $D$ & $\{A\}$ & $\{C,D\}$ & $\emptyset$ \\
+            $\to\ast E$ & $\emptyset$ & $\emptyset$ & $\{A,C\}$
+            \end{tabular}
+            
+            \item
+            \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
+            $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\
+            $\ast D$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+            $E$ & $\{F\}$ & $\emptyset$ & $\{B,C\}$\\
+            $F$ & $\{D\}$ & $\emptyset$ & $\emptyset$
+            \end{tabular}
+            
+        \end{enumerate}
+    
+    \end{multicols}
+\end{problem}
+
+
+\medskip\begin{problem}[Uzavřenost na operace]
+
+    Pro danou dvojici automatů $A,B$ sestrojte automat, který přijímá daný jazyk.
+
+    \begin{multicols}{3}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L(A)-L(B)$
+            \item $L(A).L(B)$
+            \item $L(A)^+$
+            \item $L(A)^*$
+            \item $L(A)^R$
+        \end{enumerate}
+        
+        \begin{tabular}{ r | c c }
+        A & a & b \\ \hline
+        $\to\ast$ 0 & 1 & 2 \\  
+        1 & 3 & 0 \\
+        2 & 4 & 5 \\
+        3 & 0 & 2 \\
+        4 & 2 & 5 \\
+        5 & 0 & 3
+        \end{tabular}    
+        
+        \begin{tabular}{ r | c c }
+        B & a & b \\ \hline
+        $\to\ast$ 0 & 0 & 5 \\  
+        1 & 1 & 3 \\
+        2 & 2 & 7 \\
+        3 & 3 & 2 \\
+        $\ast$ 4 & 6 & 1 \\
+        5 & 5 & 1 \\
+        $\ast$ 6 & 4 & 2 \\
+        7 & 7 & 0
+        \end{tabular}
+    
+    \end{multicols}
+    
+\end{problem}
+    
+
+\medskip\begin{problem}[Mazání]
+
+    Mějme nějaký regulární jazyk $L$ nad abecedou $\Sigma=\{a,b\}$. Popište následující jazyky v množinovém zápisu. Jsou tyto jazyky (nutně) také regulární? Dokažte nebo vyvraťte. 
+    
+    \medskip
+
+    Jazyk sestávající ze všech slov vzniklých ze slov jazyka $L$\dots
+    
+    \medskip
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item \dots smazáním všech výskytů písmene $a$.
+            \item \dots smazáním počátečního písmene a zapsáním tohoto písmene na konec slova.
+            \item \dots smazáním nejdelší souvislé posloupnosti $a$ček ze začátku slova.
+    \end{enumerate}
+
+\end{problem}
+
+    
+\medskip\begin{problem}[Záměna přijímajících a nepřijímajících stavů]
+        
+    Zaměníme-li u daného NFA přijímající a nepřijímající stavy, bude jazyk přijímaný výsledným automatem doplňkem jazyka přijímaného původním automatem? Zdůvodněte.
+        
+\end{problem}
+
+
+
+
+\end{document}

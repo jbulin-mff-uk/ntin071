@@ -1,0 +1,75 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Tutorial 9 -- Pumping lemma for context-free languages}
+
+% after Lecture 8
+% spring 2024
+
+\medskip
+
+\noindent\emph{Solve 1, 2a-j, 3 first (the rest is for practice).}
+
+\medskip
+
+
+\medskip\begin{problem}[Pumping lemma]
+
+    Recall the statement and proof of the Pumping lemma for context-free languages. Compare with the version for regular languages.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Proving non-context-freeness]
+
+    Decide if the following languages are context-free. Prove that your answer is correct.
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]
+            \setlength\itemsep{1em}
+            \item $L=\{0^i1^i\mid i\geq 0\}$
+            \item $L=\{0^i1^j0^i\mid i,j\geq 0\}$
+            \item $L=\{0^i1^j0^i\mid 0\leq i\leq j\}$
+            \item $L=\{0^i1^j0^i\mid 0\leq j\leq i\}$
+            \item $L=\{0^i1^i2^i\mid i\geq 0\}$
+            \item $L=\{0^{2i}1^{3i}0^i\mid i\geq 0\}$
+            \item $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$
+            \item $L=\{ww\mid w\in \{0,1\}^*\}$
+            \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+            \item $L=\{ww^R\mid w\in \{0,1\}^*, |w|_0=|w|_1\}$
+            \item $L=\{1^{n^2}\mid n\geq 0\}$
+            \item $L=\{1^{n^2+n+1}\mid n\geq 0\}$
+            \item $L=\{1^p\mid p \text{ is a prime}\}$
+            \item $L=\{0^i1^{j}\mid 0\leq i\leq j^2\}$
+        \end{enumerate}
+    
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping linear languages]
+    
+    Recall that a grammar is \emph{linear}, if it only contains production rules of the form $A\to uBw$ and $A\to w$, where $A,B\in V$ and $u,w\in T^*$.
+    
+    \bigskip
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{1em}
+        \item Formulate a Pumping lemma for linear languages.
+        \item Proof the statement using derivations from a (reduced) linear grammar.
+        \item How is the constant $n$ from the lemma related to a linear grammar for the given language?
+        \item Show that the language $L=\{w\in \{0,1\}^*\mid |w|_0=|w|_1\}$ is not linear.
+        \item Where does $L$ lie within the Chomsky hierarchy?
+    \end{enumerate}
+    
+\end{problem}
+
+
+\end{document}

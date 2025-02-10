@@ -1,0 +1,184 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Cvičení 11 -- Turingovy stroje}
+
+% po 11. přednášce
+% jaro 2024
+
+\medskip
+
+\noindent\emph{Vyřešte nejprve 1, 2, 3a-d, 4 (zbytek je na procvičení).}
+
+\medskip
+
+
+\medskip\begin{problem}[Turingův stroj]
+    
+    Uvažme Turingův stroj popsaný následující tabulkou:
+    
+    \begin{table}[h]
+    \begin{tabular}{r|cccc}
+    & B   & a    & b    &  c  \\ \hline
+    $\to q_0$ & $(q_1, B, L)$ & $(q_0, a, R)$ & $(q_0, c, R)$ & $(q_0, c, R)$ \\
+    $q_1$ & $(q_2, B, R)$ & $(q_1, c, L)$ &  & $(q_1, b, L)$ \\
+    $\ast q_2$  &              &              &              &             
+    \end{tabular}
+    \end{table}
+    
+    \begin{enumerate}[(a)]
+        \item Nakreslete stavový diagram.
+        \item Popište výpočet (posloupností konfigurací) na vstupu $w=aabca$.
+        \item Popište slovy, co tento Turingův stroj dělá.
+        \item Popište přijímaný jazyk.
+    \end{enumerate}
+
+\end{problem}
+    
+    
+\medskip\begin{problem}[Smaž jedničky]
+
+    Navrhněte Turingův stroj nad abecedou $\{0,1\}$, který ze vstupu smaže všechny 1ky a vrátí se na začátek (např. začne-li v konfiguraci $q_0 0011010$, skončí v $q_F 0000$ pro nějaké $q_F\in F$).
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Programování Turingových strojů]
+
+    Navrhněte Turingův stroj, který přijme jazyk $L$ Napište posloupnost konfigurací, která ukazuje, že přijmeme slovo $w$. 
+    
+    \begin{multicols}{2}
+    \begin{enumerate}[(a)]
+        \item $L=\{0^n1^n\mid n\geq 0\}$, $w=0011$
+        \item $L=\{0^n1^n2^n\mid n\geq 0\}$, $w=001122$
+        \item $L=\{0^i1^j\mid i\leq j\}$, $w=00111$
+        \item $L=\{w\in\{0,1\}^*\mid |w|_0=|w|_1\}$,\\ $w=100110$
+        \item $L=\{ucu^R\mid u\in\{0,1\}^*\}$, $w=10c01$
+        \item $L=\{uu^R\mid u\in\{0,1\}^*\}$, $w=101101$
+        \item $L=\{ucu\mid u \in\{0,1\}^*\}$, $w=110c110$
+        \item $L=\{uu\mid u \in\{0,1\}^*\}$, $w=110110$
+    \end{enumerate}
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Předchůdce]
+
+    Sestrojte Turingův stroj $T$, který pro dané vstupní přirozené číslo $x>0$ v binárním zápisu spočte jeho předchůdce, tj. $x-1$, v binárním zápisu (a vrátí čtecí hlavu na začátek). %Dále:
+    
+    \smallskip
+    \begin{enumerate}[(a)]    
+        %\item $T$ formálně popište, není ale nutné uvádět tabulku přechodové funkce, stačí stavový diagram (viz (b)).
+        \item Nakreslete stavový diagram $T$.
+        \item Napište posloupnost konfigurací, kterými $T$ projde při výpočtu pro vstup $w=10100$.
+    \end{enumerate}
+
+    Vytvořte deterministický, jednopáskový, jednostopový stroj (chcete-li např. dvoustopový, musíte jej sami naprogramovat.) Číslo v binárním zápisu nesmí začínat nulou, pokud není rovno 0. Příklady vstupních a výstupních konfigurací: 
+        
+    \begin{itemize}    
+        \item z konfigurace $q_01$ skončíme v $q0$ pro nějaké $q\in F$,
+        \item z konfigurace $q_01001$ skončíme v $q1000$ pro nějaké $q'\in F$,
+        \item z konfigurace $q_0100$ skončíme v $q11$ pro nějaké $q''\in F$.
+    \end{itemize}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Zrcadlení]
+    
+    Navrhněte Turingův stroj, který ze zadaného vstupního slova vytvoří jeho zrcadlový obraz.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Paměťové bloky]
+
+    Navrhněte Turingův stroj, který prohodí obsah dvou paměťových bloků. Konkrétně, počáteční konfiguraci $q_0u\#v\#w\#x\#y$ (kde $u, v, w, x, y \in \Sigma\setminus\{\#\}$) převede na $fu\#x\#w\#v\#y$ pro nějaké $f\in F$. Pokuste se zkonstruovat co nejmenší a nejefektivnější stroj.
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Nedeterministický test neprvočíselnosti]
+    
+    Navrhněte nedeterministický Turingův stroj, který přijme jazyk $L=\{1^n \mid\text{$n$ není prvočíslo}\}$.
+
+\end{problem}
+
+
+\begin{problem}[Jednostraně nekonečná páska]
+
+    Popište jak převést Turingův stroj s (jednou) oboustranně nekonečnou páskou na stroj, jehož páska je nekonečná jen v jednom směru, doprava. (Můžete předpokládat, že v prvním poli je speciální znak $\triangleright$.)
+
+\end{problem}
+    
+
+\begin{problem}[Pohyby hlavy]
+    
+    Uvažte modifikace Turingova stroje, kde jsou povoleny následující pohyby hlavy. Jaké třídy jazyků rozpoznávají?
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+            \item left (L), right (R)
+            \item stay (N), right (R),
+            \item stay (N), (L),
+            \item left (L), right (R), a stay (N).
+        \end{enumerate}    
+    \end{multicols}
+
+\end{problem}
+
+
+\begin{problem}[Jen dvě akce najednou]
+
+    Ukažte, že každý jednopáskový Turingův stroj $M$ lze převést na stroj $M'$, který smí provést jen dvě z následujících tří akcí najednou, tj. instrukce může: 
+    \begin{itemize}
+        \item změnit stav a pozici hlavy,
+        \item změnit stav a přepsat symbol na pásce, nebo
+        \item změnit pozici hlavy a přepsat symbol na pásce
+    \end{itemize}
+    ale žádná instrukce nesmí provést všechny tři akce najednou.
+
+\end{problem}
+
+
+\begin{problem}[Doprava nebo restartuj]
+    Uvažte modifikaci Turingova stroje, kde páska je nekonečná jen v jednom směru (doprava), a hlava může provést dva typy pohybů: right (R) nebo RESTART (návrat na první políčko). Ukažte, jak převést standardní jednopáskový stroj na tento typ stroje.
+\end{problem}
+        
+
+\begin{problem}[Přepiš jen jednou]
+
+    Uvažte jednopáskový Turingův stroj, který smí přepsat každé políčko na pásce nejvýše jednou. Ukažte, že tento výpočetní model je ekvivalentní standardnímu Turingovu stroji.
+
+\end{problem}
+    
+
+\begin{problem}[Nepřepisuj vstup]
+
+    Vysvětlete, proč zakážeme-li Turingovu stroji měnit políčka obsahující vstup, bude ekvivalentní konečnému automatu. (Takové stroje tedy rozpoznávají jen regulární jazyky.) Stačí popsat myšlenku.
+
+\end{problem}
+    
+
+\begin{problem}[Uzávěrové vlastnosti]
+    
+    Ukažte, že jak \emph{rekurzivní} tak \emph{rekurzivně spočetné} jazyky jsou uzavřené na:    
+    (a) \emph{sjednocení}, (b) \emph{průnik}, (c) \emph{konkatenaci}, (d) \emph{Kleeneho hvězdu}.
+    
+    Navíc ukažte, že
+    \begin{enumerate}[(a)]
+    \setcounter{enumi}{4}
+    \item rekurzivní jazyky jsou uzavřené na doplněk, ale 
+    \item rekurzivně spočetné ne.
+    \end{enumerate}
+
+\end{problem}
+
+
+
+\end{document}

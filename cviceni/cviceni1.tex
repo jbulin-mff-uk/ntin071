@@ -6,35 +6,35 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 1 -- Deterministický konečný automat, rozpoznávaný jazyk}
-
-% před 1. přednáškou
-% jaro 2024
+\section*{NTIN071 A\&G: Cvičení 1 -- Deterministický konečný automat, rozpoznávaný jazyk, regulární jazyky}
 
 \medskip
 
-\noindent\emph{Vyřešte nejprve 1abcd, 2ab, 3abcd (zbytek je na procvičení).}
+\subsection*{Cíle výuky:} Po absolvování student
+
+\begin{itemize}\setlength{\itemsep}{0pt}
+    \item zná základní terminologii a notaci z teorie formálních jazyků a automatů
+    \item rozumí formální definici konečného deterministického automatu (DFA) a rozpoznávaného jazyka
+    \item umí popsat jazyk rozpoznávaný daným DFA, pomocí množinového zápisu
+    \item umí sestrojit (a formálně popsat) DFA rozpoznávající daný jazyk
+    \item umí dokázat uzavřenost regulárních jazyků na různé množinové operace
+\end{itemize}
+
+\section*{Příklady na cvičení (think-pair-share)}
 
 \medskip
 
-\medskip\noindent Začneme definicí deterministického konečného automatu (DFA) a jazyka, který rozpoznává.
-% motivace: Morse code, automaty s výstupem (Moore, Mealy)?
-
-\medskip\begin{problem}[Konstrukce DFA pro daný jazyk]
+\medskip\begin{problem} [Konstrukce DFA pro daný jazyk]
     
     Sestrojte DFA rozpoznávající daný jazyk.
 
     \medskip
     
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_a \text{ je sudý}\}$
-        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_a \text{ není dělitelný 3}\}$
-        \item $L=\{w\in\{0,1\}^* \ \mid \  w\text{ je binární zápis přirozeného čísla dělitelného 5}\}$
-        \item $L=\{w\in\{a,b\}^* \mid \text{2 dělí $|w|_a$ nebo 3 dělí $|w|_b$}\}$ 
-        \item $L=\{w\in\{a,b\}^* \ \mid \  \text{2 nebo 3 dělí }|w|_a\}$
-        \item $L=\{w\in\{a,b\}^* \ \mid \  |w|_b \text{ je dělitelný 3}\}$
-        \item $L=\{w\in\{a,b\}^* \ \mid \  \text{2 dělí $|w|_a$ a 3 dělí $|w|_b$}\}$        
-        
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}        
+        \item $L=\{w\in\{a,b\}^* \,\mid\, |w|_a \text{ není dělitelný 3}\}$
+        \item $L=\{w\in\{a,b\}^* \,\mid\,\text{2 dělí $|w|_a$ nebo 3 dělí $|w|_b$}\}$ 
+        \item $L=\{w\in\{a,b\}^* \,\mid\, \text{2 dělí $|w|_a$ a 3 dělí $|w|_b$}\}$
+        \item $L=\{w\in\{0,1\}^* \,\mid\, w\text{ je binární zápis přirozeného čísla dělitelného 3}\}$        
     \end{enumerate}
 
 \end{problem}
@@ -44,27 +44,10 @@
 
     Nakreslete stavový diagram a popište rozpoznávaný jazyk v množinovém zápisu.
 
-    \begin{multicols}{4}
-    
-        \begin{enumerate}[(a)]    
-            \item \begin{tabular}{ c | c c }
-            & 0 & 1 \\   \hline
-            $\to$ $\ast$ p & q & p \\  
-            q & r & q\\
-            r & p & r
-            \end{tabular}
-    
-        \columnbreak
-
-            \item \begin{tabular}{ c | c c }
-            & 0 & 1 \\   \hline
-            $\to$ p & p & q \\  
-            q & p & r\\
-            $\ast$ r & p & r
-            \end{tabular}
-
-        \columnbreak
+    \begin{multicols}{2}
         
+        \begin{enumerate}[(a)]
+
             \item \begin{tabular}{ c | c c }
             & 0 & 1 \\   \hline
             $\to$ p & q & p \\  
@@ -93,16 +76,102 @@
     Sestrojte DFA přijímající právě všechna slova nad abecedou $\Sigma=\{a,b\}$, která splňují danou vlastnost. Popište daný jazyk pomocí množinového zápisu.
 
     \medskip
+    
+    (a) začíná `abba'\hfill (b) končí `abba'\hfill (c) obsahuje `abba' nebo `bab' jako podslovo
+\end{problem}
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item začínají `abba'
-        \item končí `abba'
-        \item obsahují `abba' nebo `bab' jako podslovo
-        \item mají alespoň 2 písmena a začínají a končí stejným písmenem
-        \item začínají a končí stejnou dvojicí písmen
+
+\medskip\begin{problem}[Regulární jazyky a množinové operace]
+
+    Mějme dva regulární jazyky, $L,L'$ nad stejnou abecedou. Ukažte, že platí následující:
+  
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $\Sigma^*\setminus L$ je regulární jazyk
+        \item $L\cup L'$ je regulární jazyk
+        \item $L\cap L'$ je regulární jazyk       
+    \end{enumerate}
+      
+\end{problem}
+
+
+\section*{K procvičení a k zamyšlení}
+
+
+\medskip\begin{problem}
+    
+    Sestrojte DFA rozpoznávající daný jazyk.
+
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{w\in\{a,b\}^* \,\mid\, |w|_a \text{ je sudý}\}$
+        \item $L=\{w\in\{a,b\}^* \,\mid\, |w|_b \text{ je dělitelný 3}\}$
+        \item $L=\{w\in\{a,b\}^* \,\mid\, \text{2 nebo 3 dělí }|w|_a\}$
+        \item $L=\{w\in\{a,b\}^* \,\mid\, \text{2 a 3 dělí }|w|_a\}$
+        \item $L=\{w\in\{0,1\}^* \,\mid\, w\text{ je binární zápis přirozeného čísla dělitelného 5}\}$       
     \end{enumerate}
 
 \end{problem}
 
 
+\medskip\begin{problem}
+
+    Nakreslete stavový diagram a popište rozpoznávaný jazyk v množinovém zápisu.
+
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]    
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ $\ast$ p & q & p \\  
+            q & r & q\\
+            r & p & r
+            \end{tabular}
+    
+        \columnbreak
+
+            \item \begin{tabular}{ c | c c }
+            & 0 & 1 \\   \hline
+            $\to$ p & p & q \\  
+            q & p & r\\
+            $\ast$ r & p & r
+            \end{tabular}
+
+        \end{enumerate}
+
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}
+
+    Sestrojte DFA rozpoznávající jazyk všech slov nad abecedou $\Sigma=\{a,b\}$ splňujících danou vlastnost:
+
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item má alespoň dvě písmena a první písmeno je stejné jako poslední
+        \item má alespoň dvě písmena a první dvojice písmen je stejná jako poslední dvojice písmen
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}
+
+    Co když jsou $L,L'$ regulární jazyky nad různými (ale ne nutně disjunktními) abecedami? Jsou jazyky $\Sigma^*\setminus L$, $L\cup L'$, $L\cap L'$ nutně také regulární?
+
+\end{problem}
+  
+
+\medskip\begin{problem}
+
+    Uměli byste ukázat, že jazyk $L^R$ (tj. slova z $L$ napsaná pozpátku) je regulární kdykoliv je $L$ regulární?
+      
+\end{problem}
+
 \end{document}
+

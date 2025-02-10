@@ -1,0 +1,77 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+%\thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Cvičení 2 -- Regulární jazyky, Pumping lemma}
+
+% po 1. přednášce
+% jaro 2024
+
+\medskip
+
+\noindent\emph{Vyřešte nejprve 1ab, 2, 3a, 4a-f (zbytek je na procvičení).}
+
+\medskip\begin{problem}[Regulární jazyky a množinové operace]
+
+    Mějme dva regulární jazyky, $L,L'$ nad stejnou abecedou. Ukažte, že platí následující:
+  
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $\Sigma^*\setminus L$ je regulární jazyk
+        \item $L\cup L'$ je regulární jazyk  
+        \item $L\cap L'$ je regulární jazyk
+        \item Co když mají $L$ a $L'$ různé abecedy (které ale mohou sdílet některé symboly)?
+        \item Uměli byste ukázat, že $L^R$ (tj. slova z $L$ napsaná pozpátku) je také regulární jazyk?
+    \end{enumerate}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping lemma: formulace]
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Zformulujte pumping lemma pro regulární jazyky (bez nahlížení do poznámek z přednášky).
+        \item Jak souvisí $n$ z lemmatu s automatem rozpoznávajícím daný jazyk?
+        \item Dokažte je (bez nahlížení do poznámek z přednášky).
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping lemma: zobecnění]
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Můžeme podmínku $|uv|\leq n$ v Pumping lemmatu nahradit za $|vw|\leq n$, tedy \emph{iterovat blízko konce}? Dokažte nebo vyvraťte.
+        \item Můžeme iterovat blízko předem zvoleného místa ve slově? Jak zformulovat (a dokázat) takové zesílení?
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping lemma: aplikace]
+
+    Určete, které z následujících jazyků nejsou regulární. Dokažte to pomocí pumping lemmatu. (Jazyky jsou nad abecedou $\Sigma=\{a,b\}$.)
+
+    \medskip
+  
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item $L=\{aa, ab, ba\}$
+        \item $L=\{a^ib^j\ \mid\ i\leq j\}$
+        \item $L=\{a^ib^j\ \mid\ i\geq j\}$
+        \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ pro dané $k\in\mathbb N$
+        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
+        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, kde $w^R$ označuje slovo $w$ napsané pozpátku
+        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
+        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+        
+    \end{enumerate}
+  
+\end{problem}
+
+
+\end{document}

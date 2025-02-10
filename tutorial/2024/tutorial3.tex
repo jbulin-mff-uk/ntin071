@@ -1,0 +1,213 @@
+\documentclass[a4paper,12pt]{amsart}
+
+\input{header.tex}
+
+\begin{document}
+
+% \thispagestyle{empty}
+
+\section*{NTIN071 A\&G: Tutorial 3 -- Equivalent and minimal representations, testing properties, nondeterminism, closure under operations}
+
+% after Lecture 3
+% spring 2024
+
+\medskip
+
+\noindent\emph{Solve 1abc only for A\&B, 2, 3a, 4 (the rest is for practice).}
+
+\medskip
+
+
+\medskip\begin{problem}[Equivalent and minimal representations]    
+    
+    For the automata below:
+
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Find and remove all unreachable states.
+        \item Determine the state equivalence (indistinguishability) relations. (Moreover, for any distinguishable pair of states find all minimal-length distinguishing words.)
+        \item Construct their reducts.
+        \item Are any two of the automata equivalent? Use the algorithm from the lecture.
+    \end{enumerate}
+    
+    \begin{multicols}{3}
+    
+        \begin{tabular}{ r | c c }
+            A & a & b \\ \hline
+            $\to\ast$ 0 & 1 & 2 \\  
+            1 & 3 & 0 \\
+            2 & 4 & 5 \\
+            3 & 0 & 2 \\
+            4 & 2 & 5 \\
+            5 & 0 & 3
+        \end{tabular}
+            
+        \begin{tabular}{ r | c c }
+            B  & a & b \\ \hline
+            $\to\ast$ 0 & 0 & 5 \\  
+            1 & 1 & 3 \\
+            2 & 2 & 7 \\
+            3 & 3 & 2 \\
+            $\ast$ 4 & 6 & 1 \\
+            5 & 5 & 1 \\
+            $\ast$ 6 & 4 & 2 \\
+            7 & 7 & 0
+        \end{tabular}
+                
+        \begin{tabular}{ r | c c }
+            C & a & b \\ \hline
+            $\to$ 1 & 2 & 3 \\
+            2 & 2 & 4 \\
+            $\ast$ 3 & 3 & 5 \\
+            4 & 2 & 7 \\
+            $\ast$ 5 & 6 & 3 \\
+            $\ast$ 6 & 6 & 6 \\
+            7 & 7 & 4 \\
+            8 & 2 & 3 \\
+            9 & 9 & 4
+        \end{tabular}
+
+    \end{multicols}
+
+\end{problem}
+
+
+\vspace{-12pt}
+\medskip\begin{problem}[Testing properties]
+
+    Consider finite automata $A,B$. Design an algorithm that decides the following properties. (Can you estimate the time complexity?)
+
+    \medskip
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L(A)=\emptyset$,
+            \item $L(A)=L(B)$,
+            \item $L(A)\subseteq L(B)$,
+            \item $L(A)$ is finite.
+        \end{enumerate}
+
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Subset construction]
+
+    Given a nondeterministic finite automaton with  $\epsilon$-transitions, construct an equivalent reduced DFA.
+    
+    
+    \begin{multicols}{2}
+    
+        \begin{enumerate}[(a)]
+
+            \item \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
+            $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
+            $D$ & $\{A\}$ & $\{C,D\}$ & $\emptyset$ \\
+            $\to\ast E$ & $\emptyset$ & $\emptyset$ & $\{A,C\}$
+            \end{tabular}
+            
+            \item \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
+            $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\
+            $\ast D$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+            $E$ & $\{F\}$ & $\emptyset$ & $\{B,C\}$\\
+            $F$ & $\{D\}$ & $\emptyset$ & $\emptyset$
+            \end{tabular}
+    
+        \end{enumerate}
+    
+    \end{multicols}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Closure under operations] 
+    
+    For the automata $A,B$ given below, construct an automaton accepting the given language.
+    
+    \begin{multicols}{5}
+
+        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+            \item $L(A)-L(B)$
+            \item $L(A).L(B)$
+            \item $L(A)^+$
+            \item $L(A)^*$
+            \item $L(A)^R$
+        \end{enumerate}
+
+    \end{multicols}
+    
+    \begin{multicols}{2}
+
+        \centering
+
+        \begin{tabular}{ r | c c }
+        A & a & b \\ \hline
+        $\to$ 0 & 1 & 2 \\  
+        $\ast$ 1 & 3 & 0 \\
+        2 & 4 & 5 \\
+        3 & 0 & 2 \\
+        4 & 2 & 5 \\
+        5 & 0 & 3
+        \end{tabular}    
+        
+        \begin{tabular}{ r | c c }
+        B & a & b \\ \hline
+        $\to$ 0 & 0 & 5 \\  
+        $\ast$ 1 & 1 & 3 \\
+        2 & 2 & 7 \\
+        3 & 3 & 2 \\
+        $\ast$ 4 & 6 & 1 \\
+        5 & 5 & 1 \\
+        $\ast$ 6 & 4 & 2 \\
+        7 & 7 & 0
+        \end{tabular}
+
+    \end{multicols}
+    
+       
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Automata homomorphism] 
+    
+    Find DFA $A,B$ such that:
+    
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item Both are reduced and they are not isomorphic. 
+        \item $A$ is homomorphic onto $B$ but they are not isomorphic.
+        \item They are equivalent but not isomorphic.
+        \item They are both homomorphic onto $C$ but not isomorphic with it. Moreover, $A$ is not homomorphic onto $B$ and $B$ is not homomorphic onto $A$.
+
+        $$
+        C=(\{p,q\},\{0,1\},\{((p,0),q),((p,1),p),((q,0),p),((q,1),q)\},p,\{q\})
+        $$
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Regular? Reduce]
+    
+    Let $L$ be a language over the alphabet $\{a,b\}$ consisting of words that do not contain three consecutive occurrences of the same letter. Decide if $L$ is regular. If it is, find a reduced DFA accepting $L$.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Switch final and nonfinal states]
+    
+    If we switch accepting and nonaccepting states in a given NFA, will the language accepted by the resulting automaton be the complement of the language accepted by the original NFA? Justify your answer.
+
+\end{problem}
+
+
+\end{document}

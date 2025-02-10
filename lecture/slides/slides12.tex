@@ -3,7 +3,7 @@
 \input{header.tex}
 
 
-\title{Lecture 12 -- Universal and diagonal lanugage, Undecidable problems, Post's correspondence problem}
+\title{Lecture 12 -- Universal and Diagonal language, Undecidability, Post Correspondence Problem}
 
 
 \begin{document}
@@ -334,12 +334,12 @@
 \section*{Undecidable problems about context-free languages}
 
 
-\begin{frame}{Post's correspondence problem}
+\begin{frame}{Post correspondence problem}
 
     \vspace{-4pt}
     Several problems about context-free grammars are undecidable, e.g. is $L(G_1)\cap L(G_2)=\emptyset$? We show that by reduction from a suitable undecidable problem:
     
-    \begin{block}{Post's correspondence problem (PCP)}
+    \begin{block}{Post correspondence problem (PCP)}
         \begin{itemize}
             \item \textbf{Instance:} two same-length lists of words over a finite alphabet $\Sigma$: \alert{$A=w_1,w_2,\ldots, w_k$}, \alert{$B=x_1,x_2,\ldots, x_k$}
             \item \textbf{Question:} is there a finite sequence of positive integers $i_1,\dots,i_m$ ($m\geq 1$) such that \alert{$w_{i_1} w_{i_2} \ldots w_{i_m}=x_{i_1} x_{i_2} \ldots x_{i_m}$}?
@@ -350,7 +350,7 @@
     %Note: indices in a solution can repeat!
 
     \begin{theorem}
-        Post's correspondence problem is undecidable.
+        The Post Correspondence Problem is undecidable.
     \end{theorem}
     \vspace{-8pt}
     \textbf{Proof idea:} Reduction from $L_U$ by simulating computation of any TM on any input as a PCP instance. [detailes later, if there's time]
@@ -574,10 +574,10 @@
 \end{frame}
 
 
-\section*{Undecidability of Post's correspondence problem}
+\section*{Undecidability of the Post Correspondence Problem}
 
   
-\begin{frame}{Modified Post's correspondence problem (MPCP)}
+\begin{frame}{Modified Post Correspondence Problem (MPCP)}
     
     A solution $(i_1,i_2,\dots,i_m)$ to a PCP instance $(A=w_1,\ldots, w_k,B=x_1,\ldots, x_k)$ is \alert{initial} if $i_1=1$, i.e., 
     $$
@@ -788,7 +788,7 @@
 \begin{frame}{Undecidability of PCP}
     
     \begin{theorem}
-        Post's correspondence problem is undecidable.
+        The Post Correspondence Problem is undecidable.
     \end{theorem}    
     \textbf{Proof:} We have already shown that MPCP reduces to PCP. To show that $L_U$ reduces to MPCP, we must verify that:
     
@@ -820,7 +820,7 @@
         \item the Halting problem is undecidable        
         \item (Rice's thm: nontriv. properties of programs are undecidable)
         \item Undecidable problems about context-free grammars
-        \item Source of undecidability: Post's correspondence problem
+        \item Source of undecidability: Post Correspondence Problem
     \end{itemize}
 
 \end{frame}
