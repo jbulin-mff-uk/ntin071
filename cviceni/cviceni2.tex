@@ -4,73 +4,125 @@
 
 \begin{document}
 
-%\thispagestyle{empty}
+\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 2 -- Regulární jazyky, Pumping lemma}
+\section*{NTIN071 A\&G: Cvičení 2 -- Pumping Lemma}
 
-% po 1. přednášce
-% jaro 2024
+\subsection*{Cíle výuky:} Po absolvování je student schopen
 
-\medskip
-
-\noindent\emph{Vyřešte nejprve 1ab, 2, 3a, 4a-f (zbytek je na procvičení).}
-
-\medskip\begin{problem}[Regulární jazyky a množinové operace]
-
-    Mějme dva regulární jazyky, $L,L'$ nad stejnou abecedou. Ukažte, že platí následující:
-  
-    \medskip
-    
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $\Sigma^*\setminus L$ je regulární jazyk
-        \item $L\cup L'$ je regulární jazyk  
-        \item $L\cap L'$ je regulární jazyk
-        \item Co když mají $L$ a $L'$ různé abecedy (které ale mohou sdílet některé symboly)?
-        \item Uměli byste ukázat, že $L^R$ (tj. slova z $L$ napsaná pozpátku) je také regulární jazyk?
-    \end{enumerate}
-    
-\end{problem}
+\begin{itemize}\setlength{\itemsep}{0pt}
+    \item formulovat a dokázat Pumping Lemma
+    \item použít Pumping Lemma k důkazu neregularity daného jazyka
+    \item formulovat a dokázat Myhill-Nerodovu větu
+    \item použít Myhill-Nerodovu větu k důkazu regularity, ke konstrukci DFA
+    \item použít Myhill-Nerodovu větu k důkazu neregularity
+\end{itemize}
 
 
-\medskip\begin{problem}[Pumping lemma: formulace]
+\section*{Příklady na cvičení}
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item Zformulujte pumping lemma pro regulární jazyky (bez nahlížení do poznámek z přednášky).
+
+\medskip\begin{problem}[Pumping Lemma: formulace]
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Zformulujte Pumping Lemma pro regulární jazyky (bez nahlížení do poznámek z přednášky).
         \item Jak souvisí $n$ z lemmatu s automatem rozpoznávajícím daný jazyk?
         \item Dokažte je (bez nahlížení do poznámek z přednášky).
+        \item Demonstrujte pumpování na jazyce $L=\{w\in\{a,b\}^* \,\mid\,\text{2 dělí $|w|_a$ nebo 3 dělí $|w|_b$}\}$.
     \end{enumerate}
 
 \end{problem}
 
 
-\medskip\begin{problem}[Pumping lemma: zobecnění]
+\medskip\begin{problem}[Pumping Lemma: aplikace]
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item Můžeme podmínku $|uv|\leq n$ v Pumping lemmatu nahradit za $|vw|\leq n$, tedy \emph{iterovat blízko konce}? Dokažte nebo vyvraťte.
+    Dokažte pomocí Pumping Lemmatu, že následující jazyky nejsou regulární. (Jazyky jsou nad abecedou $\Sigma=\{a,b\}$.)
+
+    \medskip
+      
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}        
+        \item $L=\{a^ib^j\ \mid\ i\geq j\}$       
+        \item $L=\{a^{i^2}\ \mid\ i\geq 0\}$        
+        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
+        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, kde $w^R$ je  $w$ napsané pozpátku
+    \end{enumerate}
+  
+\end{problem}
+
+
+\medskip\begin{problem}[Myhill--Nerodeova věta: formulace]
+    
+    Zformuluje Myhill--Nerodeovu větu a připomeňte si myšlenku důkazu (bez nahlížení do poznámek z přednášky).
+
+\end{problem}
+
+
+\medskip\begin{problem}[Myhill--Nerodeova věta: aplikace]
+
+    Pomocí Myhill--Nerodeovy věty dokažte nebo vyvraťte, že je jazyk regulární.
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{aa, ab, ba\}$        
+        \item $L=\{a^ib^j\ \mid\ i\geq j\}$        
+        \item $L=\{a^{i^2}\ \mid\ i\geq 0\}$ 
+        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, kde $w^R$ je  $w$ napsané pozpátku
+        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$        
+    \end{enumerate}
+
+\end{problem}
+
+
+\section*{K procvičení a k zamyšlení}
+
+
+\medskip\begin{problem}
+    
+    Dokažte pomocí Pumping Lemmatu, že následující jazyky nejsou regulární. (Jazyky jsou nad abecedou $\Sigma=\{a,b\}$.)
+    
+    \medskip
+      
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{a^ib^j\ \mid\ i\leq j\}$        
+        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
+        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+    \end{enumerate}
+      
+\end{problem}
+
+
+\medskip\begin{problem}
+
+    Pomocí Myhill--Nerodeovy věty dokažte nebo vyvraťte, že je jazyk regulární.
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{a^ib^j\ \mid\ i\leq j\}$
+        \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ pro pevně dané $k\in\mathbb N$
+        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
+        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping Lemma: zobecnění]
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Můžeme podmínku $|uv|\leq n$ v Pumping Lemmatu nahradit za $|vw|\leq n$, tedy \emph{iterovat blízko konce}? Dokažte nebo vyvraťte.
         \item Můžeme iterovat blízko předem zvoleného místa ve slově? Jak zformulovat (a dokázat) takové zesílení?
     \end{enumerate}
 
 \end{problem}
 
 
-\medskip\begin{problem}[Pumping lemma: aplikace]
+\medskip\begin{problem}[Ekvivalence na slovech]
 
-    Určete, které z následujících jazyků nejsou regulární. Dokažte to pomocí pumping lemmatu. (Jazyky jsou nad abecedou $\Sigma=\{a,b\}$.)
+    Uveďte příklad ekvivalence $\sim$ na $\Sigma^*$, která:
 
-    \medskip
-  
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $L=\{aa, ab, ba\}$
-        \item $L=\{a^ib^j\ \mid\ i\leq j\}$
-        \item $L=\{a^ib^j\ \mid\ i\geq j\}$
-        \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ pro dané $k\in\mathbb N$
-        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
-        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, kde $w^R$ označuje slovo $w$ napsané pozpátku
-        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
-        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
-        
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item je pravá a levá kongruence
+        \item je pravá, ale ne levá kongruence
+        \item je konečného indexu
     \end{enumerate}
-  
+
 \end{problem}
 
 

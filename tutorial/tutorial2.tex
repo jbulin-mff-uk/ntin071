@@ -4,72 +4,50 @@
 
 \begin{document}
 
-% \thispagestyle{empty}
+\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 2 -- Pumping lemma, Myhill--Nerode theorem}
-
-% after Lecture 2
-% spring 2024: 6a started, the rest of 6 left for next week
+\section*{NTIN071 A\&G: Tutorial 2 -- Pumping Lemma, Myhill--Nerode theorem}
 
 \medskip
 
-\noindent\emph{Solve 1, 2a, 3a-f, 4, 5, 6a-f  first (the rest is for practice).}
+\subsection*{Teaching goals:} After this tutorial the student is able to
 
-\medskip
+    \begin{itemize}\setlength{\itemsep}{0pt}
+        \item state and prove the Pumping Lemma
+        \item apply the Pumping Lemma to prove nonregularity of a given language
+        \item state and prove the Myhill-Nerode theorem
+        \item apply the Myhill-Nerode theorem to prove regularity, to construct a DFA
+        \item apply the Myhill-Nerode theorem to prove nonregularity
+    \end{itemize}
 
-\medskip\begin{problem}[Pumping lemma: statement]
+\section*{In-class problems}
+
+
+\medskip\begin{problem}[Pumping Lemma: statement]
     
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item Formulate the Pumping lemma for regular languages (without consulting your notes).
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Formulate the Pumping Lemma for regular languages (without consulting your notes).
         \item How is the number $n$ form its statement related to a recognizing automaton?
         \item Prove it (without consulting your notes).
+        \item Demonstrate pumping on $L=\{w\in\{a,b\}^* \,\mid\,\text{2 divides $|w|_a$ or 3 divides $|w|_b$}\}$.
     \end{enumerate}
 
 \end{problem}
-
-
-\medskip\begin{problem}[Pumping lemma: generalization]
-    
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item Can we change the condition $|uv|\leq n$ with $|vw|\leq n$, that is, \emph{iterate near the end}? Prove or disprove.
-        \item Can we iterate near a chosen position in the word? How to formulate (and prove) such a generalization?
-    \end{enumerate}
-    
-\end{problem}
     
     
-\medskip\begin{problem}[Pumping lemma: application]
+\medskip\begin{problem}[Pumping Lemma: application]
     
-    Determine which of the following languages are nonregular and show that using the Pumping lemma. (The alphabet is $\Sigma=\{a,b\}$.)
+    Use the Pumping Lemma to prove that the following languages are not regular. (The alphabet is $\Sigma=\{a,b\}$.)
     
     \medskip
       
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $L=\{aa, ab, ba\}$
-        \item $L=\{a^ib^j\ \mid\ i\leq j\}$
-        \item $L=\{a^ib^j\ \mid\ i\geq j\}$
-        \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ for a given $k\in\mathbb N$
-        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
-        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, where $w^R$ denotes the word $w$ written in reverse
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}        
+        \item $L=\{a^ib^j\ \mid\ i\geq j\}$       
+        \item $L=\{a^{i^2}\ \mid\ i\geq 0\}$        
         \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
-        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, where $w^R$ is $w$ reversed
     \end{enumerate}
       
-\end{problem}
-
-
-\medskip\begin{problem}[Equivalences on words]
-
-    Give an example of an equivalence relation $\sim$ on $\Sigma^*$ which:
-
-    \medskip
-    
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item is a right and a left congruence
-        \item is a right but not a left congruence
-        \item is of finite index
-    \end{enumerate}
-
 \end{problem}
 
 
@@ -83,15 +61,66 @@
 \medskip\begin{problem}[Myhill--Nerode theorem: application]
 
     Prove or disprove using the Myhill--Nerode theorem that the following languages are regular.
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-        \item $L=\{aa, ab, ba\}$
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{aa, ab, ba\}$        
+        \item $L=\{a^ib^j\ \mid\ i\geq j\}$        
+        \item $L=\{a^{i^2}\ \mid\ i\geq 0\}$ 
+        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, where $w^R$ is $w$ reversed
+        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$        
+    \end{enumerate}
+
+\end{problem}
+
+
+\section*{Extra Practice and Thinking}
+
+
+\medskip\begin{problem}
+    
+    Use the Pumping Lemma to prove that the following languages are not regular. (The alphabet is $\Sigma=\{a,b\}$.)
+          
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $L=\{a^ib^j\ \mid\ i\leq j\}$        
+        \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
+        \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+    \end{enumerate}
+    
+\end{problem}
+
+
+\medskip\begin{problem}
+
+    Prove or disprove using the Myhill--Nerode theorem that the following languages are regular.
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
         \item $L=\{a^ib^j\ \mid\ i\leq j\}$
-        \item $L=\{a^ib^j\ \mid\ i\geq j\}$
         \item $L_k=\{a^ib^j\ \mid\ i\leq j\leq k\}$ for a fixed $k\in\mathbb N$
         \item $L=\{a^{2^i}\ \mid\ i\geq 0\}$
-        \item $L=\{ww^R\ \mid \ w\in\Sigma^*\}$, where $w^R$ is $w$ reversed
-        \item $L=\{a^ib^{i+j}a^j\ \mid\ i,j\geq 0\}$
         \item $L=\{ww\ \mid \ w\in\Sigma^*\}$
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping Lemma: generalization]
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Can we change the condition $|uv|\leq n$ with $|vw|\leq n$, that is, \emph{iterate near the end}? Prove or disprove.
+        \item Can we iterate near a chosen position in the word? How to formulate (and prove) such a generalization?
+    \end{enumerate}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Equivalences on words]
+
+    Give an example of an equivalence relation $\sim$ on $\Sigma^*$ which:
+
+    \medskip
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+        \item is a right and a left congruence
+        \item is a right but not a left congruence
+        \item is of finite index
     \end{enumerate}
 
 \end{problem}
