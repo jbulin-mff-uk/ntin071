@@ -6,12 +6,100 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Tutorial 4 -- TODO}
+\section*{NTIN071 A\&G: Tutorial 4 -- Closure properties of regular languages}
 
-% after Lecture 4
-% spring 2024: the program is just finishing tutorial3.pdf
+\medskip
+
+\subsection*{Teaching goals:} The student is able to
+
+    \begin{itemize}\setlength{\itemsep}{0pt}
+        \item formally describe a construction of an automaton based on other automata
+        \item decide whether regular languages are closed under various set and string operations, including more complex ones, and prove or disprove it
+    \end{itemize}
 
 
+\section*{In-class problems}
+
+
+\medskip\begin{problem}[Closure under set and string operations] 
+    
+    Given DFAs $A,B$, construct an automaton $C$ recognizing the given language. (Give a formal description of the automaton.)
+    
+    \begin{multicols}{3}
+
+        \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+            \item $L(A)-L(B)$
+            \item $L(A).L(B)$
+            \item $L(A)^+$
+            \item $L(A)^*$
+            \item $L(A)^R$
+        \end{enumerate}
+
+        \begin{tabular}{ r | c c }
+            A & a & b \\ \hline
+            $\to$ 0 & 1 & 2 \\  
+            $\ast$ 1 & 3 & 0 \\
+            2 & 4 & 5 \\
+            3 & 0 & 2 \\
+            4 & 2 & 5 \\
+            5 & 0 & 3
+        \end{tabular}    
+        
+        \begin{tabular}{ r | c c }
+            B & a & b \\ \hline
+            $\to$ 0 & 0 & 5 \\  
+            $\ast$ 1 & 1 & 3 \\
+            2 & 2 & 5 \\
+            3 & 3 & 2 \\
+            $\ast$ 4 & 6 & 1 \\
+            5 & 5 & 1 \\
+            $\ast$ 6 & 4 & 2
+        \end{tabular}
+
+    \end{multicols}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Delete]
+    
+    Let $L$ be a regular language over the alphabet $\Sigma=\{a,b\}$. Desribe the following languages in set notation. Decide if they are (necessarily) also regular, prove or disprove.    
+    The language of all words obtained from words of the language $L$ by\dots
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt} 
+        \item \dots deleting all occurrences of the letter $a$. 
+        \item \dots deleting the initial letter and writing this letter at the end of the word. 
+        \item \dots deleting the longest contiguous sequence of $a$'s from the beginning of the word.
+    \end{enumerate}
+
+\end{problem}
+
+
+\section*{Extra Practice and Thinking}
+
+
+\medskip\begin{problem}[Shift] 
+    Given a regular language $L$ over an alphabet $\Sigma$, define the language $L'$ as follows. Is the language $L'$ necessarily regular? 
+    $$
+    L'=\{uv\mid u,v\in\Sigma^*,vu\in L\}
+    $$ 
+\end{problem}  
+
+\medskip\begin{problem}[Cut] 
+    Consider two regular languages $L$ and $M$ over an alphabet $\Sigma$, and define the language $K$ as follows. Is the language $K$ necessarily regular? 
+    $$  
+    K=\{uw\mid u,w\in\Sigma^*, (\exists v\in M)\, uvw\in L\}  
+    $$
+\end{problem}  
+
+
+\medskip\begin{problem}[Switch final and nonfinal states]
+    
+    If we switch accepting and nonaccepting states in a given NFA, will the language recognized by the resulting automaton be the complement of the language recognized by the original NFA? Justify your answer.
+
+\end{problem}
    
 
 \end{document}

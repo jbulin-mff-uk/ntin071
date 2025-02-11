@@ -6,100 +6,64 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 4 -- Nedeterminismus, uzavřenost na operace}
-
-% po 3. přednášce
-% jaro 2024
+\section*{NTIN071 A\&G: Cvičení 4 -- Uzávěrové vlastnosti regulárních jazyků}
 
 \medskip
 
-\noindent\emph{Vyřešte nejprve 1a, 2, 3 (zbytek je na procvičení, bude-li naopak čas, vraťte se k nedodělaným příkladům z minule).}
+\subsection*{Cíle výuky:} Po absolvování student umí
 
-\medskip
+\begin{itemize}\setlength{\itemsep}{0pt}  
+    \item formálně popsat konstrukci automatu na základě jiných automatů  
+    \item rozhodnout, zda jsou regulární jazyky uzavřené na různé množinové a řetězcové operace, včetně složitějších, a toto tvrzení dokázat nebo vyvrátit  
+ \end{itemize}  
+ 
+
+\section*{Příklady na cvičení}
 
 
-\medskip\begin{problem}[Podmnožinová konstrukce]
-
-    Pro daný nedeterministický automat s $\epsilon$-přechody sestrojte ekvivalentní redukovaný DFA.
+\medskip\begin{problem}[Uzavřenost na množinové a řetězcové operace] 
     
-    \begin{multicols}{2}
+    Pro danou dvojici DFA $A,B$ sestrojte automat, který rozpoznává daný jazyk. (Sestrojený automat formálně popište.)
     
-        \begin{enumerate}[(a)]
-            \item
-            \begin{tabular}{ r | c c c }
-            & a & b & $\epsilon$ \\ \hline
-            $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
-            $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
-            $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
-            $D$ & $\{A\}$ & $\{C,D\}$ & $\emptyset$ \\
-            $\to\ast E$ & $\emptyset$ & $\emptyset$ & $\{A,C\}$
-            \end{tabular}
-            
-            \item
-            \begin{tabular}{ r | c c c }
-            & a & b & $\epsilon$ \\ \hline
-            $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
-            $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
-            $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\
-            $\ast D$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
-            $E$ & $\{F\}$ & $\emptyset$ & $\{B,C\}$\\
-            $F$ & $\{D\}$ & $\emptyset$ & $\emptyset$
-            \end{tabular}
-            
-        \end{enumerate}
-    
-    \end{multicols}
-\end{problem}
-
-
-\medskip\begin{problem}[Uzavřenost na operace]
-
-    Pro danou dvojici automatů $A,B$ sestrojte automat, který přijímá daný jazyk.
-
     \begin{multicols}{3}
-    
-        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+
+        \begin{enumerate}[(a)]\setlength\itemsep{6pt}
             \item $L(A)-L(B)$
             \item $L(A).L(B)$
             \item $L(A)^+$
             \item $L(A)^*$
             \item $L(A)^R$
         \end{enumerate}
-        
+
         \begin{tabular}{ r | c c }
-        A & a & b \\ \hline
-        $\to\ast$ 0 & 1 & 2 \\  
-        1 & 3 & 0 \\
-        2 & 4 & 5 \\
-        3 & 0 & 2 \\
-        4 & 2 & 5 \\
-        5 & 0 & 3
+            A & a & b \\ \hline
+            $\to$ 0 & 1 & 2 \\  
+            $\ast$ 1 & 3 & 0 \\
+            2 & 4 & 5 \\
+            3 & 0 & 2 \\
+            4 & 2 & 5 \\
+            5 & 0 & 3
         \end{tabular}    
         
         \begin{tabular}{ r | c c }
-        B & a & b \\ \hline
-        $\to\ast$ 0 & 0 & 5 \\  
-        1 & 1 & 3 \\
-        2 & 2 & 7 \\
-        3 & 3 & 2 \\
-        $\ast$ 4 & 6 & 1 \\
-        5 & 5 & 1 \\
-        $\ast$ 6 & 4 & 2 \\
-        7 & 7 & 0
+            B & a & b \\ \hline
+            $\to$ 0 & 0 & 5 \\  
+            $\ast$ 1 & 1 & 3 \\
+            2 & 2 & 5 \\
+            3 & 3 & 2 \\
+            $\ast$ 4 & 6 & 1 \\
+            5 & 5 & 1 \\
+            $\ast$ 6 & 4 & 2
         \end{tabular}
-    
+
     \end{multicols}
     
 \end{problem}
-    
 
-\medskip\begin{problem}[Mazání]
 
-    Mějme nějaký regulární jazyk $L$ nad abecedou $\Sigma=\{a,b\}$. Popište následující jazyky v množinovém zápisu. Jsou tyto jazyky (nutně) také regulární? Dokažte nebo vyvraťte. 
-    
-    \medskip
+\begin{problem}[Mazání]
 
-    Jazyk sestávající ze všech slov vzniklých ze slov jazyka $L$\dots
+    Mějme nějaký regulární jazyk $L$ nad abecedou $\Sigma=\{a,b\}$. Popište následující jazyky v množinovém zápisu. Rozhodněte, zda jsou (nutně) také regulární, dokažte nebo vyvraťte. Jazyk sestávající ze všech slov vzniklých ze slov jazyka $L$\dots
     
     \medskip
     \begin{enumerate}[(a)]\setlength\itemsep{12pt}
@@ -110,14 +74,28 @@
 
 \end{problem}
 
-    
-\medskip\begin{problem}[Záměna přijímajících a nepřijímajících stavů]
-        
-    Zaměníme-li u daného NFA přijímající a nepřijímající stavy, bude jazyk přijímaný výsledným automatem doplňkem jazyka přijímaného původním automatem? Zdůvodněte.
-        
+
+\section*{K procvičení a k zamyšlení}
+
+
+\medskip\begin{problem}[Posun]
+    Pro daný regulární jazyk $L$ nad abecedou $\Sigma$ definujme jazyk $L'$ následovně. Je jazyk $L'$ nutně také regulární?
+    $$
+    L'=\{uv\mid u,v\in\Sigma^*,vu\in L\}
+    $$
 \end{problem}
 
 
-
+\medskip\begin{problem}[Řez]
+    Mějme dva regulární jazyky $L,M$ a definujme jazyk $K$ následovně. Je jazyk $K$ nutně také regulární?
+    $$
+    K=\{uw\mid u,w\in\Sigma^*, (\exists v\in M)\, uvw\in L\}
+    $$    
+\end{problem}
+    
+\medskip\begin{problem}[Záměna přijímajících a nepřijímajících stavů]        
+    Zaměníme-li u daného NFA přijímající a nepřijímající stavy, bude jazyk přijímaný výsledným automatem doplňkem jazyka přijímaného původním automatem? Zdůvodněte.        
+\end{problem}
+   
 
 \end{document}

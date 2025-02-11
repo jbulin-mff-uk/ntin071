@@ -4,23 +4,22 @@
 
 \begin{document}
 
-%\thispagestyle{empty}
+\thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 3 -- Myhill-Nerodeova věta, ekvivalentní a minimální reprezentace, testování vlastností}
-
-% po 2. přednášce
-% jaro 2024
+\section*{NTIN071 A\&G: Cvičení 3 -- Ekvivalentní a minimální reprezentace, testování vlastností, nedeterminismus, podmnožinová konstrukce}
 
 \medskip
 
-\noindent\emph{Vyřešte nejprve 1, 2, 3a-f, 4abc pro A\&B, 5 (zbytek je na procvičení).}
+\subsection*{Cíle výuky:} Po absolvování student umí
 
-\medskip
+\begin{itemize}\setlength{\itemsep}{0pt}
+    \item definovat dosažitelné stavy, ekvivalenci stavů, redukovaný automat, homomorfismus automatů, NFA, $\epsilon$-NFA
+    \item aplikovat algoritmy pro dosažitelné stavy a ekvivalenci stavů k redukci DFA
+    \item navrhovat efektivní algoritmy pro testování základních vlastností automatů
+    \item aplikovat konstrukci podmnožin k převodu NFA nebo $\epsilon$-NFA na DFA
+\end{itemize}
 
-
-
-
-\vspace{-12pt}
+\section*{Příklady na cvičení}
 
 \medskip\begin{problem}[Ekvivalentní a minimální reprezentace]    
     
@@ -29,11 +28,12 @@
     \begin{enumerate}[(a)]\setlength\itemsep{6pt}
         \item Najděte a odstraňte nedosažitelné stavy.
         \item Určete relaci ekvivalence (nerozlišitelnosti) stavů. (Navíc pro každou rozlišitelnou dvojici stavů najděte všechna nejkratší rozlišující slova.)
-        \item Zkonstruujte jejich redukty.
-        \item Jsou některé dva z automatů ekvivalentní? Použijte algoritmus z přednášky.
+        \item Zkonstruujte jejich redukty.        
     \end{enumerate}
-    
-    \begin{multicols}{3}\small\centering
+        
+    \begin{multicols}{2}
+
+        \centering
     
         \begin{tabular}{ r | c c }
             A & a & b \\ \hline
@@ -46,7 +46,7 @@
         \end{tabular}
             
         \begin{tabular}{ r | c c }
-            B & a & b \\ \hline
+            B  & a & b \\ \hline
             $\to\ast$ 0 & 0 & 5 \\  
             1 & 1 & 3 \\
             2 & 2 & 7 \\
@@ -56,7 +56,60 @@
             $\ast$ 6 & 4 & 2 \\
             7 & 7 & 0
         \end{tabular}
-                
+
+    \end{multicols}
+
+\end{problem}
+
+
+\begin{problem}[Testování vlastností]
+
+    Mějme konečné automaty $A,B$. Navrhněte algoritmy, které rozhodnou, zda platí daná vlasnost. (Umíte odhadnout jejich časovou složitost?)
+    
+    \begin{multicols}{4}
+    
+        \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+            \item $L(A)=\emptyset$,
+            \item $L(A)=L(B)$,
+            \item $L(A)\subseteq L(B)$,
+            \item $L(A)$ je konečný.
+        \end{enumerate}
+
+    \end{multicols}
+
+    Aplikujte algoritmus na automaty $A,B$ z předchozího problému.
+
+    \smallskip
+
+\end{problem}
+
+\begin{problem}[Podmnožinová konstrukce]
+
+    Pro daný nedeterministický automat s $\epsilon$-přechody sestrojte ekvivalentní redukovaný DFA.
+    
+    \begin{center}
+        \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\to A$ & $\{E\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\emptyset$ & $\{C\}$ & $\{D\}$ \\
+            $\to C$ & $\emptyset$ & $\{D\}$ & $\emptyset$ \\
+            $\ast D$ & $\emptyset$ & $\emptyset$ & $\emptyset$ \\
+            $E$ & $\{F\}$ & $\emptyset$ & $\{B,C\}$\\
+            $F$ & $\{D\}$ & $\emptyset$ & $\emptyset$
+        \end{tabular}
+    \end{center}
+
+\end{problem}
+
+
+\section*{K procvičení a k zamyšlení}
+
+
+\medskip\begin{problem}[Redukce DFA]    
+    
+    Zredukujte následující DFA:
+    
+    \begin{center}
         \begin{tabular}{ r | c c }
             C & a & b \\ \hline
             $\to$ 1 & 2 & 3 \\
@@ -69,28 +122,25 @@
             8 & 2 & 3 \\
             9 & 9 & 4
         \end{tabular}
-
-    \end{multicols}
+    \end{center}
 
 \end{problem}
 
 
-\medskip\begin{problem}[Testování vlastností]
+\medskip\begin{problem}[Podmnožinová konstrukce]
 
-    Mějme konečné automaty $A,B$. Navrhněte algoritmy, které rozhodnou, zda platí následující vlastnosti. (Umíte odhadnout jejich časovou složitost?)
-
-    \medskip
+    Zkonstruujte ekvivalentní redukovaný DFA.    
     
-    \begin{multicols}{2}
-    
-        \begin{enumerate}[(a)]\setlength\itemsep{12pt}
-            \item $L(A)=\emptyset$,
-            \item $L(A)=L(B)$,
-            \item $L(A)\subseteq L(B)$,
-            \item $L(A)$ je konečný.
-        \end{enumerate}
-
-    \end{multicols}
+    \begin{center}
+        \begin{tabular}{ r | c c c }
+            & a & b & $\epsilon$ \\ \hline
+            $\ast A$ & $\{A,C\}$ & $\{B\}$ & $\emptyset$ \\
+            $B$ & $\{B,D\}$ & $\emptyset$ & $\emptyset$ \\
+            $\ast C$ & $\{E\}$ & $\{D\}$ & $\emptyset$ \\
+            $D$ & $\{A\}$ & $\{C,D\}$ & $\emptyset$ \\
+            $\to\ast E$ & $\emptyset$ & $\emptyset$ & $\{A,C\}$
+        \end{tabular}
+    \end{center}
 
 \end{problem}
 
@@ -99,7 +149,7 @@
 
     Najděte DFA $A,B$ takové, že:  
 
-    \begin{enumerate}[(a)]\setlength\itemsep{12pt}
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
         \item Jsou oba redukované, a nejsou izomorfní. 
         \item $A$ je homomorfní na $B$, ale nejsou izomorfní.
         \item Jsou ekvivalentní, ale ne izomorfní.
@@ -115,6 +165,13 @@
 \medskip\begin{problem}[Regulární? Zredukuj]
     
    Uvažme jazyk $L$ nad abecedou $\{a,b\}$ sestávající ze všech slov, která neobsahují trojici po sobě jdoucích stejných písmen. Rozhodněte, zda je $L$ regulární. Pokud ano, najděte regulární DFA, který ho rozpoznává.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Podmnožinová konstrukce a redukt]
+    
+    Je výsledek podmnožinové konstrukce (kde generujeme jen dosažitelné stavy) nutně reukovaný automat? Dokažte, nebo vyvraťte.
 
 \end{problem}
 
