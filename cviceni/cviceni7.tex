@@ -18,7 +18,98 @@
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem} 
+\medskip\begin{problem}[Zbytečné symboly]
+    
+    Odpovězte na následující otázky, odpověď zdůvodněte.
+    
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+        \item Najděte příklad gramatiky, ve které je nějaký generující neterminál dosažitelný pouze přes negenerující neterminály.
+        \item Které neterminály je při redukci třeba odstranit dříve, negenerující nebo nedosažitelné?
+        \item Může se odstraněním nedosažitelných neterminálů z nějakého dosažitelného generujícího neterminálu stát negenerující?
+    \end{enumerate}
+
+\end{problem}
+    
+    
+\medskip\begin{problem}[Převod do ChNF]
+
+    Následující bezkontextovou gramatiku převeďte do Chomského normální formy:
+
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow 0AB, \\
+            &A\rightarrow 0A0\mid 11,\\
+            &B\rightarrow 0\}
+            \end{align*}
+        
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
+            &A\rightarrow 1A\mid 1\mid B1,\\
+            &B\rightarrow 0B\mid 0\mid \epsilon\} 
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{
+            &S\rightarrow 0A10B10, \\
+            &A\rightarrow 1A0\mid \epsilon,\\
+            &B\rightarrow 1B00\mid \epsilon\} 
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,E,F\},\{(,),*,+,,1\},S,\mathcal P)\\
+            \mathcal P=\{&
+            S\rightarrow (E), \\
+            &E\rightarrow F+F\mid F*F,\\
+            &F\rightarrow S\mid 1\}
+            \end{align*}
+
+        \end{enumerate}
+    \end{multicols}
+        
+\end{problem}
+    
+
+\medskip\begin{problem}[Algoritmus CYK]
+    
+    Pomocí algoritmu CYK určete, zda $w\in L(G)$.
+
+    \bigskip
+
+    \begin{enumerate}[(a)]\setlength{\itemsep}{3pt}
+
+        \item $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$,        
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow 0\mid AB, \\
+            A&\rightarrow 1\mid SA\mid SB, \\
+            B&\rightarrow AS \mid BA \mid 0\}
+        \end{align*}
+    
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, 
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+    
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$,
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+
+    \end{enumerate}
 
 \end{problem}
 

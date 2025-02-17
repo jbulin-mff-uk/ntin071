@@ -13,10 +13,14 @@
 \subsection*{Cíle výuky:} Po absolvování student umí
 
 \begin{itemize}\setlength{\itemsep}{0pt}
+    \item definovat regulární výrazy a odpovídající jazyky
     \item sestrojit regulární výraz pro regulární jazyk daný v množinovém zápisu
     \item převést regulární výraz na konečný automat
     \item převést konečný automat na regulární výraz
 \end{itemize}
+
+
+\medskip
 
 \section*{Příklady na cvičení}
 
@@ -40,7 +44,7 @@
 \end{problem}
 
 
-\begin{problem}[Převod regulárního výrazu na automat]
+\medskip\begin{problem}[Převod regulárního výrazu na automat]
 
     Zkonstruujte NFA rozpoznávající jazyky popsané následujícími regulárními výrazy:
     
@@ -58,11 +62,9 @@
 \end{problem}
 
 
-\begin{problem}[Převod automatu na regulární výraz]
+\medskip\begin{problem}[Převod automatu na regulární výraz]
     
     Sestrojte regulární výrazy pro jazyky rozpoznávané následujícími automaty.
-
-    \vspace{-15pt}
 
     (a) \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm,baseline=(current bounding box.center)]
         \tikzset{every state/.style={minimum size=0.2cm}}                    
@@ -96,13 +98,15 @@
 \end{problem}
 
 
-\begin{problem}[Doplněk regulárního výrazu]
+\medskip\begin{problem}[Doplněk regulárního výrazu]
     
     Mějme následující regulární výraz nad abecedou $\Sigma=\{a,b\}$ a buď $L=L(R)$:
     \[
         R=((a + b)(a + b))^*ab
     \]
   
+    \smallskip
+
     \begin{enumerate}[(a)]
         \item Sestrojte (co nejmenší) \emph{nedeterministický} konečný automat $A$ rozpoznávající $L$.
         \item Podmnožinovou konstrukcí převeďte $A$ na \emph{deterministický} konečný automat $B$.
@@ -111,11 +115,12 @@
 
 \end{problem}
 
+\medskip
 
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}[Převod regulárního výrazu na automat]
+\begin{problem}[Převod regulárního výrazu na automat]
 
     Zkonstruujte NFA rozpoznávající jazyky popsané následujícími regulárními výrazy:
     
@@ -134,10 +139,11 @@
 \end{problem}
 
 
-\medskip\begin{problem}[Převod automatu na regulární výraz]
+\begin{problem}[Převod automatu na regulární výraz]
     
     Sestrojte regulární výrazy pro jazyky rozpoznávané následujícími automaty.
 
+    \vspace{-12pt}
     \begin{multicols}{2}
         \begin{enumerate}[(a)]
             \item \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.5cm,baseline=(current bounding box.north)]
@@ -199,37 +205,36 @@
 
 \end{problem}
 
-
+\vspace{-12pt}
 \begin{problem}[Testování ekvivalence regulárních výrazů]
     Popište algoritmus na testování ekvivalence regulárních výrazů. Aplikujte ho na $(a + b)(a + b)^*$, $a(a + b)^* + b(a + b)^*$.
 \end{problem}
 
 
-\medskip\begin{problem}[Jsou regulární výrazy regulární?]
+\begin{problem}[Jsou regulární výrazy regulární?]
 
     Mějme konečnou abecedu $\Sigma$. Je jazyk sestávající ze všech regulárních výrazů nad abecedou $\Sigma$ regulárním jazykem?
 
 \end{problem}
 
 
-\smallskip
-
-
 \section*{Bonus: Dvousměrné automaty}
 
 
-\medskip\begin{problem}[Převod dvousměrného automatu]
+\begin{problem}[Převod dvousměrného automatu]
 
     Uvažte následující dvousměrný DFA.
 
+    \vspace{-6pt}
     \begin{multicols}{3}
 
         \begin{enumerate}[(a)]
-            \item Určete jakyk rozpoznávaný tímto automatem.
-            \item Určete funkce $f_u$ a kongruenci $\sim$ pro všechna slova délky nejvýše $4$.
+            \item Určete jazyk rozpoznávaný tímto automatem.
+            \item Určete funkce $f_w$, kongruenci $\sim$ pro $|w|\leq 4$.
             \item Převeďte ho na ekvivalentní jednosměrný konečný automat.
         \end{enumerate}
 
+        \vspace{-8pt}
         \begin{center}
             \begin{tabular}{ r | c c }
                 & a & b \\
@@ -279,14 +284,11 @@
 \end{problem}
 
 
-\medskip\begin{problem}[Konstrukce dvousměrného automatu]
+\begin{problem}[Konstrukce dvousměrného automatu]
     
     Buď $L$ regulární jazyk nad $\Sigma$ a $\#\notin\Sigma$. Sestrojte dvousměrný konečný automat rozpoznávající daný jazyk: 
     
-    \begin{enumerate}[(a)]
-        \item $L' = \{\#w\#\mid ww^R \in L\}$
-        \item $L' = \{\#w\#\mid (\exists u \in\Sigma^*)\, wu \in L\ \& \ |w|=|u|\}$
-    \end{enumerate}
+    (a) $L' = \{\#w\#\mid ww^R \in L\}$\hfill (b) $L' = \{\#w\#\mid (\exists u \in\Sigma^*)\, wu \in L\ \& \ |w|=|u|\}$
 
 \end{problem}
 

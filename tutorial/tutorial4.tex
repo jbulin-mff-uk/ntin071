@@ -80,6 +80,18 @@
 \section*{Extra Practice and Thinking}
 
 
+\medskip\medskip\begin{problem}[Prefixes]
+    Are regular languages closed under the following operations? Prove or disprove. (In the following, $L$ is a regular language over an alphabet $\Sigma$.)
+    \begin{enumerate}[(a)]
+        \item $\mathrm{init}(L)=\{w\in\Sigma^*\mid \text{there is }u\in\Sigma^*\text{ such that }wu\in L\}$
+        \item $\min(L)=\{w\in L\mid \text{there is no }u\in L,v\in\Sigma^+\text{ such that }w=uv\}$
+        \item $\max(L)=\{w\in L\mid \text{there is no }u\in\Sigma^+\text{ such that }wu\in L\}$
+    \end{enumerate}
+\end{problem}  
+
+
+
+
 \medskip\begin{problem}[Shift] 
     Given a regular language $L$ over an alphabet $\Sigma$, define the language $L'$ as follows. Is the language $L'$ necessarily regular? 
     $$

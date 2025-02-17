@@ -78,6 +78,16 @@
 \section*{K procvičení a k zamyšlení}
 
 
+\medskip\medskip\begin{problem}[Prefixy]
+    Jsou regulární jazyky uzavřené na následující operace? Dokažte nebo vyvraťte. (V následujícím je $L$ regulární jazyk nad abecedou $\Sigma$.)
+    \begin{enumerate}[(a)]
+        \item $\mathrm{init}(L)=\{w\in\Sigma^*\mid \text{existuje }u\in\Sigma^*\text{ takové, že }wu\in L\}$
+        \item $\min(L)=\{w\in L\mid \text{neexistují }u\in L,v\in\Sigma^+\text{ takové, že }w=uv\}$
+        \item $\max(L)=\{w\in L\mid \text{neexistuje }u\in\Sigma^+\text{ takové, že }wu\in L\}$
+    \end{enumerate}
+\end{problem}
+
+
 \medskip\begin{problem}[Posun]
     Pro daný regulární jazyk $L$ nad abecedou $\Sigma$ definujme jazyk $L'$ následovně. Je jazyk $L'$ nutně také regulární?
     $$

@@ -20,7 +20,58 @@
 \section*{In-class problems}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[Useless symbols]
+    
+    Recall the process of converting a context-free grammar to Chomsky Normal Form. Then answer the following questions. Justify.
+    
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+        \item Find an example of a grammar in which there is a generating variable only reachable via nongenerating variables.
+        \item When reducing a grammar, which variables do we need to remove first: nongenerating or unreachable?
+        \item Is it possible for a reachable generating variable to become nongenerating after the removal of unreachable variables?
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Convert to ChNF]
+
+    Convert the following context-free grammars to Chomsky normal form:
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+    
+            \item 
+            \begin{align*}
+            G_1=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow 0AB, \\
+            &A\rightarrow 0A0\mid 11,\\
+            &B\rightarrow 0\}
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G_2=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{
+            &S\rightarrow 0A10B10, \\
+            &A\rightarrow 1A0\mid \epsilon,\\
+            &B\rightarrow 1B00\mid \epsilon\} 
+            \end{align*}
+
+        \end{enumerate}
+    \end{multicols}
+        
+\end{problem}
+
+
+\medskip\begin{problem}[The CYK algorithm]
+    
+    Using the CYK algorithm determine if $w\in L(G)$.
+
+    $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$,        
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow 0\mid AB, \\
+            A&\rightarrow 1\mid SA\mid SB, \\
+            B&\rightarrow AS \mid BA \mid 0\}
+        \end{align*}    
 
 \end{problem}
 
@@ -28,9 +79,64 @@
 \section*{Extra Practice and Thinking}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[Convert to ChNF]
+
+    Convert the following context-free grammar to Chomsky normal form:
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
+            \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
+            &A\rightarrow 1A\mid 1\mid B1,\\
+            &B\rightarrow 0B\mid 0\mid \epsilon\} 
+            \end{align*}
+    
+            \item 
+            \begin{align*}
+            G=(\{&S,E,F\},\{(,),*,+,,1\},S,\mathcal P)\\
+            \mathcal P=\{&
+            S\rightarrow (E), \\
+            &E\rightarrow F+F\mid F*F,\\
+            &F\rightarrow S\mid 1\}
+            \end{align*}
+
+        \end{enumerate}
+    \end{multicols}
+        
+\end{problem}
+
+
+\medskip\begin{problem}[The CYK algorithm]
+    
+    Using the CYK algorithm determine if $w\in L(G)$.
+
+    \begin{enumerate}[(a)]\setlength{\itemsep}{3pt}
+
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, 
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+    
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$,
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}
+
+    \end{enumerate}
 
 \end{problem}
 
 
+
 \end{document}
+
+
+    
