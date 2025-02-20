@@ -13,12 +13,14 @@
 \subsection*{Cíle výuky:} Po absolvování student umí
 
 \begin{itemize}\setlength{\itemsep}{0pt}
-    \item 
+    \item uvést formální definici Chomského normální formy a souvisejících pojmů
+    \item převést danou bezkontextovou gramatiku do Chomského normální formy
+    \item vysvětlit algoritmus CYK, aplikovat jej na dané slovo $w$ a bezkontextovou gramatiku $G$
 \end{itemize}
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem}[Zbytečné symboly]
+\medskip\begin{problem}[O převodu do ChNF]
     
     Odpovězte na následující otázky, odpověď zdůvodněte.
     
@@ -26,6 +28,7 @@
         \item Najděte příklad gramatiky, ve které je nějaký generující neterminál dosažitelný pouze přes negenerující neterminály.
         \item Které neterminály je při redukci třeba odstranit dříve, negenerující nebo nedosažitelné?
         \item Může se odstraněním nedosažitelných neterminálů z nějakého dosažitelného generujícího neterminálu stát negenerující?
+        \item Chceme-li rozdělit produkční pravidlo s dlouhým tělem, jaký je minimální počet pravidel v Chomského normální formě, která musíme vytvořit?
     \end{enumerate}
 
 \end{problem}
@@ -33,43 +36,24 @@
     
 \medskip\begin{problem}[Převod do ChNF]
 
+    \label{prob:chnf}
     Následující bezkontextovou gramatiku převeďte do Chomského normální formy:
 
     \begin{multicols}{2}
-        \begin{enumerate}[(a)]
-    
-            \item 
+        \begin{enumerate}[(a)]    
+            \item $G_1=(\{S,A,B\},\{0,1\},S,\mathcal P)$, kde
             \begin{align*}
-            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{&S\rightarrow 0AB, \\
-            &A\rightarrow 0A0\mid 11,\\
-            &B\rightarrow 0\}
-            \end{align*}
-        
-            \item 
-            \begin{align*}
-            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
-            &A\rightarrow 1A\mid 1\mid B1,\\
-            &B\rightarrow 0B\mid 0\mid \epsilon\} 
+                \mathcal P=\{&S\rightarrow 0AB, \\
+                &A\rightarrow 0A0\mid 11,\\
+                &B\rightarrow 0\}
             \end{align*}
     
-            \item 
-            \begin{align*}
-            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{
-            &S\rightarrow 0A10B10, \\
-            &A\rightarrow 1A0\mid \epsilon,\\
-            &B\rightarrow 1B00\mid \epsilon\} 
-            \end{align*}
-    
-            \item 
-            \begin{align*}
-            G=(\{&S,E,F\},\{(,),*,+,,1\},S,\mathcal P)\\
-            \mathcal P=\{&
-            S\rightarrow (E), \\
-            &E\rightarrow F+F\mid F*F,\\
-            &F\rightarrow S\mid 1\}
+            \item $G_2=(\{S,A,B\},\{0,1\},S,\mathcal P)$, kde
+            \begin{align*}            
+                \mathcal P=\{
+                &S\rightarrow 0A10B10, \\
+                &A\rightarrow 1A0\mid \epsilon,\\
+                &B\rightarrow 1B00\mid \epsilon\}
             \end{align*}
 
         \end{enumerate}
@@ -82,33 +66,20 @@
     
     Pomocí algoritmu CYK určete, zda $w\in L(G)$.
 
-    \bigskip
-
-    \begin{enumerate}[(a)]\setlength{\itemsep}{3pt}
-
-        \item $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$,        
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+        
+        \item $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$, kde      
+        
         \begin{align*}
             \mathcal P=\{S&\rightarrow 0\mid AB, \\
             A&\rightarrow 1\mid SA\mid SB, \\
             B&\rightarrow AS \mid BA \mid 0\}
         \end{align*}
-    
-        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, 
-        \begin{align*}
-            \mathcal P=\{S&\rightarrow CA\mid CB, \\
-            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
-            C&\rightarrow ABC\mid BC,\\
-            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
-        \end{align*}
-    
-        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$,
-        \begin{align*}
-            \mathcal P=\{S&\rightarrow CA\mid CB, \\
-            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
-            C&\rightarrow ABC\mid BC,\\
-            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
-        \end{align*}
 
+        \item $w=001100$, $G=G_1$ je gramatika z Problému \ref{prob:chnf}(a)
+        
+        \item $w=110011$, $G=G_1$ je gramatika z Problému \ref{prob:chnf}(a)
+        
     \end{enumerate}
 
 \end{problem}
@@ -117,10 +88,54 @@
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[Převod do ChNF]
+
+   Převeďte následující bezkontextové gramatiky do Chomského normální formy:
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+    
+            \item $G=(\{S,A,B\},\{0,1\},S,\mathcal P)$
+            \begin{align*}
+                \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
+                &A\rightarrow 1A\mid 1\mid B1,\\
+                &B\rightarrow 0B\mid 0\mid \epsilon\} 
+            \end{align*}
+    
+            \item $G=(\{S,E,F\},\{(,),*,+,,1\},S,\mathcal P)$
+            \begin{align*}
+                \mathcal P=\{&
+                S\rightarrow (E), \\
+                &E\rightarrow F+F\mid F*F,\\
+                &F\rightarrow S\mid 1\}
+            \end{align*}
+
+        \end{enumerate}
+    \end{multicols}
+        
+\end{problem}
+
+
+\medskip\begin{problem}[Algoritmus CYK]
+    
+    Pomocí algoritmu CYK určete, zda $w\in L(G)$.
+
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, kde
+        
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow CA\mid CB, \\
+            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
+            C&\rightarrow ABC\mid BC,\\
+            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
+        \end{align*}    
+
+        \item $w=01010010$, $G=G_2$ je gramatika z Problému \ref{prob:chnf}(b)
+        \item $w=01010011$, $G=G_2$ je gramatika z Problému \ref{prob:chnf}(b)
+
+    \end{enumerate}
 
 \end{problem}
 
 
 \end{document}
-

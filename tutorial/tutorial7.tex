@@ -13,14 +13,17 @@
 \subsection*{Teaching goals:} The student is able to
 
     \begin{itemize}\setlength{\itemsep}{0pt}
-        \item 
+        \item give the formal definition of Chomsky Normal Form and related notions
+        \item convert a given context-free grammar to ChNF
+        \item explain the CYK algorithm, apply to a given word $w$ and context-free grammar $G$
     \end{itemize}
 
+\medskip
 
 \section*{In-class problems}
 
 
-\medskip\begin{problem}[Useless symbols]
+\medskip\begin{problem}[About the conversion to ChNF]
     
     Recall the process of converting a context-free grammar to Chomsky Normal Form. Then answer the following questions. Justify.
     
@@ -28,6 +31,7 @@
         \item Find an example of a grammar in which there is a generating variable only reachable via nongenerating variables.
         \item When reducing a grammar, which variables do we need to remove first: nongenerating or unreachable?
         \item Is it possible for a reachable generating variable to become nongenerating after the removal of unreachable variables?
+        \item When we want to break up a production rule with long body, what is the minimal number of Chomsky Normal Form rules we need to create?
     \end{enumerate}
 
 \end{problem}
@@ -35,27 +39,25 @@
 
 \medskip\begin{problem}[Convert to ChNF]
 
+    \label{prob:chnf}
     Convert the following context-free grammars to Chomsky normal form:
+    
     \begin{multicols}{2}
-        \begin{enumerate}[(a)]
-    
-            \item 
+        \begin{enumerate}[(a)]    
+            \item $G_1=(\{S,A,B\},\{0,1\},S,\mathcal P)$, where
             \begin{align*}
-            G_1=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{&S\rightarrow 0AB, \\
-            &A\rightarrow 0A0\mid 11,\\
-            &B\rightarrow 0\}
+                \mathcal P=\{&S\rightarrow 0AB, \\
+                &A\rightarrow 0A0\mid 11,\\
+                &B\rightarrow 0\}
             \end{align*}
     
-            \item 
-            \begin{align*}
-            G_2=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{
-            &S\rightarrow 0A10B10, \\
-            &A\rightarrow 1A0\mid \epsilon,\\
-            &B\rightarrow 1B00\mid \epsilon\} 
+            \item $G_2=(\{S,A,B\},\{0,1\},S,\mathcal P)$, where
+            \begin{align*}            
+                \mathcal P=\{
+                &S\rightarrow 0A10B10, \\
+                &A\rightarrow 1A0\mid \epsilon,\\
+                &B\rightarrow 1B00\mid \epsilon\} 
             \end{align*}
-
         \end{enumerate}
     \end{multicols}
         
@@ -66,12 +68,22 @@
     
     Using the CYK algorithm determine if $w\in L(G)$.
 
-    $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$,        
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
+        
+        \item $w=0110$, $G=(\{S,A,B\},\{0, 1\},S,\mathcal P)$, where      
+        
         \begin{align*}
             \mathcal P=\{S&\rightarrow 0\mid AB, \\
             A&\rightarrow 1\mid SA\mid SB, \\
             B&\rightarrow AS \mid BA \mid 0\}
-        \end{align*}    
+        \end{align*}
+
+        \item $w=001100$, $G=G_1$ is the grammar from Problem \ref{prob:chnf}(a)
+        
+        \item $w=110011$, $G=G_1$ is the grammar from Problem \ref{prob:chnf}(a)
+        
+    \end{enumerate}
+       
 
 \end{problem}
 
@@ -81,25 +93,23 @@
 
 \medskip\begin{problem}[Convert to ChNF]
 
-    Convert the following context-free grammar to Chomsky normal form:
+    Convert the following to Chomsky normal form:
     \begin{multicols}{2}
         \begin{enumerate}[(a)]
     
-            \item 
+            \item $G=(\{S,A,B\},\{0,1\},S,\mathcal P)$
             \begin{align*}
-            G=(\{&S,A,B\},\{0,1\},S,\mathcal P)\\
-            \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
-            &A\rightarrow 1A\mid 1\mid B1,\\
-            &B\rightarrow 0B\mid 0\mid \epsilon\} 
+                \mathcal P=\{&S\rightarrow A\mid 0SA\mid \epsilon, \\
+                &A\rightarrow 1A\mid 1\mid B1,\\
+                &B\rightarrow 0B\mid 0\mid \epsilon\} 
             \end{align*}
     
-            \item 
+            \item $G=(\{S,E,F\},\{(,),*,+,,1\},S,\mathcal P)$
             \begin{align*}
-            G=(\{&S,E,F\},\{(,),*,+,,1\},S,\mathcal P)\\
-            \mathcal P=\{&
-            S\rightarrow (E), \\
-            &E\rightarrow F+F\mid F*F,\\
-            &F\rightarrow S\mid 1\}
+                \mathcal P=\{&
+                S\rightarrow (E), \\
+                &E\rightarrow F+F\mid F*F,\\
+                &F\rightarrow S\mid 1\}
             \end{align*}
 
         \end{enumerate}
@@ -112,31 +122,24 @@
     
     Using the CYK algorithm determine if $w\in L(G)$.
 
-    \begin{enumerate}[(a)]\setlength{\itemsep}{3pt}
+    \begin{enumerate}[(a)]\setlength{\itemsep}{6pt}
 
-        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, 
+        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$, where
+        
         \begin{align*}
             \mathcal P=\{S&\rightarrow CA\mid CB, \\
             B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
             C&\rightarrow ABC\mid BC,\\
             A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
-        \end{align*}
-    
-        \item $w=abcbb$, $G=(\{S,A,B,C\},\{a,b,c\},S,\mathcal P)$,
-        \begin{align*}
-            \mathcal P=\{S&\rightarrow CA\mid CB, \\
-            B&\rightarrow CBA\mid CB\mid BA\mid BB, \\
-            C&\rightarrow ABC\mid BC,\\
-            A&\rightarrow a, B\rightarrow b, C\rightarrow c\}
-        \end{align*}
+        \end{align*}    
+
+        \item $w=01010010$, $G=G_2$ is the grammar from Problem \ref{prob:chnf}(b)
+        \item $w=01010011$, $G=G_2$ is the grammar from Problem \ref{prob:chnf}(b)
 
     \end{enumerate}
 
 \end{problem}
 
 
-
 \end{document}
-
-
-    
+   
