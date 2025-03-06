@@ -552,8 +552,8 @@
     \begin{itemize}
         \item $Q_D=\{S\subseteq Q_E\mid \alert{S=\epsilon CLOSE(S)}\}$, i.e., only \alert{$\epsilon$-closed} subsets
         \item $\delta_D(S,a)=\alert{\epsilon CLOSE(}\bigcup_{p \in S}\delta_E(p,a)\alert{)}$
-        \item $q_0=S_0$
-        \item $F_D=\{S\subseteq Q_E \mid S \cap F_E \neq \emptyset\}$
+        \item $q_0=\alert{\epsilon CLOSE(}S_0\alert{)}$
+        \item $F_D=\{S\in Q_D \mid S \cap F_E \neq \emptyset\}$, i.e., $\epsilon$-closed subsets containing some accepting state
     \end{itemize}
 
     \begin{theorem}
@@ -765,23 +765,35 @@
 
 \begin{frame}{Proof for concatenation $L.M$}
 
-    Let $A_1=(Q_1,\Sigma, \delta_1,q_1,F_1)$ and $A_2=(Q_2,\Sigma, \delta_2,q_2,F_2)$ be DFA such that $L=L(A_1)$ and $M=L(A_2)$.
+    Let $A_1=(Q_1,\Sigma, \delta_1,q_1,F_1)$ and $A_2=(Q_2,\Sigma, \delta_2,q_2,F_2)$ be DFA such that $L=L(A_1)$ and $M=L(A_2)$. Assume that $\delta_1,\delta_2$ are total functions and $Q_1\cap Q_2=\emptyset$.
     
-    Define an $\epsilon$-NFA $B=(Q\mathbin{\dot\cup} \{q_0\},\Sigma,\delta,\{q_0\},F_2)$ (note that we end after reading the word in the second language $M$) where:
-    \begin{align*}
-    &\delta(q_0,x)=\emptyset\text{ for }x\in \Sigma\\
-    &\delta(q_0,\epsilon)=\begin{cases}
-    \{q_1,q_2\}&\text{for }q_1\in F_1\hfill\text{ (i.e. if $\epsilon\in L(A_1)$)}\\
-    \{q_1\}&\text{for }q_1\notin F_1\hfill\text{ (i.e., if $\epsilon \notin L(A_1)$)}
-    \end{cases}\\
-    &\delta(q,x)=
-    \begin{cases}
-    \{\delta_1(q,x)\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\notin F_1$ (stay in $A_1$)}\\
-    \{\delta_1(q,x),q_2\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\in F_1$} \\ & \text{(nondeterministic transition from $A_1$ to $A_2$)}\\
-    \{\delta_2(q,x)\}&\text{for $q\in Q_2$  (stay in $A_2$)}
-    \end{cases}
-    \end{align*}
+    Define an $\epsilon$-NFA $B=(Q_1\cup Q_2,\Sigma,\delta,\{q_1\},F_2)$, where:
+    \begin{itemize}
+        \item $\delta(q,a)=\{\delta_1(q,a)\}$ for $q\in Q_1,a\in\Sigma$,
+        \item $\delta(q,a)=\{\delta_2(q,a)\}$ for $q\in Q_2,a\in\Sigma$,
+        \item $\delta(q,\epsilon)=\{q_2\}$ for $q\in F_1$
+    \end{itemize}
+    (And $\delta(q,x)=\emptyset$ in all other cases.)
+    
     It is straightforward to verify that $L(B)=L(A_1).L(A_2)$.\hfill\qedsymbol
+
+    % Let $A_1=(Q_1,\Sigma, \delta_1,q_1,F_1)$ and $A_2=(Q_2,\Sigma, \delta_2,q_2,F_2)$ be DFA such that $L=L(A_1)$ and $M=L(A_2)$.
+    
+    % Define an $\epsilon$-NFA $B=(Q\mathbin{\dot\cup} \{q_0\},\Sigma,\delta,\{q_0\},F_2)$ (note that we end after reading the word in the second language $M$) where:
+    % \begin{align*}
+    % &\delta(q_0,x)=\emptyset\text{ for }x\in \Sigma\\
+    % &\delta(q_0,\epsilon)=\begin{cases}
+    % \{q_1,q_2\}&\text{for }q_1\in F_1\hfill\text{ (i.e. if $\epsilon\in L(A_1)$)}\\
+    % \{q_1\}&\text{for }q_1\notin F_1\hfill\text{ (i.e., if $\epsilon \notin L(A_1)$)}
+    % \end{cases}\\
+    % &\delta(q,x)=
+    % \begin{cases}
+    % \{\delta_1(q,x)\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\notin F_1$ (stay in $A_1$)}\\
+    % \{\delta_1(q,x),q_2\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\in F_1$} \\ & \text{(nondeterministic transition from $A_1$ to $A_2$)}\\
+    % \{\delta_2(q,x)\}&\text{for $q\in Q_2$  (stay in $A_2$)}
+    % \end{cases}
+    % \end{align*}
+    % It is straightforward to verify that $L(B)=L(A_1).L(A_2)$.\hfill\qedsymbol
 
 \end{frame}
 
@@ -791,20 +803,18 @@
     Let $A=(Q,\Sigma, \delta,q_0,F)$ be DFA such that $L=L(A)$. 
     \begin{itemize}
         \item \textbf{Idea:} repeated computation of $A=(Q,\Sigma, \delta,q_0,F)$, a nondeterministic decision whether to restart or continue.
-        \item a new state to accept $\epsilon\in L^0$ (do not include this state for $L^+$, or make it nonaccepting).
+        \item New (re-)start state $q_R$, accepting for $L^*$ but not for $L^+$.
     \end{itemize}
        
-    Define an NFA $B=(Q\cup \{q_B\},\Sigma,\delta_B,\{q_B\},F\cup \{q_B\})$ where:
-    \begin{align*}
-        &\delta_B(q_B,\epsilon)=\{q_0\}\qquad\qquad\ \text{a new state $q_B$ to accept $\epsilon$, we move to $q_0$}\\
-        &\delta_B(q_B,x)=\emptyset\quad\qquad\qquad\ \ \text{for $x\in \Sigma$}\\
-        &\delta_B(q,x)=
-        \begin{cases}
-        \{\delta(q,x)\} & \text{if $q\in Q$ and $\delta(q,x)\notin F$ (inside $A$)}\\
-        \{\delta(q,x),q_0\} & \text{if $q\in Q$ and $\delta(q,x)\in F$ (restart is possible)}
-        \end{cases}
-    \end{align*}
-    Then $L(B)=L(A)^*$ (if $q_B\in F_B$), or $L(B)=L(A)^+$ (if $q_B\notin F_B$).
+    Define an NFA $B=(Q\mathbin{\dot\cup}\{q_R\},\Sigma,\delta_B,\{q_R\},F_B$ where:
+    \begin{itemize}
+        \item $F_B=F\cup\{q_R\}$ for $L^*$, $F_B=F$ for $L^+$
+        \item $\delta_B(q_R,\epsilon)=\{q_0\}$ \hfill start computation on $A$
+        \item $\delta_B(f,\epsilon)=\{q_R\}$ for $f\in F$ \hfill nondeterministic restart
+        \item $\delta_B(q,a)=\{\delta(q,a)\}$ for $q\in Q,a\in \Sigma$ \hfill computation of $A$
+    \end{itemize}
+
+    Then $L(B)=L(A)^*$ (if $q_R\in F_B$), or $L(B)=L(A)^+$ (if $q_R\notin F_B$).
     
     \hfill\qedsymbol
 
