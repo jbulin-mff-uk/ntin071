@@ -776,25 +776,7 @@
     (And $\delta(q,x)=\emptyset$ in all other cases.)
     
     It is straightforward to verify that $L(B)=L(A_1).L(A_2)$.\hfill\qedsymbol
-
-    % Let $A_1=(Q_1,\Sigma, \delta_1,q_1,F_1)$ and $A_2=(Q_2,\Sigma, \delta_2,q_2,F_2)$ be DFA such that $L=L(A_1)$ and $M=L(A_2)$.
     
-    % Define an $\epsilon$-NFA $B=(Q\mathbin{\dot\cup} \{q_0\},\Sigma,\delta,\{q_0\},F_2)$ (note that we end after reading the word in the second language $M$) where:
-    % \begin{align*}
-    % &\delta(q_0,x)=\emptyset\text{ for }x\in \Sigma\\
-    % &\delta(q_0,\epsilon)=\begin{cases}
-    % \{q_1,q_2\}&\text{for }q_1\in F_1\hfill\text{ (i.e. if $\epsilon\in L(A_1)$)}\\
-    % \{q_1\}&\text{for }q_1\notin F_1\hfill\text{ (i.e., if $\epsilon \notin L(A_1)$)}
-    % \end{cases}\\
-    % &\delta(q,x)=
-    % \begin{cases}
-    % \{\delta_1(q,x)\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\notin F_1$ (stay in $A_1$)}\\
-    % \{\delta_1(q,x),q_2\}&\text{for $q\in Q_1$ and $\delta_1(q,x)\in F_1$} \\ & \text{(nondeterministic transition from $A_1$ to $A_2$)}\\
-    % \{\delta_2(q,x)\}&\text{for $q\in Q_2$  (stay in $A_2$)}
-    % \end{cases}
-    % \end{align*}
-    % It is straightforward to verify that $L(B)=L(A_1).L(A_2)$.\hfill\qedsymbol
-
 \end{frame}
 
 
@@ -806,7 +788,7 @@
         \item New (re-)start state $q_R$, accepting for $L^*$ but not for $L^+$.
     \end{itemize}
        
-    Define an NFA $B=(Q\mathbin{\dot\cup}\{q_R\},\Sigma,\delta_B,\{q_R\},F_B$ where:
+    Define an NFA $B=(Q\mathbin{\dot\cup}\{q_R\},\Sigma,\delta_B,\{q_R\},F_B)$ where:
     \begin{itemize}
         \item $F_B=F\cup\{q_R\}$ for $L^*$, $F_B=F$ for $L^+$
         \item $\delta_B(q_R,\epsilon)=\{q_0\}$ \hfill start computation on $A$
