@@ -365,7 +365,7 @@
 		\item Left-linear grammars generate regular languages. ($L$ is regular iff $L^R$ is, reversing bodies gives a right-linear grammar.)
 		\item But not every linear language is regular! Example: $L=\{0^n1^n\mid n\geq 1\}$, linear rules $S\rightarrow 0S1\mid 01$
 		\item Observe: productions can be split to left-linear and right-linear
-		\item Not every context-free language is linear, for example $L=\{w\in\{0,1\}^*\mid |w|_0=|w_1|\}$. Context-free grammar later, to prove non-linearity use a version of PL for linear languages.
+		\item Not every context-free language is linear, for example $L=\{w\in\{0,1\}^*\mid |w|_0=|w|_1\}$. Context-free grammar later, to prove non-linearity use a version of PL for linear languages.
 	\end{itemize}
 
 \end{frame}
@@ -411,13 +411,13 @@
 		(a) Expresssions:\hspace{2cm} &
 		(b) Palindromes:\hspace{2cm} \\
 		\alert{$E\Rightarrow^* a+E$} &
-		\alert{$P\Rightarrow^* 0110$}\\
+		\alert{$S\Rightarrow^* 0110$}\\
 		\begin{forest}
 			[E[E[I[a]]][+][E]]
 		\end{forest}		
 		&		
 		\begin{forest}
-			[P[0][P[1][P[$\epsilon$]][1]][0]]
+			[S[0][S[1][S[$\epsilon$]][1]][0]]
 		\end{forest}
 	\end{tabular}
 	\end{center}
