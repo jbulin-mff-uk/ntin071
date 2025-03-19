@@ -12,15 +12,41 @@
 
 \subsection*{Teaching goals:} The student is able to
 
-    \begin{itemize}\setlength{\itemsep}{0pt}
-        \item 
-    \end{itemize}
+\begin{itemize}\setlength{\itemsep}{0pt}
+    \item give a formal statement of the Pumping lemma for context-free languages
+    \item explain the proof of the Pumping lemma for context-free languages
+    \item apply the Pumping lemma to prove that a given language is not context-free
+\end{itemize}
 
 
 \section*{In-class problems}
 
 
-\medskip\begin{problem}
+
+\medskip\begin{problem}[Pumping lemma: statement and proof]
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Formulate the Pumping Lemma for context-free languages (without consulting your notes).
+        \item Compare the statement to the version for regular languages. 
+        \item Explain the idea behind its proof.
+        \item Demonstrate pumping on the language $L=\{ww^R\mid w\in \{a,b\}^*\}$.
+    \end{enumerate}
+
+\end{problem}
+
+\medskip\begin{problem}[Pumping lemma: application]
+
+    Decide if the following languages are context-free. Prove that your answer is correct.
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item $L=\{0^i1^j0^i\mid i,j\geq 0\}$
+        \item $L=\{0^i1^j0^i\mid 0\leq i\leq j\}$
+        \item $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$
+        \item $L=\{ww\mid w\in \{0,1\}^*\}$
+        \item $L=\{ww^R\mid w\in \{0,1\}^*, |w|_0=|w|_1\}$
+        \item $L=\{1^{n^2+n+1}\mid n\geq 0\}$
+    \end{enumerate}
 
 \end{problem}
 
@@ -28,7 +54,46 @@
 \section*{Extra Practice and Thinking}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[Pumping and right-linear grammars]
+
+    Give an alternative proof of the Pumping lemma for regular languages that is based on derivations from a right-linear grammar.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping linear languages]
+    
+    Recall that a grammar is \emph{linear}, if it only contains production rules of the form $A\to uBw$ and $A\to w$, where $A,B\in V$ and $u,w\in T^*$.
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item Formulate a Pumping lemma for linear languages.
+        \item Proof the statement using derivations from a (reduced) linear grammar.
+        \item How does the pumping constant $n$ from the lemma relate to a linear grammar for $L$?
+        \item Show that the language $L=\{w\in \{0,1\}^*\mid |w|_0=|w|_1\}$ is not linear.
+        \item Where does $L$ lie within the Chomsky hierarchy?
+    \end{enumerate}
+    
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping lemma: application]
+
+    Decide if the following languages are context-free. Prove that your answer is correct.
+
+    \medskip
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item $L=\{0^i1^i\mid i\geq 0\}$        
+        \item $L=\{0^i1^j0^i\mid 0\leq j\leq i\}$
+        \item $L=\{0^i1^i2^i\mid i\geq 0\}$
+        \item $L=\{0^{2i}1^{3i}0^i\mid i\geq 0\}$        
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$        
+        \item $L=\{1^{n^2}\mid n\geq 0\}$        
+        \item $L=\{1^p\mid p \text{ is a prime}\}$
+        \item $L=\{0^i1^{j}\mid 0\leq i\leq j^2\}$
+    \end{enumerate}
 
 \end{problem}
 

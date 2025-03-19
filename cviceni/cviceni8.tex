@@ -13,12 +13,39 @@
 \subsection*{Cíle výuky:} Po absolvování student umí
 
 \begin{itemize}\setlength{\itemsep}{0pt}
-    \item 
+    \item uvést formální znění Pumping lemmatu pro bezkontextové jazyky
+    \item vysvětlit důkaz Pumping lemmatu pro bezkontextové jazyky
+    \item použít Pumping Lemma k důkazu, že daný jazyk není bezkontextový
 \end{itemize}
+
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem} 
+
+\medskip\begin{problem}[Pumping lemma: formulace a důkaz]
+    
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item Zformulujte Pumping lemma pro bezkontextové jazyky (bez nahlížení do poznámek).
+        \item Srovnejte formulaci s verzí pro regulární jazyky. 
+        \item Vysvětlete myšlenku důkazu.
+        \item Demonstrujte pumpování na jazyce $L=\{ww^R\mid w\in \{a,b\}^*\}$.
+    \end{enumerate}
+
+\end{problem}
+
+\medskip\begin{problem}[Pumping lemma: aplikace]
+
+    Rozhodněte, zda jsou následující jazyky bezkontextové. Dokažte správnost vaší odpovědi.
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item $L=\{0^i1^j0^i\mid i,j\geq 0\}$
+        \item $L=\{0^i1^j0^i\mid 0\leq i\leq j\}$
+        \item $L=\{0^i1^j2^k\mid 0\leq i\leq j\leq k\}$
+        \item $L=\{ww\mid w\in \{0,1\}^*\}$
+        \item $L=\{ww^R\mid w\in \{0,1\}^*, |w|_0=|w|_1\}$
+        \item $L=\{1^{n^2+n+1}\mid n\geq 0\}$
+    \end{enumerate}
 
 \end{problem}
 
@@ -26,7 +53,46 @@
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[Pumpování a pravé lineární gramatiky]
+
+    Uveďte alternativní důkaz Pummping lemmatu pro regulární jazyky, který je založený na derivacích z pravé lineární gramatiky.
+
+\end{problem}
+
+
+\medskip\begin{problem}[Pumpování lineárních jazyků]
+    
+    Připomeňme, že gramatika je \emph{lineární}, pokud obsahuje pouze pravidla tvaru $A\to uBw$ a $A\to w$, kde $A,B\in V$ a $u,w\in T^*$.
+        
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item Zformulujte Pumping lemma pro lineární jazyky.
+        \item Dokažte toto tvrzení pomocí odvození (redukovanou) lineární gramatikou.
+        \item Jak souvisí $n$ z tvrzení s lineární gramatikou pro daný jazyk?
+        \item Ukažte, že jazyk $L=\{w\in \{0,1\}^*\mid |w|_0=|w|_1\}$ není lineární.
+        \item Zařaďte jazyk $L$ do Chomského hierarchie.
+    \end{enumerate}    
+        
+\end{problem}
+
+
+\medskip\begin{problem}[Pumping lemma: aplikace]
+
+    Rozhodněte, zda jsou následující jazyky bezkontextové. Dokažte správnost vaší odpovědi.
+
+    \medskip
+    
+    \begin{enumerate}[(a)]
+        \setlength\itemsep{6pt}
+        \item $L=\{0^i1^i\mid i\geq 0\}$        
+        \item $L=\{0^i1^j0^i\mid 0\leq j\leq i\}$
+        \item $L=\{0^i1^i2^i\mid i\geq 0\}$
+        \item $L=\{0^{2i}1^{3i}0^i\mid i\geq 0\}$        
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$        
+        \item $L=\{1^{n^2}\mid n\geq 0\}$        
+        \item $L=\{1^p\mid p \text{ je prvočíslo}\}$
+        \item $L=\{0^i1^{j}\mid 0\leq i\leq j^2\}$
+    \end{enumerate}
 
 \end{problem}
 
