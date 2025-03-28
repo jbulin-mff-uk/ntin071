@@ -18,7 +18,65 @@
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem} 
+\medskip\begin{problem}[Konstrukce PDA]
+
+    Navrhněte zásobníkové automaty pro následující jazyky. (Mohou přijímat koncovým stavem i prázdným zásobníkem, u některých sestrojte obojí.)
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{9pt}
+        \item $L=\{w\mid w\in\{0,1\}^*,|w|_1\geq 3\}$
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+        \item $L=\{w\in\{(,)\}^*\mid w\text{ je korektní uzávorkování}\}$
+        \item $L=\{w\in \{0,1\}^*\mid w=w^R\}$
+        \item $L=\{a^ib^jc^k\mid i=j \text{ nebo } j=k\} $
+        \item $L=\{a^ib^jc^k\mid i+j=k\}$
+        \item $L=\{a^{2n}b^{3n}\mid n\geq 0\}$
+        \item $L=\{w\in \{0,1\}^*\mid  |w|_0=|w|_1\} $
+        \item $L=\{u2v\mid u,v\in \{0,1\}^*\text{ a }|u|\neq |v|\} $
+        \item $L=\{w\in\{(,),[,]\}^*\mid w\text{ je korektní uzávorkování}\}$   
+        %\item* $L=\{u2v\ \mid \ u,v\in \{0,1\}^*\text{ a } u\neq v\}$ (jde-li o bezkontextový jazyk)          
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Koncový stav vs. prázdný zásobník]
+
+    Vybrané zásobníkové automaty sestrojené v předchozím příkladu převeďte z přijímání koncovým stavem na přijímání prázdným zásobníkem, a naopak. (Vyzkoušejte si obě konstrukce.)
+
+\end{problem}
+
+
+\medskip\begin{problem}[Z gramatiky na PDA]
+
+    Pro danou gramatiku $G$ sestrojte zásobníkové automaty $Z_1,Z_2$ že $L(Z_1)=L(G)$ a $N(Z_2)=L(G)$.
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $G=(\{S,T,X\},\{a,b\},P,S)$
+            \begin{align*}
+        P=\{S&\rightarrow aTXb, \\
+        T&\rightarrow XTS\mid \epsilon,\\ 
+        X&\rightarrow a\mid b\}
+        \end{align*}
+        \item $G=(\{S,T,X\},\{(,),*,+,1\},P,S)$
+            \begin{align*}
+        P=\{S&\rightarrow S+T\mid T, \\
+        T&\rightarrow T*X\mid X,\\ 
+        X&\rightarrow 1\mid (S)\}
+        \end{align*}
+    \end{enumerate}
+
+    Pro nějaké rozumně dlouhé slovo $w\in L(G)$ najděte levou derivaci a simulujte výpočet automatu $Z_2$.
+
+\end{problem}
+    
+
+\medskip\begin{problem}[Z PDA na gramatiku]
+
+    Vybrané (malé) zásobníkové automaty sestrojené na předchozím cvičení převeďte na bezkontextové gramatiky. Pro nějaké rozumně dlouhé slovo $w$ přijímané daným automatem najděte levou derivaci tohoto slova v zkonstruované gramatice.
 
 \end{problem}
 
@@ -26,10 +84,20 @@
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}
-
+\medskip\begin{problem}[Bonus: Kontextová gramatika]
+    
+    Uvažme $G=(\{S,A,B,C\},\{a,b,c\},S,P)$, kde:
+    \begin{align*}
+        P=\{&S\rightarrow aSBC\mid aBC, B\rightarrow BBC,  C\rightarrow CC, CB\rightarrow BC,\\ 
+        &aB\rightarrow ab, bB\rightarrow bb, bC\rightarrow bc, cC\rightarrow cc\}
+    \end{align*}
+    Jaký jazyk generuje? Je gramatika $G$ kontextová? Pokud ne, najděte ekvivalentní kontextovou gramatiku.
+    
 \end{problem}
 
 
 \end{document}
+
+
+
 
