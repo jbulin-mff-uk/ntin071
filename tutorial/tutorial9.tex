@@ -13,14 +13,69 @@
 \subsection*{Teaching goals:} The student is able to
 
     \begin{itemize}\setlength{\itemsep}{0pt}
-        \item 
+        \item state the formal definition of a PDA, acceptance by empty stack and by final state
+        \item construct a pushdown automaton for a given language
+        \item convert between acceptance by empty stack and acceptance by final state
+        \item convert a context-free grammar into a pushdown automaton
+        \item convert a pushdown automaton into a context-free grammar
     \end{itemize}
 
 
 \section*{In-class problems}
 
 
-\medskip\begin{problem}
+\medskip\begin{problem}[PDA Construction]\label{problem:construct-pda}
+
+    Design a pushdown automaton recognizing the given language. For (a), (b), (c), accept by empty stack; for (d), (e), (f) by final state.
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{3pt}
+        \item $L=\{ww^R\mid w\in \{0,1\}^*\}$
+        \item $L=\{w\in\{(,)\}^*\mid w\text{ is correctly parenthesized}\}$
+        \item $L=\{a^ib^jc^k\mid i=j \text{ or } j=k\} $
+        \item $L=\{a^{2n}b^{3n}\mid n\geq 0\}$
+        \item $L=\{w\in \{0,1\}^*\mid  |w|_0=|w|_1\} $
+        \item $L=\{u2v\mid u,v\in \{0,1\}^*\text{ and }|u|\neq |v|\} $
+    \end{enumerate}
+
+\end{problem}
+
+
+\medskip\begin{problem}[Final State vs. Empty Stack]
+
+    Convert selected pushdown automata constructed in the previous problem from final state acceptance to empty stack acceptance, and vice versa. (Try both conversions.)
+
+\end{problem}
+
+
+\medskip\begin{problem}[CFG to PDA Conversion]
+
+    For a given grammar $G$, construct a PDA $A$ such that $L(G)=N(A)$. Additionally, for a given word $w\in L(G)$, find the leftmost derivation from $G$ and simulate the computation of $A$ (write the accepting sequence of configurations).
+
+    \medskip
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $G=(\{S,T,X\},\{a,b\},\mathcal P,S)$ with the following rules, $w=aaaabbb$
+            \begin{align*}
+        \mathcal P=\{S&\rightarrow aTXb, \\
+        T&\rightarrow XTS\mid \epsilon,\\ 
+        X&\rightarrow a\mid b\}
+        \end{align*}
+        \item $G=(\{S,T,X\},\{(,),*,+,1\},P,S)$ with the following rules, $w=1+1*(1+1)$
+            \begin{align*}
+        P=\{S&\rightarrow S+T\mid T, \\
+        T&\rightarrow T*X\mid X,\\ 
+        X&\rightarrow 1\mid (S)\}
+        \end{align*}
+    \end{enumerate}
+
+\end{problem}
+    
+
+\medskip\begin{problem}[PDA to CFG Conversion]
+
+    Convert the pushdown automata from Problem 1 (a), (b) into context-free grammars. For a reasonably long word $w$ accepted by the given automaton, find the leftmost derivation of this word in the constructed grammar.
 
 \end{problem}
 
@@ -28,16 +83,32 @@
 \section*{Extra Practice and Thinking}
 
 
-\medskip\begin{problem}
-
+\medskip\begin{problem}[Bonus: Context-Sensitive Grammar]
+    
+    Consider $G=(\{S,A,B,C\},\{a,b,c\},S,P)$, where:
+    \begin{align*}
+        P=\{&S\rightarrow aSBC\mid aBC, B\rightarrow BBC,  C\rightarrow CC, CB\rightarrow BC,\\ 
+        &aB\rightarrow ab, bB\rightarrow bb, bC\rightarrow bc, cC\rightarrow cc\}
+    \end{align*}
+    What language does it generate? Is grammar $G$ context-sensitive? If not, find an equivalent context-sensitive grammar.
+    
 \end{problem}
 
 
-\end{document}
+\medskip\begin{problem}[PDA Construction]
 
+    Design pushdown automata for the following languages. (They may accept by final state or empty stack; for some, construct both; for others, try converting between these two acceptance methods.)
 
+    \medskip
 
+    \begin{enumerate}[(a)]\setlength\itemsep{9pt}
+        \item $L=\{w\mid w\in\{0,1\}^*,|w|_1\geq 3\}$        
+        \item $L=\{w\in \{0,1\}^*\mid w=w^R\}$        
+        \item $L=\{a^ib^jc^k\mid i+j=k\}$        
+        \item $L=\{w\in\{(,),[,]\}^*\mid w\text{ is correctly parenthesized}\}$
+    \end{enumerate}
 
+\end{problem}
 
 
 \end{document}
