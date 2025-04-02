@@ -6,19 +6,44 @@
 
 \thispagestyle{empty}
 
-\section*{NTIN071 A\&G: Cvičení 10 -- Převod mezi PDA a bezkontextovými gramatikami}
+\section*{NTIN071 A\&G: Cvičení 10 -- Vlastnosti bezkontextových jazyků, DPDA}
 
 \medskip
 
 \subsection*{Cíle výuky:} Po absolvování student umí
 
 \begin{itemize}\setlength{\itemsep}{0pt}
-    \item 
+    \item převést bezkontextovou gramatiku na zásobníkový automat
+    \item převést zásobníkový automat na bezkontextovou gramatiku
 \end{itemize}
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem} 
+\smallskip\begin{problem}[Převod CFG na PDA]
+
+    Pro danou gramatiku $G$ sestrojte PDA $A$ takový, že $L(G)=N(A)$. Dále pro dané slovo $w\in L(G)$ najděte levou derivaci z $G$ a proveďte simulaci výpočtu $A$ (napište přijímající posloupnost konfigurací).
+
+    \begin{enumerate}[(a)]\setlength\itemsep{6pt}
+        \item $G=(\{S,T,X\},\{a,b\},\mathcal P,S)$ s následujícími pravidly, $w=aaaabbb$
+        \begin{align*}
+            \mathcal P=\{S&\rightarrow aTXb, \\
+            T&\rightarrow XTS\mid \epsilon,\\ 
+            X&\rightarrow a\mid b\}
+        \end{align*}
+        \item $G=(\{S,T,X\},\{(,),*,+,1\},P,S)$ s následujícími pravidly, $w=1+1*(1+1)$
+        \begin{align*}
+            P=\{S&\rightarrow S+T\mid T, \\
+            T&\rightarrow T*X\mid X,\\ 
+            X&\rightarrow 1\mid (S)\}
+        \end{align*}
+    \end{enumerate}
+
+\end{problem}
+    
+
+\begin{problem}[Převod PDA na CFG]
+
+    Zásobníkové automaty z Příkladu 1 (a), (b) převeďte na bezkontextové gramatiky. Pro nějaké rozumně dlouhé slovo $w$ přijímané daným automatem najděte levou derivaci tohoto slova v zkonstruované gramatice.
 
 \end{problem}
 
@@ -26,8 +51,15 @@
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}
-
+\medskip\begin{problem}[Bonus: Kontextová gramatika]
+    
+    Uvažme $G=(\{S,A,B,C\},\{a,b,c\},S,P)$, kde:
+    \begin{align*}
+        P=\{&S\rightarrow aSBC\mid aBC, B\rightarrow BBC,  C\rightarrow CC, CB\rightarrow BC,\\ 
+        &aB\rightarrow ab, bB\rightarrow bb, bC\rightarrow bc, cC\rightarrow cc\}
+    \end{align*}
+    Jaký jazyk generuje? Je gramatika $G$ kontextová? Pokud ne, najděte ekvivalentní kontextovou gramatiku.
+    
 \end{problem}
 
 
