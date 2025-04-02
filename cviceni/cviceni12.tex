@@ -1,5 +1,6 @@
 \documentclass[a4paper,12pt]{amsart}
 
+\usepackage[framemethod=TikZ]{mdframed}
 \input{header.tex}
 
 \begin{document}
@@ -13,21 +14,196 @@
 \subsection*{Cíle výuky:} Po absolvování student umí
 
 \begin{itemize}\setlength{\itemsep}{0pt}
-    
-    \item 
+    \item uvést formální definice tříd $\mathtt{TIME}(f(n))$ a $\mathtt{SPACE}(f(n))$
+    \item definovat složitostní třídy $\mathtt{P}$, $\mathtt{NP}$ (jak na základě verifikátoru, tak NTM), co-$\mathtt{NP}$
+    \item definovat polynomiální redukci, $\mathtt{NP}$-těžkost a $\mathtt{NP}$-úplnost
+    \item zkonstruovat polynomiální redukci mezi problémy
+    \item určit, zda jsou třídy složitosti uzavřené na různé operace
 \end{itemize}
+
 
 \section*{Příklady na cvičení}
 
-\medskip\begin{problem} 
 
+\medskip
+\begin{problem}
+    Ukažte, že problémy \textsc{clique}, \textsc{independent-set} a \textsc{vertex-cover}, definované níže, jsou na sebe navzájem polynomiálně redukovatelné.
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{                
+        \textsc{clique}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Graf $G=(V,E)$ a celé číslo $k\geq 0$.  
+            \item[\textsc{Q:}] Obsahuje $G$ (jako podgraf) úplný podgraf na alespoň $k$ vrcholech?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{independent-set}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Graf $G=(V,E)$ a celé číslo $k\geq 0$.  
+            \item[\textsc{Q:}] Obsahuje $G$ nezávislou množinu alespoň $k$ vrcholů, tj. množinu $S\subseteq V$, $|S|\geq k$, kde žádné dva vrcholy nejsou spojeny hranou?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{vertex-cover}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Graf $G=(V,E)$ a celé číslo $k\geq 0$.  
+            \item[\textsc{Q:}] Obsahuje $G$ vrcholové pokrytí velikosti nejvýše $k$, tj. množinu $S\subseteq V$, $|S|\leq k$, která má alespoň jeden vrchol z každé hrany?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+\end{problem}
+
+\medskip
+\begin{problem}
+
+    Použijte známý fakt, že \textsc{hamiltonian-cycle} je $\mathtt{NP}$-úplný, a ukažte, že \textsc{oriented-hamiltonian-cycle}, \textsc{$(s,t)$-hamiltonian-path} a \textsc{hamiltonian-path} jsou také $\mathtt{NP}$-úplné.  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{hamiltonian-cycle}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Neorientovaný graf $G=(V,E)$.  
+            \item[\textsc{Q:}] Obsahuje $G$ Hamiltonovskou kružnici, tj. kružnici obsahující každý vrchol?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{oriented-hamiltonian-cycle}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Orientovaný graf $G=(V,E)$.  
+            \item[\textsc{Q:}] Obsahuje $G$ orientovanou Hamiltonovskou kružnici, tj. orientovanou kružnici obsahující každý vrchol?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{$(s,t)$-hamiltonian-path}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Neorientovaný graf $G=(V,E)$ a dvojice vrcholů $s,t\in V$.  
+            \item[\textsc{Q:}] Obsahuje $G$ Hamiltonovskou cestu z $s$ do $t$, tj. cestu, která začíná v $s$, končí v $t$ a prochází každý vrchol právě jednou?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{hamiltonian-path}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Neorientovaný graf $G=(V,E)$.  
+            \item[\textsc{Q:}] Obsahuje $G$ Hamiltonovskou cestu, tj. cestu, která prochází každý vrchol právě jednou?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+\end{problem}
+
+
+\medskip
+\begin{problem}
+    Ukažte, že třída $\mathtt{P}$ je uzavřená na sjednocení, průnik a doplněk.
+\end{problem}
+
+\medskip
+\begin{problem}
+    Ukažte, že třída $\mathtt{NP}$ je uzavřená na sjednocení a průnik.
 \end{problem}
 
 
 \section*{K procvičení a k zamyšlení}
 
 
-\medskip\begin{problem}
+\medskip
+\begin{problem}
+    
+    Ukažte, že \textsc{vertex-cover} má polynomiální redukci na \textsc{dominating-set}.
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{dominating-set}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Graf $G=(V,E)$ a celé číslo $k\geq 0$.  
+            \item[\textsc{Q:}] Obsahuje $G$ množinu vrcholů $S\subseteq V$ o velikosti nejvýše $k$ takovou, že každý vrchol $v\in V\setminus S$ má souseda v $S$?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+\end{problem}
+
+\medskip
+\begin{problem}
+
+    Sestrojte polynomiální redukci \textsc{hamiltonian-cycle} na \textsc{traveling-salesperson}.        
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{traveling-salesperson}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Množina měst $C=\{c_1,\dots,c_n\}$, vzdálenosti $d(c_i,c_j)\in\mathbb N$ mezi každou dvojicí měst a číslo $D\in\mathbb N$.  
+            \item[\textsc{Q:}] Existuje cesta délky nejvýše $D$, která navštíví každé město právě jednou a vrátí se do výchozího města?  
+        \end{itemize}  
+        }}  
+    \end{center} 
+
+\end{problem}
+
+
+\begin{problem}
+
+    Ukažte, že \textsc{hamiltonian-cycle} je polynomiálně  redukovatelný na \textsc{sat}.        
+
+\end{problem}
+
+
+\begin{problem}
+
+    Ukažte, že \textsc{graph-coloring} je NP-úplný.  
+
+    \smallskip  
+    \begin{center}  
+        \fbox{\parbox{0.8\textwidth}{  
+        \textsc{graph-coloring}  
+        \medskip\hrule\medskip  
+        \begin{itemize}  
+            \item[\textsc{In:}] Graf $G=(V,E)$ a číslo $k\in\mathbb N$.  
+            \item[\textsc{Q:}] Lze obarvit vrcholy grafu $G$ nejvýše $k$ barvami tak, aby žádná hrana nespojovala dva vrcholy stejné barvy?  
+        \end{itemize}  
+        }}  
+    \end{center}  
+
+\end{problem}
+
+
+\begin{problem}
+
+    Ukažte, že třída $\mathtt{P}$ je uzavřená na iteraci. To znamená, že pokud $L\in\mathtt{P}$, pak také $L^*$ patří do $\mathtt{P}$. (Nápověda: Navrhněte dynamický program vyplňující tabulku, kde $T[i,j]=1$ právě tehdy, když $a_i\dots a_j\in L^*$.)
 
 \end{problem}
 

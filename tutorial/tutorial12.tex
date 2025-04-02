@@ -13,364 +13,202 @@
 \subsection*{Teaching goals:} The student is able to
 
     \begin{itemize}\setlength{\itemsep}{0pt}
-        \item 
+        \item give formal definitions of $\mathtt{TIME}(f(n))$ and $\mathtt{SPACE}(f(n))$
+        \item define the complexity classes $\mathtt{P}$, $\mathtt{NP}$ (both verifier and NTM-based), co-$\mathtt{NP}$
+        \item define polynomial-time reductions, $\mathtt{NP}$-hardness, $\mathtt{NP}$-completeness
+        \item design polynomial-time reductions between problems
+        \item decide whether complexity classes are closed under various operations
     \end{itemize}
 
 
 \section*{In-class problems}
 
 
-\medskip\begin{problem}
-
-\end{problem}
-
-
-\section*{Extra Practice and Thinking}
-
-
-\medskip\begin{problem}
-
-\end{problem}
-
-
-\end{document}
-
-
-
-
-
-
-
-% \bigskip\begin{problem}
-%     Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
+\medskip
+\begin{problem}
+    Show that the problems \textsc{clique}, \textsc{independent-set}, and \textsc{vertex-cover} defined below are polynomial-time inter-reducible. 
     
-%     \renewcommand{\arraystretch}{2.5}
-%     \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-%     (a) & $\SPACE(n\log n)$ & $\TIME(2^{n^2})$ & (f) & $\SPACE(n\log n)$ & $\TIME(2^{n\log n})$\\
-%     (b) & $\TIME(2^{n^2})$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^{n^2})$ & $\NSPACE(\log^2 n)$\\
-%     (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^2 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(n)$\\
-%     (d) & $\NSPACE(\log^2 n)$ & $\NTIME(n)$ & (i) & $\NSPACE(\log^2 n)$ & $\SPACE(n\log n)$ \\
-%     (e) & $\NTIME(n)$ & $\SPACE(n\log n)$ & (j) & $\NTIME(n)$ & $\TIME(2^{n^2})$
-%     \end{tabular}
-%     \end{problem}
-    
-    
-%     \bigskip\begin{problem}
-%     Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
-    
-%     \renewcommand{\arraystretch}{2.5}
-%     \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-%     (a) & $\SPACE(n)$ & $\TIME(2^n)$ & (f) & $\SPACE(n)$ & $\TIME(2^{n\log n})$\\
-%     (b) & $\TIME(2^n)$ & $\TIME(2^{n\log n})$ & (g) & $\TIME(2^n)$ & $\NSPACE(\log^3 n)$\\
-%     (c) & $\TIME(2^{n\log n})$ & $\NSPACE(\log^3 n)$ & (h) & $\TIME(2^{n\log n})$ & $\NTIME(2^n)$\\
-%     (d) & $\NSPACE(\log^3 n)$ & $\NTIME(2^n)$ & (i) & $\NSPACE(\log^3 n)$ & $\SPACE(n)$ \\
-%     (e) & $\NTIME(2^n)$ & $\SPACE(n)$ & (j) & $\NTIME(2^n)$ & $\TIME(2^n)$
-%     \end{tabular}
-%     \end{problem}
-    
-    
-\bigskip\begin{problem}
-    Show that the class P is closed under union, intersection, and complement.
-    \end{problem}
-    
-    
-    \bigskip\begin{problem}
-    Show that the class NP is closed under union and intersection.
-    \end{problem}
-    
-    \bigskip\begin{problem}
-    Show that the class P is closed under Kleene star. That is, if $A\in P$, then
-    $$
-    A^* = \{w_1\dots w_k\mid k\geq 0, w_i\in A\text { for all }i\leq k\} \in \text{P}.
-    $$
-    (Hint: Design a dynamic algorithm filling a table $T$ where $T[i,j]=1$ if and only if $w_i\dots w_j\in A^*$.) 
-    \end{problem}
-    
-    \bigskip\begin{problem}
-    Show that the class NP is closed under Kleene star.
-    \end{problem}
-    
-    \bigskip\hrule\hrule
-    
-    
-    % Determine the correct inclusion relationship between the following pairs of classes. That is, fill in one of the relation symbols $\subsetneq$, $\subseteq$, $=$, $\supseteq$, $\supsetneq$, or $?$ (if we cannot say based on our knowledge). Justify your answers.
-    
-    % \renewcommand{\arraystretch}{2.5}
-    % \begin{tabular}{p{0.5cm}  p{3cm} p{2.5cm} | p{0.5cm} p{3cm} p{2.5cm}}
-    % (a) & $\SPACE(n)$ & $\TIME(2^{\log^3 n})$ & (f) & $\SPACE(n)$ & $\NSPACE(\log^2 n)$\\
-    % (b) & $\TIME(2^{\log^3 n})$ & $\NSPACE(\log^2 n)$ & (g) & $\TIME(2^{\log^3 n})$ & $\NTIME(2^{\log^3 n})$\\
-    % (c) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{\log^3 n})$ & (h) & $\NSPACE(\log^2 n)$ & $\NTIME(2^{n\log n})$\\
-    % (d) & $\NTIME(2^{\log^3 n})$ & $\NTIME(2^{n\log n})$ & (i) & $\NTIME(2^{\log^3 n})$ & $\SPACE(n)$ \\
-    % (e) & $\NTIME(2^{n\log n})$ & $\SPACE(n)$ & (j) & $\NTIME(2^{n\log n})$ & $\TIME(2^{\log^3 n})$
-    % \end{tabular}
-
-
-
-    \medskip\begin{problem}
-        Show that the problems \textsc{clique}, \textsc{independent-set}, and \textsc{vertex-cover} defined below are polynomially inter-reducible. 
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{                
         \textsc{clique}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] A graph $G=(V,E)$ and an integer $k\geq 0$.
             \item[\textsc{Q:}] Does $G$ contain (as a subgraph) the complete graph (clique) on at least $k$ vertices?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+        }}
+    \end{center}
+    
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{independent-set}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] A graph $G=(V,E)$ and an integer $k\geq 0$.
             \item[\textsc{Q:}] Does $G$ contain an independent set of size at least $k$, i.e., $S\subseteq V$, $|S|\geq k$ with no edge connecting a pair of vertices from $S$?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+        }}
+    \end{center}
+    
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{vertex-cover}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] A graph $G=(V,E)$ and an integer $k\geq 0$.
             \item[\textsc{Q:}] Does $G$ have a vertex cover of size at most $k$, i.e., $S\subseteq V$, $|S|\leq k$ containing at least one vertex from every edge?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \end{problem}
-        
-        
-        \medskip\begin{problem}
-        Show that the problem \textsc{vertex-cover} is polynomially reducible to the problem \textsc{dominating-set} defined below.
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{dominating-set}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A graph $G=(V,E)$ and an integer $k\geq 0$.
-            \item[\textsc{Q:}] Does $G$ contain a set of vertices $S\subseteq V$ of size at most $k$ such that every $v\in V\setminus S$ has a neighbor in $S$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        
-        \end{problem}
-        
-        
-        \medskip\begin{problem}
-        It is well known that the problem \textsc{hamiltonian-cycle} defined below is an NP-complete problem. Use this fact to show that the problems \textsc{oriented-hamiltonian-cycle}, \textsc{$(s,t)$-hamiltonian-path}, and \textsc{hamiltonian-path} defined further below are NP-complete as well.
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+        }}
+    \end{center}
+    
+\end{problem}
+
+
+\medskip
+\begin{problem}
+
+    Use the well-known fact that \textsc{hamiltonian-cycle} is $\mathtt{NP}$-complete to show that \textsc{oriented-hamiltonian-cycle}, \textsc{$(s,t)$-hamiltonian-path}, and \textsc{hamiltonian-path} are $\mathtt{NP}$-complete as well.
+    
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{hamiltonian-cycle}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] An (unoriented) graph $G=(V,E)$.
             \item[\textsc{Q:}] Does $G$ contain a Hamiltonian cycle, i.e., a cycle containing every vertex?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
+        }}
+    \end{center}
         
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{oriented-hamiltonian-cycle}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] An oriented graph $G=(V,E)$.
             \item[\textsc{Q:}] Does $G$ contain an oriented Hamiltonian cycle, i.e., an oriented cycle containing every vertex?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+        }}
+    \end{center}
+       
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{$(s,t)$-hamiltonian-path}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] An (unoriented) graph $G=(V,E)$ and a pair of vertices $s,t\in V$.
             \item[\textsc{Q:}] Does $G$ contain a Hamiltonian path from $s$ to $t$, i.e., a path that starts in $s$, ends in $t$, and visits every vertex exactly once?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
+        }}
+    \end{center}
         
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{hamiltonian-path}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] An (unoriented) graph $G=(V,E)$.
             \item[\textsc{Q:}] Does $G$ contain a Hamiltonian path, i.e., a path that visits every vertex exactly once?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
+        }}
+    \end{center}
         
-        \end{problem}
-        
-        
-        \medskip\begin{problem}
-        Show that the problem \textsc{hamiltonian-cycle} is polynomially reducible to the problem \textsc{sat} defined below.
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{sat}
+\end{problem}
+
+
+\medskip
+\begin{problem}
+    Show that the class $\mathtt{P}$ is closed under union, intersection, and complement.
+\end{problem}
+
+
+\medskip    
+\begin{problem}
+    Show that the class $\mathtt{NP}$ is closed under union and intersection.
+\end{problem}
+
+
+\section*{Extra Practice and Thinking}
+
+
+\medskip
+\begin{problem}
+    Show that \textsc{vertex-cover} is polynomial-time reducible to \textsc{dominating-set}.
+    
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
+        \textsc{dominating-set}
         \medskip\hrule\medskip
         \begin{itemize}
-            \item[\textsc{In:}] A propositional formula $\varphi$ in conjunctive normal form (CNF).
-            \item[\textsc{Q:}] Is $\varphi$ satisfiable?
+            \item[\textsc{In:}] A graph $G=(V,E)$ and an integer $k\geq 0$.
+            \item[\textsc{Q:}] Does $G$ contain a set of vertices $S\subseteq V$ of size at most $k$ such that every $v\in V\setminus S$ has a neighbor in $S$?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \end{problem}
-        
-        
-        \medskip\begin{problem}
-        Show that the problem \textsc{hamiltonian-cycle} is polynomially reducible to the problem \textsc{traveling-salesperson} defined below.
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+        }}
+    \end{center}
+    
+\end{problem}
+
+
+\medskip
+\begin{problem}
+
+    Show that \textsc{hamiltonian-cycle} is polynomial-time reducible to \textsc{traveling-salesperson}.        
+
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{traveling-salesperson}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] A list of cities $C=\{c_1,\dots,c_n\}$, distances $d(c_i,c_j)\in\mathbb N$ between each pair of cities, and $D\in\mathbb N$.
             \item[\textsc{Q:}] Is there a route of length at most $D$ that visits every city exactly once and returns to the origin city?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
+        }}
+    \end{center}
         
-        \end{problem}
+\end{problem}
+
+
+\medskip
+\begin{problem}
+
+    Show that \textsc{hamiltonian-cycle} is polynomial-time reducible to \textsc{sat}.        
         
-        
-        \medskip\begin{problem}
-        Show that the problems \textsc{integer-programming} and \textsc{binary-integer-programming} defined below are NP-hard. You can use a reduction from one of the following problems: \textsc{sat}, \textsc{clique}, \textsc{independent-set}, or \textsc{vertex-cover}.
-        
-        Moreover, show that the problem \textsc{binary-integer-programming} is in NP (and thus it is NP-complete). The problem \textsc{integer-programming} is in NP as well but it is not that easy to prove. Why? 
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{integer-programming}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A $k\times n$ integer matrix $A$ and an integer vector $b$ of length $k$.
-            \item[\textsc{Q:}] Is there an integer vector $x$ of length $n$ such that $Ax\geq b$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{binary-integer-programming}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A $k\times n$ integer matrix $A$ and an integer vector $b$ of length $k$.
-            \item[\textsc{Q:}] Is there a vector $x\in\{0,1\}^n$ such that $Ax\geq b$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        \end{problem}
-        
-        
-        \medskip\begin{problem}
-        Show that the problem \textsc{graph-coloring} defined below is NP-complete.
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
+\end{problem}
+
+
+\begin{problem}
+
+    Show that \textsc{graph-coloring} is NP-complete.
+
+    \smallskip
+    \begin{center}
+        \fbox{\parbox{0.8\textwidth}{ 
         \textsc{graph-coloring}
         \medskip\hrule\medskip
         \begin{itemize}
             \item[\textsc{In:}] A graph $G=(V,E)$ and $k\in\mathbb N$.
             \item[\textsc{Q:}] Can we color vertices of $G$ with at most $k$ colors so that there are no monochromatic edges?
         \end{itemize}
-        \end{mdframed}
-        \end{quote}
+        }}
+    \end{center}
         
-        \end{problem}
-        
-        
-        Show that the problem \textsc{cover-oriented-cycles} defined below is NP-complete. (Hint: Use a reduction from \textsc{vertex-cover}. Do not forget to show that \textsc{cover-oriented-cycles} is in NP.)
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{cover-oriented-cycles}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] An oriented graph $G=(V,E)$ and an integer $k\geq 0$.
-            \item[\textsc{Q:}] Is there a set of vertices $S\subseteq V$, $|S|\leq k$, containing at least one vertex from every oriented cycle in $G$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
+\end{problem}
+       
 
-        
-        \bigskip
+\begin{problem}
 
-        Consider the \textsc{partition-problem} defined below.
-        \begin{enumerate}[(a)]
-            \item Show that the \textsc{partition-problem} is polynomially reducible to the \textsc{knapsack} problem defined further below.
-            \item Show that the \textsc{partition-problem} is polynomially reducible to the \textsc{scheduling} problem defined even further below.
-        \end{enumerate}
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{partition-problem}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A (finite) set $A$ and a value $s(a)\in\mathbb N$ associated with each $a\in A$.
-            \item[\textsc{Q:}] Is it possible to partition $A$ into two parts of the same value? More precisely, is there $A'\subseteq A$ such that $\sum_{a\in A'} s(a)=\sum_{a\in A\setminus A'} s(a)$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{knapsack}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A (finite) set $A$, where each $a\in A$ has an associated size $s(a)\in\mathbb N$ and value $v(a)\in\mathbb N$, and two positive integers: capacity $C$ and value $V$.
-            \item[\textsc{Q:}] Is there a subset $A'\subseteq A$ such that $\sum_{a\in A'} s(a)\leq C$ and $\sum_{a\in A'} v(a)\geq V$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
-        
-        \bigskip
-        \begin{quote}
-        \begin{mdframed}
-        \textsc{scheduling}
-        \medskip\hrule\medskip
-        \begin{itemize}
-            \item[\textsc{In:}] A number of processors $m\in\mathbb N$, a (finite) set of tasks $T$ where each task $x\in T$ has an associated duration $d(x)\in\mathbb N$, and a positive integer $D$.
-            \item[\textsc{Q:}] Is it possible to partition the set $T$ into $m$ parts $T_1,\dots,T_m$ (i.e., pairwise disjoint sets covering $T$) such that $\sum_{x\in T_i} d(x)\leq D$ for every $1\leq i\leq m$?
-        \end{itemize}
-        \end{mdframed}
-        \end{quote}
-        
+    Show that the class $\mathtt{P}$ is closed under iteration. That is, if $L\in\mathtt{P}$, then $L^*$ is also in $\mathtt{P}$. (Hint: Design a table-filling algorithm where $T[i,j]=1$ iff $a_i\dots a_j\in L^*$.)
 
+\end{problem}
 
 
 \end{document}
