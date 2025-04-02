@@ -12,51 +12,21 @@
 
 \subsection*{Teaching goals:} The student is able to
 
-    \begin{itemize}\setlength{\itemsep}{0pt}
-        \item 
-    \end{itemize}
+\begin{itemize}\setlength{\itemsep}{0pt}
+    \item explain the formal definition of deterministic and nondeterministic Turing machines
+    \item describe computation graph, define the recognized language, the computed function
+    \item perform the computation of a given Turing machine on a given input
+    \item determine the language recognized by a given Turing machine
+    \item construct a Turing machine recognizing given language, computing given function
+    \item analyze various variants \& modifications of the Turing machine computation model
+\end{itemize}
+
 
 
 \section*{In-class problems}
 
 
-\medskip\begin{problem}
-
-\end{problem}
-
-
-\section*{Extra Practice and Thinking}
-
-
-\medskip\begin{problem}
-
-\end{problem}
-
-
-\end{document}
-
-
-\documentclass[a4paper,12pt]{amsart}
-
-\input{header.tex}
-
-\begin{document}
-
-% \thispagestyle{empty}
-
-\section*{NTIN071 A\&G: Tutorial 11 -- Turing machines}
-
-% after Lecture 10
-% spring 2024
-
-\medskip
-
-\noindent\emph{Solve 1, 2, 3a-d, 4  first (the rest is for practice).}
-
-\medskip
-
-
-\medskip\begin{problem}[A Turing machine]
+\begin{problem}[A Turing machine]
     
     Consider the following TM.
     \vspace{-9pt}
@@ -69,47 +39,23 @@
         \end{tabular}
     \end{table}
 
-    \vspace{-24pt}    
-    \begin{multicols}{2}        
-        \begin{enumerate}[(a)]
-            \item Draw the state diagram.
-            \item Describe the computation (by a sequence of configurations) for $w=aabca$.
-            \item Describe the operation it performs.
-            \item What is the language recognized by the machine?
-        \end{enumerate} 
-    \end{multicols}
+    \begin{enumerate}[(a)]
+        \item Draw the state diagram.
+        \item Describe the computation (by a sequence of configurations) for $w=aabca$.
+        \item What language does the machine recognize? What function does it compute?
+    \end{enumerate} 
     
 \end{problem}
-    
-    
-\medskip\begin{problem}[Erase all 1s]
+
+
+\begin{problem}[Erase all 1s]
 
     Design a TM over the alphabet $\{0,1\}$ which will erase all 1's from the input and then return to the beginning (e.g. if it starts in the configuration $q_0 0011010$, then it will halt in the configuration $q_F 0000$ for some $q_F\in F$).
 
 \end{problem}
-    
-
-\medskip\begin{problem}[Programming TMs]
-
-    Design a TM which will accept the language $L$. Write down the sequence of configurations that shows that the given word $w$ is accepted. 
-    
-    \begin{multicols}{2}
-    \begin{enumerate}[(a)]
-        \item $L=\{0^n1^n\mid n\geq 0\}$, $w=0011$
-        \item $L=\{0^n1^n2^n\mid n\geq 0\}$, $w=001122$
-        \item $L=\{0^i1^j\mid i\leq j\}$, $w=00111$
-        \item $L=\{w\in\{0,1\}^*\mid |w|_0=|w|_1\}$,\\ $w=100110$
-        \item $L=\{ucu^R\mid u\in\{0,1\}^*\}$, $w=10c01$
-        \item $L=\{uu^R\mid u\in\{0,1\}^*\}$, $w=101101$
-        \item $L=\{ucu\mid u \in\{0,1\}^*\}$, $w=110c110$
-        \item $L=\{uu\mid u \in\{0,1\}^*\}$, $w=110110$
-    \end{enumerate}
-    \end{multicols}
-
-\end{problem}
 
 
-\medskip\begin{problem}[Predecessor]
+\begin{problem}[Predecessor]
 	
     Construct a Turing machine $T$ that for a given input natural number $x>0$ in binary encoding outputs its predecessor, i.e., $x-1$ (in binary encoding as well) and returns the head to the beginning of the output. %Additionally:
 	
@@ -132,6 +78,43 @@
 	\end{itemize}
 
 \end{problem}
+
+
+\begin{problem}[One-way infinite tape]
+
+    Describe how to convert a Turing machine with a (single) two-way infinite tape to a Turing machine whose tape is only infinite in one direction, to the right. (You can assume that the second TM's tape contains a special delimiter $\triangleright$ in its first field.)
+
+\end{problem}
+
+
+\begin{problem}[Nondeterministic test of non-primeness]
+    
+    Design a nondeterministic TM which will recognize the language $L=\{1^n \mid\text{$n$ is not a prime number}\}$.
+
+\end{problem}
+
+
+\section*{Extra Practice and Thinking}
+
+
+\medskip\begin{problem}[Programming TMs]
+
+    Design a TM which will accept the language $L$. Write down the sequence of configurations that shows that the given word $w$ is accepted. 
+    
+    \begin{multicols}{2}
+        \begin{enumerate}[(a)]
+            % \item $L=\{0^n1^n\mid n\geq 0\}$, $w=0011$
+            \item $L=\{0^n1^n2^n\mid n\geq 0\}$, $w=001122$
+            % \item $L=\{0^i1^j\mid i\leq j\}$, $w=00111$
+            \item $L=\{w\in\{0,1\}^*\mid |w|_0=|w|_1\}$,\\ $w=100110$
+            \item $L=\{ucu^R\mid u\in\{0,1\}^*\}$, $w=10c01$
+            % \item $L=\{uu^R\mid u\in\{0,1\}^*\}$, $w=101101$
+            \item $L=\{ucu\mid u \in\{0,1\}^*\}$, $w=10c10$
+            \item $L=\{uu\mid u \in\{0,1\}^*\}$, $w=110110$
+        \end{enumerate}
+    \end{multicols}
+
+\end{problem}
     
     
 \medskip\begin{problem}[Reverse]
@@ -143,24 +126,10 @@
 
 \begin{problem}[Memory blocks]
 
-    Design a TM which will switch the contents of two memory blocks. Specifically, if it starts in the configuration $q_0u\#v\#w\#x\#y$ (where $u, v, w, x, y \in \Sigma\setminus\{\#\}$), then it halts in the configuration $fu\#x\#w\#v\#y$ for some $f\in F$. Try to construct a small and efficient machine.
+    Design a TM which will switch the contents of two memory blocks. Specifically, if it starts in the configuration $q_0u\#v\#w\#x\#y$ (where $u, v, w, x, y \in \Sigma\setminus\{\#\}$), then it halts in the configuration $fu\#x\#w\#v\#y$ for some $f\in F$. %Try to construct a small and efficient machine.
 
 \end{problem}
-    
-
-\begin{problem}[Nondeterministic test of non-primeness]
-    
-    Design a nondeterministic TM which will accept the language $L=\{1^n \mid\text{$n$ is not a prime number}\}$.
-
-\end{problem}
-
-
-\begin{problem}[One-way infinite tape]
-
-    Describe how to convert a Turing machine with a (single) two-way infinite tape to a Turing machine whose tape is only infinite in one direction, to the right. (You can assume that the second TM's tape contains a special delimiter $\triangleright$ in its first field.)
-
-\end{problem}
-    
+       
 
 \begin{problem}[Head moves]
     
@@ -211,16 +180,16 @@
 
 \begin{problem}[Closure properties]
     
-    Show that both the class of all \emph{decidable} languages and the class of all \emph{partially decidable} languages are closed under:
+    Show that \emph{recursive} languages and \emph{recursively enumerable} languages are closed under (a) \emph{union}, (b) \emph{intersection}, (c) \emph{concatenation}, (d) \emph{iteration}.
     
-    (a) \emph{union}, (b) \emph{intersection}, (c) \emph{concatenation}, (d) \emph{Kleene star}.
-    
-    Moreover, show that 
-    \begin{enumerate}[(a)]
-    \setcounter{enumi}{4}
-    \item decidable languages are closed under \emph{complementation}, but
-    \item partially decidable languages are not.
-    \end{enumerate}
+    Moreover, show that (e) \emph{recursive languages are closed under complementation}, but (f) \emph{recursively enumerable languages are not.}
+
+    % Moreover, show that 
+    % \begin{enumerate}[(a)]
+    % \setcounter{enumi}{4}
+    % \item decidable languages are closed under \emph{complementation}, but
+    % \item partially decidable languages are not.
+    % \end{enumerate}
 
 \end{problem}
     
