@@ -239,7 +239,7 @@
     \begin{block}{The construction}
         Given $P=(Q,\Sigma,\Gamma,\delta,q_0,Z_0)$, construct $G=(V,T,\mathcal P,S)$ where $V=\{S\}\cup\{[pXq]\mid p,q\in Q,X\in\Gamma\}$ and the productions are:   
         \begin{enumerate}[(i)]
-            \item for every state $p\in Q$ add $S\to [q_0Xp]$ 
+            \item for every state $p\in Q$ add $S\to [q_0 Z_0 p]$ 
             \item for every transition $({\color{red}p},Y_1Y_2\ldots Y_k)\in\delta({\color{red}q,a,X})$ (incl. $a=\epsilon$) and \alert{all $k$-tuples of states} $p_1,\dots,p_{k-1},{\color{blue}p_k}\in Q$ add
             
             \vspace{-6pt}

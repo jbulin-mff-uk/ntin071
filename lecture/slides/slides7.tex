@@ -593,7 +593,7 @@
 \begin{frame}{Unseen data cannot affect computation}
 
     \begin{lemma}
-        If $(q,x,\alpha)\vdash_P (p,y,\beta) $, then for any $w\in \Sigma^*$ and $\gamma\in\Gamma^*$ we also have 
+        If $(q,x,\alpha)\vdash^*_P (p,y,\beta) $, then for any $w\in \Sigma^*$ and $\gamma\in\Gamma^*$ we also have 
         $(q,xw,\alpha\gamma)\vdash^*_P(p,yw,\beta\gamma)$. (In particular, $\gamma=\epsilon$ or $w=\epsilon$.)
     \end{lemma}
     \textbf{Proof:} Induction on the number length of the sequence of configurations that take $(q,xw,\alpha\gamma)$ to $(p,yw,\beta\gamma)$. Each of the moves $(q,x,\alpha)\vdash^*_P(p,y,\beta)$ is justified without using $w$ and/or $\gamma$ in any way. The moves are still valid with $w,\gamma$ on the input/stack.\hfill\qedsymbol
