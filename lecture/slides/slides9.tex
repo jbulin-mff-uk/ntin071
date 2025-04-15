@@ -348,10 +348,10 @@
     $$
     M=(Q_1\times Q_2,\Sigma,\Gamma,\delta, (q_1,q_2),Z_0,F_1\times F_2)
     $$ 
-    where we have a transition $\delta((q_1,q_2),a,X)\ni((r_1,r_2),\gamma)$ iff either
+    where we have a transition $\delta((p_1,p_2),a,X)\ni((r_1,r_2),\gamma)$ iff either
     \begin{enumerate}[(i)]
-        \item $a\neq\epsilon$ and $(r_1,\gamma)\in \delta_1(q_1,a,X)$ and $r_2=\delta_2(q_2,a)$, or
-        \item $a=\epsilon$ and $(r_1,\gamma)\in \delta_1(q_1,\epsilon,X)$ and $r_2=q_2$
+        \item $a\neq\epsilon$ and $(r_1,\gamma)\in \delta_1(p_1,a,X)$ and $r_2=\delta_2(p_2,a)$, or
+        \item $a=\epsilon$ and $(r_1,\gamma)\in \delta_1(p_1,\epsilon,X)$ and $r_2=p_2$
     \end{enumerate}
     In (i) both automata read input, in (ii) $P$ works on its stack while $A$ waits. Clearly, $L(M)=L(P)\cap L(A)$ ($P$ and $R$ run in parallel).\hfill\qedsymbol       
 
@@ -417,7 +417,7 @@
         The class of the context-free languages is not closed under difference, nor complement.
     \end{theorem}
 
-    \textbf{Proof:} $L_1\cap L_2=\overline{\overline{L_1}\cup\overline{L_2}}$, closure under complement would imply closure under intersection. For difference, use $\overline{L}=\Sigma^2-L$.\hfill\qedsymbol
+    \textbf{Proof:} $L_1\cap L_2=\overline{\overline{L_1}\cup\overline{L_2}}$, closure under complement would imply closure under intersection. For difference, use $\overline{L}=\Sigma^*-L$.\hfill\qedsymbol
 
     \textbf{NB:} PDA is non-deterministic, switching accepting/non-accepting states does not work.
 
