@@ -557,10 +557,10 @@
                 \node[elliptic state] (q2)  [below=2cm of q0]     {RegE};
                 \node[elliptic state] (q3) [right=3cm of q2]     {DFA};
                 \path[->]
-                    (q0)  edge  node[swap] {$O(n^3 2^n )$} (q3)
-                    (q1)  edge  node[swap] {$O(n^3 2^n )$} (q3)
+                    (q0)  edge  node[swap] {$O( 2^n )$} (q3)
+                    (q1)  edge  node[swap] {$O( 2^n )$} (q3)
                     (q2)  edge node {$O(n)$} (q0)
-                    (q3)  edge node {$O(n^3 4^n)$} (q2)
+                    (q3)  edge node {$O(4^n)$} (q2)
                     (q3)  edge[bend right] node[swap] {$O(n)$} (q0)
                     (q3)  edge[bend right] node[swap] {$O(n)$} (q1)
                     ;
@@ -569,10 +569,11 @@
     \end{center}
         
     \begin{itemize}
-        \item NFA or $\epsilon$-NFA to DFA: $O(n^32^n)$
+        \item NFA or $\epsilon$-NFA to DFA: $O(2^n)$
         \begin{itemize}
-            \item $\epsilon$-closure in $O(n^3)$ (search $n$ states $\times$ $n^2$ arcs)
             \item subset construction, DFA with up to $2^n$ states; for each state need $O(n^3)$ time to compute transitions.
+            \item $\epsilon$-closure in $O(n^3)$ (search $n$ states $\times$ $n^2$ arcs)
+            
         \end{itemize}        
         \item DFA to NFA or $\epsilon$-NFA: $O(n)$
         \begin{itemize}
